@@ -8,22 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		E77280651FFDDEF6004DC8A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77280641FFDDEF6004DC8A3 /* AppDelegate.swift */; };
-		E77280671FFDDEF6004DC8A3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77280661FFDDEF6004DC8A3 /* ViewController.swift */; };
 		E772806A1FFDDEF6004DC8A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E77280681FFDDEF6004DC8A3 /* Main.storyboard */; };
 		E772806D1FFDDEF6004DC8A3 /* Your_Vocabulary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E772806B1FFDDEF6004DC8A3 /* Your_Vocabulary.xcdatamodeld */; };
 		E772806F1FFDDEF6004DC8A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E772806E1FFDDEF6004DC8A3 /* Assets.xcassets */; };
 		E77280721FFDDEF6004DC8A3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E77280701FFDDEF6004DC8A3 /* LaunchScreen.storyboard */; };
+		E772807B1FFDE10C004DC8A3 /* DictionariesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E772807A1FFDE10C004DC8A3 /* DictionariesTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E77280611FFDDEF6004DC8A3 /* Your Vocabulary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Your Vocabulary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E77280641FFDDEF6004DC8A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E77280661FFDDEF6004DC8A3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E77280691FFDDEF6004DC8A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E772806C1FFDDEF6004DC8A3 /* Your_Vocabulary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Your_Vocabulary.xcdatamodel; sourceTree = "<group>"; };
 		E772806E1FFDDEF6004DC8A3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E77280711FFDDEF6004DC8A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E77280731FFDDEF6004DC8A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E772807A1FFDE10C004DC8A3 /* DictionariesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionariesTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +56,8 @@
 		E77280631FFDDEF6004DC8A3 /* Your Vocabulary */ = {
 			isa = PBXGroup;
 			children = (
+				E77280791FFDE0D6004DC8A3 /* Controlers */,
 				E77280641FFDDEF6004DC8A3 /* AppDelegate.swift */,
-				E77280661FFDDEF6004DC8A3 /* ViewController.swift */,
 				E77280681FFDDEF6004DC8A3 /* Main.storyboard */,
 				E772806E1FFDDEF6004DC8A3 /* Assets.xcassets */,
 				E77280701FFDDEF6004DC8A3 /* LaunchScreen.storyboard */,
@@ -65,6 +65,14 @@
 				E772806B1FFDDEF6004DC8A3 /* Your_Vocabulary.xcdatamodeld */,
 			);
 			path = "Your Vocabulary";
+			sourceTree = "<group>";
+		};
+		E77280791FFDE0D6004DC8A3 /* Controlers */ = {
+			isa = PBXGroup;
+			children = (
+				E772807A1FFDE10C004DC8A3 /* DictionariesTableViewController.swift */,
+			);
+			path = Controlers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,9 +147,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E77280671FFDDEF6004DC8A3 /* ViewController.swift in Sources */,
 				E772806D1FFDDEF6004DC8A3 /* Your_Vocabulary.xcdatamodeld in Sources */,
 				E77280651FFDDEF6004DC8A3 /* AppDelegate.swift in Sources */,
+				E772807B1FFDE10C004DC8A3 /* DictionariesTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

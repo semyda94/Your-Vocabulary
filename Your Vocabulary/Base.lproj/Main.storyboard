@@ -48,7 +48,14 @@
                             <outlet property="delegate" destination="vxZ-pg-Ris" id="jkh-bW-hcO"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Dictionaries" id="DNh-ld-AGX"/>
+                    <navigationItem key="navigationItem" title="Dictionaries" id="DNh-ld-AGX">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="u19-tJ-pK0">
+                            <color key="tintColor" red="1" green="0.83137254900000002" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="addNewDictionaryIntoTable:" destination="vxZ-pg-Ris" id="dA4-ee-zBA"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bEv-jG-ZNZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

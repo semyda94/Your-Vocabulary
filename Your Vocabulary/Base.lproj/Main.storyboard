@@ -51,7 +51,7 @@
                             <outlet property="delegate" destination="vxZ-pg-Ris" id="jkh-bW-hcO"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Dictionaries" id="DNh-ld-AGX">
+                    <navigationItem key="navigationItem" title="Dictionaries" leftItemsSupplementBackButton="YES" id="DNh-ld-AGX">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="u19-tJ-pK0">
                             <color key="tintColor" red="1" green="0.83137254900000002" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -106,7 +106,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oG7-6j-JfZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1442" y="-156"/>
+            <point key="canvasLocation" x="1494" y="-156"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="J8d-Zz-6Hz">

@@ -78,7 +78,6 @@ class DictionariesTableViewController: UITableViewController {
             // Delete the row from the data source
             dictionaries.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            tableView.reloadData()
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    

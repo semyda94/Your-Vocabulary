@@ -15,6 +15,7 @@
 		E772807B1FFDE10C004DC8A3 /* DictionariesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E772807A1FFDE10C004DC8A3 /* DictionariesTableViewController.swift */; };
 		E772807E1FFDEA94004DC8A3 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = E772807D1FFDEA94004DC8A3 /* Dictionary.swift */; };
 		E77280801FFDEBEA004DC8A3 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = E772807F1FFDEBEA004DC8A3 /* Word.swift */; };
+		E77280821FFDF80F004DC8A3 /* WordsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77280811FFDF80F004DC8A3 /* WordsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		E772807A1FFDE10C004DC8A3 /* DictionariesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionariesTableViewController.swift; sourceTree = "<group>"; };
 		E772807D1FFDEA94004DC8A3 /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		E772807F1FFDEBEA004DC8A3 /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
+		E77280811FFDF80F004DC8A3 /* WordsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				E772807A1FFDE10C004DC8A3 /* DictionariesTableViewController.swift */,
+				E77280811FFDF80F004DC8A3 /* WordsTableViewController.swift */,
 			);
 			path = Controlers;
 			sourceTree = "<group>";
@@ -166,6 +169,7 @@
 				E77280801FFDEBEA004DC8A3 /* Word.swift in Sources */,
 				E77280651FFDDEF6004DC8A3 /* AppDelegate.swift in Sources */,
 				E772807B1FFDE10C004DC8A3 /* DictionariesTableViewController.swift in Sources */,
+				E77280821FFDF80F004DC8A3 /* WordsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

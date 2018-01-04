@@ -58,6 +58,7 @@
 			children = (
 				E77280791FFDE0D6004DC8A3 /* Controlers */,
 				E77280641FFDDEF6004DC8A3 /* AppDelegate.swift */,
+				E772807C1FFDE699004DC8A3 /* Model */,
 				E77280681FFDDEF6004DC8A3 /* Main.storyboard */,
 				E772806E1FFDDEF6004DC8A3 /* Assets.xcassets */,
 				E77280701FFDDEF6004DC8A3 /* LaunchScreen.storyboard */,
@@ -73,6 +74,13 @@
 				E772807A1FFDE10C004DC8A3 /* DictionariesTableViewController.swift */,
 			);
 			path = Controlers;
+			sourceTree = "<group>";
+		};
+		E772807C1FFDE699004DC8A3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

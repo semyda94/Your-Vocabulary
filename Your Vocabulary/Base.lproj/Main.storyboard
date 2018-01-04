@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vxZ-pg-Ris">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nqc-Ei-bCp">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Dictionaries Table View Controller-->
+        <!--Dictionaries-->
         <scene sceneID="8wh-fT-Fmb">
             <objects>
                 <tableViewController id="vxZ-pg-Ris" customClass="DictionariesTableViewController" customModule="Your_Vocabulary" customModuleProvider="target" sceneMemberID="viewController">
@@ -48,10 +48,30 @@
                             <outlet property="delegate" destination="vxZ-pg-Ris" id="jkh-bW-hcO"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Dictionaries" id="DNh-ld-AGX"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bEv-jG-ZNZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-39" y="-155"/>
+            <point key="canvasLocation" x="694" y="-156"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="J8d-Zz-6Hz">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nqc-Ei-bCp" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="xt2-tp-GVk">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.59215686274509804" green="0.73725490196078436" blue="0.70588235294117641" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="vxZ-pg-Ris" kind="relationship" relationship="rootViewController" id="eAj-wE-H7y"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mUG-7I-ufQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-40" y="-155.62218890554723"/>
         </scene>
     </scenes>
 </document>

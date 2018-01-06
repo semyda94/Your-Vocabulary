@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class DictionariesTableViewController: UITableViewController {
 
@@ -17,7 +18,23 @@ class DictionariesTableViewController: UITableViewController {
     // MARK: - IBActions
     
     @IBAction func addNewDictionaryIntoTable(_ sender: UIBarButtonItem) {
-        dictionaries += [Dictionary("New dictionary")]
+        
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            let context = appDelegate.persistentContainer.viewContext
+            if let entity = NSEntityDescription.entity(forEntityName: "Dictionaries", in: context) {
+                let newDictionary = NSManagedObject(entity: entity, insertInto: context)
+                newDictionary.setValue("New dictionary", forKey: "name")
+                newDictionary.setValue(4, forKey: "countOfWords")
+                
+                do {
+                    try context.save()
+                } catch {
+                    print("Failed saving")
+                }
+            }
+        }
+        
+        
         tableView.reloadData()
     }
     
@@ -28,8 +45,24 @@ class DictionariesTableViewController: UITableViewController {
 
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        dictionaries += [Dictionary("Dictionary 1"),
-                        Dictionary("Dictionary 2")]
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            let context = appDelegate.persistentContainer.viewContext
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Dictionaries")
+            
+            request.returnsObjectsAsFaults = false
+            
+            do {
+                let result = try context.fetch(request)
+                    
+                for data in result as! [NSManagedObject] {
+                    var tmp_dic = Dictionary(data.value(forKey: "name") as! String)
+                    tmp_dic.countOfWords = Int(data.value(forKey: "countOfWords") as! Int32)
+                    dictionaries += [tmp_dic]
+                }
+            } catch {
+                print("Failed fetching")
+            }
+        }
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -108,8 +141,8 @@ class DictionariesTableViewController: UITableViewController {
             if let cell = sender as? UITableViewCell {
                 if let wtvc = segue.destination as? WordsTableViewController {
                     if let indexPath = tableView.indexPath(for: cell) {
-                        wtvc.dictionaryName = dictionaries[indexPath.row].name
-                        wtvc.words = dictionaries[indexPath.row].words
+//                        wtvc.dictionaryName = dictionaries[indexPath.row].name
+//                        wtvc.words = dictionaries[indexPath.row].words
                     }
                 }
             }

@@ -14,13 +14,14 @@
 		E772806F1FFDDEF6004DC8A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E772806E1FFDDEF6004DC8A3 /* Assets.xcassets */; };
 		E77280721FFDDEF6004DC8A3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E77280701FFDDEF6004DC8A3 /* LaunchScreen.storyboard */; };
 		E772807B1FFDE10C004DC8A3 /* DictionariesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E772807A1FFDE10C004DC8A3 /* DictionariesTableViewController.swift */; };
-		E772807E1FFDEA94004DC8A3 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = E772807D1FFDEA94004DC8A3 /* Dictionary.swift */; };
 		E77280801FFDEBEA004DC8A3 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = E772807F1FFDEBEA004DC8A3 /* Word.swift */; };
 		E77280821FFDF80F004DC8A3 /* WordsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77280811FFDF80F004DC8A3 /* WordsTableViewController.swift */; };
+		E7E91B7420032C020066EC13 /* Dictionary+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E91B7220032C020066EC13 /* Dictionary+CoreDataClass.swift */; };
+		E7E91B7520032C020066EC13 /* Dictionary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E91B7320032C020066EC13 /* Dictionary+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E73171F11FFE56B500615B88 /* WordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WordViewController.swift; path = "Your Vocabulary/Controlers/WordViewController.swift"; sourceTree = "<group>"; };
+		E73171F11FFE56B500615B88 /* WordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordViewController.swift; sourceTree = "<group>"; };
 		E77280611FFDDEF6004DC8A3 /* Your Vocabulary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Your Vocabulary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E77280641FFDDEF6004DC8A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E77280691FFDDEF6004DC8A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -29,9 +30,10 @@
 		E77280711FFDDEF6004DC8A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E77280731FFDDEF6004DC8A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E772807A1FFDE10C004DC8A3 /* DictionariesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionariesTableViewController.swift; sourceTree = "<group>"; };
-		E772807D1FFDEA94004DC8A3 /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		E772807F1FFDEBEA004DC8A3 /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		E77280811FFDF80F004DC8A3 /* WordsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsTableViewController.swift; sourceTree = "<group>"; };
+		E7E91B7220032C020066EC13 /* Dictionary+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Dictionary+CoreDataClass.swift"; path = "CoreDataObjects/Dictionary+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E7E91B7320032C020066EC13 /* Dictionary+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Dictionary+CoreDataProperties.swift"; path = "CoreDataObjects/Dictionary+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,7 +50,6 @@
 		E77280581FFDDEF6004DC8A3 = {
 			isa = PBXGroup;
 			children = (
-				E73171F11FFE56B500615B88 /* WordViewController.swift */,
 				E77280631FFDDEF6004DC8A3 /* Your Vocabulary */,
 				E77280621FFDDEF6004DC8A3 /* Products */,
 			);
@@ -80,6 +81,7 @@
 		E77280791FFDE0D6004DC8A3 /* Controlers */ = {
 			isa = PBXGroup;
 			children = (
+				E73171F11FFE56B500615B88 /* WordViewController.swift */,
 				E772807A1FFDE10C004DC8A3 /* DictionariesTableViewController.swift */,
 				E77280811FFDF80F004DC8A3 /* WordsTableViewController.swift */,
 			);
@@ -89,7 +91,8 @@
 		E772807C1FFDE699004DC8A3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E772807D1FFDEA94004DC8A3 /* Dictionary.swift */,
+				E7E91B7220032C020066EC13 /* Dictionary+CoreDataClass.swift */,
+				E7E91B7320032C020066EC13 /* Dictionary+CoreDataProperties.swift */,
 				E772807F1FFDEBEA004DC8A3 /* Word.swift */,
 			);
 			path = Model;
@@ -167,13 +170,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7E91B7420032C020066EC13 /* Dictionary+CoreDataClass.swift in Sources */,
 				E772806D1FFDDEF6004DC8A3 /* Your_Vocabulary.xcdatamodeld in Sources */,
-				E772807E1FFDEA94004DC8A3 /* Dictionary.swift in Sources */,
 				E73171F21FFE56B500615B88 /* WordViewController.swift in Sources */,
 				E77280801FFDEBEA004DC8A3 /* Word.swift in Sources */,
 				E77280651FFDDEF6004DC8A3 /* AppDelegate.swift in Sources */,
 				E772807B1FFDE10C004DC8A3 /* DictionariesTableViewController.swift in Sources */,
 				E77280821FFDF80F004DC8A3 /* WordsTableViewController.swift in Sources */,
+				E7E91B7520032C020066EC13 /* Dictionary+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

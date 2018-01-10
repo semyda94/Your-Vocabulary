@@ -6,8 +6,21 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="numberofLearned" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="numberOfWords" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="words" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Word" inverseName="dictionary" inverseEntity="Word" syncable="YES"/>
+    </entity>
+    <entity name="Word" representedClassName="Word" syncable="YES">
+        <attribute name="dataCreation" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="definition" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="example" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="extraInfo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isLearned" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="synonym" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="translation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="word" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="dictionary" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Dictionary" inverseName="words" inverseEntity="Dictionary" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Dictionary" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="Dictionary" positionX="-54" positionY="2" width="128" height="133"/>
+        <element name="Word" positionX="180" positionY="-43" width="128" height="178"/>
     </elements>
 </model>

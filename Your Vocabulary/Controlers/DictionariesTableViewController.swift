@@ -13,7 +13,7 @@ class DictionariesTableViewController: UITableViewController {
 
     // MARK: - Properties
     
-    var managedContext: NSManagedObjectContext? {
+    private var managedContext: NSManagedObjectContext? {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return nil
         }
@@ -157,8 +157,8 @@ class DictionariesTableViewController: UITableViewController {
             if let cell = sender as? UITableViewCell {
                 if let wtvc = segue.destination as? WordsTableViewController {
                     if let indexPath = tableView.indexPath(for: cell) {
-                        wtvc.dictionaryName = dictionaries[indexPath.row].name
-                       // wtvc.words = dictionaries[indexPath.row].words
+
+                        wtvc.currentDictionary = dictionaries[indexPath.row]
                     }
                 }
             }

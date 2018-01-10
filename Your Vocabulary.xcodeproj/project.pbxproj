@@ -14,10 +14,11 @@
 		E772806F1FFDDEF6004DC8A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E772806E1FFDDEF6004DC8A3 /* Assets.xcassets */; };
 		E77280721FFDDEF6004DC8A3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E77280701FFDDEF6004DC8A3 /* LaunchScreen.storyboard */; };
 		E772807B1FFDE10C004DC8A3 /* DictionariesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E772807A1FFDE10C004DC8A3 /* DictionariesTableViewController.swift */; };
-		E77280801FFDEBEA004DC8A3 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = E772807F1FFDEBEA004DC8A3 /* Word.swift */; };
 		E77280821FFDF80F004DC8A3 /* WordsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77280811FFDF80F004DC8A3 /* WordsTableViewController.swift */; };
 		E7E91B7420032C020066EC13 /* Dictionary+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E91B7220032C020066EC13 /* Dictionary+CoreDataClass.swift */; };
 		E7E91B7520032C020066EC13 /* Dictionary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E91B7320032C020066EC13 /* Dictionary+CoreDataProperties.swift */; };
+		E7E91B7820033C540066EC13 /* Word+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E91B7620033C540066EC13 /* Word+CoreDataClass.swift */; };
+		E7E91B7920033C540066EC13 /* Word+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E91B7720033C540066EC13 /* Word+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,10 +31,11 @@
 		E77280711FFDDEF6004DC8A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E77280731FFDDEF6004DC8A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E772807A1FFDE10C004DC8A3 /* DictionariesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionariesTableViewController.swift; sourceTree = "<group>"; };
-		E772807F1FFDEBEA004DC8A3 /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		E77280811FFDF80F004DC8A3 /* WordsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsTableViewController.swift; sourceTree = "<group>"; };
 		E7E91B7220032C020066EC13 /* Dictionary+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Dictionary+CoreDataClass.swift"; path = "CoreDataObjects/Dictionary+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E7E91B7320032C020066EC13 /* Dictionary+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Dictionary+CoreDataProperties.swift"; path = "CoreDataObjects/Dictionary+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E7E91B7620033C540066EC13 /* Word+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Word+CoreDataClass.swift"; path = "CoreDataObjects/Word+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E7E91B7720033C540066EC13 /* Word+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Word+CoreDataProperties.swift"; path = "CoreDataObjects/Word+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,9 +93,10 @@
 		E772807C1FFDE699004DC8A3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E7E91B7620033C540066EC13 /* Word+CoreDataClass.swift */,
+				E7E91B7720033C540066EC13 /* Word+CoreDataProperties.swift */,
 				E7E91B7220032C020066EC13 /* Dictionary+CoreDataClass.swift */,
 				E7E91B7320032C020066EC13 /* Dictionary+CoreDataProperties.swift */,
-				E772807F1FFDEBEA004DC8A3 /* Word.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -172,8 +175,9 @@
 			files = (
 				E7E91B7420032C020066EC13 /* Dictionary+CoreDataClass.swift in Sources */,
 				E772806D1FFDDEF6004DC8A3 /* Your_Vocabulary.xcdatamodeld in Sources */,
+				E7E91B7920033C540066EC13 /* Word+CoreDataProperties.swift in Sources */,
 				E73171F21FFE56B500615B88 /* WordViewController.swift in Sources */,
-				E77280801FFDEBEA004DC8A3 /* Word.swift in Sources */,
+				E7E91B7820033C540066EC13 /* Word+CoreDataClass.swift in Sources */,
 				E77280651FFDDEF6004DC8A3 /* AppDelegate.swift in Sources */,
 				E772807B1FFDE10C004DC8A3 /* DictionariesTableViewController.swift in Sources */,
 				E77280821FFDF80F004DC8A3 /* WordsTableViewController.swift in Sources */,

@@ -18,10 +18,22 @@ class WordViewController: UIViewController {
                                           "ExtraInfo" : 3,
                                           "Synonym" : 4,
                                           "Example" : 5]
-
-    var word: Word?
     
     @IBOutlet var wordFields: [UITextField]!
+    
+    var currentDictionary: Dictionary?
+    
+    var word: Word?
+    
+    @IBAction func saveWord(_ sender: UIButton) {
+        if (wordFields[wordMark["Word"]!].text?.isEmpty)! {
+            if (wordFields[wordMark["Translation"]!].text?.isEmpty)! {
+                if word != nil {
+                    
+                }
+            }
+        }
+    }
     
     // MARK: - IBActions
     

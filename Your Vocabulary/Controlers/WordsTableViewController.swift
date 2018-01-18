@@ -31,7 +31,8 @@ class WordsTableViewController: UITableViewController {
     
     // action when we add new Word
     @objc func addTapped() {
-        guard let context = managedContext else { return }
+        performSegue(withIdentifier: "newWord", sender: nil)
+/*        guard let context = managedContext else { return }
         
         guard let dictionary = currentDictionary else { return }
         
@@ -50,6 +51,7 @@ class WordsTableViewController: UITableViewController {
         } catch let error as NSError {
             print("Unsolved error during add new word: \(error), \(error.userInfo)")
         }
+ */
     }
     
     // MARK: - View life cycle
@@ -161,15 +163,21 @@ class WordsTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        switch segue.identifier! {
-        case "showWord":
-            if let wvc = segue.destination as? WordViewController {
-                if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
-//                    wvc.word = words[indexPath.row]
+        
+        if let wvc = segue.destination as? WordViewController {
+            if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
+                switch segue.identifier! {
+                    case "showWord" :
+                        guard let words = currentDictionary?.words?.allObjects as? [Word] else { return }
+                        wvc.currentDictionary = currentDictionary
+                        wvc.word = words[indexPath.row]
+                    
+                    case "newWord" :
+                        wvc.currentDictionary = currentDictionary
+                    
+                    default: break
                 }
             }
-        default:
-            break
         }
     }
 

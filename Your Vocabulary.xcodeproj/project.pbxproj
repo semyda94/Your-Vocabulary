@@ -46,7 +46,7 @@
 		E785D6D2200C5A0E0068B4CE /* BEMPathManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMPathManager.h; sourceTree = "<group>"; };
 		E785D6D3200C5A0E0068B4CE /* BEMCheckBoxGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMCheckBoxGroup.h; sourceTree = "<group>"; };
 		E7DC927C20101FD1009D77FE /* ObjectCBridgeHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectCBridgeHeader.h; sourceTree = "<group>"; };
-		E7DC927D20104EC6009D77FE /* DictionaryPropertiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DictionaryPropertiesViewController.swift; path = "Your Vocabulary/Controlers/DictionaryPropertiesViewController.swift"; sourceTree = "<group>"; };
+		E7DC927D20104EC6009D77FE /* DictionaryPropertiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryPropertiesViewController.swift; sourceTree = "<group>"; };
 		E7E91B7220032C020066EC13 /* Dictionary+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Dictionary+CoreDataClass.swift"; path = "CoreDataObjects/Dictionary+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E7E91B7320032C020066EC13 /* Dictionary+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Dictionary+CoreDataProperties.swift"; path = "CoreDataObjects/Dictionary+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E7E91B7620033C540066EC13 /* Word+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Word+CoreDataClass.swift"; path = "CoreDataObjects/Word+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -67,7 +67,6 @@
 		E77280581FFDDEF6004DC8A3 = {
 			isa = PBXGroup;
 			children = (
-				E7DC927D20104EC6009D77FE /* DictionaryPropertiesViewController.swift */,
 				E7DC927C20101FD1009D77FE /* ObjectCBridgeHeader.h */,
 				E77280631FFDDEF6004DC8A3 /* Your Vocabulary */,
 				E77280621FFDDEF6004DC8A3 /* Products */,
@@ -101,6 +100,7 @@
 		E77280791FFDE0D6004DC8A3 /* Controlers */ = {
 			isa = PBXGroup;
 			children = (
+				E7DC927D20104EC6009D77FE /* DictionaryPropertiesViewController.swift */,
 				E73171F11FFE56B500615B88 /* WordViewController.swift */,
 				E77280811FFDF80F004DC8A3 /* WordsTableViewController.swift */,
 				E72E9DE2200C3300008D16A1 /* DictionariesViewController.swift */,

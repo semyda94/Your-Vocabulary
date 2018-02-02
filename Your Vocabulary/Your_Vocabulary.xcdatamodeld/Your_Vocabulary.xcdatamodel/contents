@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13533" systemVersion="17B1003" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Definition" representedClassName="Definition" syncable="YES">
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="word" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Word" inverseName="definitions" inverseEntity="Word" syncable="YES"/>
+    </entity>
     <entity name="Dictionary" representedClassName="Dictionary" syncable="YES">
         <attribute name="dateOfCreation" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="dateOfLastChanges" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -13,6 +17,22 @@
         <attribute name="numberOfWords" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="words" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Word" inverseName="dictionary" inverseEntity="Word" syncable="YES"/>
     </entity>
+    <entity name="Example" representedClassName="Example" syncable="YES">
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="word" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Word" inverseName="examples" inverseEntity="Word" syncable="YES"/>
+    </entity>
+    <entity name="ExtraInfo" representedClassName="ExtraInfo" syncable="YES">
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="word" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Word" inverseName="extraInfos" inverseEntity="Word" syncable="YES"/>
+    </entity>
+    <entity name="Synonym" representedClassName="Synonym" syncable="YES">
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="word" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Word" inverseName="synonyms" inverseEntity="Word" syncable="YES"/>
+    </entity>
+    <entity name="Translation" representedClassName="Translation" syncable="YES">
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="word" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Word" inverseName="translations" inverseEntity="Word" syncable="YES"/>
+    </entity>
     <entity name="Word" representedClassName="Word" syncable="YES">
         <attribute name="dataCreation" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="definition" optional="YES" attributeType="String" syncable="YES"/>
@@ -22,10 +42,20 @@
         <attribute name="synonym" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="translation" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="word" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="definitions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Definition" inverseName="word" inverseEntity="Definition" syncable="YES"/>
         <relationship name="dictionary" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Dictionary" inverseName="words" inverseEntity="Dictionary" syncable="YES"/>
+        <relationship name="examples" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Example" inverseName="word" inverseEntity="Example" syncable="YES"/>
+        <relationship name="extraInfos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExtraInfo" inverseName="word" inverseEntity="ExtraInfo" syncable="YES"/>
+        <relationship name="synonyms" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Synonym" inverseName="word" inverseEntity="Synonym" syncable="YES"/>
+        <relationship name="translations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Translation" inverseName="word" inverseEntity="Translation" syncable="YES"/>
     </entity>
     <elements>
+        <element name="Definition" positionX="72" positionY="81" width="128" height="75"/>
         <element name="Dictionary" positionX="-54" positionY="2" width="128" height="210"/>
-        <element name="Word" positionX="180" positionY="-43" width="128" height="180"/>
+        <element name="Example" positionX="81" positionY="90" width="128" height="75"/>
+        <element name="ExtraInfo" positionX="90" positionY="99" width="128" height="75"/>
+        <element name="Synonym" positionX="99" positionY="108" width="128" height="75"/>
+        <element name="Translation" positionX="63" positionY="72" width="128" height="75"/>
+        <element name="Word" positionX="180" positionY="-43" width="128" height="30"/>
     </elements>
 </model>

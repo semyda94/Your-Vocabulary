@@ -2,7 +2,7 @@
 //  Dictionary+CoreDataProperties.swift
 //  Your Vocabulary
 //
-//  Created by Dmitrii Semykin on 18/01/18.
+//  Created by Dmitrii Semykin on 2/02/18.
 //  Copyright © 2018 Dmitrii Semykin. All rights reserved.
 //
 //
@@ -19,14 +19,14 @@ extension Dictionary {
 
     @NSManaged public var dateOfCreation: NSDate?
     @NSManaged public var dateOfLastChanges: NSDate?
+    @NSManaged public var isDefinition: Bool
+    @NSManaged public var isExample: Bool
+    @NSManaged public var isExtraInfo: Bool
+    @NSManaged public var isSynonym: Bool
+    @NSManaged public var isTranslation: Bool
     @NSManaged public var name: String?
     @NSManaged public var numberofLearned: Int32
     @NSManaged public var numberOfWords: Int32
-    @NSManaged public var isTranslation: Bool
-    @NSManaged public var isDefinition: Bool
-    @NSManaged public var isExtraInfo: Bool
-    @NSManaged public var isSynonym: Bool
-    @NSManaged public var isExample: Bool
     @NSManaged public var words: NSSet?
 
 }

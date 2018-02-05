@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class WordViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class WordViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddNewFieldDelegate {
     
     // MARK: - Variables
     
@@ -87,6 +87,8 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         navigationItem.largeTitleDisplayMode = .never
         
         navigationItem.title = "New word"
@@ -132,6 +134,8 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
             
         case .addFieldButton:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "addFieldButtonCell", for: indexPath) as? WordAddFieldButtonTableViewCell else { break }
+            
+            cell.delegate = self
             return cell
             
         case .SaveCancelButtons:
@@ -142,6 +146,17 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
         return UITableViewCell()
     }
     
+    // MARK: - AddNewFieldDelegate implementation
+    
+    func addFieldBeforeRow(_ row: UITableViewCell) {
+        guard let indexPath = fieldsTableView.indexPath(for: row) else { return }
+        
+        print("Should insert row into section \(sections[indexPath.section][0]) before row \(indexPath.row)")
+        
+        sections[indexPath.section].insert((nil, .field), at: indexPath.row - 1)
+        
+        fieldsTableView.reloadData()
+    }
 
     /*
     // MARK: - Navigation

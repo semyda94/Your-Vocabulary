@@ -8,8 +8,15 @@
 
 import UIKit
 
+//
+protocol AddNewFieldDelegate: class {
+    func addFieldBeforeRow(_ row: UITableViewCell)
+}
+
 class WordAddFieldButtonTableViewCell: UITableViewCell {
 
+    weak var delegate: AddNewFieldDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -17,8 +24,11 @@ class WordAddFieldButtonTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
 
+    @IBAction func addNewField(_ sender: UIButton) {
+        delegate?.addFieldBeforeRow(self)
+    }
 }

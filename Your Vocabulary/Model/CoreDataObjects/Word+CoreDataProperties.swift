@@ -2,7 +2,7 @@
 //  Word+CoreDataProperties.swift
 //  Your Vocabulary
 //
-//  Created by Dmitrii Semykin on 2/02/18.
+//  Created by Dmitrii Semykin on 8/02/18.
 //  Copyright © 2018 Dmitrii Semykin. All rights reserved.
 //
 //
@@ -17,14 +17,10 @@ extension Word {
         return NSFetchRequest<Word>(entityName: "Word")
     }
 
-    @NSManaged public var dataCreation: NSDate?
-    @NSManaged public var definition: String?
-    @NSManaged public var example: String?
-    @NSManaged public var extraInfo: String?
+    @NSManaged public var dateCreation: NSDate?
     @NSManaged public var isLearned: Bool
-    @NSManaged public var synonym: String?
-    @NSManaged public var translation: String?
     @NSManaged public var word: String?
+    @NSManaged public var dateOfLastChanges: NSDate?
     @NSManaged public var definitions: NSSet?
     @NSManaged public var dictionary: Dictionary?
     @NSManaged public var examples: NSSet?

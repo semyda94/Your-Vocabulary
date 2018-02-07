@@ -27,7 +27,33 @@ class WordsTableViewController: UITableViewController {
     
     // MARK: - IBActions
     
-    // MARK: - functions
+    @IBAction func cancelButtonWasTapped(segue: UIStoryboardSegue){
+        
+    }
+    
+    @IBAction func saveButtonWasTapped(segue:
+        UIStoryboardSegue){
+        guard let sourceView = segue.source as? WordViewController else { return }
+        
+        guard let context = managedContext else {
+            return
+        }
+        
+        if let word = sourceView.currentWord{
+            context.delete(word)
+        }
+        
+        sourceView.saveContent()
+        do {
+            try context.save()
+            tableView.reloadData()
+        } catch let error as NSError {
+            print("Unresolved error during saving new word \(error), \(error.userInfo)")
+        }
+    }
+    
+    
+    // MARK: - Methods
     
     // action when we add new Word
     
@@ -79,9 +105,25 @@ class WordsTableViewController: UITableViewController {
         
         guard let words = currentDictionary?.words?.allObjects as? [Word] else { return cell }
         
+        print(words)
         cell.textLabel?.text = words[indexPath.row].word
         
-        if let d = words[indexPath.row].definition{
+        print("Setting a detailLabel text:")
+        
+        if words[indexPath.row].definitions?.count != 0 {
+            print("Definition isn't empty")
+            guard let randomDefinition = words[indexPath.row].definitions?.anyObject() as? Definition else { return cell }
+            cell.detailTextLabel?.text = randomDefinition.text
+        } else if words[indexPath.row].translations?.count != 0 {
+            print("Translation isn't empty")
+            guard let randomTranslation = words[indexPath.row].translations?.anyObject() as? Translation else { return cell }
+            cell.detailTextLabel?.text = randomTranslation.text
+        } else {
+            print("Definition and translation is empty")
+            cell.detailTextLabel?.text = "No definitions or transaltions"
+        }
+        
+        /*if let d = words[indexPath.row].definitions?.count {
             cell.detailTextLabel?.text = d
         } else {
             if let t = words[indexPath.row].translation {
@@ -89,7 +131,7 @@ class WordsTableViewController: UITableViewController {
             } else {
                 cell.detailTextLabel?.text = "Non"
             }
-        }
+        }*/
         
         return cell
     }
@@ -155,7 +197,7 @@ class WordsTableViewController: UITableViewController {
                     
                     guard let words = currentDictionary?.words?.allObjects as? [Word] else { return }
                     wvc.currentDictionary = currentDictionary
-                   // wvc.word = words[indexPath.row]
+                    wvc.currentWord = words[indexPath.row]
                     print("showWord segue: was seted dictionary and word")
                 }
                 

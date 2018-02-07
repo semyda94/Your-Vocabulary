@@ -8,7 +8,7 @@
 
 import UIKit
 
-//
+//Delegate who provide insert new fields into table
 protocol AddNewFieldDelegate: class {
     func addFieldBeforeRow(_ row: UITableViewCell)
 }

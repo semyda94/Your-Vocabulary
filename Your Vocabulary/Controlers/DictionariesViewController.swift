@@ -25,12 +25,12 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
     fileprivate lazy var blurEffectView = UIVisualEffectView(effect: blurEffect)
     
     fileprivate let dictionaryFlags:  [String : Int] = [ "Translation" : 0,
-                                                         "Definition" : 1,
+                                                        "Definition" : 1,
                                                          "ExtraInfo" : 2,
                                                          "Synonym" : 3,
                                                          "Example" : 4]
     
-    // MARK: - Functions
+    // MARK: - Methods
     
     fileprivate func addDictionaryAtTable(withName name : String, isTranslation translation : Bool, isDefinition definition : Bool, isExtraInfo extraInfo : Bool, isSynonym synonym : Bool, isExample example : Bool) {
         guard let context = managedContext, let entity = NSEntityDescription.entity(forEntityName: "Dictionary", in: context) else { return }
@@ -94,8 +94,6 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
     
     // MARK: - Actions
-    
-    
     
     @IBAction func cancelButtonWasTapped(segue: UIStoryboardSegue){
         

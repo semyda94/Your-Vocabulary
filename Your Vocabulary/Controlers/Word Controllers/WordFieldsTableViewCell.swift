@@ -17,5 +17,5 @@ class WordFieldsTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
 }

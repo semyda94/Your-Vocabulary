@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13533" systemVersion="17B1003" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13533" systemVersion="17D47" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Definition" representedClassName="Definition" syncable="YES">
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="word" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Word" inverseName="definitions" inverseEntity="Word" syncable="YES"/>
@@ -34,13 +34,9 @@
         <relationship name="word" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Word" inverseName="translations" inverseEntity="Word" syncable="YES"/>
     </entity>
     <entity name="Word" representedClassName="Word" syncable="YES">
-        <attribute name="dataCreation" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="definition" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="example" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="extraInfo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dateCreation" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="dateOfLastChanges" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="isLearned" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="synonym" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="translation" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="word" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="definitions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Definition" inverseName="word" inverseEntity="Definition" syncable="YES"/>
         <relationship name="dictionary" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Dictionary" inverseName="words" inverseEntity="Dictionary" syncable="YES"/>
@@ -56,6 +52,6 @@
         <element name="ExtraInfo" positionX="90" positionY="99" width="128" height="75"/>
         <element name="Synonym" positionX="99" positionY="108" width="128" height="75"/>
         <element name="Translation" positionX="63" positionY="72" width="128" height="75"/>
-        <element name="Word" positionX="180" positionY="-43" width="128" height="30"/>
+        <element name="Word" positionX="180" positionY="-43" width="128" height="195"/>
     </elements>
 </model>

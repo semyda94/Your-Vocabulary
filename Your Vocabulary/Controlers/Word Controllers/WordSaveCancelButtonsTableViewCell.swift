@@ -8,8 +8,15 @@
 
 import UIKit
 
+protocol SaveCancelWordTableContentDelegate: class {
+    func saveContent()
+    func cancelChanges()
+}
+
 class WordSaveCancelButtonsTableViewCell: UITableViewCell {
 
+    weak var delegate: SaveCancelWordTableContentDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,4 +28,13 @@ class WordSaveCancelButtonsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func saveContent(_ sender: UIButton) {
+        delegate?.saveContent()
+    }
+    
+    @IBAction func cancelChanges(_ sender: Any) {
+        delegate?.cancelChanges()
+    }
+    
+    
 }

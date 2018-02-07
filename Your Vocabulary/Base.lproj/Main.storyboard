@@ -253,10 +253,16 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VfP-lM-Z2g">
                                                             <rect key="frame" x="0.0" y="0.0" width="48" height="30"/>
                                                             <state key="normal" title="Save"/>
+                                                            <connections>
+                                                                <segue destination="fLA-bV-ljz" kind="unwind" unwindAction="saveButtonWasTappedWithSegue:" id="UVP-lE-anl"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kEV-rq-fcO">
                                                             <rect key="frame" x="56" y="0.0" width="48" height="30"/>
                                                             <state key="normal" title="Cancel"/>
+                                                            <connections>
+                                                                <segue destination="fLA-bV-ljz" kind="unwind" unwindAction="cancelButtonWasTappedWithSegue:" id="VJJ-k3-toO"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                 </stackView>
@@ -289,6 +295,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jv3-9X-0ft" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="fLA-bV-ljz" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2898.4000000000001" y="-156.65024630541873"/>
         </scene>
@@ -794,14 +801,6 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ZeI-Z7-9OK">
-                                        <rect key="frame" x="0.0" y="519.33333333333337" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZeI-Z7-9OK" id="D05-Jf-hsu">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
-                                            <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>

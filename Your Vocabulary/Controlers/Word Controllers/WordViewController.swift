@@ -308,6 +308,7 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         dictionary.addToWords(newWord)
         dictionary.dateOfLastChanges = NSDate()
+        dictionary.numberOfWords += 1
     }
     
     func cancelChanges() {

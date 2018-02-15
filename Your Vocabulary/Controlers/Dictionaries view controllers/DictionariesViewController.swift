@@ -168,8 +168,16 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
         
         gettingListOfDictionaries()
         
+        self.dictionariesTableView.rowHeight = 60.0
+        
         
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        dictionariesTableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -188,10 +196,9 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "standartDictionaryCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DictionaryCell", for: indexPath) as! DictionaryTableViewCell
         
-        cell.textLabel?.text = dictionaries[indexPath.row].name
-        cell.detailTextLabel?.text = "Count of words: \(dictionaries[indexPath.row].numberOfWords)"
+        cell.dictionary = dictionaries[indexPath.row]
         
         return cell
     }
@@ -222,7 +229,6 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
         return [delete, edit]
     }
     
-    
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -232,12 +238,15 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
         
         switch segue.identifier {
         case "openDictionarySegue"?:
-            guard let wtvc = segue.destination as? WordsTableViewController else { return }
+            print("try make segue")
+            guard let wvc = segue.destination as? WordsViewController else { return }
             
-            guard let cell = sender as? UITableViewCell, let indexPath = dictionariesTableView.indexPath(for: cell) else { return }
+            print ("destination correct")
             
-            wtvc.currentDictionary = dictionaries[indexPath.row]
+            guard let cell = sender as? DictionaryTableViewCell, let indexPath = dictionariesTableView.indexPath(for: cell) else { return }
             
+            wvc.currentDictionary = dictionaries[indexPath.row]
+            print("done segue")
         case "newDictionaryProperties"?:
             guard let dpvc = segue.destination as? DictionaryPropertiesViewController else { return }
             

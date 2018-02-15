@@ -41,6 +41,7 @@ class WordsTableViewController: UITableViewController {
         
         if let word = sourceView.currentWord{
             context.delete(word)
+            currentDictionary!.numberOfWords -= 1
         }
         
         sourceView.saveContent()
@@ -122,16 +123,7 @@ class WordsTableViewController: UITableViewController {
             print("Definition and translation is empty")
             cell.detailTextLabel?.text = "No definitions or transaltions"
         }
-        
-        /*if let d = words[indexPath.row].definitions?.count {
-            cell.detailTextLabel?.text = d
-        } else {
-            if let t = words[indexPath.row].translation {
-                cell.detailTextLabel?.text = t
-            } else {
-                cell.detailTextLabel?.text = "Non"
-            }
-        }*/
+
         
         return cell
     }
@@ -154,6 +146,7 @@ class WordsTableViewController: UITableViewController {
             managedContext?.delete(words[indexPath.row])
             
             do {
+                currentDictionary?.numberOfWords -= 1
                 try managedContext?.save()
                 tableView.deleteRows(at: [indexPath], with: .fade)
             } catch let error as NSError {

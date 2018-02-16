@@ -23,7 +23,7 @@ class DictionaryTableViewCell: UITableViewCell {
             
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "d MMMM"
-            dataOfCreationLabel.text = "\(dateFormatter.string(from: currentDictionary.dateOfLastChanges as! Date))"
+            dataOfCreationLabel.text = "\(dateFormatter.string(from: currentDictionary.dateOfLastChanges! as Date))"
         }
     }
     

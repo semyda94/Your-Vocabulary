@@ -67,6 +67,8 @@ class WordsViewController: UIViewController, UITableViewDataSource, UITableViewD
         let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
         navigationItem.rightBarButtonItem = add
         
+        wordsTableView.rowHeight = UITableViewAutomaticDimension
+        
         // Do any additional setup after loading the view.
     }
 

@@ -17,13 +17,32 @@ class WordTableViewCell: UITableViewCell {
             guard let w = word else { return }
             
             wordLabel.text = w.word
+            
+            if let definition =  w.definitions?.allObjects as? [Definition] {
+                for d in definition {
+                    guard let text = d.text else { break }
+                    descriptionLabel.text = "\t \(text)"
+                    return
+                }
+            }
+            
+            if let translations = w.translations?.allObjects as? [Translation] {
+                for t in translations {
+                    guard let text = t.text else { break }
+                    descriptionLabel.text = text
+                    return
+                }
+            }
+            
+            
+            
+            
         }
     }
     
     // MARK: - Outlets
     
     @IBOutlet weak var wordLabel: UILabel!
-    @IBOutlet weak var stackOfSubProperties: UIStackView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var learnedCheckBox: BEMCheckBox!
     

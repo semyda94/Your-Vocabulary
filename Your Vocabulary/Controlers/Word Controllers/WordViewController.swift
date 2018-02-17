@@ -153,6 +153,11 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
         return 0
     }
     
+    fileprivate func deletingFiledCellFromTable(at index: IndexPath) {
+        sections[index.section].remove(at: index.row)
+        fieldsTableView.reloadData()
+    }
+    
     // MARK: - IBActions
     
     // MARK: - Life cycle methods
@@ -176,7 +181,7 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         // Set automatic dimensions for row height
         fieldsTableView.rowHeight = UITableViewAutomaticDimension
-        fieldsTableView.estimatedRowHeight = UITableViewAutomaticDimension
+        fieldsTableView.estimatedRowHeight = 50
         
         // Do any additional setup after loading the view.
     }
@@ -204,10 +209,13 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
             return cell
             
         case .field:
+            print("Set field cell")
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "fieldCell", for: indexPath) as? WordFieldsTableViewCell else { break }
-            cell.textField.delegate = self
-            cell.textField.text = sections[indexPath.section][indexPath.row].value
-            cell.textField.placeholder = "Enter \(sections[indexPath.section].first?.value!.lowercased() ?? "None")"
+            //cell.textField.delegate = self
+            print("Got cell")
+            cell.textView.text = sections[indexPath.section][indexPath.row].value
+            print("Setted text")
+            //cell.textView.plas = "Enter \(sections[indexPath.section].first?.value!.lowercased() ?? "None")"
             return cell
             
         case .addFieldButton:
@@ -223,6 +231,24 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
         return UITableViewCell()
+    }
+    
+    //MARK: - TableViewDelegate
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if sections[indexPath.section][indexPath.row].type == .field && sections[indexPath.section].count > 3 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .default, title: "Delete") { (action, index) in
+            self.deletingFiledCellFromTable(at: indexPath)
+        }
+        
+        return [delete]
     }
     
     //MARK: - UITextFieldDelegate implemenation methods
@@ -306,6 +332,7 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
 
+        
         dictionary.addToWords(newWord)
         dictionary.dateOfLastChanges = NSDate()
         dictionary.numberOfWords += 1

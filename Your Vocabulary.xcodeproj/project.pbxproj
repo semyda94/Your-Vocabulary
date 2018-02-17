@@ -31,7 +31,6 @@
 		E772806D1FFDDEF6004DC8A3 /* Your_Vocabulary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E772806B1FFDDEF6004DC8A3 /* Your_Vocabulary.xcdatamodeld */; };
 		E772806F1FFDDEF6004DC8A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E772806E1FFDDEF6004DC8A3 /* Assets.xcassets */; };
 		E77280721FFDDEF6004DC8A3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E77280701FFDDEF6004DC8A3 /* LaunchScreen.storyboard */; };
-		E77280821FFDF80F004DC8A3 /* WordsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77280811FFDF80F004DC8A3 /* WordsTableViewController.swift */; };
 		E785D6D4200C5A0E0068B4CE /* BEMAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E785D6CD200C5A0E0068B4CE /* BEMAnimationManager.m */; };
 		E785D6D5200C5A0E0068B4CE /* BEMPathManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E785D6CE200C5A0E0068B4CE /* BEMPathManager.m */; };
 		E785D6D6200C5A0E0068B4CE /* BEMCheckBoxGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E785D6CF200C5A0E0068B4CE /* BEMCheckBoxGroup.m */; };
@@ -74,7 +73,6 @@
 		E772806E1FFDDEF6004DC8A3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E77280711FFDDEF6004DC8A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E77280731FFDDEF6004DC8A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E77280811FFDF80F004DC8A3 /* WordsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsTableViewController.swift; sourceTree = "<group>"; };
 		E785D6CC200C5A0E0068B4CE /* BEMCheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMCheckBox.h; sourceTree = "<group>"; };
 		E785D6CD200C5A0E0068B4CE /* BEMAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMAnimationManager.m; sourceTree = "<group>"; };
 		E785D6CE200C5A0E0068B4CE /* BEMPathManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMPathManager.m; sourceTree = "<group>"; };
@@ -122,7 +120,6 @@
 			children = (
 				E74B4A0820354285000BA062 /* WordsViewController.swift */,
 				E74B4A0A20362951000BA062 /* WordTableViewCell.swift */,
-				E77280811FFDF80F004DC8A3 /* WordsTableViewController.swift */,
 			);
 			path = "Words Table controllers";
 			sourceTree = "<group>";
@@ -332,7 +329,6 @@
 				E750B9AB202415770033AA2B /* Synonym+CoreDataClass.swift in Sources */,
 				E750B9B0202415770033AA2B /* Example+CoreDataProperties.swift in Sources */,
 				E77280651FFDDEF6004DC8A3 /* AppDelegate.swift in Sources */,
-				E77280821FFDF80F004DC8A3 /* WordsTableViewController.swift in Sources */,
 				E7E91B7520032C020066EC13 /* Dictionary+CoreDataProperties.swift in Sources */,
 				E7C55641202524F500CD5C3C /* WordSaveCancelButtonsTableViewCell.swift in Sources */,
 				E750B9A9202415770033AA2B /* Translation+CoreDataClass.swift in Sources */,

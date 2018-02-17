@@ -10,11 +10,14 @@ import UIKit
 
 class WordFieldsTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var textField: UITextField!
     
+    @IBOutlet weak var textView: UITextView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        textView.layer.borderColor = #colorLiteral(red: 0.168627451, green: 0.2705882353, blue: 0.4392156863, alpha: 0.5)
+        textView.layer.borderWidth = 1
+        textView.layer.cornerRadius = 10
         // Initialization code
     }
     

@@ -7,14 +7,15 @@
 //
 
 import UIKit
+import CoreData
 
 class WordTableViewCell: UITableViewCell {
 
     // MARK: - Properties
     
-    var word: Word? {
+    var currentWord: Word? {
         didSet {
-            guard let w = word else { return }
+            guard let w = currentWord else { return }
             
             wordLabel.text = w.word
             
@@ -34,17 +35,45 @@ class WordTableViewCell: UITableViewCell {
                 }
             }
             
-            
+            learnedCheckBox.on = w.isLearned
             
             
         }
     }
+    
+    var managetContext: NSManagedObjectContext? {
+        guard  let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return nil }
+        
+        return appDelegate.persistentContainer.viewContext
+    }
+ 
     
     // MARK: - Outlets
     
     @IBOutlet weak var wordLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var learnedCheckBox: BEMCheckBox!
+    
+    // MARK: - IBActions
+    
+    @IBAction func wasTappedLearnedMark(_ sender: BEMCheckBox) {
+        guard let context = managetContext else { return }
+        let word = context.object(with: currentWord!.objectID) as! Word
+
+        word.isLearned = sender.on
+        
+        print("learned mark for word \(word.word!) was changed to \(word.isLearned)")
+        /*childEntity.dictionary?.numberofLearned = sender.on ? childEntity.dictionary!.numberofLearned + 1 : childEntity.dictionary!.numberofLearned - 1
+         */
+        
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("Unresolved error during updating learned mark status \(error), \(error.userInfo)")
+        }
+        
+
+    }
     
     
     // MARK: - Life cycle

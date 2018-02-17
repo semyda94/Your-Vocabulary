@@ -96,8 +96,7 @@ class WordsViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        print("Setting a properties of cell")
+    
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath) as? WordTableViewCell else {
              let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath)
             return cell
@@ -107,26 +106,7 @@ class WordsViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         guard let words = currentDictionary?.words?.allObjects as? [Word] else { return cell }
         
-        print(words)
-        cell.word = words[indexPath.row]
-        
-        
-        print("Setting a detailLabel text:")
-        /*
-        if words[indexPath.row].definitions?.count != 0 {
-            print("Definition isn't empty")
-            guard let randomDefinition = words[indexPath.row].definitions?.anyObject() as? Definition else { return cell }
-            cell.detailTextLabel?.text = randomDefinition.text
-        } else if words[indexPath.row].translations?.count != 0 {
-            print("Translation isn't empty")
-            guard let randomTranslation = words[indexPath.row].translations?.anyObject() as? Translation else { return cell }
-            cell.detailTextLabel?.text = randomTranslation.text
-        } else {
-            print("Definition and translation is empty")
-            cell.detailTextLabel?.text = "No definitions or transaltions"
-        }
-        */
-        
+        cell.currentWord = words[indexPath.row]
         return cell
     }
     
@@ -144,7 +124,6 @@ class WordsViewController: UIViewController, UITableViewDataSource, UITableViewD
             // Delete the row from the data source
             guard let words = currentDictionary?.words?.allObjects as? [Word] else { return }
             
-            //print("count of words \(words.count)")
             managedContext?.delete(words[indexPath.row])
             
             do {
@@ -169,7 +148,6 @@ class WordsViewController: UIViewController, UITableViewDataSource, UITableViewD
         // Pass the selected object to the new view controller.
         
         if let wvc = segue.destination as? WordViewController {
-            print ("got destination")
             
             switch segue.identifier! {
             case "showWord" :

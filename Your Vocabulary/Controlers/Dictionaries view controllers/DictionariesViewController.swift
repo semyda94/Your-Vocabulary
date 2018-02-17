@@ -62,6 +62,7 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
             let result = try context.fetch(request)
             
             dictionaries = result
+            dictionariesTableView.reloadData()
         } catch let error as NSError {
             print("Unresolved error during fetching dictionary: \(error), \(error.userInfo)")
         }
@@ -177,7 +178,7 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        dictionariesTableView.reloadData()
+        gettingListOfDictionaries()
     }
     
     override func didReceiveMemoryWarning() {
@@ -246,6 +247,7 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
             guard let cell = sender as? DictionaryTableViewCell, let indexPath = dictionariesTableView.indexPath(for: cell) else { return }
             
             wvc.currentDictionary = dictionaries[indexPath.row]
+            
             print("done segue")
         case "newDictionaryProperties"?:
             guard let dpvc = segue.destination as? DictionaryPropertiesViewController else { return }

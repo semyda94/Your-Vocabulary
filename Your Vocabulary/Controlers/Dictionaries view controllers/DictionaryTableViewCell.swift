@@ -17,7 +17,7 @@ class DictionaryTableViewCell: UITableViewCell {
             guard let currentDictionary = dictionary else { return }
             
             titleLabel.text = currentDictionary.name
-          //  thumbnailLabel.text = String(currentDictionary.name!.first!).uppercased()
+            thumbnailLabel.text = String(currentDictionary.name!.first!).uppercased()
             numberOfWordsLabel.text = "Count of words: \( currentDictionary.numberOfWords)"
             numberOfLearnedWordsLabel.text = "learned words: \(currentDictionary.numberofLearned)"
             

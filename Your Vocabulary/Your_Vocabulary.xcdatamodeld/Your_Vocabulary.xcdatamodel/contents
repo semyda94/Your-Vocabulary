@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13533" systemVersion="17D47" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17D47" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Definition" representedClassName="Definition" syncable="YES">
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="word" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Word" inverseName="definitions" inverseEntity="Word" syncable="YES"/>
@@ -15,7 +15,8 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="numberofLearned" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="numberOfWords" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="words" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Word" inverseName="dictionary" inverseEntity="Word" syncable="YES"/>
+        <relationship name="tests" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="TestInfo" inverseName="dictonary" inverseEntity="TestInfo" syncable="YES"/>
+        <relationship name="words" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Word" inverseName="dictionary" inverseEntity="Word" syncable="YES"/>
     </entity>
     <entity name="Example" representedClassName="Example" syncable="YES">
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
@@ -28,6 +29,12 @@
     <entity name="Synonym" representedClassName="Synonym" syncable="YES">
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="word" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Word" inverseName="synonyms" inverseEntity="Word" syncable="YES"/>
+    </entity>
+    <entity name="TestInfo" representedClassName="TestInfo" syncable="YES">
+        <attribute name="dateOfCreation" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="numberOfAnswers" attributeType="Integer 32" minValueString="0" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="numberOfCorrectAnswers" attributeType="Integer 32" minValueString="0" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="dictonary" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Dictionary" inverseName="tests" inverseEntity="Dictionary" syncable="YES"/>
     </entity>
     <entity name="Translation" representedClassName="Translation" syncable="YES">
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
@@ -47,11 +54,12 @@
     </entity>
     <elements>
         <element name="Definition" positionX="72" positionY="-18" width="128" height="75"/>
-        <element name="Dictionary" positionX="-90" positionY="-81" width="128" height="210"/>
+        <element name="Dictionary" positionX="-90" positionY="-81" width="128" height="225"/>
         <element name="Example" positionX="340" positionY="303" width="128" height="75"/>
         <element name="ExtraInfo" positionX="106" positionY="213" width="128" height="75"/>
         <element name="Synonym" positionX="117" positionY="312" width="128" height="75"/>
         <element name="Translation" positionX="-99" positionY="303" width="128" height="75"/>
         <element name="Word" positionX="322" positionY="-27" width="128" height="195"/>
+        <element name="TestInfo" positionX="117" positionY="81" width="128" height="105"/>
     </elements>
 </model>

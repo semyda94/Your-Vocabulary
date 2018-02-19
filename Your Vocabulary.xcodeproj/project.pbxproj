@@ -11,6 +11,8 @@
 		E70793B7203B26C600BF6712 /* Quizzes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E70793B6203B26C600BF6712 /* Quizzes.storyboard */; };
 		E70793B9203B27AB00BF6712 /* Statistic.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E70793B8203B27AB00BF6712 /* Statistic.storyboard */; };
 		E70793BB203B27D600BF6712 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E70793BA203B27D600BF6712 /* Settings.storyboard */; };
+		E70793C9203B301800BF6712 /* TestInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70793C7203B301800BF6712 /* TestInfo+CoreDataClass.swift */; };
+		E70793CA203B301800BF6712 /* TestInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70793C8203B301800BF6712 /* TestInfo+CoreDataProperties.swift */; };
 		E7089B42202BE3F30028272C /* QuizzesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7089B41202BE3F30028272C /* QuizzesCollectionViewCell.swift */; };
 		E7089B44202BE42A0028272C /* QuizzesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7089B43202BE42A0028272C /* QuizzesCollectionViewController.swift */; };
 		E714DB872033E65E0082024E /* DictionaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E714DB862033E65E0082024E /* DictionaryTableViewCell.swift */; };
@@ -54,6 +56,8 @@
 		E70793B6203B26C600BF6712 /* Quizzes.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Quizzes.storyboard; sourceTree = "<group>"; };
 		E70793B8203B27AB00BF6712 /* Statistic.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Statistic.storyboard; sourceTree = "<group>"; };
 		E70793BA203B27D600BF6712 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		E70793C7203B301800BF6712 /* TestInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "TestInfo+CoreDataClass.swift"; path = "CoreDataObjects/TestInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E70793C8203B301800BF6712 /* TestInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "TestInfo+CoreDataProperties.swift"; path = "CoreDataObjects/TestInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E7089B41202BE3F30028272C /* QuizzesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzesCollectionViewCell.swift; sourceTree = "<group>"; };
 		E7089B43202BE42A0028272C /* QuizzesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzesCollectionViewController.swift; sourceTree = "<group>"; };
 		E714DB862033E65E0082024E /* DictionaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryTableViewCell.swift; sourceTree = "<group>"; };
@@ -172,9 +176,9 @@
 		E77280631FFDDEF6004DC8A3 /* Your Vocabulary */ = {
 			isa = PBXGroup;
 			children = (
-				E70793C4203B2D1D00BF6712 /* Views */,
 				E785D6CB200C5A0E0068B4CE /* Classes */,
 				E772807C1FFDE699004DC8A3 /* Model */,
+				E70793C4203B2D1D00BF6712 /* Views */,
 				E77280791FFDE0D6004DC8A3 /* Controlers */,
 				E77280641FFDDEF6004DC8A3 /* AppDelegate.swift */,
 				E772806E1FFDDEF6004DC8A3 /* Assets.xcassets */,
@@ -198,6 +202,8 @@
 		E772807C1FFDE699004DC8A3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E70793C7203B301800BF6712 /* TestInfo+CoreDataClass.swift */,
+				E70793C8203B301800BF6712 /* TestInfo+CoreDataProperties.swift */,
 				E750B99D202415770033AA2B /* ExtraInfo+CoreDataClass.swift */,
 				E750B99E202415770033AA2B /* ExtraInfo+CoreDataProperties.swift */,
 				E750B99F202415770033AA2B /* Translation+CoreDataClass.swift */,
@@ -339,7 +345,9 @@
 				E72E9DE3200C3300008D16A1 /* DictionariesViewController.swift in Sources */,
 				E7DC927E20104EC6009D77FE /* DictionaryPropertiesViewController.swift in Sources */,
 				E7E91B7820033C540066EC13 /* Word+CoreDataClass.swift in Sources */,
+				E70793CA203B301800BF6712 /* TestInfo+CoreDataProperties.swift in Sources */,
 				E750B9A8202415770033AA2B /* ExtraInfo+CoreDataProperties.swift in Sources */,
+				E70793C9203B301800BF6712 /* TestInfo+CoreDataClass.swift in Sources */,
 				E7089B42202BE3F30028272C /* QuizzesCollectionViewCell.swift in Sources */,
 				E785D6D6200C5A0E0068B4CE /* BEMCheckBoxGroup.m in Sources */,
 				E750B9AD202415770033AA2B /* Definition+CoreDataClass.swift in Sources */,

@@ -104,7 +104,7 @@ class WordsViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         // Configure the cell...
         
-        guard let words = currentDictionary?.words?.allObjects as? [Word] else { return cell }
+        guard let words = currentDictionary?.words?.array as? [Word] else { return cell }
         
         cell.currentWord = words[indexPath.row]
         return cell
@@ -122,7 +122,7 @@ class WordsViewController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            guard let words = currentDictionary?.words?.allObjects as? [Word] else { return }
+            guard let words = currentDictionary?.words?.array as? [Word] else { return }
             
             managedContext?.delete(words[indexPath.row])
             
@@ -153,7 +153,7 @@ class WordsViewController: UIViewController, UITableViewDataSource, UITableViewD
             case "showWord" :
                 if let cell = sender as? WordTableViewCell, let indexPath = wordsTableView.indexPath(for: cell) {
                     
-                    guard let words = currentDictionary?.words?.allObjects as? [Word] else { return }
+                    guard let words = currentDictionary?.words?.array as? [Word] else { return }
                     wvc.currentDictionary = currentDictionary
                     wvc.currentWord = words[indexPath.row]
                     print("showWord segue: was seted dictionary and word")

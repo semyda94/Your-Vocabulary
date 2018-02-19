@@ -110,6 +110,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E70793C4203B2D1D00BF6712 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E70793BA203B27D600BF6712 /* Settings.storyboard */,
+				E70793B8203B27AB00BF6712 /* Statistic.storyboard */,
+				E70793B6203B26C600BF6712 /* Quizzes.storyboard */,
+				E77280681FFDDEF6004DC8A3 /* Main.storyboard */,
+				E77280701FFDDEF6004DC8A3 /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		E74B4A0D20362CF8000BA062 /* Quiezzes Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -160,16 +172,12 @@
 		E77280631FFDDEF6004DC8A3 /* Your Vocabulary */ = {
 			isa = PBXGroup;
 			children = (
-				E70793BA203B27D600BF6712 /* Settings.storyboard */,
-				E70793B8203B27AB00BF6712 /* Statistic.storyboard */,
-				E70793B6203B26C600BF6712 /* Quizzes.storyboard */,
+				E70793C4203B2D1D00BF6712 /* Views */,
 				E785D6CB200C5A0E0068B4CE /* Classes */,
 				E772807C1FFDE699004DC8A3 /* Model */,
 				E77280791FFDE0D6004DC8A3 /* Controlers */,
 				E77280641FFDDEF6004DC8A3 /* AppDelegate.swift */,
-				E77280681FFDDEF6004DC8A3 /* Main.storyboard */,
 				E772806E1FFDDEF6004DC8A3 /* Assets.xcassets */,
-				E77280701FFDDEF6004DC8A3 /* LaunchScreen.storyboard */,
 				E77280731FFDDEF6004DC8A3 /* Info.plist */,
 				E772806B1FFDDEF6004DC8A3 /* Your_Vocabulary.xcdatamodeld */,
 			);

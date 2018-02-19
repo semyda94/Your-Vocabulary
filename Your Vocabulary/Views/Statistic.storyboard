@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hjm-37-WBF">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Statistic-->
+        <scene sceneID="rzX-vr-EF7">
+            <objects>
+                <viewController id="hjm-37-WBF" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Phr-zT-RDY">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="N2d-vu-Xvp"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Statistic" image="statistics_tb" selectedImage="selected_statistics_tb" id="WhO-Jv-PuN"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n3Y-i7-W23" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="530" y="990"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="selected_statistics_tb" width="26" height="26"/>
+        <image name="statistics_tb" width="26" height="26"/>
+    </resources>
+</document>

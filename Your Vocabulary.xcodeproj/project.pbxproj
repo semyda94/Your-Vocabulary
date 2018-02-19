@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		E7041E1E202BF069002A5B81 /* QuizzesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7041E1D202BF069002A5B81 /* QuizzesViewController.swift */; };
+		E70793B7203B26C600BF6712 /* Quizzes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E70793B6203B26C600BF6712 /* Quizzes.storyboard */; };
+		E70793B9203B27AB00BF6712 /* Statistic.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E70793B8203B27AB00BF6712 /* Statistic.storyboard */; };
+		E70793BB203B27D600BF6712 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E70793BA203B27D600BF6712 /* Settings.storyboard */; };
 		E7089B42202BE3F30028272C /* QuizzesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7089B41202BE3F30028272C /* QuizzesCollectionViewCell.swift */; };
 		E7089B44202BE42A0028272C /* QuizzesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7089B43202BE42A0028272C /* QuizzesCollectionViewController.swift */; };
 		E714DB872033E65E0082024E /* DictionaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E714DB862033E65E0082024E /* DictionaryTableViewCell.swift */; };
@@ -48,6 +51,9 @@
 
 /* Begin PBXFileReference section */
 		E7041E1D202BF069002A5B81 /* QuizzesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzesViewController.swift; sourceTree = "<group>"; };
+		E70793B6203B26C600BF6712 /* Quizzes.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Quizzes.storyboard; sourceTree = "<group>"; };
+		E70793B8203B27AB00BF6712 /* Statistic.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Statistic.storyboard; sourceTree = "<group>"; };
+		E70793BA203B27D600BF6712 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		E7089B41202BE3F30028272C /* QuizzesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzesCollectionViewCell.swift; sourceTree = "<group>"; };
 		E7089B43202BE42A0028272C /* QuizzesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzesCollectionViewController.swift; sourceTree = "<group>"; };
 		E714DB862033E65E0082024E /* DictionaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryTableViewCell.swift; sourceTree = "<group>"; };
@@ -154,6 +160,9 @@
 		E77280631FFDDEF6004DC8A3 /* Your Vocabulary */ = {
 			isa = PBXGroup;
 			children = (
+				E70793BA203B27D600BF6712 /* Settings.storyboard */,
+				E70793B8203B27AB00BF6712 /* Statistic.storyboard */,
+				E70793B6203B26C600BF6712 /* Quizzes.storyboard */,
 				E785D6CB200C5A0E0068B4CE /* Classes */,
 				E772807C1FFDE699004DC8A3 /* Model */,
 				E77280791FFDE0D6004DC8A3 /* Controlers */,
@@ -285,7 +294,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E70793B7203B26C600BF6712 /* Quizzes.storyboard in Resources */,
+				E70793B9203B27AB00BF6712 /* Statistic.storyboard in Resources */,
 				E77280721FFDDEF6004DC8A3 /* LaunchScreen.storyboard in Resources */,
+				E70793BB203B27D600BF6712 /* Settings.storyboard in Resources */,
 				E772806F1FFDDEF6004DC8A3 /* Assets.xcassets in Resources */,
 				E772806A1FFDDEF6004DC8A3 /* Main.storyboard in Resources */,
 			);

@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class WordViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, AddNewFieldDelegate, SaveCancelWordTableContentDelegate {
+class WordViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, AddNewFieldDelegate, SaveCancelWordTableContentDelegate {
     
     // MARK: - Properties
     
@@ -209,12 +209,9 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
             return cell
             
         case .field:
-            print("Set field cell")
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "fieldCell", for: indexPath) as? WordFieldsTableViewCell else { break }
-            //cell.textField.delegate = self
-            print("Got cell")
+            cell.textView.delegate = self
             cell.textView.text = sections[indexPath.section][indexPath.row].value
-            print("Setted text")
             //cell.textView.plas = "Enter \(sections[indexPath.section].first?.value!.lowercased() ?? "None")"
             return cell
             
@@ -250,24 +247,32 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         return [delete]
     }
-    
-    //MARK: - UITextFieldDelegate implemenation methods
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        guard let cell = textField.superview?.superview as? WordFieldsTableViewCell, let indexPath = fieldsTableView.indexPath(for: cell) else { return true }
+
+    //MARK: - UITextViewDelegate implementation
+    func textViewDidChange(_ textView: UITextView) {
+        guard let cell = textView.superview?.superview as? WordFieldsTableViewCell, let index = fieldsTableView.indexPath(for: cell) else { return }
         
-        sections[indexPath.section][indexPath.row].value = textField.text
+        sections[index.section][index.row].value = textView.text
+    }
+   /*
+    func textViewDidEndEditing(_ textView: UITextView) {
+        print("enter into textViewDidEndEditing")
+        textView.resignFirstResponder()
+        guard let cell = textView.superview?.superview as? WordFieldsTableViewCell, let index = fieldsTableView.indexPath(for: cell) else { return }
+        
+        sections[index.section][index.row].value = textView.text
+        print("was saved \(textView.text) for index \(index)")
+    }
+    
+    func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
+        textView.resignFirstResponder()
+        guard let cell = textView.superview?.superview as? WordFieldsTableViewCell, let index = fieldsTableView.indexPath(for: cell) else { return true}
+        
+        sections[index.section][index.row].value = textView.text
         
         return true
     }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let cell = textField.superview?.superview as? WordFieldsTableViewCell, let indexPath = fieldsTableView.indexPath(for: cell) else { return }
-        
-        sections[indexPath.section][indexPath.row].value = textField.text
-    }
-    
+ */
     // MARK: - AddNewFieldDelegate implementation
     
     func addFieldBeforeRow(_ row: UITableViewCell) {
@@ -301,10 +306,12 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
                 for element in section[1..<section.count - 1] {
                     switch sectionName {
                     case sectionsName[0]:
-                        guard let entity = NSEntityDescription.entity(forEntityName: "Translation", in: context) else { break }
+                        print("try to save translation")
+                        guard let entity = NSEntityDescription.entity(forEntityName: "Translation", in: context) else {print("translation entity wasn't created"); break }
                         let newTranslation = Translation(entity: entity, insertInto: context)
                         newTranslation.text = element.value
                         newWord.addToTranslations(newTranslation)
+                        print("translation was added into word")
                     case sectionsName[1]:
                         guard let entity = NSEntityDescription.entity(forEntityName: "Definition", in: context) else { break }
                         let newDefinition = Definition(entity: entity, insertInto: context)

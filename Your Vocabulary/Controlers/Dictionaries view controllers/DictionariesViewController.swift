@@ -249,7 +249,7 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
             wvc.currentDictionary = dictionaries[indexPath.row]
             
             print("done segue")
-        case "newDictionaryProperties"?:
+        case "newDictionaryProperties"? :
             guard let dpvc = segue.destination as? DictionaryPropertiesViewController else { return }
             
             dpvc.modalPresentationStyle = .overCurrentContext

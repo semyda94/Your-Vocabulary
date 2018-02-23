@@ -10,10 +10,44 @@ import UIKit
 
 private let reuseIdentifier = "QuizCollectionCell"
 
+enum QuizzesTypes:String {
+    case seeking = "Seeking"
+    case seekingByTime = "Seeking by time"
+    case matching = "Matching"
+    case matchingByTime = "Matching by time"
+    case spelling = "Spelling"
+    case spellingByTime = "Spelling by time"
+    case none = "none"
+}
+
 class QuizzesCollectionViewController: UICollectionViewController {
 
     // MARK: - Properties
-    let quizzes: [(name: String, thumbnail: UIImage)] = [("Seeking", #imageLiteral(resourceName: "seeking_icon") ), ("Seeking by time", #imageLiteral(resourceName: "seeking_by_time_icon")), ("Matching", #imageLiteral(resourceName: "matching_icon")), ("Matching byt time", #imageLiteral(resourceName: "matching_by_time_icon")), ("Spelling", #imageLiteral(resourceName: "spelling_icon")), ("Spelliing by time", #imageLiteral(resourceName: "spelling_by_time_icon"))]
+    let quizzes: [(name: QuizzesTypes, thumbnail: UIImage)] = [(.seeking, #imageLiteral(resourceName: "seeking_icon") ), (.seekingByTime, #imageLiteral(resourceName: "seeking_by_time_icon")), (.matching, #imageLiteral(resourceName: "matching_icon")), (.matchingByTime, #imageLiteral(resourceName: "matching_by_time_icon")), (.spelling, #imageLiteral(resourceName: "spelling_icon")), (.spellingByTime, #imageLiteral(resourceName: "spelling_by_time_icon"))]
+    
+    //MARK: - Unwind segue
+    
+    @IBAction func closePropertiesView(segue: UIStoryboardSegue){
+        
+    }
+    
+    @IBAction func startQuiz(segue: UIStoryboardSegue) {
+        if let segue = segue as? UIStoryboardSegueWithCompletion {
+            
+            segue.completion = {
+                guard let sourceVC = segue.source as? QuizPropertiesViewController else { return }
+                
+                switch sourceVC.typeOfQuiz {
+                case .seeking:
+                    self.performSegue(withIdentifier: "startSeekingQuiz", sender: nil)
+                default:
+                    return
+                }
+            }
+        } else {
+            return
+        }
+    }
     
     // MARK: - Life cycle
     
@@ -50,8 +84,12 @@ class QuizzesCollectionViewController: UICollectionViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier! {
-        case "showSeekingQuiz":
-            break
+        case "showQuizProperties":
+            guard let qpvc = segue.destination as? QuizPropertiesViewController else { return }
+            guard let cell = sender as? QuizzesCollectionViewCell, let indexPath = collectionView?.indexPath(for: cell) else { return }
+            qpvc.typeOfQuiz = quizzes[indexPath.row].name
+            qpvc.modalPresentationStyle = .overCurrentContext
+            
         default:
             break
         }
@@ -78,7 +116,7 @@ class QuizzesCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! QuizzesCollectionViewCell
     
         cell.quizzThumbNail.image = quizzes[indexPath.row].thumbnail
-        cell.title.text = quizzes[indexPath.row].name
+        cell.title.text = quizzes[indexPath.row].name.rawValue
         // Configure the cell
         
         return cell
@@ -89,12 +127,7 @@ class QuizzesCollectionViewController: UICollectionViewController {
 
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        switch quizzes[indexPath.row].name {
-        case "Seeking":
-            performSegue(withIdentifier: "showSeekingQuiz", sender: nil)
-        default:
-            break
-        }
+        
     }
     
     /*

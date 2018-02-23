@@ -790,7 +790,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="geM-mf-3Kb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-922" y="273"/>
+            <point key="canvasLocation" x="-924" y="406"/>
         </scene>
         <!--Statistic-->
         <scene sceneID="Kig-T3-ir2">
@@ -800,7 +800,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xs4-7m-2Ri" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-684" y="273"/>
+            <point key="canvasLocation" x="-685" y="432"/>
         </scene>
         <!--Settings-->
         <scene sceneID="cr1-lv-OBT">
@@ -810,7 +810,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3FO-b6-eff" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-449" y="273"/>
+            <point key="canvasLocation" x="-444" y="432"/>
         </scene>
     </scenes>
     <resources>
@@ -820,7 +820,7 @@
         <image name="red_button" width="148" height="47"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="8Hd-U3-Qow"/>
+        <segue reference="y0M-lq-7af"/>
         <segue reference="mEZ-CJ-2GZ"/>
     </inferredMetricsTieBreakers>
 </document>

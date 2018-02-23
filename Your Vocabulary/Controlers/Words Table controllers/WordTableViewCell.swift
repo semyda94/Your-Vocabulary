@@ -18,6 +18,7 @@ class WordTableViewCell: UITableViewCell {
             guard let w = currentWord else { return }
             
             wordLabel.text = w.word
+            learnedCheckBox.on = w.isLearned
             
             if let definition =  w.definitions?.allObjects as? [Definition] {
                 for d in definition {
@@ -28,15 +29,13 @@ class WordTableViewCell: UITableViewCell {
             }
             
             if let translations = w.translations?.allObjects as? [Translation] {
+                print("Got array with translation")
                 for t in translations {
-                    guard let text = t.text else { break }
+                    guard let text = t.text else { print("translation doesn't have text"); break }
                     descriptionLabel.text = text
                     return
                 }
             }
-            
-            learnedCheckBox.on = w.isLearned
-            
             
         }
     }
@@ -61,7 +60,11 @@ class WordTableViewCell: UITableViewCell {
         let word = context.object(with: currentWord!.objectID) as! Word
 
         word.isLearned = sender.on
-        
+        if word.isLearned {
+            word.dictionary?.numberofLearned += 1
+        } else {
+            word.dictionary?.numberofLearned -= 1
+        }
         print("learned mark for word \(word.word!) was changed to \(word.isLearned)")
         /*childEntity.dictionary?.numberofLearned = sender.on ? childEntity.dictionary!.numberofLearned + 1 : childEntity.dictionary!.numberofLearned - 1
          */

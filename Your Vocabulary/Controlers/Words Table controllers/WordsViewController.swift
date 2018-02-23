@@ -128,6 +128,9 @@ class WordsViewController: UIViewController, UITableViewDataSource, UITableViewD
             
             do {
                 currentDictionary?.numberOfWords -= 1
+                if words[indexPath.row].isLearned {
+                    currentDictionary?.numberofLearned -= 1
+                }
                 try managedContext?.save()
                 tableView.deleteRows(at: [indexPath], with: .fade)
             } catch let error as NSError {

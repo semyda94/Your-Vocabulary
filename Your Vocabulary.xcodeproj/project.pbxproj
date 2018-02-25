@@ -46,6 +46,8 @@
 		E7C556452025255600CD5C3C /* WordAddFieldButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C556442025255600CD5C3C /* WordAddFieldButtonTableViewCell.swift */; };
 		E7DC927E20104EC6009D77FE /* DictionaryPropertiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DC927D20104EC6009D77FE /* DictionaryPropertiesViewController.swift */; };
 		E7E25E3B203FC7E6009EFE87 /* UIStoryBoardSegueWithCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E25E3A203FC7E6009EFE87 /* UIStoryBoardSegueWithCompletion.swift */; };
+		E7E25E3D2042B9C3009EFE87 /* QuizMatchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E25E3C2042B9C3009EFE87 /* QuizMatchingViewController.swift */; };
+		E7E25E3F2042C0B9009EFE87 /* QuizSpellingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E25E3E2042C0B9009EFE87 /* QuizSpellingViewController.swift */; };
 		E7E312182032A81C00F03FC9 /* QuizSeekingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E312172032A81C00F03FC9 /* QuizSeekingViewController.swift */; };
 		E7E91B7420032C020066EC13 /* Dictionary+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E91B7220032C020066EC13 /* Dictionary+CoreDataClass.swift */; };
 		E7E91B7520032C020066EC13 /* Dictionary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E91B7320032C020066EC13 /* Dictionary+CoreDataProperties.swift */; };
@@ -100,6 +102,8 @@
 		E7DC927C20101FD1009D77FE /* ObjectCBridgeHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectCBridgeHeader.h; sourceTree = "<group>"; };
 		E7DC927D20104EC6009D77FE /* DictionaryPropertiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryPropertiesViewController.swift; sourceTree = "<group>"; };
 		E7E25E3A203FC7E6009EFE87 /* UIStoryBoardSegueWithCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryBoardSegueWithCompletion.swift; sourceTree = "<group>"; };
+		E7E25E3C2042B9C3009EFE87 /* QuizMatchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizMatchingViewController.swift; sourceTree = "<group>"; };
+		E7E25E3E2042C0B9009EFE87 /* QuizSpellingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizSpellingViewController.swift; sourceTree = "<group>"; };
 		E7E312172032A81C00F03FC9 /* QuizSeekingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizSeekingViewController.swift; sourceTree = "<group>"; };
 		E7E91B7220032C020066EC13 /* Dictionary+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Dictionary+CoreDataClass.swift"; path = "CoreDataObjects/Dictionary+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E7E91B7320032C020066EC13 /* Dictionary+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Dictionary+CoreDataProperties.swift"; path = "CoreDataObjects/Dictionary+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -133,6 +137,8 @@
 		E74B4A0D20362CF8000BA062 /* Quiezzes Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				E7E25E3E2042C0B9009EFE87 /* QuizSpellingViewController.swift */,
+				E7E25E3C2042B9C3009EFE87 /* QuizMatchingViewController.swift */,
 				E7A91668203E19EE006A5CDB /* QuizPropertiesViewController.swift */,
 				E7E312172032A81C00F03FC9 /* QuizSeekingViewController.swift */,
 				E7041E1D202BF069002A5B81 /* QuizzesViewController.swift */,
@@ -335,6 +341,7 @@
 				E785D6D4200C5A0E0068B4CE /* BEMAnimationManager.m in Sources */,
 				E7C556432025252600CD5C3C /* WordTitleFollowingFieldsCellTableViewCell.swift in Sources */,
 				E7E25E3B203FC7E6009EFE87 /* UIStoryBoardSegueWithCompletion.swift in Sources */,
+				E7E25E3D2042B9C3009EFE87 /* QuizMatchingViewController.swift in Sources */,
 				E74B4A0B20362951000BA062 /* WordTableViewCell.swift in Sources */,
 				E74B4A0920354285000BA062 /* WordsViewController.swift in Sources */,
 				E785D6D7200C5A0E0068B4CE /* BEMCheckBox.m in Sources */,
@@ -355,6 +362,7 @@
 				E7E91B7820033C540066EC13 /* Word+CoreDataClass.swift in Sources */,
 				E70793CA203B301800BF6712 /* TestInfo+CoreDataProperties.swift in Sources */,
 				E750B9A8202415770033AA2B /* ExtraInfo+CoreDataProperties.swift in Sources */,
+				E7E25E3F2042C0B9009EFE87 /* QuizSpellingViewController.swift in Sources */,
 				E70793C9203B301800BF6712 /* TestInfo+CoreDataClass.swift in Sources */,
 				E7089B42202BE3F30028272C /* QuizzesCollectionViewCell.swift in Sources */,
 				E785D6D6200C5A0E0068B4CE /* BEMCheckBoxGroup.m in Sources */,

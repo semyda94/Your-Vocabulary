@@ -1,54 +1,38 @@
- //
-//  QuizSeekingViewController.swift
+//
+//  QuizMatchingViewController.swift
 //  Your Vocabulary
 //
-//  Created by Dmitrii Semykin on 13/02/18.
+//  Created by Dmitrii Semykin on 25/02/18.
 //  Copyright © 2018 Dmitrii Semykin. All rights reserved.
 //
 
 import UIKit
 
-class QuizSeekingViewController: UIViewController {
+class QuizMatchingViewController: UIViewController {
 
-    //Outlets
+    // MARK: - Outlets
     
-    @IBOutlet weak var progressBar: UIProgressView!
-    @IBOutlet weak var questionLabel: UILabel!
+    @IBOutlet var leftButtons: [UIButton]!
+    @IBOutlet var rightButtons: [UIButton]!
     
-    @IBOutlet var answersButtons: [UIButton]!
-    
-    @IBAction func wasDoneAnswer(_ sender: UIButton) {
-        //print("Was tapped \(sender.titleLabel?.text ?? lol)")
-    }
-    
-    // methods
-    
-    fileprivate func prepareScreen() {
-        self.view.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "bg"))
-        
-        for button in answersButtons {
+    // MARK: - Methods
+    fileprivate func setButtonsSettings(forButtons buttons: [UIButton]) {
+        for button in buttons {
             button.layer.cornerRadius = 10
             button.layer.borderWidth = 2
             button.layer.borderColor = #colorLiteral(red: 1, green: 0.831372549, blue: 0.4588235294, alpha: 1)
-            button.backgroundColor = #colorLiteral(red: 0.568627451, green: 0.7137254902, blue: 0.6862745098, alpha: 1)
+            button.backgroundColor = #colorLiteral(red: 0.5921568627, green: 0.737254902, blue: 0.7058823529, alpha: 1)
             button.tintColor = #colorLiteral(red: 0.168627451, green: 0.2705882353, blue: 0.4392156863, alpha: 1)
         }
     }
     
-    fileprivate func startGame() {
-        
-    }
-    
-    
-    // MARK: - View life cycle
-    
+    // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        prepareScreen()
-        
-        startGame()
-        
+        setButtonsSettings(forButtons: leftButtons)
+        setButtonsSettings(forButtons: rightButtons)
+
         // Do any additional setup after loading the view.
     }
 

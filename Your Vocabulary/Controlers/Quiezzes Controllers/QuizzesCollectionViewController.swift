@@ -40,6 +40,10 @@ class QuizzesCollectionViewController: UICollectionViewController {
                 switch sourceVC.typeOfQuiz {
                 case .seeking:
                     self.performSegue(withIdentifier: "startSeekingQuiz", sender: nil)
+                case .matching:
+                    self.performSegue(withIdentifier: "startMatchingQuiz", sender: nil)
+                case .spelling:
+                    self.performSegue(withIdentifier: "startSpellingQuiz", sender: nil)
                 default:
                     return
                 }

@@ -7,10 +7,20 @@
 //
 
 import UIKit
+import CoreData
 
 class QuizSeekingViewController: UIViewController {
 
-    //Outlets
+    // MARK: - Properties
+    
+    var chosenParametrs: (dictionary: Dictionary, questionType: DictionaryElements, answerType: DictionaryElements)?
+    
+    fileprivate var remainingQuestion = [(question: String, answer: String)]()
+    fileprivate var currentQuestion: (question: String, answer: String) = ("None", "None")
+    fileprivate var wholeAnswers = [String]()
+    fileprivate var currentAnswers = [String]()
+    
+    // MARK: - Outlets
     
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var questionLabel: UILabel!
@@ -18,10 +28,12 @@ class QuizSeekingViewController: UIViewController {
     @IBOutlet var answersButtons: [UIButton]!
     
     @IBAction func wasDoneAnswer(_ sender: UIButton) {
-        //print("Was tapped \(sender.titleLabel?.text ?? lol)")
+        if sender.currentTitle == currentQuestion.answer {
+            setQuestionAndAnswers()
+        }
     }
     
-    // methods
+    // MARK: - Methods
     
     fileprivate func prepareScreen() {
         self.view.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "bg"))
@@ -35,8 +47,133 @@ class QuizSeekingViewController: UIViewController {
         }
     }
     
-    fileprivate func startGame() {
+    fileprivate func getElement(baseOn typeElement: DictionaryElements, forWord word: Word) -> String?{
+        switch typeElement {
+        case .word:
+            return word.word
+        case .translation:
+            guard let translations = word.translations?.allObjects as? [Translation] else { return nil}
+            
+            for translation in translations {
+                guard let element = translation.text else { break }
+                return element
+            }
+            return nil
+            
+        case .definition:
+            guard let definitions = word.definitions?.allObjects as? [Definition] else { return nil}
+            
+            for definition in definitions {
+                guard let element = definition.text else { break }
+                return element
+            }
+            return nil
+            
+        case .extraInfo:
+            guard let extraInfos = word.extraInfos?.allObjects as? [ExtraInfo] else { return nil}
+            
+            for extraInfo in extraInfos {
+                guard let element = extraInfo.text else { break }
+                return element
+            }
+            return nil
+            
+        case .synonym:
+            guard let synonyms = word.synonyms?.allObjects as? [Synonym] else { return nil}
+            
+            for synonym in synonyms {
+                guard let element = synonym.text else { break }
+                return element
+            }
+            return nil
+            
+        case .example:
+            guard let examples = word.examples?.allObjects as? [Example] else { return nil}
+            
+            for example in examples {
+                guard let element = example.text else { break }
+                return element
+            }
+            return nil
+        }
+    }
+    
+    fileprivate func formQuestions() {
+        guard let parametrs = chosenParametrs, let words = chosenParametrs?.dictionary.words?.array as? [Word] else { return }
         
+        for word in words {
+            guard let question = getElement(baseOn: parametrs.questionType, forWord: word), let answer = getElement(baseOn: parametrs.answerType, forWord: word) else { break }
+            
+            wholeAnswers.append(answer)
+            remainingQuestion.append((question, answer))
+        }
+        
+    }
+    
+    fileprivate func setAnswers(forQuestion question : (question: String, answer: String)) {
+        currentAnswers.removeAll()
+        
+        currentAnswers.append(currentQuestion.answer)
+        
+        while currentAnswers.count < answersButtons.count {
+            let answer = wholeAnswers[wholeAnswers.count.getRandom()]
+            if currentAnswers.contains(answer) { continue } else {
+                currentAnswers.append(answer)
+            }
+        }
+        
+        for button in answersButtons {
+            let randomOfset = currentAnswers.count.getRandom()
+            let randomAnswer = currentAnswers[randomOfset]
+            button.setTitle(randomAnswer, for: .normal)
+            currentAnswers.remove(at: randomOfset)
+        }
+        
+    }
+    
+    fileprivate func finishQuiz() {
+        let alertController = UIAlertController(title: "Title", message: "End?", preferredStyle: .alert)
+        
+        alertController.view.tintColor = #colorLiteral(red: 0.168627451, green: 0.2705882353, blue: 0.4392156863, alpha: 1)
+        let subview = (alertController.view.subviews.first?.subviews.first?.subviews.first!)! as UIView
+        subview.backgroundColor = #colorLiteral(red: 0.5921568627, green: 0.737254902, blue: 0.7058823529, alpha: 1)
+        
+        let restartGame = UIAlertAction(title: "New game", style: .default) { (_) in
+            self.formQuestions()
+            self.setQuestionAndAnswers()
+        }
+        
+        alertController.addAction(restartGame)
+        
+        let quitGame = UIAlertAction(title: "Quit", style: .default) { (_) in
+            self.performSegue(withIdentifier: "unwindFinishSeekingQuiz", sender:self)
+        }
+        
+        alertController.addAction(quitGame)
+        
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    fileprivate func setQuestionAndAnswers() {
+        if remainingQuestion.count == 0 {
+            finishQuiz()
+            return
+            
+        }
+        
+        updateProgressBar()
+        
+        let randomQuestionIndex = (remainingQuestion.count).getRandom()
+        currentQuestion = remainingQuestion[ randomQuestionIndex]
+        questionLabel.text = currentQuestion.question
+        setAnswers(forQuestion: currentQuestion)
+        
+        remainingQuestion.remove(at: randomQuestionIndex)
+    }
+    
+    fileprivate func updateProgressBar() {
+        progressBar.setProgress(1 / Float(remainingQuestion.count), animated: true)
     }
     
     
@@ -47,7 +184,9 @@ class QuizSeekingViewController: UIViewController {
         
         prepareScreen()
         
-        startGame()
+        formQuestions()
+        
+        setQuestionAndAnswers()
         
         // Do any additional setup after loading the view.
     }
@@ -69,3 +208,15 @@ class QuizSeekingViewController: UIViewController {
     */
 
 }
+
+ extension Int {
+    func getRandom() -> Int {
+        if self > 0 {
+            return Int(arc4random_uniform(UInt32(self)))
+        } else if self < 0 {
+            return -Int(arc4random_uniform(UInt32(abs(self))))
+        } else {
+            return 0
+        }
+    }
+ }

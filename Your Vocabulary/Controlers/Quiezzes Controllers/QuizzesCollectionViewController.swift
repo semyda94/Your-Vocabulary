@@ -10,16 +10,6 @@ import UIKit
 
 private let reuseIdentifier = "QuizCollectionCell"
 
-enum QuizzesTypes:String {
-    case seeking = "Seeking"
-    case seekingByTime = "Seeking by time"
-    case matching = "Matching"
-    case matchingByTime = "Matching by time"
-    case spelling = "Spelling"
-    case spellingByTime = "Spelling by time"
-    case none = "none"
-}
-
 class QuizzesCollectionViewController: UICollectionViewController {
 
     // MARK: - Properties
@@ -37,13 +27,14 @@ class QuizzesCollectionViewController: UICollectionViewController {
             segue.completion = {
                 guard let sourceVC = segue.source as? QuizPropertiesViewController else { return }
                 
+                
                 switch sourceVC.typeOfQuiz {
                 case .seeking:
-                    self.performSegue(withIdentifier: "startSeekingQuiz", sender: nil)
+                    self.performSegue(withIdentifier: "startSeekingQuiz", sender: sourceVC)
                 case .matching:
-                    self.performSegue(withIdentifier: "startMatchingQuiz", sender: nil)
+                    self.performSegue(withIdentifier: "startMatchingQuiz", sender: sourceVC)
                 case .spelling:
-                    self.performSegue(withIdentifier: "startSpellingQuiz", sender: nil)
+                    self.performSegue(withIdentifier: "startSpellingQuiz", sender: sourceVC)
                 default:
                     return
                 }
@@ -51,6 +42,10 @@ class QuizzesCollectionViewController: UICollectionViewController {
         } else {
             return
         }
+    }
+    
+    @IBAction func finishQuiz(segue: UIStoryboardSegue) {
+        
     }
     
     // MARK: - Life cycle
@@ -71,7 +66,7 @@ class QuizzesCollectionViewController: UICollectionViewController {
         super.viewWillLayoutSubviews()
         
         if let layout = collectionView!.collectionViewLayout as? UICollectionViewFlowLayout {
-            let itemWidth = view.bounds.width / 2.0 - 20
+            let itemWidth = view.bounds.width / 2.0 - 5
             let itemHeight = itemWidth
             layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
         }
@@ -93,6 +88,18 @@ class QuizzesCollectionViewController: UICollectionViewController {
             guard let cell = sender as? QuizzesCollectionViewCell, let indexPath = collectionView?.indexPath(for: cell) else { return }
             qpvc.typeOfQuiz = quizzes[indexPath.row].name
             qpvc.modalPresentationStyle = .overCurrentContext
+        case "startSeekingQuiz":
+            guard let qpvc = sender as? QuizPropertiesViewController else { return }
+            guard let qsvc = segue.destination as? QuizSeekingViewController else { return }
+            
+            let chosenParametrs: (dictionary: Dictionary, questionType: DictionaryElements, answerType: DictionaryElements)
+            chosenParametrs.dictionary = qpvc.parametrsForPicker.dictionaries[qpvc.pickerView.selectedRow(inComponent: 0)]
+            
+            chosenParametrs.questionType = qpvc.parametrsForPicker.questionType[qpvc.pickerView.selectedRow(inComponent: 1)]
+            
+            chosenParametrs.answerType = qpvc.parametrsForPicker.answersType[qpvc.pickerView.selectedRow(inComponent: 2)]
+            
+            qsvc.chosenParametrs = chosenParametrs
             
         default:
             break

@@ -19,11 +19,7 @@ class QuizPropertiesViewController: UIViewController, UIPickerViewDelegate, UIPi
         return appDelegate.persistentContainer.viewContext
     }
     
-    fileprivate var dictionaries = [Dictionary]()
-    
-    fileprivate var firstParametrs = [String]()
-    fileprivate var secondParametrs = [String]()
-    fileprivate var selectedParametrs = [String]()
+    var parametrsForPicker =  (dictionaries: [Dictionary](), questionType: [DictionaryElements](), answersType: [DictionaryElements]())
     
     var typeOfQuiz = QuizzesTypes.none
     
@@ -42,7 +38,7 @@ class QuizPropertiesViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         do {
             let result = try context.fetch(request)
-            dictionaries = result
+            parametrsForPicker.dictionaries = result
             setSubParametrs(dictionarAt: 0)
         } catch let error as NSError {
             print("Unresolver error during fetching dictionary: \(error), \(error.userInfo)")
@@ -51,27 +47,30 @@ class QuizPropertiesViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     fileprivate func setSubParametrs(dictionarAt position: Int) {
-        firstParametrs.removeAll()
-        secondParametrs.removeAll()
+        parametrsForPicker.answersType.removeAll()
+        parametrsForPicker.questionType.removeAll()
         
-        if dictionaries[position].isTranslation {
-            firstParametrs.append("Translation")
-            secondParametrs.append("Translation")
+        parametrsForPicker.questionType.append(DictionaryElements.word)
+        parametrsForPicker.answersType.append(DictionaryElements.word)
+        
+        if parametrsForPicker.dictionaries[position].isTranslation {
+            parametrsForPicker.questionType.append(DictionaryElements.translation)
+            parametrsForPicker.answersType.append(DictionaryElements.translation)
         }
         
-        if dictionaries[position].isDefinition {
-            firstParametrs.append("Definition")
-            secondParametrs.append("Definition")
+        if parametrsForPicker.dictionaries[position].isDefinition {
+            parametrsForPicker.questionType.append(DictionaryElements.definition)
+            parametrsForPicker.answersType.append(DictionaryElements.definition)
         }
         
-        if dictionaries[position].isSynonym {
-            firstParametrs.append("Synonym")
-            secondParametrs.append("Synonym")
+        if parametrsForPicker.dictionaries[position].isSynonym {
+            parametrsForPicker.questionType.append(DictionaryElements.synonym)
+            parametrsForPicker.answersType.append(DictionaryElements.synonym)
         }
         
-        if dictionaries[position].isExample {
-            firstParametrs.append("Example")
-            secondParametrs.append("Example")
+        if parametrsForPicker.dictionaries[position].isExample {
+            parametrsForPicker.questionType.append(DictionaryElements.example)
+            parametrsForPicker.answersType.append(DictionaryElements.example)
         }
         
         pickerView.reloadComponent(1)
@@ -103,11 +102,11 @@ class QuizPropertiesViewController: UIViewController, UIPickerViewDelegate, UIPi
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch component {
         case 0:
-            return dictionaries.count
+            return parametrsForPicker.dictionaries.count
         case 1:
-            return firstParametrs.count
+            return parametrsForPicker.questionType.count
         case 2:
-            return secondParametrs.count
+            return parametrsForPicker.answersType.count
         default:
             return 0
         }
@@ -116,11 +115,11 @@ class QuizPropertiesViewController: UIViewController, UIPickerViewDelegate, UIPi
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch component {
         case 0:
-            return dictionaries[row].name
+            return parametrsForPicker.dictionaries[row].name
         case 1:
-            return firstParametrs[row]
+            return parametrsForPicker.questionType[row].rawValue
         case 2:
-            return secondParametrs[row]
+            return parametrsForPicker.answersType[row].rawValue
         default:
             return nil
         }

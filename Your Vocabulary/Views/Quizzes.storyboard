@@ -371,8 +371,15 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bvh-Hm-cYI"/>
                     </view>
+                    <connections>
+                        <outlet property="answerField" destination="0cl-n5-ajp" id="h02-5s-zmL"/>
+                        <outlet property="progressBar" destination="uSD-OD-1i4" id="emO-tl-Rru"/>
+                        <outlet property="questionLabel" destination="50X-8j-ppb" id="mcm-pM-RpF"/>
+                        <segue destination="WzQ-c0-5fl" kind="unwind" identifier="unwindFinishSpellingQuiz" unwindAction="finishQuizWithSegue:" id="Phq-QA-z7S"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8xg-hf-W8b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="WzQ-c0-5fl" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1849" y="1314"/>
         </scene>

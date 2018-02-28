@@ -112,6 +112,18 @@ class QuizzesCollectionViewController: UICollectionViewController {
             
             qsvc.chosenParametrs = chosenParametrs
             
+        case "startSpellingQuiz":
+            guard let qpvc = sender as? QuizPropertiesViewController else { return }
+            guard let qsvc = segue.destination as? QuizSpellingViewController else { return }
+            
+            let chosenParametrs: (dictionary: Dictionary, questionType: DictionaryElements, answerType: DictionaryElements)
+            
+            chosenParametrs.dictionary = qpvc.parametrsForPicker.dictionaries[qpvc.pickerView.selectedRow(inComponent: 0)]
+            chosenParametrs.questionType = qpvc.parametrsForPicker.questionType[qpvc.pickerView.selectedRow(inComponent: 1)]
+            chosenParametrs.answerType = qpvc.parametrsForPicker.answersType[qpvc.pickerView.selectedRow(inComponent: 2)]
+            
+            qsvc.chosenParametrs = chosenParametrs
+            
         default:
             break
         }

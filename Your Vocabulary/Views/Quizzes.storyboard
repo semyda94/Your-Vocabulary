@@ -211,22 +211,37 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chh-pL-7Kf">
                                                 <rect key="frame" x="0.0" y="0.0" width="168.5" height="94.5"/>
                                                 <state key="normal" title="L1"/>
+                                                <connections>
+                                                    <action selector="answerButtonWasTapped:" destination="QWs-Ge-WNh" eventType="touchUpInside" id="HSS-aE-HJN"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="puU-eL-dLz">
                                                 <rect key="frame" x="0.0" y="102.5" width="168.5" height="94.5"/>
                                                 <state key="normal" title="L2"/>
+                                                <connections>
+                                                    <action selector="answerButtonWasTapped:" destination="QWs-Ge-WNh" eventType="touchUpInside" id="fFq-gl-6nM"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OSh-SV-mSM">
                                                 <rect key="frame" x="0.0" y="205" width="168.5" height="94"/>
                                                 <state key="normal" title="L3"/>
+                                                <connections>
+                                                    <action selector="answerButtonWasTapped:" destination="QWs-Ge-WNh" eventType="touchUpInside" id="gge-eK-PRt"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3b0-rM-iLH">
                                                 <rect key="frame" x="0.0" y="307" width="168.5" height="94.5"/>
                                                 <state key="normal" title="L4"/>
+                                                <connections>
+                                                    <action selector="answerButtonWasTapped:" destination="QWs-Ge-WNh" eventType="touchUpInside" id="2XC-zI-pYc"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WXm-fe-BBh">
                                                 <rect key="frame" x="0.0" y="409.5" width="168.5" height="94.5"/>
                                                 <state key="normal" title="L5"/>
+                                                <connections>
+                                                    <action selector="answerButtonWasTapped:" destination="QWs-Ge-WNh" eventType="touchUpInside" id="kbc-hr-hfO"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -236,22 +251,37 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4rv-1D-X1l">
                                                 <rect key="frame" x="0.0" y="0.0" width="168.5" height="94.5"/>
                                                 <state key="normal" title="R1"/>
+                                                <connections>
+                                                    <action selector="answerButtonWasTapped:" destination="QWs-Ge-WNh" eventType="touchUpInside" id="Kn5-6g-IAi"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cOR-fS-oOn">
                                                 <rect key="frame" x="0.0" y="102.5" width="168.5" height="94.5"/>
                                                 <state key="normal" title="R2"/>
+                                                <connections>
+                                                    <action selector="answerButtonWasTapped:" destination="QWs-Ge-WNh" eventType="touchUpInside" id="jdk-jC-ljB"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jcO-kA-cQM">
                                                 <rect key="frame" x="0.0" y="205" width="168.5" height="94"/>
                                                 <state key="normal" title="R3"/>
+                                                <connections>
+                                                    <action selector="answerButtonWasTapped:" destination="QWs-Ge-WNh" eventType="touchUpInside" id="quU-wp-8OC"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CIE-tR-bdw">
                                                 <rect key="frame" x="0.0" y="307" width="168.5" height="94.5"/>
                                                 <state key="normal" title="R4"/>
+                                                <connections>
+                                                    <action selector="answerButtonWasTapped:" destination="QWs-Ge-WNh" eventType="touchUpInside" id="q5d-MW-DjL"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VSu-We-0qx">
                                                 <rect key="frame" x="0.0" y="409.5" width="168.5" height="94.5"/>
                                                 <state key="normal" title="R5"/>
+                                                <connections>
+                                                    <action selector="answerButtonWasTapped:" destination="QWs-Ge-WNh" eventType="touchUpInside" id="TEA-G1-cxL"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -275,6 +305,7 @@
                         <viewLayoutGuide key="safeArea" id="rNf-wT-jqb"/>
                     </view>
                     <connections>
+                        <outlet property="progressBar" destination="IUP-mm-hUE" id="zDD-x8-XSV"/>
                         <outletCollection property="leftButtons" destination="chh-pL-7Kf" collectionClass="NSMutableArray" id="NGX-ci-2MA"/>
                         <outletCollection property="leftButtons" destination="puU-eL-dLz" collectionClass="NSMutableArray" id="3W2-lE-uaP"/>
                         <outletCollection property="leftButtons" destination="OSh-SV-mSM" collectionClass="NSMutableArray" id="fFQ-zO-JqR"/>
@@ -285,7 +316,7 @@
                         <outletCollection property="rightButtons" destination="jcO-kA-cQM" collectionClass="NSMutableArray" id="Ozx-zB-F2t"/>
                         <outletCollection property="rightButtons" destination="CIE-tR-bdw" collectionClass="NSMutableArray" id="Vhp-A8-ITR"/>
                         <outletCollection property="rightButtons" destination="VSu-We-0qx" collectionClass="NSMutableArray" id="lsb-ob-Ffd"/>
-                        <segue destination="J1i-Cz-75z" kind="unwind" identifier="" unwindAction="finishQuizWithSegue:" id="UiX-NS-NGd"/>
+                        <segue destination="J1i-Cz-75z" kind="unwind" identifier="unwindFinishMatchingQuiz" unwindAction="finishQuizWithSegue:" id="UiX-NS-NGd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cax-Ks-qPN" userLabel="First Responder" sceneMemberID="firstResponder"/>

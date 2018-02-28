@@ -36,6 +36,7 @@
 		E772806D1FFDDEF6004DC8A3 /* Your_Vocabulary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E772806B1FFDDEF6004DC8A3 /* Your_Vocabulary.xcdatamodeld */; };
 		E772806F1FFDDEF6004DC8A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E772806E1FFDDEF6004DC8A3 /* Assets.xcassets */; };
 		E77280721FFDDEF6004DC8A3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E77280701FFDDEF6004DC8A3 /* LaunchScreen.storyboard */; };
+		E781A5AC204542E3002028D7 /* QuizzesMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = E781A5AB204542E3002028D7 /* QuizzesMethods.swift */; };
 		E785D6D4200C5A0E0068B4CE /* BEMAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E785D6CD200C5A0E0068B4CE /* BEMAnimationManager.m */; };
 		E785D6D5200C5A0E0068B4CE /* BEMPathManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E785D6CE200C5A0E0068B4CE /* BEMPathManager.m */; };
 		E785D6D6200C5A0E0068B4CE /* BEMCheckBoxGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E785D6CF200C5A0E0068B4CE /* BEMCheckBoxGroup.m */; };
@@ -88,6 +89,7 @@
 		E772806E1FFDDEF6004DC8A3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E77280711FFDDEF6004DC8A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E77280731FFDDEF6004DC8A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E781A5AB204542E3002028D7 /* QuizzesMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzesMethods.swift; sourceTree = "<group>"; };
 		E785D6CC200C5A0E0068B4CE /* BEMCheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMCheckBox.h; sourceTree = "<group>"; };
 		E785D6CD200C5A0E0068B4CE /* BEMAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMAnimationManager.m; sourceTree = "<group>"; };
 		E785D6CE200C5A0E0068B4CE /* BEMPathManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMPathManager.m; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 		E77280791FFDE0D6004DC8A3 /* Controlers */ = {
 			isa = PBXGroup;
 			children = (
+				E781A5AB204542E3002028D7 /* QuizzesMethods.swift */,
 				E7E25E3A203FC7E6009EFE87 /* UIStoryBoardSegueWithCompletion.swift */,
 				E74B4A0D20362CF8000BA062 /* Quiezzes Controllers */,
 				E7C5563D2025247D00CD5C3C /* Word Controllers */,
@@ -353,6 +356,7 @@
 				E750B9AC202415770033AA2B /* Synonym+CoreDataProperties.swift in Sources */,
 				E7E312182032A81C00F03FC9 /* QuizSeekingViewController.swift in Sources */,
 				E7E91B7420032C020066EC13 /* Dictionary+CoreDataClass.swift in Sources */,
+				E781A5AC204542E3002028D7 /* QuizzesMethods.swift in Sources */,
 				E750B9AF202415770033AA2B /* Example+CoreDataClass.swift in Sources */,
 				E714DB872033E65E0082024E /* DictionaryTableViewCell.swift in Sources */,
 				E7C556452025255600CD5C3C /* WordAddFieldButtonTableViewCell.swift in Sources */,

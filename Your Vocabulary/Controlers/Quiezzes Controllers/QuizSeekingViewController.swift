@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class QuizSeekingViewController: UIViewController {
+class QuizSeekingViewController: UIViewController, QuizzesMethods {
 
     // MARK: - Properties
     
@@ -47,62 +47,11 @@ class QuizSeekingViewController: UIViewController {
         }
     }
     
-    fileprivate func getElement(baseOn typeElement: DictionaryElements, forWord word: Word) -> String?{
-        switch typeElement {
-        case .word:
-            return word.word
-        case .translation:
-            guard let translations = word.translations?.allObjects as? [Translation] else { return nil}
-            
-            for translation in translations {
-                guard let element = translation.text else { break }
-                return element
-            }
-            return nil
-            
-        case .definition:
-            guard let definitions = word.definitions?.allObjects as? [Definition] else { return nil}
-            
-            for definition in definitions {
-                guard let element = definition.text else { break }
-                return element
-            }
-            return nil
-            
-        case .extraInfo:
-            guard let extraInfos = word.extraInfos?.allObjects as? [ExtraInfo] else { return nil}
-            
-            for extraInfo in extraInfos {
-                guard let element = extraInfo.text else { break }
-                return element
-            }
-            return nil
-            
-        case .synonym:
-            guard let synonyms = word.synonyms?.allObjects as? [Synonym] else { return nil}
-            
-            for synonym in synonyms {
-                guard let element = synonym.text else { break }
-                return element
-            }
-            return nil
-            
-        case .example:
-            guard let examples = word.examples?.allObjects as? [Example] else { return nil}
-            
-            for example in examples {
-                guard let element = example.text else { break }
-                return element
-            }
-            return nil
-        }
-    }
-    
     fileprivate func formQuestions() {
-        guard let parametrs = chosenParametrs, let words = chosenParametrs?.dictionary.words?.array as? [Word] else { return }
+        guard let parametrs = chosenParametrs, let words = parametrs.dictionary.words?.array as? [Word] else { return }
         
         for word in words {
-            guard let question = getElement(baseOn: parametrs.questionType, forWord: word), let answer = getElement(baseOn: parametrs.answerType, forWord: word) else { break }
+            guard let question = getElement(baseOn: parametrs.questionType, forWord: word), let answer = getElement(baseOn: parametrs.answerType, forWord: word) else { continue }
             
             wholeAnswers.append(answer)
             remainingQuestion.append((question, answer))

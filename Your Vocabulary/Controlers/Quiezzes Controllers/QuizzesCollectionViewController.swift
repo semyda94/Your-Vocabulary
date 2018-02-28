@@ -93,10 +93,21 @@ class QuizzesCollectionViewController: UICollectionViewController {
             guard let qsvc = segue.destination as? QuizSeekingViewController else { return }
             
             let chosenParametrs: (dictionary: Dictionary, questionType: DictionaryElements, answerType: DictionaryElements)
+            
             chosenParametrs.dictionary = qpvc.parametrsForPicker.dictionaries[qpvc.pickerView.selectedRow(inComponent: 0)]
-            
             chosenParametrs.questionType = qpvc.parametrsForPicker.questionType[qpvc.pickerView.selectedRow(inComponent: 1)]
+            chosenParametrs.answerType = qpvc.parametrsForPicker.answersType[qpvc.pickerView.selectedRow(inComponent: 2)]
             
+            qsvc.chosenParametrs = chosenParametrs
+            
+        case "startMatchingQuiz":
+            guard let qpvc = sender as? QuizPropertiesViewController else { return }
+            guard let qsvc = segue.destination as? QuizMatchingViewController else { return }
+            
+            let chosenParametrs: (dictionary: Dictionary, questionType: DictionaryElements, answerType: DictionaryElements)
+            
+            chosenParametrs.dictionary = qpvc.parametrsForPicker.dictionaries[qpvc.pickerView.selectedRow(inComponent: 0)]
+            chosenParametrs.questionType = qpvc.parametrsForPicker.questionType[qpvc.pickerView.selectedRow(inComponent: 1)]
             chosenParametrs.answerType = qpvc.parametrsForPicker.answersType[qpvc.pickerView.selectedRow(inComponent: 2)]
             
             qsvc.chosenParametrs = chosenParametrs

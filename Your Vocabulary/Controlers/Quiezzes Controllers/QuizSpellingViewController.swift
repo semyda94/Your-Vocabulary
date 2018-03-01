@@ -16,6 +16,10 @@ class QuizSpellingViewController: UIViewController, QuizzesMethods, UITextFieldD
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var answerField: UITextField!
     
+    var countOfAnswers = 0
+    var countOfCorrectAnswers = 0
+    let dateOfQuiz = Date()
+    
     // MARK: - Actions
     
     
@@ -104,7 +108,9 @@ class QuizSpellingViewController: UIViewController, QuizzesMethods, UITextFieldD
     // MARK: - UITextFieldDelegate
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        countOfAnswers += 1
         if textField.text == currentPair.answer {
+            countOfCorrectAnswers += 1
             if questionPairs.count > 0 {
                 setQuestion()
             } else {

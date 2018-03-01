@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 private let reuseIdentifier = "QuizCollectionCell"
 
@@ -14,6 +15,12 @@ class QuizzesCollectionViewController: UICollectionViewController {
 
     // MARK: - Properties
     let quizzes: [(name: QuizzesTypes, thumbnail: UIImage)] = [(.seeking, #imageLiteral(resourceName: "seeking_icon") ), (.seekingByTime, #imageLiteral(resourceName: "seeking_by_time_icon")), (.matching, #imageLiteral(resourceName: "matching_icon")), (.matchingByTime, #imageLiteral(resourceName: "matching_by_time_icon")), (.spelling, #imageLiteral(resourceName: "spelling_icon")), (.spellingByTime, #imageLiteral(resourceName: "spelling_by_time_icon"))]
+    
+    var managedContext: NSManagedObjectContext? {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return nil }
+        
+        return appDelegate.persistentContainer.viewContext
+    }
     
     //MARK: - Unwind segue
     
@@ -45,6 +52,55 @@ class QuizzesCollectionViewController: UICollectionViewController {
     }
     
     @IBAction func finishQuiz(segue: UIStoryboardSegue) {
+        var countOfAnswers = 0
+        var countOfCorrectAnswer = 0
+        var dateOfQuiz: Date?
+        var dictionary: Dictionary
+        
+        switch segue.identifier! {
+        case "unwindFinishSeekingQuiz":
+            guard let sourceVC = segue.source as? QuizSeekingViewController else { return }
+            countOfAnswers = sourceVC.countOfAnswers
+            countOfCorrectAnswer = sourceVC.countOfCorrectAnswers
+            dateOfQuiz = sourceVC.dateOfQuiz
+            dictionary = sourceVC.chosenParametrs!.dictionary
+            print("unwindFinishSeekingQuiz done")
+        case "unwindFinishMatchingQuiz":
+            guard let sourceVC = segue.source as? QuizMatchingViewController else { return }
+            countOfAnswers = sourceVC.countOfAnswers
+            countOfCorrectAnswer = sourceVC.countOfCorrectAnswers
+            dateOfQuiz = sourceVC.dateOfQuiz
+            dictionary = sourceVC.chosenParametrs!.dictionary
+            print("unwindFinishMatchingQuiz done")
+        case "unwindFinishSpellingQuiz":
+            guard let sourceVC = segue.source as? QuizSpellingViewController else { return }
+            countOfAnswers = sourceVC.countOfAnswers
+            countOfCorrectAnswer = sourceVC.countOfCorrectAnswers
+            dateOfQuiz = sourceVC.dateOfQuiz
+            dictionary = sourceVC.chosenParametrs!.dictionary
+            print("unwindFinishSpellingQuiz done")
+        default:
+            return
+        }
+        
+        guard let context = managedContext else { return }
+        
+        guard let entityQuiz = NSEntityDescription.entity(forEntityName: "TestInfo", in: context) else { return }
+        let newQuiz = TestInfo(entity: entityQuiz, insertInto: context)
+        
+        newQuiz.dateOfCreation = dateOfQuiz! as NSDate
+        newQuiz.numberOfAnswers = Int32(countOfAnswers)
+        newQuiz.numberOfCorrectAnswers = Int32(countOfCorrectAnswer)
+        
+        dictionary.insertIntoTests(newQuiz, at: 0)
+        
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("Unresolved error during insert new quiz \(error), \(error.userInfo)")
+        }
+        
+        print(dictionary.tests?.array as! [TestInfo])
         
     }
     

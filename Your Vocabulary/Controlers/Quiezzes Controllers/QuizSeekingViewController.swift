@@ -20,6 +20,10 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
     fileprivate var wholeAnswers = [String]()
     fileprivate var currentAnswers = [String]()
     
+    var countOfAnswers = 0
+    var countOfCorrectAnswers = 0
+    let dateOfQuiz = Date()
+    
     // MARK: - Outlets
     
     @IBOutlet weak var progressBar: UIProgressView!
@@ -28,8 +32,10 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
     @IBOutlet var answersButtons: [UIButton]!
     
     @IBAction func wasDoneAnswer(_ sender: UIButton) {
+        countOfAnswers += 1
         if sender.currentTitle == currentQuestion.answer {
             setQuestionAndAnswers()
+            countOfCorrectAnswers += 1
         }
     }
     

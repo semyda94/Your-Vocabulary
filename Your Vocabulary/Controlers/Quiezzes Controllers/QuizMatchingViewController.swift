@@ -21,6 +21,10 @@ class QuizMatchingViewController: UIViewController, QuizzesMethods {
     
     fileprivate var answer: (question: String?, answer: String?)
     
+    var countOfAnswers = 0
+    var countOfCorrectAnswers = 0
+    let dateOfQuiz = Date()
+    
     
     // MARK: - Outlets
     
@@ -174,9 +178,11 @@ class QuizMatchingViewController: UIViewController, QuizzesMethods {
     fileprivate func checkAnswer() -> Bool {
         guard let _ = answer.question, let _ = answer.answer  else { return false }
         
+        countOfAnswers += 1
+        
         for pair in currentPairs {
             if pair.question == answer.question , pair.answer == answer.answer! {
-                print("Got rigth matching should disable buttons")
+                countOfCorrectAnswers += 1
                 return true
             }
         }

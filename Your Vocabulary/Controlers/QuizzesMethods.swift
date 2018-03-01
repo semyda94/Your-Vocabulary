@@ -9,10 +9,10 @@
 import Foundation
 
 protocol QuizzesMethods {
-
 }
 
 extension QuizzesMethods {
+    
     func getElement(baseOn typeElement: DictionaryElements, forWord word: Word) -> String?{
         switch typeElement {
         case .word:

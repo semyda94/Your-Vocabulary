@@ -91,15 +91,20 @@ class StatisticViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     fileprivate func updateBarData(withTests tests: [TestInfo]) {
+        combinedChart.reloadInputViews()
         var barChartDataEntries = [BarChartDataEntry]()
         var lineChartDataEntries = [ChartDataEntry]()
         
+         combinedChart.xAxis.valueFormatter = nil
         
         let formato = CombinedChartFormatter()
         let xaxis:XAxis = XAxis()
         
         let dateFormater = DateFormatter()
         dateFormater.dateFormat = "MMM dd"
+        
+        let maxNumberOfAnswers = tests.max(by: { $0.numberOfAnswers < $1.numberOfAnswers })?.numberOfAnswers ?? 0
+        let maxNumberOfCorrectAnswers = tests.max(by: { $0.numberOfCorrectAnswers < $1.numberOfCorrectAnswers })?.numberOfCorrectAnswers ?? 0
         
         //Just show one point for all tests at the date otherwise show each test separately.
 //        var prevDate = ""
@@ -114,17 +119,40 @@ class StatisticViewController: UIViewController, UITableViewDelegate, UITableVie
             barChartDataEntries.append( BarChartDataEntry(x: Double(index), y: Double(test.numberOfAnswers)) )
             lineChartDataEntries.append(ChartDataEntry(x: Double(index), y: Double(test.numberOfCorrectAnswers)))
             formato.labels.append(dateFormater.string(from: test.dateOfCreation! as Date))
-            formato.stringForValue(Double(index), axis: xaxis)
         }
         
         xaxis.valueFormatter = formato
         
        
         let barDataSet = BarChartDataSet(values: barChartDataEntries, label: "Number of answers")
+        
+        //barDataSet.setColor(#colorLiteral(red: 0.4117647059, green: 0.4117647059, blue: 0.7019607843, alpha: 1))
+        barDataSet.setColor(#colorLiteral(red: 0.9568627451, green: 0.9137254902, blue: 0.8039215686, alpha: 1))
+        
         let lineDataSet = LineChartDataSet(values: lineChartDataEntries, label: "Number of correct answers")
+        
+        lineDataSet.circleColors.removeAll()
+        lineDataSet.circleColors.append(#colorLiteral(red: 0.3960784314, green: 0.6078431373, blue: 0.368627451, alpha: 1))
+        lineDataSet.setColor(#colorLiteral(red: 0.3960784314, green: 0.6078431373, blue: 0.368627451, alpha: 1))
+        // Colors of the gradient
+        let gradientColors = [#colorLiteral(red: 0.3960784314, green: 0.6078431373, blue: 0.368627451, alpha: 1).cgColor, UIColor.clear.cgColor] as CFArray
+        // Positioning of the gradient
+        let colorLocations:[CGFloat] = [1.0 / (CGFloat(maxNumberOfAnswers) / CGFloat(maxNumberOfCorrectAnswers)) / 2.0, 0.0]
+        // Gradient Object
+        let gradient = CGGradient.init(colorsSpace: CGColorSpaceCreateDeviceRGB(), colors: gradientColors, locations: colorLocations)
+        // Set the Gradient
+        lineDataSet.fill = Fill.fillWithLinearGradient(gradient!, angle: 90.0)
+        lineDataSet.drawFilledEnabled = true
+        
+        lineDataSet.circleRadius = 5.0
+        lineDataSet.circleHoleRadius = 0.0
+        
+        //set curve line mode
+        lineDataSet.mode = .horizontalBezier
         
         let barData = BarChartData(dataSet: barDataSet)
         let lineData = LineChartData(dataSet: lineDataSet)
+        
         
         let combinedData = CombinedChartData()
         combinedData.barData = barData
@@ -132,7 +160,11 @@ class StatisticViewController: UIViewController, UITableViewDelegate, UITableVie
         
         combinedChart.data = combinedData
         combinedChart.xAxis.valueFormatter = xaxis.valueFormatter
+        combinedChart.leftAxis.axisMinimum = 0.0
+        combinedChart.rightAxis.axisMinimum = 0.0
         
+        combinedChart.animate(xAxisDuration: 2.0, yAxisDuration: 2.0, easingOption: .linear)
+        //combinedChart.animate(xAxisDuration: 2.0, yAxisDuration: 2.0, easingOption: .easeInQuad)
         combinedChart.notifyDataSetChanged()
         
         

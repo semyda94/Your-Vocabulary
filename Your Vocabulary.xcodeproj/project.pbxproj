@@ -49,6 +49,10 @@
 		E7C55641202524F500CD5C3C /* WordSaveCancelButtonsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C55640202524F500CD5C3C /* WordSaveCancelButtonsTableViewCell.swift */; };
 		E7C556432025252600CD5C3C /* WordTitleFollowingFieldsCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C556422025252600CD5C3C /* WordTitleFollowingFieldsCellTableViewCell.swift */; };
 		E7C556452025255600CD5C3C /* WordAddFieldButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C556442025255600CD5C3C /* WordAddFieldButtonTableViewCell.swift */; };
+		E7C901BE20591A9B0076823C /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C901BD20591A9B0076823C /* SettingsTableViewController.swift */; };
+		E7C901C12059279E0076823C /* LanguageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C901C02059279E0076823C /* LanguageTableViewController.swift */; };
+		E7D4344C205D3D3E00287A5F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E7D4344E205D3D3E00287A5F /* InfoPlist.strings */; };
+		E7D43451205D3D3F00287A5F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E7D43453205D3D3F00287A5F /* Localizable.strings */; };
 		E7DC927E20104EC6009D77FE /* DictionaryPropertiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DC927D20104EC6009D77FE /* DictionaryPropertiesViewController.swift */; };
 		E7E25E3B203FC7E6009EFE87 /* UIStoryBoardSegueWithCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E25E3A203FC7E6009EFE87 /* UIStoryBoardSegueWithCompletion.swift */; };
 		E7E25E3D2042B9C3009EFE87 /* QuizMatchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E25E3C2042B9C3009EFE87 /* QuizMatchingViewController.swift */; };
@@ -59,6 +63,7 @@
 		E7E91B7520032C020066EC13 /* Dictionary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E91B7320032C020066EC13 /* Dictionary+CoreDataProperties.swift */; };
 		E7E91B7820033C540066EC13 /* Word+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E91B7620033C540066EC13 /* Word+CoreDataClass.swift */; };
 		E7E91B7920033C540066EC13 /* Word+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E91B7720033C540066EC13 /* Word+CoreDataProperties.swift */; };
+		E7F04B6B2061252A000AF4BB /* publicDictionaries.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F04B6A2061252A000AF4BB /* publicDictionaries.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,6 +152,12 @@
 		E7C55640202524F500CD5C3C /* WordSaveCancelButtonsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSaveCancelButtonsTableViewCell.swift; sourceTree = "<group>"; };
 		E7C556422025252600CD5C3C /* WordTitleFollowingFieldsCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordTitleFollowingFieldsCellTableViewCell.swift; sourceTree = "<group>"; };
 		E7C556442025255600CD5C3C /* WordAddFieldButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordAddFieldButtonTableViewCell.swift; sourceTree = "<group>"; };
+		E7C901BD20591A9B0076823C /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		E7C901C02059279E0076823C /* LanguageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageTableViewController.swift; sourceTree = "<group>"; };
+		E7D43447205D327400287A5F /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		E7D43449205D327400287A5F /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		E7D4344D205D3D3E00287A5F /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E7D43452205D3D3F00287A5F /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E7DC927C20101FD1009D77FE /* ObjectCBridgeHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectCBridgeHeader.h; sourceTree = "<group>"; };
 		E7DC927D20104EC6009D77FE /* DictionaryPropertiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryPropertiesViewController.swift; sourceTree = "<group>"; };
 		E7E25E3A203FC7E6009EFE87 /* UIStoryBoardSegueWithCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryBoardSegueWithCompletion.swift; sourceTree = "<group>"; };
@@ -158,6 +169,7 @@
 		E7E91B7320032C020066EC13 /* Dictionary+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Dictionary+CoreDataProperties.swift"; path = "CoreDataObjects/Dictionary+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E7E91B7620033C540066EC13 /* Word+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Word+CoreDataClass.swift"; path = "CoreDataObjects/Word+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E7E91B7720033C540066EC13 /* Word+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Word+CoreDataProperties.swift"; path = "CoreDataObjects/Word+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E7F04B6A2061252A000AF4BB /* publicDictionaries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = publicDictionaries.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,6 +250,9 @@
 		E77280631FFDDEF6004DC8A3 /* Your Vocabulary */ = {
 			isa = PBXGroup;
 			children = (
+				E7F04B6A2061252A000AF4BB /* publicDictionaries.swift */,
+				E7D43453205D3D3F00287A5F /* Localizable.strings */,
+				E7D4344E205D3D3E00287A5F /* InfoPlist.strings */,
 				E7E25E402042D78E009EFE87 /* enumerations.swift */,
 				E785D6CB200C5A0E0068B4CE /* Classes */,
 				E772807C1FFDE699004DC8A3 /* Model */,
@@ -254,6 +269,8 @@
 		E77280791FFDE0D6004DC8A3 /* Controlers */ = {
 			isa = PBXGroup;
 			children = (
+				E7C901C02059279E0076823C /* LanguageTableViewController.swift */,
+				E7C901BD20591A9B0076823C /* SettingsTableViewController.swift */,
 				E781A5AB204542E3002028D7 /* QuizzesMethods.swift */,
 				E7E25E3A203FC7E6009EFE87 /* UIStoryBoardSegueWithCompletion.swift */,
 				E74B4A0D20362CF8000BA062 /* Quiezzes Controllers */,
@@ -410,9 +427,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E70793B7203B26C600BF6712 /* Quizzes.storyboard in Resources */,
+				E7D4344C205D3D3E00287A5F /* InfoPlist.strings in Resources */,
 				E70793B9203B27AB00BF6712 /* Statistic.storyboard in Resources */,
 				E77280721FFDDEF6004DC8A3 /* LaunchScreen.storyboard in Resources */,
 				E70793BB203B27D600BF6712 /* Settings.storyboard in Resources */,
+				E7D43451205D3D3F00287A5F /* Localizable.strings in Resources */,
 				E772806F1FFDDEF6004DC8A3 /* Assets.xcassets in Resources */,
 				E772806A1FFDDEF6004DC8A3 /* Main.storyboard in Resources */,
 			);
@@ -427,6 +446,7 @@
 			files = (
 				E7089B44202BE42A0028272C /* QuizzesCollectionViewController.swift in Sources */,
 				E750B9AA202415770033AA2B /* Translation+CoreDataProperties.swift in Sources */,
+				E7F04B6B2061252A000AF4BB /* publicDictionaries.swift in Sources */,
 				E785D6D4200C5A0E0068B4CE /* BEMAnimationManager.m in Sources */,
 				E7C556432025252600CD5C3C /* WordTitleFollowingFieldsCellTableViewCell.swift in Sources */,
 				E7E25E3B203FC7E6009EFE87 /* UIStoryBoardSegueWithCompletion.swift in Sources */,
@@ -451,6 +471,7 @@
 				E73171F21FFE56B500615B88 /* WordViewController.swift in Sources */,
 				E72E9DE3200C3300008D16A1 /* DictionariesViewController.swift in Sources */,
 				E7DC927E20104EC6009D77FE /* DictionaryPropertiesViewController.swift in Sources */,
+				E7C901BE20591A9B0076823C /* SettingsTableViewController.swift in Sources */,
 				E7E91B7820033C540066EC13 /* Word+CoreDataClass.swift in Sources */,
 				E70793CA203B301800BF6712 /* TestInfo+CoreDataProperties.swift in Sources */,
 				E750B9A8202415770033AA2B /* ExtraInfo+CoreDataProperties.swift in Sources */,
@@ -469,6 +490,7 @@
 				E7E91B7520032C020066EC13 /* Dictionary+CoreDataProperties.swift in Sources */,
 				E7C55641202524F500CD5C3C /* WordSaveCancelButtonsTableViewCell.swift in Sources */,
 				E750B9A9202415770033AA2B /* Translation+CoreDataClass.swift in Sources */,
+				E7C901C12059279E0076823C /* LanguageTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -487,6 +509,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				E77280691FFDDEF6004DC8A3 /* Base */,
+				E7D43447205D327400287A5F /* ru */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -495,8 +518,25 @@
 			isa = PBXVariantGroup;
 			children = (
 				E77280711FFDDEF6004DC8A3 /* Base */,
+				E7D43449205D327400287A5F /* ru */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		E7D4344E205D3D3E00287A5F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E7D4344D205D3D3E00287A5F /* ru */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		E7D43453205D3D3F00287A5F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E7D43452205D3D3F00287A5F /* ru */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -506,6 +546,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -563,6 +604,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

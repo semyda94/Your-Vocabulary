@@ -16,10 +16,14 @@ class DictionaryTableViewCell: UITableViewCell {
         didSet {
             guard let currentDictionary = dictionary else { return }
             
+            let formatNumberOfWords = NSLocalizedString("Count of words: %d", comment: "Show count of words for dictionary")
+            let formatNumberOfLearnedWords = NSLocalizedString("Learned words: %d", comment: "Show count of learned words for dictionary")
+            
+            
             titleLabel.text = currentDictionary.name
             thumbnailLabel.text = String(currentDictionary.name!.first!).uppercased()
-            numberOfWordsLabel.text = "Count of words: \( currentDictionary.numberOfWords)"
-            numberOfLearnedWordsLabel.text = "learned words: \(currentDictionary.numberofLearned)"
+            numberOfWordsLabel.text = String.localizedStringWithFormat(formatNumberOfWords, currentDictionary.numberOfWords) 
+            numberOfLearnedWordsLabel.text = String.localizedStringWithFormat(formatNumberOfLearnedWords, currentDictionary.numberofLearned)
             
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "d MMMM"

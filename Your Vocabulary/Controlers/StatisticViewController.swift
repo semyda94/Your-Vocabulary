@@ -163,8 +163,7 @@ class StatisticViewController: UIViewController, UITableViewDelegate, UITableVie
         combinedChart.leftAxis.axisMinimum = 0.0
         combinedChart.rightAxis.axisMinimum = 0.0
         
-        combinedChart.animate(xAxisDuration: 2.0, yAxisDuration: 2.0, easingOption: .linear)
-        //combinedChart.animate(xAxisDuration: 2.0, yAxisDuration: 2.0, easingOption: .easeInQuad)
+        combinedChart.animate(xAxisDuration: 0.0, yAxisDuration: 2.0, easingOption: .easeOutBack)
         combinedChart.notifyDataSetChanged()
         
         

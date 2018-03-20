@@ -1,0 +1,6 @@
+/* Show count of words for dictionary */
+"Count of words: %d" = "Количество слов: %d";
+
+/* Show count of learned words for dictionary */
+"Learned words: %d" = "Выученых слов: %d";
+

@@ -387,7 +387,7 @@
         <scene sceneID="xFc-7V-neC">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fig-kD-MDv" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Quizzes" image="quizzes_tb" selectedImage="quizzes_tb" id="ZVX-qd-701">
+                    <tabBarItem key="tabBarItem" title="Quizzes" image="quiz_tb" selectedImage="quiz_tb_selected" id="ZVX-qd-701">
                         <color key="badgeColor" red="1" green="0.83137254900000002" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -513,6 +513,7 @@
     </scenes>
     <resources>
         <image name="bg" width="1243" height="2209"/>
-        <image name="quizzes_tb" width="17" height="26"/>
+        <image name="quiz_tb" width="32" height="32"/>
+        <image name="quiz_tb_selected" width="30" height="30"/>
     </resources>
 </document>

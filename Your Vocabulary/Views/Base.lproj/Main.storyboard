@@ -757,7 +757,7 @@
         <scene sceneID="20P-J2-gqF">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2g8-ah-MgQ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Dictionaries" image="dictionary_tb" selectedImage="dictionary_tb" id="emg-q2-AjS">
+                    <tabBarItem key="tabBarItem" title="Dictionaries" image="dictionary_tb" selectedImage="dictionary_tb_selected" id="emg-q2-AjS">
                         <color key="badgeColor" red="1" green="0.83137254900000002" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -786,7 +786,9 @@
         <scene sceneID="MmM-eX-K5D">
             <objects>
                 <viewControllerPlaceholder storyboardName="Quizzes" id="u7N-Ec-p72" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="MUz-P7-mk9"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="quiz_tb" selectedImage="quiz_tb_selected" id="MUz-P7-mk9">
+                        <color key="badgeColor" red="1" green="0.83137254900000002" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBarItem>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="geM-mf-3Kb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -796,7 +798,9 @@
         <scene sceneID="Kig-T3-ir2">
             <objects>
                 <viewControllerPlaceholder storyboardName="Statistic" id="kaX-aE-JUY" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="fWq-8z-nGg"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="statistics_tb" selectedImage="statistics_tb_selected" id="fWq-8z-nGg">
+                        <color key="badgeColor" red="1" green="0.83137254900000002" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBarItem>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xs4-7m-2Ri" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -806,7 +810,9 @@
         <scene sceneID="cr1-lv-OBT">
             <objects>
                 <viewControllerPlaceholder storyboardName="Settings" id="gDy-h3-1Yq" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="d5M-Pt-IjA"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="settings_tb" selectedImage="settings_tb_selected" id="d5M-Pt-IjA">
+                        <color key="badgeColor" red="1" green="0.83137254900000002" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBarItem>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3FO-b6-eff" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -815,9 +821,16 @@
     </scenes>
     <resources>
         <image name="bg" width="1243" height="2209"/>
-        <image name="dictionary_tb" width="20" height="26"/>
+        <image name="dictionary_tb" width="25" height="33"/>
+        <image name="dictionary_tb_selected" width="23" height="31"/>
         <image name="green_button" width="148" height="47"/>
+        <image name="quiz_tb" width="32" height="32"/>
+        <image name="quiz_tb_selected" width="30" height="30"/>
         <image name="red_button" width="148" height="47"/>
+        <image name="settings_tb" width="30" height="30"/>
+        <image name="settings_tb_selected" width="30" height="30"/>
+        <image name="statistics_tb" width="26" height="26"/>
+        <image name="statistics_tb_selected" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="y0M-lq-7af"/>

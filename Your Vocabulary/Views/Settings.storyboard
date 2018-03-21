@@ -245,7 +245,7 @@
         <scene sceneID="K7A-b3-fuP">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NaR-tw-MJj" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" image="settings_tb" selectedImage="selected_settings_tb" id="KLd-dK-Q8X"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="settings_tb" selectedImage="settings_tb_selected" id="KLd-dK-Q8X"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="IzO-z4-62v">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -270,7 +270,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="selected_settings_tb" width="26" height="26"/>
-        <image name="settings_tb" width="26" height="26"/>
+        <image name="settings_tb" width="30" height="30"/>
+        <image name="settings_tb_selected" width="30" height="30"/>
     </resources>
 </document>

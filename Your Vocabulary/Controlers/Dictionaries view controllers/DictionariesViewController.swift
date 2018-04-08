@@ -94,6 +94,9 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
     
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
     
+    @IBOutlet weak var nonDictionariesBGImage: UIImageView!
+    @IBOutlet weak var nonDictionaryStack: UIStackView!
+    
     // MARK: - Actions
     
     @IBAction func cancelButtonWasTapped(segue: UIStoryboardSegue){
@@ -193,6 +196,17 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (dictionaries.count <= 0) {
+            nonDictionaryStack.isHidden = false
+            UIView.animate(withDuration: 2) {
+                self.nonDictionaryStack.alpha = 1
+            }
+        } else {
+            UIView.animate(withDuration: 2) {
+                self.nonDictionaryStack.alpha = 0
+            }
+            self.nonDictionaryStack.isHidden = true;
+        }
         return dictionaries.count
     }
     

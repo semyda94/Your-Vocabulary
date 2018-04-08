@@ -24,7 +24,13 @@ class WordsViewController: UIViewController, UITableViewDataSource, UITableViewD
             navigationItem.title = currentDictionary?.name
         }
     }
+    
+    // MARK: - Outlets
+    
     @IBOutlet weak var wordsTableView: UITableView!
+    
+    @IBOutlet weak var nonWordsStack: UIStackView!
+    
     
     // MARK: - IBActions
     
@@ -91,6 +97,18 @@ class WordsViewController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         guard let count = currentDictionary?.words?.count else { return 0}
+        
+        if (count <= 0) {
+            nonWordsStack.isHidden = false;
+            UIView.animate(withDuration: 2) {
+                self.nonWordsStack.alpha = 1;
+            }
+        } else {
+            UIView.animate(withDuration: 2) {
+                self.nonWordsStack.alpha = 0;
+            }
+            nonWordsStack.isHidden = true;
+        }
         
         return count
     }

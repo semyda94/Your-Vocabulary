@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ifo-ul-Ec4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ifo-ul-Ec4">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -23,6 +23,29 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="ldR-Xf-xlG">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="730"/>
                             </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Tfd-Rz-jDw">
+                                <rect key="frame" x="20" y="317.33333333333331" width="335" height="234.33333333333331"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="open-book" translatesAutoresizingMaskIntoConstraints="NO" id="Prq-Cy-dTN">
+                                        <rect key="frame" x="72" y="0.0" width="191" height="167.66666666666666"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Dictionaries" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T9Y-4h-HR5">
+                                        <rect key="frame" x="106.33333333333334" y="175.66666666666669" width="122.33333333333334" height="20.333333333333343"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <color key="textColor" red="0.16862745100000001" green="0.27058823529999998" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don't have dictionaries yet. All your future dictionaries will be stored here." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FZc-Kk-S3T">
+                                        <rect key="frame" x="0.0" y="204.00000000000006" width="335" height="30.333333333333343"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                        <color key="textColor" red="0.16862745100000001" green="0.27058823529999998" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Prq-Cy-dTN" secondAttribute="height" multiplier="5:2.5" id="rTU-eq-ZgC"/>
+                                </constraints>
+                            </stackView>
                             <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2yh-zk-sX5">
                                 <rect key="frame" x="0.0" y="140" width="375" height="589"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -120,9 +143,12 @@
                             <constraint firstAttribute="bottom" secondItem="ldR-Xf-xlG" secondAttribute="bottom" constant="-1" id="OG3-j7-RfS"/>
                             <constraint firstItem="ldR-Xf-xlG" firstAttribute="trailing" secondItem="ale-57-ZBf" secondAttribute="trailing" id="Pc2-eG-tIi"/>
                             <constraint firstItem="ldR-Xf-xlG" firstAttribute="top" secondItem="FS6-iO-ViW" secondAttribute="top" id="TMm-mC-sRE"/>
+                            <constraint firstItem="Tfd-Rz-jDw" firstAttribute="centerY" secondItem="ale-57-ZBf" secondAttribute="centerY" id="VFN-kZ-iIW"/>
                             <constraint firstItem="2yh-zk-sX5" firstAttribute="leading" secondItem="ale-57-ZBf" secondAttribute="leading" id="enr-H6-Xja"/>
                             <constraint firstItem="2yh-zk-sX5" firstAttribute="top" secondItem="ale-57-ZBf" secondAttribute="top" id="fKn-Ki-GG9"/>
+                            <constraint firstItem="Tfd-Rz-jDw" firstAttribute="leading" secondItem="ale-57-ZBf" secondAttribute="leading" constant="20" id="q11-do-mm9"/>
                             <constraint firstItem="2yh-zk-sX5" firstAttribute="trailing" secondItem="ale-57-ZBf" secondAttribute="trailing" id="r1R-8r-FjK"/>
+                            <constraint firstItem="ale-57-ZBf" firstAttribute="trailing" secondItem="Tfd-Rz-jDw" secondAttribute="trailing" constant="20" id="wLf-71-wqm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ale-57-ZBf"/>
                     </view>
@@ -136,6 +162,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="dictionariesTableView" destination="2yh-zk-sX5" id="EmD-1U-qnf"/>
+                        <outlet property="nonDictionariesBGImage" destination="Prq-Cy-dTN" id="qnN-Fe-izd"/>
+                        <outlet property="nonDictionaryStack" destination="Tfd-Rz-jDw" id="InR-tb-sIR"/>
                         <outlet property="visualEffectView" destination="d0s-u4-n1M" id="Jla-kq-UZ2"/>
                         <segue destination="5dq-HT-GJp" kind="presentation" identifier="showDictionaryProperties" id="8Hd-U3-Qow"/>
                     </connections>
@@ -646,7 +674,24 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="wbY-1p-urr">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="730"/>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DOX-i4-Gmc">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ui1-5G-RzM">
+                                <rect key="frame" x="20" y="413.33333333333331" width="335" height="42.666666666666686"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Words" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pnX-bZ-HFu">
+                                        <rect key="frame" x="128.33333333333334" y="0.0" width="78.333333333333343" height="20.333333333333332"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <color key="textColor" red="0.16862745100000001" green="0.27058823529999998" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You dont't havy words at dictionary, yet." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aUk-AE-3Z6">
+                                        <rect key="frame" x="54.333333333333329" y="28.333333333333368" width="226.33333333333337" height="14.333333333333332"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                        <color key="textColor" red="0.16862745100000001" green="0.27058823529999998" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DOX-i4-Gmc">
                                 <rect key="frame" x="0.0" y="140" width="375" height="589"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -661,22 +706,22 @@
                                                     <rect key="frame" x="5" y="2.6666666666666643" width="365" height="73.666666666666686"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Word" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f2k-nQ-Rss">
-                                                            <rect key="frame" x="0.0" y="0.0" width="365" height="15.666666666666666"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="365" height="20.333333333333332"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sXg-0u-nFA">
-                                                            <rect key="frame" x="0.0" y="23.666666666666664" width="365" height="49.999999999999993"/>
+                                                            <rect key="frame" x="0.0" y="28.333333333333332" width="365" height="45.333333333333343"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="19" placeholderIntrinsicHeight="infinite" text="Definition or translation" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s06-Ex-0Vj">
-                                                                    <rect key="frame" x="5" y="0.0" width="330" height="50"/>
+                                                                    <rect key="frame" x="5" y="0.0" width="330" height="45.333333333333336"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="1" placeholderIntrinsicHeight="infinite" translatesAutoresizingMaskIntoConstraints="NO" id="IeM-9X-AcH" customClass="BEMCheckBox">
-                                                                    <rect key="frame" x="340" y="15.000000000000004" width="20" height="19.999999999999996"/>
+                                                                    <rect key="frame" x="340" y="12.666666666666664" width="20" height="20"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="20" id="9BL-AG-zJm"/>
@@ -733,11 +778,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="ui1-5G-RzM" firstAttribute="leading" secondItem="a7N-8f-wch" secondAttribute="leading" constant="20" id="0Ag-Aq-4wk"/>
                             <constraint firstItem="wbY-1p-urr" firstAttribute="trailing" secondItem="a7N-8f-wch" secondAttribute="trailing" id="CQu-UU-k58"/>
                             <constraint firstItem="DOX-i4-Gmc" firstAttribute="top" secondItem="a7N-8f-wch" secondAttribute="top" id="DTr-gl-cAt"/>
                             <constraint firstItem="a7N-8f-wch" firstAttribute="trailing" secondItem="DOX-i4-Gmc" secondAttribute="trailing" id="Gm0-eb-De4"/>
                             <constraint firstItem="wbY-1p-urr" firstAttribute="top" secondItem="Uep-S7-YYg" secondAttribute="top" id="Nhg-jx-yZE"/>
                             <constraint firstItem="DOX-i4-Gmc" firstAttribute="leading" secondItem="a7N-8f-wch" secondAttribute="leading" id="Vcq-d5-AkG"/>
+                            <constraint firstAttribute="trailing" secondItem="ui1-5G-RzM" secondAttribute="trailing" constant="20" id="XaX-U7-cPW"/>
+                            <constraint firstItem="ui1-5G-RzM" firstAttribute="centerY" secondItem="a7N-8f-wch" secondAttribute="centerY" id="ZTW-q3-hSz"/>
                             <constraint firstItem="a7N-8f-wch" firstAttribute="bottom" secondItem="DOX-i4-Gmc" secondAttribute="bottom" id="gj1-Pc-6yb"/>
                             <constraint firstItem="wbY-1p-urr" firstAttribute="leading" secondItem="a7N-8f-wch" secondAttribute="leading" id="m8V-fb-a8K"/>
                             <constraint firstItem="a7N-8f-wch" firstAttribute="bottom" secondItem="wbY-1p-urr" secondAttribute="bottom" constant="-1" id="un9-yv-bZ8"/>
@@ -745,6 +793,7 @@
                         <viewLayoutGuide key="safeArea" id="a7N-8f-wch"/>
                     </view>
                     <connections>
+                        <outlet property="nonWordsStack" destination="ui1-5G-RzM" id="XIF-Gk-I6Y"/>
                         <outlet property="wordsTableView" destination="DOX-i4-Gmc" id="5Pp-fq-Xl9"/>
                         <segue destination="upw-ZW-aTh" kind="show" identifier="newWord" id="Sxf-VG-V8t"/>
                     </connections>
@@ -824,6 +873,7 @@
         <image name="dictionary_tb" width="25" height="33"/>
         <image name="dictionary_tb_selected" width="23" height="31"/>
         <image name="green_button" width="148" height="47"/>
+        <image name="open-book" width="191" height="146"/>
         <image name="quiz_tb" width="32" height="32"/>
         <image name="quiz_tb_selected" width="30" height="30"/>
         <image name="red_button" width="148" height="47"/>
@@ -833,7 +883,7 @@
         <image name="statistics_tb_selected" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="y0M-lq-7af"/>
+        <segue reference="8Hd-U3-Qow"/>
         <segue reference="mEZ-CJ-2GZ"/>
     </inferredMetricsTieBreakers>
 </document>

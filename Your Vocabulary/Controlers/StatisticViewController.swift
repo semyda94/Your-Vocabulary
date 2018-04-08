@@ -45,7 +45,6 @@ class StatisticViewController: UIViewController, UITableViewDelegate, UITableVie
         var numberOfCorrectAnswers = 0
         
         if let choosenDictionary = dictionary {
-            print("Choose dictionnary \(choosenDictionary.name)")
             tests = choosenDictionary.tests?.array as! [TestInfo]
             numberOfWords = Int(choosenDictionary.numberOfWords)
             

@@ -30,9 +30,13 @@ class StatisticViewController: UIViewController, UITableViewDelegate, UITableVie
     fileprivate var rows = [(title: String, number: Int)]()
     
     // MARK: - Outlets
+    
+    @IBOutlet weak var StatisticInfoStack: UIStackView!
     @IBOutlet weak var dictionaryPicker: UIPickerView!
     @IBOutlet weak var combinedChart: CombinedChartView!
     @IBOutlet weak var statisticTableView: UITableView!
+    
+    @IBOutlet weak var noQuizzesStack: UIStackView!
     
     // MARK: - Methods
     
@@ -60,7 +64,6 @@ class StatisticViewController: UIViewController, UITableViewDelegate, UITableVie
         tests = tests.sorted(by: { $0.dateOfCreation?.compare($1.dateOfCreation! as Date) == .orderedAscending })
         
         for test in tests {
-            //barChartDataEntry.append(BarChartDataEntry(x: <#T##Double#>, y: <#T##Double#>) )
             numberOfAnswers += Int(test.numberOfAnswers)
             numberOfCorrectAnswers += Int(test.numberOfCorrectAnswers)
         }
@@ -189,7 +192,19 @@ class StatisticViewController: UIViewController, UITableViewDelegate, UITableVie
 
         dictionaries = fetchListOfDictionaries() ?? [Dictionary]()
         
-        updateTableContent(forDictionary: nil)
+        var amountOfTests = 0
+        for dictionary in dictionaries {
+            if let count = dictionary.tests?.array.count { amountOfTests += count}
+        }
+        
+        if amountOfTests > 0 {
+            StatisticInfoStack.isHidden = false
+            noQuizzesStack.isHidden = true
+            updateTableContent(forDictionary: nil)
+        } else {
+            StatisticInfoStack.isHidden = true
+            noQuizzesStack.isHidden = false
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -235,15 +250,23 @@ class StatisticViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return dictionaries.count + 1
+        if (dictionaries.count > 1 ) {
+            return dictionaries.count + 1
+        } else {
+            return dictionaries.count
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        switch row {
-        case 0:
-            return "All"
-        default:
-            return dictionaries[row - 1].name
+        if dictionaries.count > 1 {
+            switch row {
+            case 0:
+                return "All"
+            default:
+                return dictionaries[row - 1].name
+            }
+        } else {
+            return dictionaries[row].name
         }
     }
     

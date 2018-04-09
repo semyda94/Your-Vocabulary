@@ -160,10 +160,39 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     // MARK: - IBActions
     
+    @objc func adjustForKeyboard(notification: Notification) {
+        let userInfo = notification.userInfo!
+        
+        let keyboardScreenEndFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+        
+        if notification.name == Notification.Name.UIKeyboardWillHide {
+            fieldsTableView.contentInset = UIEdgeInsets.zero
+        } else {
+            fieldsTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height, right: 0)
+        }
+        
+        fieldsTableView.scrollIndicatorInsets = fieldsTableView.contentInset
+    }
+    
+    @objc func hideKeyboard() {
+        fieldsTableView.endEditing(true);
+    }
+    
     // MARK: - Life cycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // change table view frame size during appearance/hidden of keyboard
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: Notification.Name.UIKeyboardWillHide, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
+        
+        //set gesture of hidden keyboard after tap somewhere else
+        let tapGesture = UITapGestureRecognizer(target: self, action: Selector("hideKeyboard"))
+        tapGesture.cancelsTouchesInView = true
+        self.view.addGestureRecognizer(tapGesture)
         
         navigationItem.largeTitleDisplayMode = .never
         

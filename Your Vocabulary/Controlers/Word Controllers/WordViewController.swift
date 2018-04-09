@@ -155,6 +155,7 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     fileprivate func deletingFiledCellFromTable(at index: IndexPath) {
         sections[index.section].remove(at: index.row)
+        fieldsTableView.deleteRows(at: [index], with: .fade)
         fieldsTableView.reloadData()
     }
     
@@ -307,9 +308,11 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
     func addFieldBeforeRow(_ row: UITableViewCell) {
         guard let indexPath = fieldsTableView.indexPath(for: row) else { return }
         
-        sections[indexPath.section].insert((nil, .field), at: indexPath.row - 1)
+        sections[indexPath.section].insert((nil, .field), at: indexPath.row)
         
-        fieldsTableView.reloadData()
+        fieldsTableView.insertRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+        
+        //fieldsTableView.reloadData()
     }
 
     // MARK: - SaveCancelWordTableContentDelegate implementation
@@ -335,7 +338,6 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
                 for element in section[1..<section.count - 1] {
                     switch sectionName {
                     case sectionsName[0]:
-                        print("try to save translation")
                         guard let entity = NSEntityDescription.entity(forEntityName: "Translation", in: context) else {print("translation entity wasn't created"); break }
                         let newTranslation = Translation(entity: entity, insertInto: context)
                         newTranslation.text = element.value
@@ -375,7 +377,6 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func cancelChanges() {
-        print("Cancel changes for word")
     }
     
     /*

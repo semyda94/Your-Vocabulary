@@ -19,7 +19,12 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
         return appDelegate.persistentContainer.viewContext
     }
     
-    fileprivate var dictionaries = [Dictionary]()
+    
+    fileprivate var dictionaries = [Dictionary]() {
+        didSet {
+            dictionaries.sort { $0.name! < $1.name! }
+        }
+    }
     
     fileprivate var blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
     fileprivate lazy var blurEffectView = UIVisualEffectView(effect: blurEffect)

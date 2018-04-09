@@ -360,10 +360,10 @@
             </objects>
             <point key="canvasLocation" x="2898.4000000000001" y="-156.65024630541873"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Your Vocabulary Tab Bar Controller-->
         <scene sceneID="kdl-lf-YXt">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="ifo-ul-Ec4" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="ifo-ul-Ec4" customClass="YourVocabularyTabBarController" customModule="Your_Vocabulary" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" itemPositioning="centered" id="dic-ta-2cg">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>

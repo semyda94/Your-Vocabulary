@@ -59,6 +59,7 @@
 		E7E25E3F2042C0B9009EFE87 /* QuizSpellingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E25E3E2042C0B9009EFE87 /* QuizSpellingViewController.swift */; };
 		E7E25E412042D78E009EFE87 /* enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E25E402042D78E009EFE87 /* enumerations.swift */; };
 		E7E312182032A81C00F03FC9 /* QuizSeekingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E312172032A81C00F03FC9 /* QuizSeekingViewController.swift */; };
+		E7E520C2207B2BE800546735 /* YourVocabularyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E520C1207B2BE800546735 /* YourVocabularyTabBarController.swift */; };
 		E7E91B7420032C020066EC13 /* Dictionary+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E91B7220032C020066EC13 /* Dictionary+CoreDataClass.swift */; };
 		E7E91B7520032C020066EC13 /* Dictionary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E91B7320032C020066EC13 /* Dictionary+CoreDataProperties.swift */; };
 		E7E91B7820033C540066EC13 /* Word+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E91B7620033C540066EC13 /* Word+CoreDataClass.swift */; };
@@ -165,6 +166,7 @@
 		E7E25E3E2042C0B9009EFE87 /* QuizSpellingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizSpellingViewController.swift; sourceTree = "<group>"; };
 		E7E25E402042D78E009EFE87 /* enumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = enumerations.swift; sourceTree = "<group>"; };
 		E7E312172032A81C00F03FC9 /* QuizSeekingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizSeekingViewController.swift; sourceTree = "<group>"; };
+		E7E520C1207B2BE800546735 /* YourVocabularyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourVocabularyTabBarController.swift; sourceTree = "<group>"; };
 		E7E91B7220032C020066EC13 /* Dictionary+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Dictionary+CoreDataClass.swift"; path = "CoreDataObjects/Dictionary+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E7E91B7320032C020066EC13 /* Dictionary+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Dictionary+CoreDataProperties.swift"; path = "CoreDataObjects/Dictionary+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E7E91B7620033C540066EC13 /* Word+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Word+CoreDataClass.swift"; path = "CoreDataObjects/Word+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 		E77280791FFDE0D6004DC8A3 /* Controlers */ = {
 			isa = PBXGroup;
 			children = (
+				E7E520C1207B2BE800546735 /* YourVocabularyTabBarController.swift */,
 				E7C901C02059279E0076823C /* LanguageTableViewController.swift */,
 				E7C901BD20591A9B0076823C /* SettingsTableViewController.swift */,
 				E781A5AB204542E3002028D7 /* QuizzesMethods.swift */,
@@ -450,6 +453,7 @@
 				E785D6D4200C5A0E0068B4CE /* BEMAnimationManager.m in Sources */,
 				E7C556432025252600CD5C3C /* WordTitleFollowingFieldsCellTableViewCell.swift in Sources */,
 				E7E25E3B203FC7E6009EFE87 /* UIStoryBoardSegueWithCompletion.swift in Sources */,
+				E7E520C2207B2BE800546735 /* YourVocabularyTabBarController.swift in Sources */,
 				E7E25E3D2042B9C3009EFE87 /* QuizMatchingViewController.swift in Sources */,
 				E74B4A0B20362951000BA062 /* WordTableViewCell.swift in Sources */,
 				E74B4A0920354285000BA062 /* WordsViewController.swift in Sources */,

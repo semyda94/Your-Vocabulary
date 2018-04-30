@@ -101,13 +101,17 @@ class WordsViewController: UIViewController, UITableViewDataSource, UITableViewD
         if (count <= 0) {
             nonWordsStack.isHidden = false;
             UIView.animate(withDuration: 2) {
-                self.nonWordsStack.alpha = 1;
+                self.nonWordsStack.alpha = 1
+                tableView.alpha = 0
             }
+            tableView.isHidden = true
         } else {
+            tableView.isHidden = false
             UIView.animate(withDuration: 2) {
-                self.nonWordsStack.alpha = 0;
+                self.nonWordsStack.alpha = 0
+                tableView.alpha = 1
             }
-            nonWordsStack.isHidden = true;
+            nonWordsStack.isHidden = true
         }
         
         return count

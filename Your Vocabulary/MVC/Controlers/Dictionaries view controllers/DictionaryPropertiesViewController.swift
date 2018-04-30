@@ -60,7 +60,8 @@ class DictionaryPropertiesViewController: UIViewController, UITextFieldDelegate 
         NotificationCenter.default.addObserver(self, selector: #selector(DictionaryPropertiesViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
         
         if dictionary != nil {
-            titleOfView.text = "Editing properties"
+            titleOfView.text = NSLocalizedString("Editing properties", comment: "Title during editing properties of dictionary")
+            
             if let name = dictionary?.name { dictionaryNameTextField.text = name }
             
             translationCheckBox.on = (dictionary?.isTranslation)!
@@ -72,7 +73,7 @@ class DictionaryPropertiesViewController: UIViewController, UITextFieldDelegate 
             newDictionary = false
             
         } else {
-            titleOfView.text = "New dictionary"
+            titleOfView.text = NSLocalizedString("New dictionary", comment: "Title during creating new dictionary")
         }
     
         // Do any additional setup after loading the view.

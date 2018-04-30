@@ -1,53 +1,63 @@
+
 /* Class = "UILabel"; text = "Example"; ObjectID = "2Jv-Bb-F30"; */
-"2Jv-Bb-F30.text" = "Пример";
+"2Jv-Bb-F30.text" = "Example";
 
 /* Class = "UILabel"; text = "Translation"; ObjectID = "7bw-qm-Uf8"; */
-"7bw-qm-Uf8.text" = "Перевод";
+"7bw-qm-Uf8.text" = "Translation";
 
 /* Class = "UILabel"; text = "Count of words:"; ObjectID = "8Hw-Ih-MjN"; */
 "8Hw-Ih-MjN.text" = "Count of words:";
 
 /* Class = "UILabel"; text = "Dictionary"; ObjectID = "92X-YZ-aV2"; */
-"92X-YZ-aV2.text" = "Словарь";
+"92X-YZ-aV2.text" = "Dictionary";
 
 /* Class = "UILabel"; text = "date of creation"; ObjectID = "EQZ-tz-SM3"; */
 "EQZ-tz-SM3.text" = "date of creation";
 
+/* Class = "UILabel"; text = "You don't have dictionaries yet. All your future dictionaries will be stored here."; ObjectID = "FZc-Kk-S3T"; */
+"FZc-Kk-S3T.text" = "You don't have dictionaries yet. All your future dictionaries will be stored here.";
+
 /* Class = "UITabBarItem"; title = "Item"; ObjectID = "MUz-P7-mk9"; */
 "MUz-P7-mk9.title" = "Item";
 
+/* Class = "UILabel"; text = "No Dictionaries"; ObjectID = "T9Y-4h-HR5"; */
+"T9Y-4h-HR5.text" = "No Dictionaries";
+
 /* Class = "UIButton"; normalTitle = "Save"; ObjectID = "VfP-lM-Z2g"; */
-"VfP-lM-Z2g.normalTitle" = "Сохранить";
+"VfP-lM-Z2g.normalTitle" = "Save";
+
+/* Class = "UILabel"; text = "You dont't havy words at dictionary, yet."; ObjectID = "aUk-AE-3Z6"; */
+"aUk-AE-3Z6.text" = "You dont't havy words at dictionary, yet.";
 
 /* Class = "UITabBarItem"; title = "Item"; ObjectID = "d5M-Pt-IjA"; */
 "d5M-Pt-IjA.title" = "Item";
 
-/* Class = "UITextView"; text = "lol"; ObjectID = "eKE-14-cOD"; */
-"eKE-14-cOD.text" = "lol";
-
 /* Class = "UITabBarItem"; title = "Dictionaries"; ObjectID = "emg-q2-AjS"; */
-"emg-q2-AjS.title" = "Словари";
+"emg-q2-AjS.title" = "Dictionaries";
 
 /* Class = "UILabel"; text = "Word"; ObjectID = "f2k-nQ-Rss"; */
-"f2k-nQ-Rss.text" = "Слово";
+"f2k-nQ-Rss.text" = "Word";
 
 /* Class = "UILabel"; text = "Count of learned words:"; ObjectID = "f3N-wn-a29"; */
 "f3N-wn-a29.text" = "Count of learned words:";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "fFw-7D-Jov"; */
-"fFw-7D-Jov.normalTitle" = "Отменить";
+"fFw-7D-Jov.normalTitle" = "Cancel";
 
 /* Class = "UITabBarItem"; title = "Item"; ObjectID = "fWq-8z-nGg"; */
 "fWq-8z-nGg.title" = "Item";
 
 /* Class = "UILabel"; text = "Definition"; ObjectID = "iot-xP-eQ2"; */
-"iot-xP-eQ2.text" = "Определение";
+"iot-xP-eQ2.text" = "Definition";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "kEV-rq-fcO"; */
-"kEV-rq-fcO.normalTitle" = "Отменить";
+"kEV-rq-fcO.normalTitle" = "Cancel";
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "mdQ-PN-Wfe"; */
 "mdQ-PN-Wfe.text" = "Title";
+
+/* Class = "UILabel"; text = "No Words"; ObjectID = "pnX-bZ-HFu"; */
+"pnX-bZ-HFu.text" = "No Words";
 
 /* Class = "UILabel"; text = "Definition or translation"; ObjectID = "s06-Ex-0Vj"; */
 "s06-Ex-0Vj.text" = "Definition or translation";
@@ -56,14 +66,13 @@
 "vpI-ch-MH7.text" = "Label";
 
 /* Class = "UILabel"; text = "Extra info"; ObjectID = "wXt-8n-hIu"; */
-"wXt-8n-hIu.text" = "Экстра инфо";
+"wXt-8n-hIu.text" = "Extra info";
 
 /* Class = "UILabel"; text = "Synonym"; ObjectID = "xCu-ua-aPp"; */
-"xCu-ua-aPp.text" = "Синоним";
+"xCu-ua-aPp.text" = "Synonym";
 
 /* Class = "UINavigationItem"; title = "Dictionaries"; ObjectID = "xvb-gf-K01"; */
-"xvb-gf-K01.title" = "Словари";
+"xvb-gf-K01.title" = "Dictionaries";
 
 /* Class = "UIButton"; normalTitle = "Save"; ObjectID = "zAC-1z-wyj"; */
-"zAC-1z-wyj.normalTitle" = "Сохранить";
-
+"zAC-1z-wyj.normalTitle" = "Save";

@@ -1,0 +1,66 @@
+
+/* Class = "UIButton"; normalTitle = "L4"; ObjectID = "3b0-rM-iLH"; */
+"3b0-rM-iLH.normalTitle" = "L4";
+
+/* Class = "UIButton"; normalTitle = "1"; ObjectID = "3fu-fK-Z19"; */
+"3fu-fK-Z19.normalTitle" = "1";
+
+/* Class = "UIButton"; normalTitle = "R1"; ObjectID = "4rv-1D-X1l"; */
+"4rv-1D-X1l.normalTitle" = "R1";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "50X-8j-ppb"; */
+"50X-8j-ppb.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "R4"; ObjectID = "CIE-tR-bdw"; */
+"CIE-tR-bdw.normalTitle" = "R4";
+
+/* Class = "UINavigationItem"; title = "Quizzes"; ObjectID = "JTy-Xe-XLr"; */
+"JTy-Xe-XLr.title" = "Quizzes";
+
+/* Class = "UIButton"; normalTitle = "L3"; ObjectID = "OSh-SV-mSM"; */
+"OSh-SV-mSM.normalTitle" = "L3";
+
+/* Class = "UIButton"; normalTitle = "2"; ObjectID = "Tft-HU-9jO"; */
+"Tft-HU-9jO.normalTitle" = "2";
+
+/* Class = "UIButton"; normalTitle = "R5"; ObjectID = "VSu-We-0qx"; */
+"VSu-We-0qx.normalTitle" = "R5";
+
+/* Class = "UIButton"; normalTitle = "L5"; ObjectID = "WXm-fe-BBh"; */
+"WXm-fe-BBh.normalTitle" = "L5";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "WiA-pC-A0m"; */
+"WiA-pC-A0m.normalTitle" = "Cancel";
+
+/* Class = "UIButton"; normalTitle = "4"; ObjectID = "XCa-Mb-Gkw"; */
+"XCa-Mb-Gkw.normalTitle" = "4";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Xdq-av-kid"; */
+"Xdq-av-kid.text" = "Label";
+
+/* Class = "UITabBarItem"; title = "Quizzes"; ObjectID = "ZVX-qd-701"; */
+"ZVX-qd-701.title" = "Quizzes";
+
+/* Class = "UIButton"; normalTitle = "R2"; ObjectID = "cOR-fS-oOn"; */
+"cOR-fS-oOn.normalTitle" = "R2";
+
+/* Class = "UIButton"; normalTitle = "L1"; ObjectID = "chh-pL-7Kf"; */
+"chh-pL-7Kf.normalTitle" = "L1";
+
+/* Class = "UIButton"; normalTitle = "R3"; ObjectID = "jcO-kA-cQM"; */
+"jcO-kA-cQM.normalTitle" = "R3";
+
+/* Class = "UILabel"; text = "Question"; ObjectID = "meo-kJ-P1o"; */
+"meo-kJ-P1o.text" = "Question";
+
+/* Class = "UIButton"; normalTitle = "L2"; ObjectID = "puU-eL-dLz"; */
+"puU-eL-dLz.normalTitle" = "L2";
+
+/* Class = "UIButton"; normalTitle = "3"; ObjectID = "syP-1v-bTy"; */
+"syP-1v-bTy.normalTitle" = "3";
+
+/* Class = "UILabel"; text = "Choose a dictionary"; ObjectID = "zPd-hC-oIv"; */
+"zPd-hC-oIv.text" = "Choose a dictionary";
+
+/* Class = "UIButton"; normalTitle = "Start"; ObjectID = "zlv-Yv-De1"; */
+"zlv-Yv-De1.normalTitle" = "Start";

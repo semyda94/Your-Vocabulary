@@ -1,0 +1,48 @@
+
+/* Class = "UITableViewSection"; headerTitle = "Database"; ObjectID = "2Tm-C5-4C8"; */
+"2Tm-C5-4C8.headerTitle" = "Database";
+
+/* Class = "UILabel"; text = "Insert database"; ObjectID = "4x0-Z7-ZTk"; */
+"4x0-Z7-ZTk.text" = "Insert database";
+
+/* Class = "UITableViewController"; title = "Language"; ObjectID = "58C-SK-XC8"; */
+"58C-SK-XC8.title" = "Language";
+
+/* Class = "UILabel"; text = "Русский"; ObjectID = "9PE-2t-PTt"; */
+"9PE-2t-PTt.text" = "Русский";
+
+/* Class = "UILabel"; text = "Quick guide"; ObjectID = "9Vw-Lx-5TJ"; */
+"9Vw-Lx-5TJ.text" = "Quick guide";
+
+/* Class = "UITableViewSection"; headerTitle = "General"; ObjectID = "BDz-8l-M2f"; */
+"BDz-8l-M2f.headerTitle" = "General";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "Jcz-Ax-iC1"; */
+"Jcz-Ax-iC1.title" = "Settings";
+
+/* Class = "UITabBarItem"; title = "Settings"; ObjectID = "KLd-dK-Q8X"; */
+"KLd-dK-Q8X.title" = "Settings";
+
+/* Class = "UILabel"; text = "English"; ObjectID = "L7y-4l-EzO"; */
+"L7y-4l-EzO.text" = "English";
+
+/* Class = "UILabel"; text = "Evaluate app"; ObjectID = "RGk-dx-xmC"; */
+"RGk-dx-xmC.text" = "Evaluate app";
+
+/* Class = "UILabel"; text = "English"; ObjectID = "jva-tq-3U2"; */
+"jva-tq-3U2.text" = "English";
+
+/* Class = "UILabel"; text = "Export database"; ObjectID = "oyl-wv-hfY"; */
+"oyl-wv-hfY.text" = "Export database";
+
+/* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "rcf-Kt-UAx"; */
+"rcf-Kt-UAx.headerTitle" = "Other";
+
+/* Class = "UILabel"; text = "Language"; ObjectID = "tJq-gl-VJZ"; */
+"tJq-gl-VJZ.text" = "Language";
+
+/* Class = "UILabel"; text = "Notifications"; ObjectID = "y1j-VS-NfE"; */
+"y1j-VS-NfE.text" = "Notifications";
+
+/* Class = "UILabel"; text = "Reset database"; ObjectID = "zX3-kv-H4h"; */
+"zX3-kv-H4h.text" = "Reset database";

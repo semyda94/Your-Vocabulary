@@ -1,0 +1,18 @@
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "5m2-1G-shJ"; */
+"5m2-1G-shJ.text" = "Title";
+
+/* Class = "UITabBarItem"; title = "Statistic"; ObjectID = "WhO-Jv-PuN"; */
+"WhO-Jv-PuN.title" = "Statistic";
+
+/* Class = "UILabel"; text = "No quizzes"; ObjectID = "epn-zL-kkm"; */
+"epn-zL-kkm.text" = "No quizzes";
+
+/* Class = "UINavigationItem"; title = "Statistic"; ObjectID = "gaa-gZ-OvQ"; */
+"gaa-gZ-OvQ.title" = "Statistic";
+
+/* Class = "UILabel"; text = "number"; ObjectID = "lvO-Ku-XIg"; */
+"lvO-Ku-XIg.text" = "number";
+
+/* Class = "UILabel"; text = "No one quiz wasn't passed."; ObjectID = "ry1-fH-mOA"; */
+"ry1-fH-mOA.text" = "No one quiz wasn't passed.";

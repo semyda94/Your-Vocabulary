@@ -120,7 +120,7 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
             if let name = sourceViewController.dictionaryNameTextField.text {
                 newDictionary.name = name
             } else {
-                newDictionary.name = "Unknowed"
+                newDictionary.name = NSLocalizedString("Unknown", comment: "Dictionary without name")
             }
             newDictionary.dateOfCreation = NSDate()
             newDictionary.dateOfLastChanges = NSDate()
@@ -147,7 +147,7 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
             if let name = sourceViewController.dictionaryNameTextField.text {
                 dictionary.name = name
             } else {
-                dictionary.name = "Unknowed"
+                dictionary.name = NSLocalizedString("Unknown", comment: "Dictionary without name")
             }
             
             dictionary.dateOfLastChanges = NSDate()
@@ -205,12 +205,16 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
             nonDictionaryStack.isHidden = false
             UIView.animate(withDuration: 2) {
                 self.nonDictionaryStack.alpha = 1
+                tableView.alpha = 0;
             }
+            tableView.isHidden = true
         } else {
+            tableView.isHidden = false;
             UIView.animate(withDuration: 2) {
                 self.nonDictionaryStack.alpha = 0
+                tableView.alpha = 1
             }
-            self.nonDictionaryStack.isHidden = true;
+            self.nonDictionaryStack.isHidden = true
         }
         return dictionaries.count
     }
@@ -236,13 +240,13 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let edit = UITableViewRowAction(style: .normal, title: "Edit") { (action, index) in
+        let edit = UITableViewRowAction(style: .normal, title: NSLocalizedString("Edit", comment: "Edit dictionary table view edit action") ) { (action, index) in
             guard self.dictionaries[index.row].name != nil else { return }
             
             self.performSegue(withIdentifier: "showDictionaryProperties", sender: self.dictionariesTableView.cellForRow(at: index))
         }
         
-        let delete = UITableViewRowAction(style: .default, title: "Delete") { (action, index) in
+        let delete = UITableViewRowAction(style: .default, title: NSLocalizedString("Delete", comment: "Delete dictionary table view edit action")) { (action, index) in
             self.deletingDictionaryFromTable(at: indexPath.row)
         }
         

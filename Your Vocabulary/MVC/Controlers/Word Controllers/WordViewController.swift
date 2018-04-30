@@ -25,7 +25,7 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
     var currentWord: Word?
     
     fileprivate var sections = [[(value: String? , type: typeOfCell)]]()
-    fileprivate var sectionsName = ["Translations", "Definitions", "Extra information", "Synonyms", "Examples"]
+    fileprivate var sectionsName = [NSLocalizedString("Translations", comment: "Title for translations properties in word view") ,NSLocalizedString("Definitions", comment: "Title for definitions properties in word view"), NSLocalizedString("Extra information", comment: "Title for extra information properties in word view"), NSLocalizedString("Synonyms", comment: "Title for synonyms properties in word view"), NSLocalizedString("Examples", comment: "Title for examples properties in word view")]
     
     // MARK: - Outlets.
     @IBOutlet weak var fieldsTableView: UITableView!
@@ -39,7 +39,7 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
         guard let dictionary = currentDictionary else { return -1 }
         
         //Word section
-        sections.append([("Word", typeOfCell.titleFollowingFields), (nil, .field)])
+        sections.append([(NSLocalizedString("Word", comment: "Title for word in word view"), typeOfCell.titleFollowingFields), (nil, .field)])
         
         //Translation
         if dictionary.isTranslation {
@@ -80,7 +80,7 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
         var sectionContent = [(value: String?, type: WordViewController.typeOfCell)]()
         
         //Word section
-        sections.append([("Word", typeOfCell.titleFollowingFields), (word.word, .field)])
+        sections.append([(NSLocalizedString("Word", comment: "Title for word in word view"), typeOfCell.titleFollowingFields), (word.word, .field)])
         
         //Translation
         if dictionary.isTranslation , let translations = word.translations?.allObjects as? [Translation] {
@@ -191,13 +191,13 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
         
         //set gesture of hidden keyboard after tap somewhere else
-        let tapGesture = UITapGestureRecognizer(target: self, action: Selector("hideKeyboard"))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(WordViewController.hideKeyboard))
         tapGesture.cancelsTouchesInView = true
         self.view.addGestureRecognizer(tapGesture)
         
         navigationItem.largeTitleDisplayMode = .never
         
-        navigationItem.title = "New word"
+        navigationItem.title = NSLocalizedString("New word", comment: "Title of navigation bar for during creating new word")
         
         if let word = currentWord {
             if setData(forWord: word) < 0 {
@@ -211,7 +211,7 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         // Set automatic dimensions for row height
         fieldsTableView.rowHeight = UITableViewAutomaticDimension
-        fieldsTableView.estimatedRowHeight = 50
+        fieldsTableView.estimatedRowHeight = 22
         
         // Do any additional setup after loading the view.
     }
@@ -271,7 +271,7 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let delete = UITableViewRowAction(style: .default, title: "Delete") { (action, index) in
+        let delete = UITableViewRowAction(style: .default, title: NSLocalizedString("Delete", comment: "Delete title properties in word view")) { (action, index) in
             self.deletingFiledCellFromTable(at: indexPath)
         }
         

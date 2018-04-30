@@ -109,6 +109,15 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     @IBAction func saveButtonWasTapped(segue: UIStoryboardSegue){
+        
+        func getDictionryNameByField(_ field: UITextField ) -> String{
+            guard let name = field.text, !name.isEmpty else {
+                return NSLocalizedString("Unknown", comment: "Dictionary without name")
+            }
+            
+            return name
+        }
+        
         guard let sourceViewController = segue.source as? DictionaryPropertiesViewController else { return }
         
         guard let context = managedContext else { return }
@@ -117,11 +126,7 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
             guard let entity = NSEntityDescription.entity(forEntityName: "Dictionary", in: context) else { return }
             let newDictionary = Dictionary(entity: entity, insertInto: context)
             
-            if let name = sourceViewController.dictionaryNameTextField.text {
-                newDictionary.name = name
-            } else {
-                newDictionary.name = NSLocalizedString("Unknown", comment: "Dictionary without name")
-            }
+            newDictionary.name = getDictionryNameByField(sourceViewController.dictionaryNameTextField)
             newDictionary.dateOfCreation = NSDate()
             newDictionary.dateOfLastChanges = NSDate()
             newDictionary.numberOfWords = 0

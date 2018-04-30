@@ -19,9 +19,12 @@ class DictionaryTableViewCell: UITableViewCell {
             let formatNumberOfWords = NSLocalizedString("Count of words: %d", comment: "Show count of words for dictionary")
             let formatNumberOfLearnedWords = NSLocalizedString("Learned words: %d", comment: "Show count of learned words for dictionary")
             
+            if let name = currentDictionary.name  {
+                thumbnailLabel.text = String(name.first!).uppercased()
+                titleLabel.text = name
+            }
             
-            titleLabel.text = currentDictionary.name
-            thumbnailLabel.text = String(currentDictionary.name!.first!).uppercased()
+           
             numberOfWordsLabel.text = String.localizedStringWithFormat(formatNumberOfWords, currentDictionary.numberOfWords) 
             numberOfLearnedWordsLabel.text = String.localizedStringWithFormat(formatNumberOfLearnedWords, currentDictionary.numberofLearned)
             
@@ -47,6 +50,8 @@ class DictionaryTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     
+        titleLabel.text = NSLocalizedString("Unknown", comment: "Name for dictionary when user didn't set name")
+        
         thumbnailLabel.textAlignment = .center
         thumbnailLabel.bounds = thumbnailView.bounds
         thumbnailLabel.layer.cornerRadius = 0.5 * thumbnailLabel.bounds.size.width

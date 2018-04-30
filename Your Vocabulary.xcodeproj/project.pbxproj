@@ -112,7 +112,6 @@
 		E750B9A5202415770033AA2B /* Example+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Example+CoreDataClass.swift"; path = "CoreDataObjects/Example+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E750B9A6202415770033AA2B /* Example+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Example+CoreDataProperties.swift"; path = "CoreDataObjects/Example+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E7591EC22023BE5F00007057 /* WordFieldsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordFieldsTableViewCell.swift; sourceTree = "<group>"; };
-		E760EA16209691AA0080F1E5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		E760EA18209691B00080F1E5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		E77280611FFDDEF6004DC8A3 /* Your Vocabulary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Your Vocabulary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E77280641FFDDEF6004DC8A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +130,7 @@
 		E785D6D2200C5A0E0068B4CE /* BEMPathManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMPathManager.h; sourceTree = "<group>"; };
 		E785D6D3200C5A0E0068B4CE /* BEMCheckBoxGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMCheckBoxGroup.h; sourceTree = "<group>"; };
 		E788C2FD20969B8E0032F30B /* ObjectCBridgeHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectCBridgeHeader.h; sourceTree = "<group>"; };
+		E788C2FF2096C8830032F30B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		E78E23D7205419CD00EE8790 /* StatisticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
 		E78E23DB205633B700EE8790 /* StatisticTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticTableViewCell.swift; sourceTree = "<group>"; };
 		E7A91668203E19EE006A5CDB /* QuizPropertiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizPropertiesViewController.swift; sourceTree = "<group>"; };
@@ -573,7 +573,7 @@
 			children = (
 				E77280691FFDDEF6004DC8A3 /* Base */,
 				E7D43447205D327400287A5F /* ru */,
-				E760EA16209691AA0080F1E5 /* en */,
+				E788C2FF2096C8830032F30B /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

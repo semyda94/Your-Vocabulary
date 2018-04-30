@@ -209,10 +209,6 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
         
-        // Set automatic dimensions for row height
-        fieldsTableView.rowHeight = UITableViewAutomaticDimension
-        fieldsTableView.estimatedRowHeight = 22
-        
         // Do any additional setup after loading the view.
     }
 
@@ -276,6 +272,16 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
         return [delete]
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if sections[indexPath.section][indexPath.row].type == .addFieldButton { return 22 }
+        
+        return UITableViewAutomaticDimension
     }
 
     //MARK: - UITextViewDelegate implementation

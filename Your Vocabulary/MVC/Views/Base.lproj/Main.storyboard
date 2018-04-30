@@ -20,11 +20,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="ldR-Xf-xlG">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ldR-Xf-xlG">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="730"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Tfd-Rz-jDw">
-                                <rect key="frame" x="20" y="298.33333333333337" width="335" height="272.33333333333337"/>
+                                <rect key="frame" x="20" y="290" width="335" height="289.33333333333326"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="open-book" translatesAutoresizingMaskIntoConstraints="NO" id="Prq-Cy-dTN">
                                         <rect key="frame" x="72" y="0.0" width="191" height="167.66666666666666"/>
@@ -41,11 +41,12 @@
                                         <color key="textColor" red="0.16862745100000001" green="0.27058823529999998" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PE4-Gg-Jgf">
-                                        <rect key="frame" x="100.66666666666669" y="242.33333333333331" width="134" height="30"/>
-                                        <color key="backgroundColor" red="0.16862745100000001" green="0.27058823529999998" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PE4-Gg-Jgf">
+                                        <rect key="frame" x="93.666666666666686" y="242.33333333333337" width="148" height="47"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="tintColor" red="0.59215686270000001" green="0.73725490199999999" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="  Create dictionary  "/>
+                                        <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="5"/>
+                                        <state key="normal" title="Create dictionary" backgroundImage="dark_blue_button"/>
                                         <connections>
                                             <segue destination="5dq-HT-GJp" kind="presentation" identifier="newDictionaryProperties" id="e2Y-f8-py9"/>
                                         </connections>
@@ -162,8 +163,8 @@
                         <viewLayoutGuide key="safeArea" id="ale-57-ZBf"/>
                     </view>
                     <navigationItem key="navigationItem" title="Dictionaries" id="xvb-gf-K01">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="AG1-Gj-us6">
-                            <color key="tintColor" red="1" green="0.83137254900000002" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="new_dictionary_icon" landscapeImage="new_dictionary_icon" largeContentSizeImage="new_dictionary_icon" id="AG1-Gj-us6">
+                            <color key="tintColor" red="0.16862745100000001" green="0.27058823529999998" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <segue destination="5dq-HT-GJp" kind="presentation" identifier="newDictionaryProperties" id="y0M-lq-7af"/>
                             </connections>
@@ -219,7 +220,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="i3D-ug-OJy">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="730"/>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KWR-go-Xv1">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="22" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KWR-go-Xv1">
                                 <rect key="frame" x="0.0" y="140" width="375" height="589"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -279,25 +280,25 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="titleFollowingFieldsCell" rowHeight="44" id="JPY-4c-zhW" customClass="WordTitleFollowingFieldsCellTableViewCell" customModule="Your_Vocabulary" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="91" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="titleFollowingFieldsCell" rowHeight="22" id="JPY-4c-zhW" customClass="WordTitleFollowingFieldsCellTableViewCell" customModule="Your_Vocabulary" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="91" width="375" height="22"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JPY-4c-zhW" id="A1K-t5-rTw">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="22"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vpI-ch-MH7">
-                                                    <rect key="frame" x="23" y="11" width="337" height="22"/>
+                                                    <rect key="frame" x="23" y="11" width="345" height="0.0"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                     <color key="textColor" red="0.16862745098039217" green="0.27058823529411763" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottomMargin" secondItem="vpI-ch-MH7" secondAttribute="bottom" id="E2g-um-FPk"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="vpI-ch-MH7" secondAttribute="trailing" id="N1c-vb-BrY"/>
-                                                <constraint firstItem="vpI-ch-MH7" firstAttribute="leading" secondItem="A1K-t5-rTw" secondAttribute="leadingMargin" constant="8" id="dYF-Pf-W3Q"/>
-                                                <constraint firstItem="vpI-ch-MH7" firstAttribute="centerY" secondItem="A1K-t5-rTw" secondAttribute="centerY" id="xwt-kr-OdB"/>
+                                                <constraint firstItem="vpI-ch-MH7" firstAttribute="top" secondItem="A1K-t5-rTw" secondAttribute="topMargin" id="1uu-ec-nIh"/>
+                                                <constraint firstItem="vpI-ch-MH7" firstAttribute="bottom" secondItem="A1K-t5-rTw" secondAttribute="bottomMargin" id="3j9-V7-Tr6"/>
+                                                <constraint firstItem="vpI-ch-MH7" firstAttribute="leading" secondItem="A1K-t5-rTw" secondAttribute="leadingMargin" constant="8" id="KeF-Mh-EiU"/>
+                                                <constraint firstItem="vpI-ch-MH7" firstAttribute="trailing" secondItem="A1K-t5-rTw" secondAttribute="trailingMargin" constant="8" id="NtK-KO-lcp"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -306,7 +307,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="saveCancelButtonsCell" id="42G-GO-RpZ" customClass="WordSaveCancelButtonsTableViewCell" customModule="Your_Vocabulary" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="135" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="113" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="42G-GO-RpZ" id="owI-bh-wXP">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -691,7 +692,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="730"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ui1-5G-RzM">
-                                <rect key="frame" x="20" y="378.33333333333331" width="335" height="112.66666666666669"/>
+                                <rect key="frame" x="20" y="370" width="335" height="129.66666666666663"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your words will be show up here." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pnX-bZ-HFu">
                                         <rect key="frame" x="37" y="0.0" width="261" height="20.333333333333332"/>
@@ -700,7 +701,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aUk-AE-3Z6">
-                                        <rect key="frame" x="8" y="28.333333333333375" width="319" height="46.333333333333343"/>
+                                        <rect key="frame" x="8" y="28.333333333333318" width="319" height="46.333333333333343"/>
                                         <string key="text">Your dictionary doesn't have any words. For adding new word tap " Add new word" here or at right top corner.
 </string>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
@@ -708,10 +709,11 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jhZ-bm-Nq5">
-                                        <rect key="frame" x="110.66666666666666" y="82.666666666666686" width="114" height="30"/>
-                                        <color key="backgroundColor" red="0.16862745100000001" green="0.27058823529999998" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="93.666666666666686" y="82.666666666666686" width="148" height="47"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="tintColor" red="0.59215686270000001" green="0.73725490199999999" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="  Add new word  "/>
+                                        <inset key="titleEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                        <state key="normal" title="  Add new word  " backgroundImage="dark_blue_button"/>
                                         <connections>
                                             <segue destination="upw-ZW-aTh" kind="show" identifier="newWord" id="926-HE-Ebi"/>
                                         </connections>
@@ -897,9 +899,11 @@
     </scenes>
     <resources>
         <image name="bg" width="1243" height="2209"/>
+        <image name="dark_blue_button" width="148" height="47"/>
         <image name="dictionary_tb" width="25" height="33"/>
         <image name="dictionary_tb_selected" width="23" height="31"/>
         <image name="green_button" width="148" height="47"/>
+        <image name="new_dictionary_icon" width="25" height="27"/>
         <image name="open-book" width="191" height="146"/>
         <image name="quiz_tb" width="32" height="32"/>
         <image name="quiz_tb_selected" width="30" height="30"/>

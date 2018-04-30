@@ -11,23 +11,29 @@
 /* Class = "UILabel"; text = "Dictionary"; ObjectID = "92X-YZ-aV2"; */
 "92X-YZ-aV2.text" = "Dictionary";
 
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "AG1-Gj-us6"; */
+"AG1-Gj-us6.title" = "Item";
+
 /* Class = "UILabel"; text = "date of creation"; ObjectID = "EQZ-tz-SM3"; */
 "EQZ-tz-SM3.text" = "date of creation";
 
-/* Class = "UILabel"; text = "You don't have dictionaries yet. All your future dictionaries will be stored here."; ObjectID = "FZc-Kk-S3T"; */
-"FZc-Kk-S3T.text" = "You don't have dictionaries yet. All your future dictionaries will be stored here.";
+/* Class = "UILabel"; text = "Get started by tapping the \"Create dictionary\" button here or at the top right corner."; ObjectID = "FZc-Kk-S3T"; */
+"FZc-Kk-S3T.text" = "Get started by tapping the \"Create dictionary\" button here or at the top right corner.";
 
 /* Class = "UITabBarItem"; title = "Item"; ObjectID = "MUz-P7-mk9"; */
 "MUz-P7-mk9.title" = "Item";
 
-/* Class = "UILabel"; text = "No Dictionaries"; ObjectID = "T9Y-4h-HR5"; */
-"T9Y-4h-HR5.text" = "No Dictionaries";
+/* Class = "UIButton"; normalTitle = "Create dictionary"; ObjectID = "PE4-Gg-Jgf"; */
+"PE4-Gg-Jgf.normalTitle" = "Create dictionary";
+
+/* Class = "UILabel"; text = "You dictionaries will show up here."; ObjectID = "T9Y-4h-HR5"; */
+"T9Y-4h-HR5.text" = "You dictionaries will show up here.";
 
 /* Class = "UIButton"; normalTitle = "Save"; ObjectID = "VfP-lM-Z2g"; */
 "VfP-lM-Z2g.normalTitle" = "Save";
 
-/* Class = "UILabel"; text = "You dont't havy words at dictionary, yet."; ObjectID = "aUk-AE-3Z6"; */
-"aUk-AE-3Z6.text" = "You dont't havy words at dictionary, yet.";
+/* Class = "UILabel"; text = "Your dictionary doesn't have any words. For adding new word tap \" Add new word\" here or at right top corner.\n"; ObjectID = "aUk-AE-3Z6"; */
+"aUk-AE-3Z6.text" = "Your dictionary doesn't have any words. For adding new word tap \" Add new word\" here or at right top corner.\n";
 
 /* Class = "UITabBarItem"; title = "Item"; ObjectID = "d5M-Pt-IjA"; */
 "d5M-Pt-IjA.title" = "Item";
@@ -50,17 +56,20 @@
 /* Class = "UILabel"; text = "Definition"; ObjectID = "iot-xP-eQ2"; */
 "iot-xP-eQ2.text" = "Definition";
 
+/* Class = "UIButton"; normalTitle = "  Add new word  "; ObjectID = "jhZ-bm-Nq5"; */
+"jhZ-bm-Nq5.normalTitle" = "  Add new word  ";
+
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "kEV-rq-fcO"; */
 "kEV-rq-fcO.normalTitle" = "Cancel";
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "mdQ-PN-Wfe"; */
 "mdQ-PN-Wfe.text" = "Title";
 
-/* Class = "UILabel"; text = "No Words"; ObjectID = "pnX-bZ-HFu"; */
-"pnX-bZ-HFu.text" = "No Words";
+/* Class = "UILabel"; text = "Your words will be show up here."; ObjectID = "pnX-bZ-HFu"; */
+"pnX-bZ-HFu.text" = "Your words will be show up here.";
 
-/* Class = "UILabel"; text = "Definition or translation"; ObjectID = "s06-Ex-0Vj"; */
-"s06-Ex-0Vj.text" = "Definition or translation";
+/* Class = "UILabel"; text = "No translation or definition"; ObjectID = "s06-Ex-0Vj"; */
+"s06-Ex-0Vj.text" = "No translation or definition";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "vpI-ch-MH7"; */
 "vpI-ch-MH7.text" = "Label";

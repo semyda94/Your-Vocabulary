@@ -26,7 +26,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Tfd-Rz-jDw">
                                 <rect key="frame" x="20" y="290" width="335" height="289.33333333333326"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="open-book" translatesAutoresizingMaskIntoConstraints="NO" id="Prq-Cy-dTN">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="thinking_man" translatesAutoresizingMaskIntoConstraints="NO" id="Prq-Cy-dTN">
                                         <rect key="frame" x="72" y="0.0" width="191" height="167.66666666666666"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You dictionaries will show up here." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T9Y-4h-HR5">
@@ -904,7 +904,6 @@
         <image name="dictionary_tb_selected" width="23" height="31"/>
         <image name="green_button" width="148" height="47"/>
         <image name="new_dictionary_icon" width="25" height="27"/>
-        <image name="open-book" width="191" height="146"/>
         <image name="quiz_tb" width="32" height="32"/>
         <image name="quiz_tb_selected" width="30" height="30"/>
         <image name="red_button" width="148" height="47"/>
@@ -912,6 +911,7 @@
         <image name="settings_tb_selected" width="30" height="30"/>
         <image name="statistics_tb" width="26" height="26"/>
         <image name="statistics_tb_selected" width="26" height="26"/>
+        <image name="thinking_man" width="191" height="190"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="8Hd-U3-Qow"/>

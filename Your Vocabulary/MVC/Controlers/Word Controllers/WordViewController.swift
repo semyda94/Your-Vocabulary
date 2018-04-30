@@ -289,6 +289,22 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
         guard let cell = textView.superview?.superview as? WordFieldsTableViewCell, let index = fieldsTableView.indexPath(for: cell) else { return }
         
         sections[index.section][index.row].value = textView.text
+        
+        let fixedWidth = textView.frame.size.width
+        textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+        let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+        
+        if textView.frame.height != newSize.height {
+            var newFrame = textView.frame
+            newFrame.size = CGSize(width: fixedWidth, height: newSize.height)
+            textView.frame = newFrame
+        
+            var newCellFrame = cell.frame
+            newCellFrame.size = CGSize(width: newCellFrame.size.width, height: newSize.height)
+            
+            fieldsTableView.beginUpdates()
+            fieldsTableView.endUpdates()
+        }
     }
    /*
     func textViewDidEndEditing(_ textView: UITextView) {

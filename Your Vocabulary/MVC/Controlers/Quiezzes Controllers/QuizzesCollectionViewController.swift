@@ -40,9 +40,21 @@ class QuizzesCollectionViewController: UICollectionViewController {
             
             segue.completion = {
                 guard let sourceVC = segue.source as? QuizPropertiesViewController else { return }
+                let chosenDictionary = sourceVC.parametrsForPicker.dictionaries[sourceVC.pickerView.selectedRow(inComponent: 0)]
                 
-                if sourceVC.parametrsForPicker.dictionaries[sourceVC.pickerView.selectedRow(inComponent: 0)].numberOfWords >= 4 {
+                if chosenDictionary.numberOfWords - chosenDictionary.numberofLearned >= 4 {
                     print("Dictionary has more than 4 words")
+                    
+                    switch sourceVC.typeOfQuiz {
+                    case .seeking:
+                        self.performSegue(withIdentifier: "startSeekingQuiz", sender: sourceVC)
+                    case .matching:
+                        self.performSegue(withIdentifier: "startMatchingQuiz", sender: sourceVC)
+                    case .spelling:
+                        self.performSegue(withIdentifier: "startSpellingQuiz", sender: sourceVC)
+                    default:
+                        return
+                    }
                 } else {
                     print("Dictionary doesn't have 4 words")
                     let alertController = UIAlertController(title: NSLocalizedString("Not enough words", comment: "Title for alert controller when chosen dictionary doesn't have any words"), message: NSLocalizedString("Sorry, chosen dictionary doesn't have enough unlearned words. ", comment: "Message for alert controller when chosen dictionary doesnt' have any words"), preferredStyle: .alert)
@@ -53,19 +65,6 @@ class QuizzesCollectionViewController: UICollectionViewController {
                     
                     self.present(alertController, animated: true, completion: nil)
                 }
-                
-                /*
-                switch sourceVC.typeOfQuiz {
-                case .seeking:
-                    self.performSegue(withIdentifier: "startSeekingQuiz", sender: sourceVC)
-                case .matching:
-                    self.performSegue(withIdentifier: "startMatchingQuiz", sender: sourceVC)
-                case .spelling:
-                    self.performSegue(withIdentifier: "startSpellingQuiz", sender: sourceVC)
-                default:
-                    return
-                }
-                */
             }
         } else {
             return

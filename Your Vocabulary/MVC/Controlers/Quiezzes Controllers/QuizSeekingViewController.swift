@@ -45,6 +45,8 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
         self.view.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "bg"))
         
         for button in answersButtons {
+            button.titleLabel?.numberOfLines = 4
+            button.titleLabel?.textAlignment = NSTextAlignment.center
             button.layer.cornerRadius = 10
             button.layer.borderWidth = 2
             button.layer.borderColor = #colorLiteral(red: 1, green: 0.831372549, blue: 0.4588235294, alpha: 1)

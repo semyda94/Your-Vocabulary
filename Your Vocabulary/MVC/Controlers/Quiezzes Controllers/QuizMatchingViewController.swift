@@ -91,6 +91,8 @@ class QuizMatchingViewController: UIViewController, QuizzesMethods {
     
     fileprivate func setButtonsSettings(forButtons buttons: [UIButton]) {
         for button in buttons {
+            button.titleLabel?.numberOfLines = 3
+            button.titleLabel?.textAlignment = NSTextAlignment.center
             button.layer.cornerRadius = 10
             button.layer.borderWidth = 2
             button.layer.borderColor = #colorLiteral(red: 1, green: 0.831372549, blue: 0.4588235294, alpha: 1)

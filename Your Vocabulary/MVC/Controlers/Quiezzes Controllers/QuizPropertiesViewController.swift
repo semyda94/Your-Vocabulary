@@ -32,14 +32,16 @@ class QuizPropertiesViewController: UIViewController, UIPickerViewDelegate, UIPi
     //MARK: Fucntions
     
     fileprivate func setPickersParametrs() {
-        guard let context = managedContext else { return }
+       guard let context = managedContext else { return }
         
         let request = NSFetchRequest<Dictionary>(entityName: "Dictionary")
         
         do {
             let result = try context.fetch(request)
-            parametrsForPicker.dictionaries = result
-            setSubParametrs(dictionarAt: 0)
+            if !result.isEmpty {
+                parametrsForPicker.dictionaries = result
+                setSubParametrs(dictionarAt: 0)
+            }
         } catch let error as NSError {
             print("Unresolver error during fetching dictionary: \(error), \(error.userInfo)")
         }

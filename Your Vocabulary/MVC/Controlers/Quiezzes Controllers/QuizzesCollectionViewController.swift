@@ -14,7 +14,7 @@ private let reuseIdentifier = "QuizCollectionCell"
 class QuizzesCollectionViewController: UICollectionViewController {
 
     // MARK: - Properties
-    let quizzes: [(name: QuizzesTypes, thumbnail: UIImage)] = [(.seeking, #imageLiteral(resourceName: "seeking_icon") ), (.seekingByTime, #imageLiteral(resourceName: "seeking_by_time_icon")), (.matching, #imageLiteral(resourceName: "matching_icon")), (.matchingByTime, #imageLiteral(resourceName: "matching_by_time_icon")), (.spelling, #imageLiteral(resourceName: "spelling_icon")), (.spellingByTime, #imageLiteral(resourceName: "spelling_by_time_icon"))]
+    let quizzes: [(name: QuizzesTypes, thumbnail: UIImage)] = [(.seeking, #imageLiteral(resourceName: "seeking_icon") ), (.seekingByTime, #imageLiteral(resourceName: "seeking_by_time_icon")), (.matching, #imageLiteral(resourceName: "matching_icon")), (.matchingByTime, #imageLiteral(resourceName: "matching_by_time_icon")), /*(.spelling, #imageLiteral(resourceName: "spelling_icon")), (.spellingByTime, #imageLiteral(resourceName: "spelling_by_time_icon"))*/]
     
     var managedContext: NSManagedObjectContext? {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return nil }
@@ -22,7 +22,14 @@ class QuizzesCollectionViewController: UICollectionViewController {
         return appDelegate.persistentContainer.viewContext
     }
     
+    fileprivate var selectedQuizCellIndex = IndexPath(row: 0, section: 0)
+    
     //MARK: - Unwind segue
+    
+    @IBAction func getEmptyListOfDictionaries(segue: UIStoryboardSegue) {
+        print("Lol")
+        
+    }
     
     @IBAction func closePropertiesView(segue: UIStoryboardSegue){
         
@@ -34,7 +41,20 @@ class QuizzesCollectionViewController: UICollectionViewController {
             segue.completion = {
                 guard let sourceVC = segue.source as? QuizPropertiesViewController else { return }
                 
+                if sourceVC.parametrsForPicker.dictionaries[sourceVC.pickerView.selectedRow(inComponent: 0)].numberOfWords >= 4 {
+                    print("Dictionary has more than 4 words")
+                } else {
+                    print("Dictionary doesn't have 4 words")
+                    let alertController = UIAlertController(title: NSLocalizedString("Not enough words", comment: "Title for alert controller when chosen dictionary doesn't have any words"), message: NSLocalizedString("Sorry, chosen dictionary doesn't have enough unlearned words. ", comment: "Message for alert controller when chosen dictionary doesnt' have any words"), preferredStyle: .alert)
+                    
+                    let cancelAlertAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Title for cancel alert action when chosen dictionary doesn't have any words"), style: .cancel, handler: nil)
+                    
+                    alertController.addAction(cancelAlertAction)
+                    
+                    self.present(alertController, animated: true, completion: nil)
+                }
                 
+                /*
                 switch sourceVC.typeOfQuiz {
                 case .seeking:
                     self.performSegue(withIdentifier: "startSeekingQuiz", sender: sourceVC)
@@ -45,6 +65,7 @@ class QuizzesCollectionViewController: UICollectionViewController {
                 default:
                     return
                 }
+                */
             }
         } else {
             return
@@ -140,10 +161,13 @@ class QuizzesCollectionViewController: UICollectionViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier! {
         case "showQuizProperties":
+            
             guard let qpvc = segue.destination as? QuizPropertiesViewController else { return }
-            guard let cell = sender as? QuizzesCollectionViewCell, let indexPath = collectionView?.indexPath(for: cell) else { return }
-            qpvc.typeOfQuiz = quizzes[indexPath.row].name
+            guard let qcvc = segue.source as? QuizzesCollectionViewController else { return }
+            /*guard let cell = sender as? QuizzesCollectionViewCell, let indexPath = collectionView?.indexPath(for: cell) else { return }*/
+            qpvc.typeOfQuiz = quizzes[selectedQuizCellIndex.row].name
             qpvc.modalPresentationStyle = .overCurrentContext
+ 
         case "startSeekingQuiz":
             guard let qpvc = sender as? QuizPropertiesViewController else { return }
             guard let qsvc = segue.destination as? QuizSeekingViewController else { return }
@@ -217,7 +241,27 @@ class QuizzesCollectionViewController: UICollectionViewController {
 
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let context = managedContext else { return }
         
+        let request = NSFetchRequest<Dictionary>(entityName: "Dictionary")
+        
+        do {
+            let result = try context.fetch(request)
+            if !result.isEmpty {
+                selectedQuizCellIndex = indexPath
+                performSegue(withIdentifier: "showQuizProperties", sender: self)
+            } else {
+                let emptyListOfDictionariesAlertController = UIAlertController(title: NSLocalizedString("No dictionaries", comment: "Title for alert controler when list of dictionaries is empty"), message: NSLocalizedString("Sadly, at this moment your list of dictionaries doesn't have no one dictionary.", comment: "Message for alert controller when list of dictionaries is empty"), preferredStyle: .alert)
+                
+                let cancelAlertAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Title for cancel alert action when chosen dictionary doesn't have any words"), style: .cancel, handler: nil)
+                
+                emptyListOfDictionariesAlertController.addAction(cancelAlertAction)
+                
+                present(emptyListOfDictionariesAlertController, animated: true, completion: nil)
+            }
+        } catch let error as NSError {
+            print("Unresolver error during fetching dictionary: \(error), \(error.userInfo)")
+        }
     }
     
     /*

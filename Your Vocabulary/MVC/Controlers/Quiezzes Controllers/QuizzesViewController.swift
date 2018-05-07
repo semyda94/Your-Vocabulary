@@ -10,7 +10,7 @@ import UIKit
 
 class QuizzesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
-    let quizzes: [(name: String,thumbnail: UIImage)] = [("Seeking", #imageLiteral(resourceName: "seeking_icon")), ("Seeking by time", #imageLiteral(resourceName: "seeking_by_time_icon")), ("Matching", #imageLiteral(resourceName: "matching_icon")), ("Matching by time", #imageLiteral(resourceName: "matching_by_time_icon")), ("Spelling", #imageLiteral(resourceName: "spelling_icon")), ("Spelling by time", #imageLiteral(resourceName: "spelling_by_time_icon"))]
+    let quizzes: [(name: String,thumbnail: UIImage)] = [("Seeking", #imageLiteral(resourceName: "seeking_icon")), ("Seeking by time", #imageLiteral(resourceName: "seeking_by_time_icon")), ("Matching", #imageLiteral(resourceName: "matching_icon")), ("Matching by time", #imageLiteral(resourceName: "matching_by_time_icon"))/*, ("Spelling", #imageLiteral(resourceName: "spelling_icon")), ("Spelling by time", #imageLiteral(resourceName: "spelling_by_time_icon")*/]
     
     override func viewDidLoad() {
         super.viewDidLoad()

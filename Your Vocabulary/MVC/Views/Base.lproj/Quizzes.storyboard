@@ -66,7 +66,6 @@
                                 <connections>
                                     <outlet property="quizzThumbNail" destination="JWx-lX-U0b" id="hDW-Cc-qbQ"/>
                                     <outlet property="title" destination="Xdq-av-kid" id="q0Y-mL-In7"/>
-                                    <segue destination="0Jx-UW-PHv" kind="presentation" identifier="showQuizProperties" id="9FC-je-rHw"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -80,6 +79,7 @@
                         <segue destination="MF1-EY-6Sx" kind="show" identifier="startSeekingQuiz" id="Mwv-Rh-qZr"/>
                         <segue destination="QWs-Ge-WNh" kind="show" identifier="startMatchingQuiz" id="M0K-Sf-69x"/>
                         <segue destination="lQn-hh-uMz" kind="show" identifier="startSpellingQuiz" id="hX4-Qs-rYV"/>
+                        <segue destination="0Jx-UW-PHv" kind="presentation" identifier="showQuizProperties" id="B0z-Ds-axn"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Krf-dS-DMU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -504,6 +504,7 @@
                     <connections>
                         <outlet property="backgroundView" destination="Un7-zQ-1tq" id="saz-nc-Ga2"/>
                         <outlet property="pickerView" destination="1M6-FU-LV0" id="aPo-hn-Ifa"/>
+                        <segue destination="J6h-GP-HJk" kind="unwind" identifier="getedEmptyListOfDictionariesSegue" unwindAction="getEmptyListOfDictionariesWithSegue:" id="qFa-tB-ZSr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RYK-da-93P" userLabel="First Responder" sceneMemberID="firstResponder"/>

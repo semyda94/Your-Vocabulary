@@ -48,6 +48,8 @@ class QuizzesCollectionViewController: UICollectionViewController {
                     switch sourceVC.typeOfQuiz {
                     case .seeking:
                         self.performSegue(withIdentifier: "startSeekingQuiz", sender: sourceVC)
+                    case .seekingByTime:
+                        self.performSegue(withIdentifier: "startSeekingByTimeQuiz", sender: sourceVC)
                     case .matching:
                         self.performSegue(withIdentifier: "startMatchingQuiz", sender: sourceVC)
                     case .spelling:
@@ -80,7 +82,7 @@ class QuizzesCollectionViewController: UICollectionViewController {
         switch segue.identifier! {
         case "unwindFinishSeekingQuiz":
             guard let sourceVC = segue.source as? QuizSeekingViewController else { return }
-            countOfAnswers = sourceVC.countOfAnswers
+            countOfAnswers = sourceVC.countOfAnswers + sourceVC.countOfTimerInvokerd
             countOfCorrectAnswer = sourceVC.countOfCorrectAnswers
             dateOfQuiz = sourceVC.dateOfQuiz
             dictionary = sourceVC.chosenParametrs!.dictionary
@@ -166,6 +168,20 @@ class QuizzesCollectionViewController: UICollectionViewController {
             /*guard let cell = sender as? QuizzesCollectionViewCell, let indexPath = collectionView?.indexPath(for: cell) else { return }*/
             qpvc.typeOfQuiz = quizzes[selectedQuizCellIndex.row].name
             qpvc.modalPresentationStyle = .overCurrentContext
+        
+        case "startSeekingByTimeQuiz":
+            guard let qpvc = sender as? QuizPropertiesViewController else { return }
+            guard let qsvc = segue.destination as? QuizSeekingViewController else { return }
+            
+            let chosenParametrs: (dictionary: Dictionary, questionType: DictionaryElements, answerType: DictionaryElements)
+            
+            qsvc.byTime = true
+            
+            chosenParametrs.dictionary = qpvc.parametrsForPicker.dictionaries[qpvc.pickerView.selectedRow(inComponent: 0)]
+            chosenParametrs.questionType = qpvc.parametrsForPicker.questionType[qpvc.pickerView.selectedRow(inComponent: 1)]
+            chosenParametrs.answerType = qpvc.parametrsForPicker.answersType[qpvc.pickerView.selectedRow(inComponent: 2)]
+            
+            qsvc.chosenParametrs = chosenParametrs
  
         case "startSeekingQuiz":
             guard let qpvc = sender as? QuizPropertiesViewController else { return }

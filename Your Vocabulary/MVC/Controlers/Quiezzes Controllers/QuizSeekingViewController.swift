@@ -19,13 +19,24 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
     fileprivate var currentQuestion: (question: String, answer: String) = ("None", "None")
     fileprivate var wholeAnswers = [String]()
     fileprivate var currentAnswers = [String]()
+    fileprivate var roundTimer : Timer!
+    fileprivate var gameTimer : Timer!
+    
+    fileprivate var stepForProgressBar = 0.0
+    fileprivate var seconds = 0.0
+    
+    var timeForAnswer = 5.0
     
     var countOfAnswers = 0
     var countOfCorrectAnswers = 0
+    var countOfTimerInvokerd = 0
     let dateOfQuiz = Date()
+    
+    var byTime = false
     
     // MARK: - Outlets
     
+    @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var questionLabel: UILabel!
     
@@ -34,8 +45,28 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
     @IBAction func wasDoneAnswer(_ sender: UIButton) {
         countOfAnswers += 1
         if sender.currentTitle == currentQuestion.answer {
+            
             setQuestionAndAnswers()
             countOfCorrectAnswers += 1
+            
+            if byTime {
+                gameTimer.invalidate()
+                
+                seconds = timeForAnswer
+                timerLabel.text = "\(Int(seconds))"
+                gameTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (_) in
+                    self.seconds -= 1
+                    if self.seconds < 0 {
+                        self.setQuestionAndAnswers()
+                        self.countOfTimerInvokerd += 1
+                        
+                        self.seconds = self.timeForAnswer
+                        self.timerLabel.text = "\(Int(self.seconds))"
+                    } else {
+                        self.timerLabel.text = "\(Int(self.seconds))"
+                    }
+                })
+            }
         }
     }
     
@@ -65,6 +96,9 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
             remainingQuestion.append((question, answer))
         }
         
+        progressBar.progress = 0.0
+        stepForProgressBar = 1.0 / Double(remainingQuestion.count)
+        
     }
     
     fileprivate func setAnswers(forQuestion question : (question: String, answer: String)) {
@@ -89,7 +123,11 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
     }
     
     fileprivate func finishQuiz() {
-        let alertController = UIAlertController(title: "Title", message: "End?", preferredStyle: .alert)
+        if byTime {
+            gameTimer.invalidate()
+        }
+        
+        let alertController = UIAlertController(title: "Title", message: "Count of answers: \(countOfAnswers), count of correct answers: \(countOfCorrectAnswers), count of timer was invoked: \(countOfTimerInvokerd)", preferredStyle: .alert)
         
         alertController.view.tintColor = #colorLiteral(red: 0.168627451, green: 0.2705882353, blue: 0.4392156863, alpha: 1)
         let subview = (alertController.view.subviews.first?.subviews.first?.subviews.first!)! as UIView
@@ -130,7 +168,8 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
     }
     
     fileprivate func updateProgressBar() {
-        progressBar.setProgress(1 / Float(remainingQuestion.count), animated: true)
+        progressBar.setProgress(progressBar.progress + Float(stepForProgressBar), animated: true)
+        print("Progress: \(progressBar.progress)")
     }
     
     
@@ -144,6 +183,28 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
         formQuestions()
         
         setQuestionAndAnswers()
+        
+        if byTime {
+            print("Starting seeking by time quiz")
+            timerLabel.isHidden = false
+            seconds = timeForAnswer
+            timerLabel.text = "\(Int(timeForAnswer))"
+            countOfTimerInvokerd += 1
+            gameTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (_) in
+                self.seconds -= 1
+                if self.seconds < 0 {
+                    self.setQuestionAndAnswers()
+                    self.countOfTimerInvokerd += 1
+                    
+                    self.seconds = self.timeForAnswer
+                    self.timerLabel.text = "\(Int(self.seconds))"
+                } else {
+                    self.timerLabel.text = "\(Int(self.seconds))"
+                }
+            })
+        } else {
+            print("Starting seeking quiz")
+        }
         
         // Do any additional setup after loading the view.
     }

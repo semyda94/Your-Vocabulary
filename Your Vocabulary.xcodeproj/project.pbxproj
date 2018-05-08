@@ -31,7 +31,7 @@
 		E750B9AE202415770033AA2B /* Definition+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E750B9A4202415770033AA2B /* Definition+CoreDataProperties.swift */; };
 		E750B9AF202415770033AA2B /* Example+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E750B9A5202415770033AA2B /* Example+CoreDataClass.swift */; };
 		E750B9B0202415770033AA2B /* Example+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E750B9A6202415770033AA2B /* Example+CoreDataProperties.swift */; };
-		E752843720A0531800A397C3 /* EdgeInsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E752843620A0531800A397C3 /* EdgeInsetLabel.swift */; };
+		E752843920A0766F00A397C3 /* enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E752843820A0766F00A397C3 /* enumerations.swift */; };
 		E7591EC32023BE5F00007057 /* WordFieldsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7591EC22023BE5F00007057 /* WordFieldsTableViewCell.swift */; };
 		E77280651FFDDEF6004DC8A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77280641FFDDEF6004DC8A3 /* AppDelegate.swift */; };
 		E772806A1FFDDEF6004DC8A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E77280681FFDDEF6004DC8A3 /* Main.storyboard */; };
@@ -111,7 +111,7 @@
 		E750B9A4202415770033AA2B /* Definition+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Definition+CoreDataProperties.swift"; path = "CoreDataObjects/Definition+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E750B9A5202415770033AA2B /* Example+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Example+CoreDataClass.swift"; path = "CoreDataObjects/Example+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E750B9A6202415770033AA2B /* Example+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Example+CoreDataProperties.swift"; path = "CoreDataObjects/Example+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		E752843620A0531800A397C3 /* EdgeInsetLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeInsetLabel.swift; sourceTree = "<group>"; };
+		E752843820A0766F00A397C3 /* enumerations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = enumerations.swift; path = ../../../../../../enumerations.swift; sourceTree = "<group>"; };
 		E7591EC22023BE5F00007057 /* WordFieldsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordFieldsTableViewCell.swift; sourceTree = "<group>"; };
 		E760EA18209691B00080F1E5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		E77280611FFDDEF6004DC8A3 /* Your Vocabulary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Your Vocabulary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -264,6 +264,7 @@
 		E77280631FFDDEF6004DC8A3 /* Your Vocabulary */ = {
 			isa = PBXGroup;
 			children = (
+				E752843820A0766F00A397C3 /* enumerations.swift */,
 				E7F04B6A2061252A000AF4BB /* publicDictionaries.swift */,
 				E7D43453205D3D3F00287A5F /* Localizable.strings */,
 				E7D4344E205D3D3E00287A5F /* InfoPlist.strings */,
@@ -280,7 +281,6 @@
 		E77280791FFDE0D6004DC8A3 /* Controlers */ = {
 			isa = PBXGroup;
 			children = (
-				E752843620A0531800A397C3 /* EdgeInsetLabel.swift */,
 				E7E520C1207B2BE800546735 /* YourVocabularyTabBarController.swift */,
 				E7C901C02059279E0076823C /* LanguageTableViewController.swift */,
 				E7C901BD20591A9B0076823C /* SettingsTableViewController.swift */,
@@ -507,6 +507,7 @@
 				E714DB872033E65E0082024E /* DictionaryTableViewCell.swift in Sources */,
 				E7C556452025255600CD5C3C /* WordAddFieldButtonTableViewCell.swift in Sources */,
 				E772806D1FFDDEF6004DC8A3 /* Your_Vocabulary.xcdatamodeld in Sources */,
+				E752843920A0766F00A397C3 /* enumerations.swift in Sources */,
 				E7E91B7920033C540066EC13 /* Word+CoreDataProperties.swift in Sources */,
 				E7A91669203E19EE006A5CDB /* QuizPropertiesViewController.swift in Sources */,
 				E73171F21FFE56B500615B88 /* WordViewController.swift in Sources */,
@@ -515,7 +516,6 @@
 				E7C901BE20591A9B0076823C /* SettingsTableViewController.swift in Sources */,
 				E7E91B7820033C540066EC13 /* Word+CoreDataClass.swift in Sources */,
 				E70793CA203B301800BF6712 /* TestInfo+CoreDataProperties.swift in Sources */,
-				E752843720A0531800A397C3 /* EdgeInsetLabel.swift in Sources */,
 				E750B9A8202415770033AA2B /* ExtraInfo+CoreDataProperties.swift in Sources */,
 				E7E25E3F2042C0B9009EFE87 /* QuizSpellingViewController.swift in Sources */,
 				E70793C9203B301800BF6712 /* TestInfo+CoreDataClass.swift in Sources */,

@@ -80,6 +80,7 @@
                         <segue destination="QWs-Ge-WNh" kind="show" identifier="startMatchingQuiz" id="M0K-Sf-69x"/>
                         <segue destination="lQn-hh-uMz" kind="show" identifier="startSpellingQuiz" id="hX4-Qs-rYV"/>
                         <segue destination="0Jx-UW-PHv" kind="presentation" identifier="showQuizProperties" id="B0z-Ds-axn"/>
+                        <segue destination="MF1-EY-6Sx" kind="show" identifier="startSeekingByTimeQuiz" id="U5Y-xP-EzA"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Krf-dS-DMU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -98,23 +99,23 @@
                                 <rect key="frame" x="0.0" y="116" width="375" height="552"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Ukh-xd-JsL">
-                                <rect key="frame" x="10" y="143" width="355" height="519"/>
+                                <rect key="frame" x="10" y="133" width="355" height="529"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="meo-kJ-P1o">
-                                        <rect key="frame" x="0.0" y="0.0" width="355" height="255.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="260.5"/>
                                         <color key="tintColor" red="0.16862745100000001" green="0.27058823529999998" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                         <color key="textColor" red="0.16862745100000001" green="0.27058823529999998" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="highlightedColor" red="0.16862745100000001" green="0.27058823529999998" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="TXd-MT-Y4E">
-                                        <rect key="frame" x="0.0" y="263.5" width="355" height="255.5"/>
+                                        <rect key="frame" x="0.0" y="268.5" width="355" height="260.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Mph-xn-2mT">
-                                                <rect key="frame" x="0.0" y="0.0" width="355" height="124"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="355" height="126.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x1S-un-yY5">
-                                                        <rect key="frame" x="0.0" y="0.0" width="173.5" height="124"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="173.5" height="126.5"/>
                                                         <inset key="titleEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                                         <state key="normal" title="1"/>
                                                         <connections>
@@ -122,7 +123,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bI8-EW-eDL">
-                                                        <rect key="frame" x="181.5" y="0.0" width="173.5" height="124"/>
+                                                        <rect key="frame" x="181.5" y="0.0" width="173.5" height="126.5"/>
                                                         <inset key="titleEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                                         <state key="normal" title="2"/>
                                                         <connections>
@@ -132,10 +133,10 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Cne-Wk-Hu7">
-                                                <rect key="frame" x="0.0" y="132" width="355" height="123.5"/>
+                                                <rect key="frame" x="0.0" y="134.5" width="355" height="126"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJw-QL-inG">
-                                                        <rect key="frame" x="0.0" y="0.0" width="173.5" height="123.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="173.5" height="126"/>
                                                         <inset key="titleEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                                         <state key="normal" title="3"/>
                                                         <connections>
@@ -143,7 +144,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oAs-Au-m25">
-                                                        <rect key="frame" x="181.5" y="0.0" width="173.5" height="123.5"/>
+                                                        <rect key="frame" x="181.5" y="0.0" width="173.5" height="126"/>
                                                         <inset key="titleEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                                         <state key="normal" title="4"/>
                                                         <connections>
@@ -156,10 +157,21 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.20000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="fm7-4g-cCi">
-                                <rect key="frame" x="32" y="131" width="311" height="2"/>
-                                <color key="progressTintColor" red="0.16862745100000001" green="0.27058823529999998" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </progressView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="uKH-64-37A">
+                                <rect key="frame" x="10" y="126" width="355" height="2"/>
+                                <subviews>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eow-DT-6L0">
+                                        <rect key="frame" x="0.0" y="-126" width="355" height="0.0"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <color key="textColor" red="0.16862745100000001" green="0.27058823529999998" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.20000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="fm7-4g-cCi">
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="2"/>
+                                        <color key="progressTintColor" red="0.16862745100000001" green="0.27058823529999998" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </progressView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -167,19 +179,20 @@
                             <constraint firstItem="ZjZ-dG-crr" firstAttribute="leading" secondItem="J2W-Nn-qN8" secondAttribute="leading" id="4vv-J4-hAb"/>
                             <constraint firstItem="J2W-Nn-qN8" firstAttribute="trailing" secondItem="Ukh-xd-JsL" secondAttribute="trailing" constant="10" id="9t6-GO-jNy"/>
                             <constraint firstItem="J2W-Nn-qN8" firstAttribute="bottom" secondItem="Ukh-xd-JsL" secondAttribute="bottom" constant="5" id="D0e-AD-wHg"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="fm7-4g-cCi" secondAttribute="trailing" constant="16" id="VMt-s4-EGE"/>
-                            <constraint firstItem="fm7-4g-cCi" firstAttribute="leading" secondItem="ItS-hE-M84" secondAttribute="leadingMargin" constant="16" id="W8n-DT-PpH"/>
+                            <constraint firstItem="J2W-Nn-qN8" firstAttribute="trailing" secondItem="uKH-64-37A" secondAttribute="trailing" constant="10" id="D5B-Aa-Gw2"/>
                             <constraint firstItem="J2W-Nn-qN8" firstAttribute="trailing" secondItem="ZjZ-dG-crr" secondAttribute="trailing" id="chT-lz-m2z"/>
+                            <constraint firstItem="uKH-64-37A" firstAttribute="top" secondItem="J2W-Nn-qN8" secondAttribute="top" constant="10" id="fP9-FT-COx"/>
                             <constraint firstItem="Ukh-xd-JsL" firstAttribute="leading" secondItem="J2W-Nn-qN8" secondAttribute="leading" constant="10" id="fPo-a4-1SX"/>
                             <constraint firstItem="ZjZ-dG-crr" firstAttribute="top" secondItem="J2W-Nn-qN8" secondAttribute="top" id="mx3-hb-WpF"/>
-                            <constraint firstItem="fm7-4g-cCi" firstAttribute="top" secondItem="J2W-Nn-qN8" secondAttribute="top" constant="15" id="n7m-rA-DAv"/>
-                            <constraint firstItem="Ukh-xd-JsL" firstAttribute="top" secondItem="fm7-4g-cCi" secondAttribute="bottom" constant="10" id="yfA-4s-PSS"/>
+                            <constraint firstItem="Ukh-xd-JsL" firstAttribute="top" secondItem="uKH-64-37A" secondAttribute="bottom" constant="5" id="tB5-97-Nmf"/>
+                            <constraint firstItem="uKH-64-37A" firstAttribute="leading" secondItem="ItS-hE-M84" secondAttribute="leading" constant="10" id="ydI-2p-gTm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="J2W-Nn-qN8"/>
                     </view>
                     <connections>
                         <outlet property="progressBar" destination="fm7-4g-cCi" id="NkS-Lf-sVe"/>
                         <outlet property="questionLabel" destination="meo-kJ-P1o" id="uwP-Pg-H4T"/>
+                        <outlet property="timerLabel" destination="eow-DT-6L0" id="vVI-vv-A2B"/>
                         <outletCollection property="answersButtons" destination="x1S-un-yY5" collectionClass="NSMutableArray" id="ufx-e1-wfC"/>
                         <outletCollection property="answersButtons" destination="bI8-EW-eDL" collectionClass="NSMutableArray" id="F0m-HX-Mch"/>
                         <outletCollection property="answersButtons" destination="lJw-QL-inG" collectionClass="NSMutableArray" id="BwE-bm-SGh"/>
@@ -190,7 +203,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wM2-Ub-nx8" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Elw-0b-WBh" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="460" y="1314"/>
+            <point key="canvasLocation" x="463" y="1346"/>
         </scene>
         <!--Quiz Matching View Controller-->
         <scene sceneID="65m-ee-enm">
@@ -354,7 +367,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cax-Ks-qPN" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="J1i-Cz-75z" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1150" y="1314"/>
+            <point key="canvasLocation" x="1150" y="1345"/>
         </scene>
         <!--Quiz Spelling View Controller-->
         <scene sceneID="CLO-mN-Ghc">
@@ -413,7 +426,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8xg-hf-W8b" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="WzQ-c0-5fl" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1849" y="1314"/>
+            <point key="canvasLocation" x="1847" y="1346"/>
         </scene>
         <!--Quizzes-->
         <scene sceneID="xFc-7V-neC">
@@ -549,4 +562,7 @@
         <image name="quiz_tb" width="32" height="32"/>
         <image name="quiz_tb_selected" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="U5Y-xP-EzA"/>
+    </inferredMetricsTieBreakers>
 </document>

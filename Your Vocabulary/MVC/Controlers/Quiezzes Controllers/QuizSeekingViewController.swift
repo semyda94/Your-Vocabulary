@@ -46,8 +46,9 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
         countOfAnswers += 1
         if sender.currentTitle == currentQuestion.answer {
             
-            setQuestionAndAnswers()
             countOfCorrectAnswers += 1
+            
+            setQuestionAndAnswers()
             
             if byTime {
                 gameTimer.invalidate()
@@ -127,7 +128,24 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
             gameTimer.invalidate()
         }
         
-        let alertController = UIAlertController(title: "Title", message: "Count of answers: \(countOfAnswers), count of correct answers: \(countOfCorrectAnswers), count of timer was invoked: \(countOfTimerInvokerd)", preferredStyle: .alert)
+        let grade = 1.0 / (Float(countOfAnswers + countOfTimerInvokerd) / Float(countOfCorrectAnswers))
+        var alertTitle : String!
+        var alertMessage : String!
+        
+        print("Grade \(grade * 100.0)%");
+        
+        if grade >= 0.90 {
+            alertTitle = NSLocalizedString("Excellent", comment: "Title for finish alert controller when user's grade above 90%")
+            alertMessage = NSLocalizedString("Excellent, your knowledge is great, keep adding new words and expand your vocabulary", comment: "Message for finish alert controller when user's grade above 90%")
+        } else if grade >= 0.75 {
+            alertTitle = NSLocalizedString("Good", comment: "Title for finish alert controller when user's grade above 75%")
+            alertMessage = NSLocalizedString("Your results are good enough, a little more practice and your knowledge will be excellent", comment: "Message for finish alert controller when user's grade above 75%")
+        } else {
+            alertTitle = NSLocalizedString("Keep going", comment: "Title for finish alert controller when user's grade under 75%")
+            alertMessage = NSLocalizedString("Continue to work in the same direction and your results will be improving with every attempt!", comment: "Message for finish alert controller when user's grade under 75%")
+        }
+        
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
         
         alertController.view.tintColor = #colorLiteral(red: 0.168627451, green: 0.2705882353, blue: 0.4392156863, alpha: 1)
         let subview = (alertController.view.subviews.first?.subviews.first?.subviews.first!)! as UIView

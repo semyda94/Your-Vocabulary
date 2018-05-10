@@ -81,6 +81,7 @@
                         <segue destination="lQn-hh-uMz" kind="show" identifier="startSpellingQuiz" id="hX4-Qs-rYV"/>
                         <segue destination="0Jx-UW-PHv" kind="presentation" identifier="showQuizProperties" id="B0z-Ds-axn"/>
                         <segue destination="MF1-EY-6Sx" kind="show" identifier="startSeekingByTimeQuiz" id="U5Y-xP-EzA"/>
+                        <segue destination="QWs-Ge-WNh" kind="show" identifier="startMatchingByTimeQuiz" id="na7-WR-M3U"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Krf-dS-DMU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -216,96 +217,90 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="JEu-Hu-RGq">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="IUP-mm-hUE">
-                                <rect key="frame" x="31" y="131" width="313" height="2"/>
-                                <color key="progressTintColor" red="0.16862745100000001" green="0.27058823529999998" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </progressView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Q2N-gI-HfC">
+                                <rect key="frame" x="10" y="126" width="355" height="2"/>
+                                <subviews>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FhH-ql-qr7">
+                                        <rect key="frame" x="0.0" y="-126" width="355" height="0.0"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <color key="textColor" red="0.16862745100000001" green="0.27058823529999998" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="IUP-mm-hUE">
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="2"/>
+                                        <color key="progressTintColor" red="0.16862745100000001" green="0.27058823529999998" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </progressView>
+                                </subviews>
+                            </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="dSa-mu-LzZ">
-                                <rect key="frame" x="15" y="148" width="345" height="504"/>
+                                <rect key="frame" x="15" y="138" width="345" height="514"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="8cp-th-l08">
-                                        <rect key="frame" x="0.0" y="0.0" width="168.5" height="504"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="168.5" height="514"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="chh-pL-7Kf">
-                                                <rect key="frame" x="0.0" y="0.0" width="168.5" height="94.5"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZqH-AC-bi9">
+                                                <rect key="frame" x="0.0" y="0.0" width="168.5" height="96.5"/>
                                                 <inset key="titleEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                                                <state key="normal">
-                                                    <attributedString key="attributedTitle">
-                                                        <fragment content="L1">
-                                                            <attributes>
-                                                                <font key="NSFont" metaFont="system" size="15"/>
-                                                            </attributes>
-                                                        </fragment>
-                                                    </attributedString>
-                                                </state>
+                                                <state key="normal" title="L1"/>
                                                 <connections>
-                                                    <action selector="answerButtonWasTapped:" destination="QWs-Ge-WNh" eventType="touchUpInside" id="HSS-aE-HJN"/>
+                                                    <action selector="answerButtonWasTapped:" destination="QWs-Ge-WNh" eventType="touchUpInside" id="G9O-Mx-uDN"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="puU-eL-dLz">
-                                                <rect key="frame" x="0.0" y="102.5" width="168.5" height="94.5"/>
+                                                <rect key="frame" x="0.0" y="104.5" width="168.5" height="96.5"/>
                                                 <inset key="titleEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                                 <state key="normal" title="L2"/>
                                                 <connections>
-                                                    <action selector="answerButtonWasTapped:" destination="QWs-Ge-WNh" eventType="touchUpInside" id="fFq-gl-6nM"/>
+                                                    <action selector="answerButtonWasTapped:" destination="QWs-Ge-WNh" eventType="touchUpInside" id="4ZD-fR-4AV"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OSh-SV-mSM">
-                                                <rect key="frame" x="0.0" y="205" width="168.5" height="94"/>
+                                                <rect key="frame" x="0.0" y="209" width="168.5" height="96"/>
                                                 <inset key="titleEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                                 <state key="normal" title="L3"/>
                                                 <connections>
-                                                    <action selector="answerButtonWasTapped:" destination="QWs-Ge-WNh" eventType="touchUpInside" id="gge-eK-PRt"/>
+                                                    <action selector="answerButtonWasTapped:" destination="QWs-Ge-WNh" eventType="touchUpInside" id="cil-5R-lL9"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3b0-rM-iLH">
-                                                <rect key="frame" x="0.0" y="307" width="168.5" height="94.5"/>
+                                                <rect key="frame" x="0.0" y="313" width="168.5" height="96.5"/>
                                                 <inset key="titleEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                                 <state key="normal" title="L4"/>
                                                 <connections>
-                                                    <action selector="answerButtonWasTapped:" destination="QWs-Ge-WNh" eventType="touchUpInside" id="2XC-zI-pYc"/>
+                                                    <action selector="answerButtonWasTapped:" destination="QWs-Ge-WNh" eventType="touchUpInside" id="hSS-O6-9J2"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WXm-fe-BBh">
-                                                <rect key="frame" x="0.0" y="409.5" width="168.5" height="94.5"/>
+                                                <rect key="frame" x="0.0" y="417.5" width="168.5" height="96.5"/>
                                                 <inset key="titleEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                                 <state key="normal" title="L5"/>
                                                 <connections>
-                                                    <action selector="answerButtonWasTapped:" destination="QWs-Ge-WNh" eventType="touchUpInside" id="kbc-hr-hfO"/>
+                                                    <action selector="answerButtonWasTapped:" destination="QWs-Ge-WNh" eventType="touchUpInside" id="7cM-S5-Aql"/>
                                                 </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="5aU-mf-4o9">
-                                        <rect key="frame" x="176.5" y="0.0" width="168.5" height="504"/>
+                                        <rect key="frame" x="176.5" y="0.0" width="168.5" height="514"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4rv-1D-X1l">
-                                                <rect key="frame" x="0.0" y="0.0" width="168.5" height="94.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="168.5" height="96.5"/>
                                                 <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="5"/>
                                                 <state key="normal" title="R1"/>
                                                 <connections>
                                                     <action selector="answerButtonWasTapped:" destination="QWs-Ge-WNh" eventType="touchUpInside" id="Kn5-6g-IAi"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cOR-fS-oOn">
-                                                <rect key="frame" x="0.0" y="102.5" width="168.5" height="94.5"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IPX-jH-pla">
+                                                <rect key="frame" x="0.0" y="104.5" width="168.5" height="96.5"/>
                                                 <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="5"/>
-                                                <state key="normal">
-                                                    <attributedString key="attributedTitle">
-                                                        <fragment content="R2">
-                                                            <attributes>
-                                                                <font key="NSFont" metaFont="system" size="15"/>
-                                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                            </attributes>
-                                                        </fragment>
-                                                    </attributedString>
-                                                </state>
+                                                <state key="normal" title="R2"/>
                                                 <connections>
-                                                    <action selector="answerButtonWasTapped:" destination="QWs-Ge-WNh" eventType="touchUpInside" id="jdk-jC-ljB"/>
+                                                    <action selector="answerButtonWasTapped:" destination="QWs-Ge-WNh" eventType="touchUpInside" id="qvR-w8-ZBu"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jcO-kA-cQM">
-                                                <rect key="frame" x="0.0" y="205" width="168.5" height="94"/>
+                                                <rect key="frame" x="0.0" y="209" width="168.5" height="96"/>
                                                 <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="5"/>
                                                 <state key="normal" title="R3"/>
                                                 <connections>
@@ -313,7 +308,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CIE-tR-bdw">
-                                                <rect key="frame" x="0.0" y="307" width="168.5" height="94.5"/>
+                                                <rect key="frame" x="0.0" y="313" width="168.5" height="96.5"/>
                                                 <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="5"/>
                                                 <state key="normal" title="R4"/>
                                                 <connections>
@@ -321,7 +316,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VSu-We-0qx">
-                                                <rect key="frame" x="0.0" y="409.5" width="168.5" height="94.5"/>
+                                                <rect key="frame" x="0.0" y="417.5" width="168.5" height="96.5"/>
                                                 <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="5"/>
                                                 <state key="normal" title="R5"/>
                                                 <connections>
@@ -335,15 +330,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="IUP-mm-hUE" firstAttribute="leading" secondItem="qem-i2-dq8" secondAttribute="leadingMargin" constant="15" id="I42-rW-REG"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="IUP-mm-hUE" secondAttribute="trailing" constant="15" id="IW5-Zl-vff"/>
-                            <constraint firstItem="dSa-mu-LzZ" firstAttribute="top" secondItem="IUP-mm-hUE" secondAttribute="bottom" constant="15" id="PxZ-hy-HYK"/>
                             <constraint firstItem="JEu-Hu-RGq" firstAttribute="leading" secondItem="rNf-wT-jqb" secondAttribute="leading" id="ccx-g6-UJx"/>
+                            <constraint firstItem="Q2N-gI-HfC" firstAttribute="top" secondItem="rNf-wT-jqb" secondAttribute="top" constant="10" id="e8p-OM-dA5"/>
                             <constraint firstItem="rNf-wT-jqb" firstAttribute="bottom" secondItem="dSa-mu-LzZ" secondAttribute="bottom" constant="15" id="eCi-DZ-OfK"/>
                             <constraint firstItem="dSa-mu-LzZ" firstAttribute="leading" secondItem="rNf-wT-jqb" secondAttribute="leading" constant="15" id="f5c-Ag-02G"/>
+                            <constraint firstItem="dSa-mu-LzZ" firstAttribute="top" secondItem="Q2N-gI-HfC" secondAttribute="bottom" constant="10" id="k0C-Q8-NH7"/>
                             <constraint firstItem="JEu-Hu-RGq" firstAttribute="top" secondItem="qem-i2-dq8" secondAttribute="top" id="kKg-FK-YIu"/>
                             <constraint firstItem="rNf-wT-jqb" firstAttribute="bottom" secondItem="JEu-Hu-RGq" secondAttribute="bottom" id="kgm-87-I8y"/>
-                            <constraint firstItem="IUP-mm-hUE" firstAttribute="top" secondItem="rNf-wT-jqb" secondAttribute="top" constant="15" id="ndX-fO-CKb"/>
+                            <constraint firstItem="Q2N-gI-HfC" firstAttribute="leading" secondItem="rNf-wT-jqb" secondAttribute="leading" constant="10" id="nA1-r3-WTC"/>
+                            <constraint firstItem="rNf-wT-jqb" firstAttribute="trailing" secondItem="Q2N-gI-HfC" secondAttribute="trailing" constant="10" id="uay-lZ-RYD"/>
                             <constraint firstItem="JEu-Hu-RGq" firstAttribute="trailing" secondItem="rNf-wT-jqb" secondAttribute="trailing" id="wvr-ow-aHu"/>
                             <constraint firstItem="rNf-wT-jqb" firstAttribute="trailing" secondItem="dSa-mu-LzZ" secondAttribute="trailing" constant="15" id="zUY-aW-QVc"/>
                         </constraints>
@@ -351,16 +346,17 @@
                     </view>
                     <connections>
                         <outlet property="progressBar" destination="IUP-mm-hUE" id="zDD-x8-XSV"/>
-                        <outletCollection property="leftButtons" destination="chh-pL-7Kf" collectionClass="NSMutableArray" id="NGX-ci-2MA"/>
-                        <outletCollection property="leftButtons" destination="puU-eL-dLz" collectionClass="NSMutableArray" id="3W2-lE-uaP"/>
-                        <outletCollection property="leftButtons" destination="OSh-SV-mSM" collectionClass="NSMutableArray" id="fFQ-zO-JqR"/>
-                        <outletCollection property="leftButtons" destination="3b0-rM-iLH" collectionClass="NSMutableArray" id="avw-hh-J8M"/>
-                        <outletCollection property="leftButtons" destination="WXm-fe-BBh" collectionClass="NSMutableArray" id="Dsn-y7-E5O"/>
-                        <outletCollection property="rightButtons" destination="4rv-1D-X1l" collectionClass="NSMutableArray" id="F2O-lC-zPB"/>
-                        <outletCollection property="rightButtons" destination="cOR-fS-oOn" collectionClass="NSMutableArray" id="kMC-b5-rbW"/>
-                        <outletCollection property="rightButtons" destination="jcO-kA-cQM" collectionClass="NSMutableArray" id="Ozx-zB-F2t"/>
-                        <outletCollection property="rightButtons" destination="CIE-tR-bdw" collectionClass="NSMutableArray" id="Vhp-A8-ITR"/>
-                        <outletCollection property="rightButtons" destination="VSu-We-0qx" collectionClass="NSMutableArray" id="lsb-ob-Ffd"/>
+                        <outlet property="timerLabel" destination="FhH-ql-qr7" id="R82-l2-TzC"/>
+                        <outletCollection property="leftButtons" destination="ZqH-AC-bi9" collectionClass="NSMutableArray" id="MHA-sC-T43"/>
+                        <outletCollection property="leftButtons" destination="puU-eL-dLz" collectionClass="NSMutableArray" id="hSO-IC-73J"/>
+                        <outletCollection property="leftButtons" destination="OSh-SV-mSM" collectionClass="NSMutableArray" id="f3w-ml-C6K"/>
+                        <outletCollection property="leftButtons" destination="3b0-rM-iLH" collectionClass="NSMutableArray" id="26a-7w-ndX"/>
+                        <outletCollection property="leftButtons" destination="WXm-fe-BBh" collectionClass="NSMutableArray" id="Qq7-vG-nCg"/>
+                        <outletCollection property="rightButtons" destination="4rv-1D-X1l" collectionClass="NSMutableArray" id="3v7-GP-DPh"/>
+                        <outletCollection property="rightButtons" destination="IPX-jH-pla" collectionClass="NSMutableArray" id="ii1-if-YEe"/>
+                        <outletCollection property="rightButtons" destination="jcO-kA-cQM" collectionClass="NSMutableArray" id="7xY-9s-Dva"/>
+                        <outletCollection property="rightButtons" destination="CIE-tR-bdw" collectionClass="NSMutableArray" id="lV9-lK-gq3"/>
+                        <outletCollection property="rightButtons" destination="VSu-We-0qx" collectionClass="NSMutableArray" id="Vw6-2q-tkJ"/>
                         <segue destination="J1i-Cz-75z" kind="unwind" identifier="unwindFinishMatchingQuiz" unwindAction="finishQuizWithSegue:" id="UiX-NS-NGd"/>
                     </connections>
                 </viewController>
@@ -563,6 +559,7 @@
         <image name="quiz_tb_selected" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="na7-WR-M3U"/>
         <segue reference="U5Y-xP-EzA"/>
     </inferredMetricsTieBreakers>
 </document>

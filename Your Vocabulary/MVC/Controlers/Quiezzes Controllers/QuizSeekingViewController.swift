@@ -20,10 +20,13 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
     fileprivate var wholeAnswers = [String]()
     fileprivate var currentAnswers = [String]()
     fileprivate var roundTimer : Timer!
-    fileprivate var gameTimer : Timer!
     
     fileprivate var stepForProgressBar = 0.0
-    fileprivate var seconds = 0.0
+    fileprivate var seconds = 0.0 {
+        didSet {
+            timerLabel.text = "\(Int(seconds))"
+        }
+    }
     
     var timeForAnswer = 5.0
     
@@ -51,20 +54,17 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
             setQuestionAndAnswers()
             
             if byTime {
-                gameTimer.invalidate()
+                roundTimer.invalidate()
                 
                 seconds = timeForAnswer
-                timerLabel.text = "\(Int(seconds))"
-                gameTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (_) in
+                roundTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (_) in
                     self.seconds -= 1
                     if self.seconds < 0 {
                         self.setQuestionAndAnswers()
                         self.countOfTimerInvokerd += 1
                         
                         self.seconds = self.timeForAnswer
-                        self.timerLabel.text = "\(Int(self.seconds))"
-                    } else {
-                        self.timerLabel.text = "\(Int(self.seconds))"
+
                     }
                 })
             }
@@ -91,10 +91,12 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
         guard let parametrs = chosenParametrs, let words = parametrs.dictionary.words?.array as? [Word] else { return }
         
         for word in words {
-            guard let question = getElement(baseOn: parametrs.questionType, forWord: word), let answer = getElement(baseOn: parametrs.answerType, forWord: word) else { continue }
+            if !word.isLearned {
+                guard let question = getElement(baseOn: parametrs.questionType, forWord: word), let answer = getElement(baseOn: parametrs.answerType, forWord: word) else { continue }
             
-            wholeAnswers.append(answer)
-            remainingQuestion.append((question, answer))
+                wholeAnswers.append(answer)
+                remainingQuestion.append((question, answer))
+            }
         }
         
         progressBar.progress = 0.0
@@ -125,7 +127,7 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
     
     fileprivate func finishQuiz() {
         if byTime {
-            gameTimer.invalidate()
+            roundTimer.invalidate()
         }
         
         let grade = 1.0 / (Float(countOfAnswers + countOfTimerInvokerd) / Float(countOfCorrectAnswers))
@@ -206,18 +208,14 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
             print("Starting seeking by time quiz")
             timerLabel.isHidden = false
             seconds = timeForAnswer
-            timerLabel.text = "\(Int(timeForAnswer))"
             countOfTimerInvokerd += 1
-            gameTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (_) in
+            roundTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (_) in
                 self.seconds -= 1
                 if self.seconds < 0 {
                     self.setQuestionAndAnswers()
                     self.countOfTimerInvokerd += 1
                     
                     self.seconds = self.timeForAnswer
-                    self.timerLabel.text = "\(Int(self.seconds))"
-                } else {
-                    self.timerLabel.text = "\(Int(self.seconds))"
                 }
             })
         } else {

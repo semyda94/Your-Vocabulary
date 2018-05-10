@@ -21,6 +21,15 @@ class QuizMatchingViewController: UIViewController, QuizzesMethods {
     
     fileprivate var answer: (question: String?, answer: String?)
     
+    var byTime = false
+    var roundTimer : Timer!
+    var timeForAnswer = 15.0
+    fileprivate var seconds = 0.0 {
+        didSet {
+            timerLabel.text = "\(Int(seconds))"
+        }
+    }
+    
     var countOfAnswers = 0
     var countOfCorrectAnswers = 0
     let dateOfQuiz = Date()
@@ -28,10 +37,11 @@ class QuizMatchingViewController: UIViewController, QuizzesMethods {
     
     // MARK: - Outlets
     
+    @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var progressBar: UIProgressView!
+    
     @IBOutlet var leftButtons: [UIButton]!
     @IBOutlet var rightButtons: [UIButton]!
-    
-    @IBOutlet weak var progressBar: UIProgressView!
     
     // MARK: - Actions
     
@@ -77,6 +87,21 @@ class QuizMatchingViewController: UIViewController, QuizzesMethods {
             setButtonsLabels()
             
             updateProgressBarProgress()
+            if byTime {
+                roundTimer.invalidate()
+                
+                seconds = timeForAnswer
+                roundTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (_) in
+                    self.seconds -= 1
+                    if self.seconds < 0 {
+                        self.setButtonsLabels()
+                        
+                        self.seconds = self.timeForAnswer
+                    }
+                })
+            }
+            
+            
         }
     }
     
@@ -107,10 +132,11 @@ class QuizMatchingViewController: UIViewController, QuizzesMethods {
         guard let parametrs = chosenParametrs, let words = parametrs.dictionary.words?.array as? [Word] else { return }
         
         for word in words {
-            guard let question = getElement(baseOn: parametrs.questionType, forWord: word), let answer = getElement(baseOn: parametrs.answerType, forWord: word) else { continue }
+            if !word.isLearned {
+                guard let question = getElement(baseOn: parametrs.questionType, forWord: word), let answer = getElement(baseOn: parametrs.answerType, forWord: word) else { continue }
             
-            questionPairs.append((question, answer))
-            
+                questionPairs.append((question, answer))
+            }
         }
     }
     
@@ -121,6 +147,11 @@ class QuizMatchingViewController: UIViewController, QuizzesMethods {
     // game set up
     
     fileprivate func setQuestions() {
+        if questionPairs.count <= 1 {
+            finishQuiz()
+            return
+        }
+        
         currentPairs.removeAll()
     
         var numberOfEnableButtons = 0
@@ -145,12 +176,12 @@ class QuizMatchingViewController: UIViewController, QuizzesMethods {
             
         }
         
-        if  numberOfEnableButtons < leftButtons.count {
-            for i in (numberOfEnableButtons...leftButtons.count - 1).reversed() {
-                leftButtons[i].isHidden = true
-                rightButtons[i].isHidden = true
-            }
+        for i in numberOfEnableButtons..<leftButtons.count {
+            leftButtons[i].isHidden = true
+            rightButtons[i].isHidden = true
         }
+        
+
     }
     
     fileprivate func setButtonsLabels() {
@@ -161,7 +192,7 @@ class QuizMatchingViewController: UIViewController, QuizzesMethods {
         
         for i in 0..<currentPairs.count {
             let randomQuestionPosition = copyCurrentPairs.count.getRandom()
-            leftButtons[i].setTitle(copyCurrentPairs[randomQuestionPosition].question, for: .normal)
+            leftButtons[i].setTitle(copyCurrentPairs[randomQuestionPosition].question, for: leftButtons[i].state)
             
             copyCurrentPairs.remove(at: randomQuestionPosition)
         }
@@ -198,8 +229,28 @@ class QuizMatchingViewController: UIViewController, QuizzesMethods {
     }
     
     fileprivate func finishQuiz() {
+        if byTime {
+            roundTimer.invalidate()
+        }
         
-        let alertController = UIAlertController(title: "Done", message: "Finish quiz?", preferredStyle: .alert)
+        let grade = 1.0 / (Float(countOfAnswers) / Float(countOfCorrectAnswers))
+        var alertTitle : String!
+        var alertMessage : String!
+        
+        print("Grade \(grade * 100.0)%");
+        
+        if grade >= 0.90 {
+            alertTitle = NSLocalizedString("Excellent", comment: "Title for finish alert controller when user's grade above 90%")
+            alertMessage = NSLocalizedString("Excellent, your knowledge is great, keep adding new words and expand your vocabulary", comment: "Message for finish alert controller when user's grade above 90%")
+        } else if grade >= 0.75 {
+            alertTitle = NSLocalizedString("Good", comment: "Title for finish alert controller when user's grade above 75%")
+            alertMessage = NSLocalizedString("Your results are good enough, a little more practice and your knowledge will be excellent", comment: "Message for finish alert controller when user's grade above 75%")
+        } else {
+            alertTitle = NSLocalizedString("Keep going", comment: "Title for finish alert controller when user's grade under 75%")
+            alertMessage = NSLocalizedString("Continue to work in the same direction and your results will be improving with every attempt!", comment: "Message for finish alert controller when user's grade under 75%")
+        }
+        
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
         
         alertController.view.tintColor = #colorLiteral(red: 0.168627451, green: 0.2705882353, blue: 0.4392156863, alpha: 1)
         let subview = (alertController.view.subviews.first?.subviews.first?.subviews.first!)! as UIView
@@ -233,6 +284,19 @@ class QuizMatchingViewController: UIViewController, QuizzesMethods {
         
         setButtonsLabels()
         
+        if byTime {
+            timerLabel.isHidden = false
+            seconds = timeForAnswer
+            roundTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (_) in
+                self.seconds -= 1
+                if self.seconds < 0 {
+                    self.setButtonsLabels()
+                    
+                    self.seconds = self.timeForAnswer
+                }
+            })
+            
+        }
         // Do any additional setup after loading the view.
     }
 

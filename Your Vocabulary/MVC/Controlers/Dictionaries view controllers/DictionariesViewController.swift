@@ -137,7 +137,6 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
             newDictionary.isDefinition = sourceViewController.definitionCheckBox.on
             newDictionary.isExtraInfo = sourceViewController.extraInfoCheckBox.on
             newDictionary.isSynonym = sourceViewController.synonymCheckBox.on
-            print("examples: \(sourceViewController.exampleCheckBox.on)")
             newDictionary.isExample = sourceViewController.exampleCheckBox.on
             
             try! realm.write {
@@ -163,7 +162,6 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
                 dictionary.isExtraInfo = sourceViewController.extraInfoCheckBox.on
                 dictionary.isSynonym = sourceViewController.synonymCheckBox.on
                 dictionary.isExample = sourceViewController.exampleCheckBox.on
-                print("examples: \(sourceViewController.exampleCheckBox.on)")
                 
                 dictionariesTableView.reloadData()
             }

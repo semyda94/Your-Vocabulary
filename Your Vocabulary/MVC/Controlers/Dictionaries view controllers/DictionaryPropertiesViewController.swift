@@ -68,7 +68,7 @@ class DictionaryPropertiesViewController: UIViewController, UITextFieldDelegate 
             definitionCheckBox.on = (dictionary?.isDefinition)!
             extraInfoCheckBox.on = (dictionary?.isExtraInfo)!
             synonymCheckBox.on = (dictionary?.isSynonym)!
-            extraInfoCheckBox.on = (dictionary?.isExample)!
+            exampleCheckBox.on = (dictionary?.isExample)!
             
             newDictionary = false
             

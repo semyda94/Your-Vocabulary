@@ -134,8 +134,6 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
         var alertTitle : String!
         var alertMessage : String!
         
-        print("Grade \(grade * 100.0)%");
-        
         if grade >= 0.90 {
             alertTitle = NSLocalizedString("Excellent", comment: "Title for finish alert controller when user's grade above 90%")
             alertMessage = NSLocalizedString("Excellent, your knowledge is great, keep adding new words and expand your vocabulary", comment: "Message for finish alert controller when user's grade above 90%")
@@ -189,7 +187,6 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
     
     fileprivate func updateProgressBar() {
         progressBar.setProgress(progressBar.progress + Float(stepForProgressBar), animated: true)
-        print("Progress: \(progressBar.progress)")
     }
     
     
@@ -205,7 +202,6 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
         setQuestionAndAnswers()
         
         if byTime {
-            print("Starting seeking by time quiz")
             timerLabel.isHidden = false
             seconds = timeForAnswer
             countOfTimerInvokerd += 1
@@ -218,8 +214,6 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
                     self.seconds = self.timeForAnswer
                 }
             })
-        } else {
-            print("Starting seeking quiz")
         }
         
         // Do any additional setup after loading the view.

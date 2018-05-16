@@ -91,7 +91,10 @@ class SettingsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view:UIView, forSection: Int) {
         if let headerTitle = view as? UITableViewHeaderFooterView {
-            headerTitle.textLabel?.textColor = #colorLiteral(red: 1, green: 0.831372549, blue: 0.4588235294, alpha: 1)
+            headerTitle.textLabel?.textColor = #colorLiteral(red: 0.168627451, green: 0.2705882353, blue: 0.4392156863, alpha: 1)
+            headerTitle.textLabel?.textAlignment = .center
+            headerTitle.textLabel?.font = UIFont.boldSystemFont(ofSize: 17)
+            headerTitle.backgroundColor = #colorLiteral(red: 0.5921568627, green: 0.737254902, blue: 0.7058823529, alpha: 1)
         }
     }
     
@@ -100,7 +103,22 @@ class SettingsTableViewController: UITableViewController {
         case 1:
             switch indexPath.row {
             case settingsCells["Export"]!.row :
-                print(NSPersistentContainer.defaultDirectoryURL())
+                guard let context = managedContext else { return }
+                
+                var dictionaries : [Dictionary]
+                
+                let request = NSFetchRequest<Dictionary>(entityName: "Dictionary")
+                
+                do {
+                    let result = try context.fetch(request)
+                    
+                    dictionaries = result
+                    
+                } catch let error as NSError {
+                    print("Unresolved error during fetching dictionary for export: \(error), \(error.userInfo)")
+                }
+                
+                
             case settingsCells["Reset"]!.row:
                 let alert = UIAlertController(title: "Reseting database", message: "Are you sure you want to delete all data?", preferredStyle: .alert)
                 

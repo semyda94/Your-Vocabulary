@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import RealmSwift
 import CoreData
 
 class DictionariesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // MARK: - Properties
+    
+    let realm = try! Realm()
     
     var managedContext: NSManagedObjectContext? {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return nil }
@@ -19,12 +22,15 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
         return appDelegate.persistentContainer.viewContext
     }
     
+    fileprivate var dictionaries : Results<RealmDictionary>?
     
+    /*
     fileprivate var dictionaries = [Dictionary]() {
         didSet {
             dictionaries.sort { $0.name! < $1.name! }
         }
     }
+    */
     
     fileprivate var blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
     fileprivate lazy var blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -38,7 +44,7 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
     // MARK: - Methods
     
     fileprivate func addDictionaryAtTable(withName name : String, isTranslation translation : Bool, isDefinition definition : Bool, isExtraInfo extraInfo : Bool, isSynonym synonym : Bool, isExample example : Bool) {
-        guard let context = managedContext, let entity = NSEntityDescription.entity(forEntityName: "Dictionary", in: context) else { return }
+        /*guard let context = managedContext, let entity = NSEntityDescription.entity(forEntityName: "Dictionary", in: context) else { return }
         
         let newDictionary = Dictionary(entity: entity, insertInto: context)
         
@@ -56,9 +62,12 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
         } catch let error as NSError {
             print("Unresolved error during adding new dictionary \(error), \(error.userInfo)")
         }
+ */
     }
     
     fileprivate func gettingListOfDictionaries(){
+    /*
+        
         guard let context = managedContext else { return }
         
         let request = NSFetchRequest<Dictionary>(entityName: "Dictionary")
@@ -71,10 +80,11 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
         } catch let error as NSError {
             print("Unresolved error during fetching dictionary: \(error), \(error.userInfo)")
         }
+ */
     }
     
     fileprivate func deletingDictionaryFromTable(at index:Int){
-        guard let context = managedContext else { return }
+       /* guard let context = managedContext else { return }
         
         let dictionaryToRemove = dictionaries[index]
         
@@ -87,6 +97,7 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
         } catch let error as NSError {
             print("Unresolved error during deleting dictionary \(error), \(error.userInfo)")
         }
+ */
     }
     
     // MARK: - Outlets
@@ -109,7 +120,7 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     @IBAction func saveButtonWasTapped(segue: UIStoryboardSegue){
-        
+       
         func getDictionryNameByField(_ field: UITextField ) -> String{
             guard let name = field.text, !name.isEmpty else {
                 return NSLocalizedString("Unknown", comment: "Dictionary without name")
@@ -170,7 +181,6 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
             }
         }
         
-        
     }
     
     // MARK: - View Life Cycle
@@ -180,7 +190,9 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
         
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        gettingListOfDictionaries()
+       //gettingListOfDictionaries()
+        
+        dictionaries = realm.objects(RealmDictionary.self)
         
         self.dictionariesTableView.rowHeight = 60.0
         
@@ -206,6 +218,16 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let dictionaries = dictionaries else {
+            nonDictionaryStack.isHidden = false
+            UIView.animate(withDuration: 2) {
+                self.nonDictionaryStack.alpha = 1
+                tableView.alpha = 0;
+            }
+            tableView.isHidden = true
+            return 0
+        }
+        
         if (dictionaries.count <= 0) {
             nonDictionaryStack.isHidden = false
             UIView.animate(withDuration: 2) {
@@ -227,6 +249,8 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DictionaryCell", for: indexPath) as! DictionaryTableViewCell
         
+        guard let dictionaries = dictionaries else { return cell }
+        
         cell.dictionary = dictionaries[indexPath.row]
         
         return cell
@@ -246,7 +270,6 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let edit = UITableViewRowAction(style: .normal, title: NSLocalizedString("Edit", comment: "Edit dictionary table view edit action") ) { (action, index) in
-            guard self.dictionaries[index.row].name != nil else { return }
             
             self.performSegue(withIdentifier: "showDictionaryProperties", sender: self.dictionariesTableView.cellForRow(at: index))
         }
@@ -272,9 +295,9 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
             
             print ("destination correct")
             
-            guard let cell = sender as? DictionaryTableViewCell, let indexPath = dictionariesTableView.indexPath(for: cell) else { return }
+            guard let cell = sender as? DictionaryTableViewCell, let indexPath = dictionariesTableView.indexPath(for: cell), let dictionaries = dictionaries else { return }
             
-            wvc.currentDictionary = dictionaries[indexPath.row]
+            //wvc.currentDictionary = dictionaries[indexPath.row]
             
             print("done segue")
         case "newDictionaryProperties"? :
@@ -288,7 +311,7 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
             guard let cell = sender as? UITableViewCell, let indexPath = dictionariesTableView.indexPath(for: cell) else { return }
             
             dpvc.modalPresentationStyle = .overCurrentContext
-            dpvc.dictionary = dictionaries[indexPath.row]
+            //dpvc.dictionary = dictionaries[indexPath.row]
             
         default:
             break

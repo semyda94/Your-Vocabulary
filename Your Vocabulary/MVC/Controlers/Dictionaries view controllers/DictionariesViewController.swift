@@ -84,20 +84,15 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     fileprivate func deletingDictionaryFromTable(at index:Int){
-       /* guard let context = managedContext else { return }
+        
+        guard let dictionaries = dictionaries else { return }
         
         let dictionaryToRemove = dictionaries[index]
         
-        context.delete(dictionaryToRemove)
-        
-        do {
-            try context.save()
-            dictionaries.remove(at: index)
+        try! realm.write {
+            realm.delete(dictionaryToRemove)
             dictionariesTableView.reloadData()
-        } catch let error as NSError {
-            print("Unresolved error during deleting dictionary \(error), \(error.userInfo)")
         }
- */
     }
     
     // MARK: - Outlets
@@ -131,53 +126,46 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
         
         guard let sourceViewController = segue.source as? DictionaryPropertiesViewController else { return }
         
-        guard let context = managedContext else { return }
-        
         if sourceViewController.newDictionary {
-            guard let entity = NSEntityDescription.entity(forEntityName: "Dictionary", in: context) else { return }
-            let newDictionary = Dictionary(entity: entity, insertInto: context)
+            let newDictionary = RealmDictionary()
             
             newDictionary.name = getDictionryNameByField(sourceViewController.dictionaryNameTextField)
-            newDictionary.dateOfCreation = NSDate()
-            newDictionary.dateOfLastChanges = NSDate()
-            newDictionary.numberOfWords = 0
-            newDictionary.numberofLearned = 0
+            newDictionary.dateOfCreation = Date()
+            newDictionary.dateOfLastChanges = newDictionary.dateOfCreation
+            newDictionary.numberOfLearnedWords = 0
             newDictionary.isTranslation = sourceViewController.translationCheckBox.on
             newDictionary.isDefinition = sourceViewController.definitionCheckBox.on
             newDictionary.isExtraInfo = sourceViewController.extraInfoCheckBox.on
             newDictionary.isSynonym = sourceViewController.synonymCheckBox.on
+            print("examples: \(sourceViewController.exampleCheckBox.on)")
             newDictionary.isExample = sourceViewController.exampleCheckBox.on
             
-            do {
-                try context.save()
-                dictionaries += [newDictionary]
-                dictionariesTableView.reloadData()
-            } catch let error as NSError {
-                print("Unresolved error during creating dictionary \(error), \(error.userInfo)")
+            try! realm.write {
+                realm.add(newDictionary)
             }
+            
+            dictionariesTableView.reloadData()
             
         } else {
             
-            guard let dictionary = sourceViewController.dictionary else { return }
+           guard let dictionary = sourceViewController.dictionary else { return }
             
-            if let name = sourceViewController.dictionaryNameTextField.text {
-                dictionary.name = name
-            } else {
-                dictionary.name = NSLocalizedString("Unknown", comment: "Dictionary without name")
-            }
-            
-            dictionary.dateOfLastChanges = NSDate()
-            dictionary.isTranslation = sourceViewController.translationCheckBox.on
-            dictionary.isDefinition = sourceViewController.definitionCheckBox.on
-            dictionary.isExtraInfo = sourceViewController.extraInfoCheckBox.on
-            dictionary.isSynonym = sourceViewController.synonymCheckBox.on
-            dictionary.isExample = sourceViewController.exampleCheckBox.on
-            
-            do {
-                try context.save()
+            try! realm.write {
+                if let name = sourceViewController.dictionaryNameTextField.text {
+                    dictionary.name = name
+                } else {
+                    dictionary.name = NSLocalizedString("Unknown", comment: "Dictionary without name")
+                }
+                
+                dictionary.dateOfLastChanges = Date()
+                dictionary.isTranslation = sourceViewController.translationCheckBox.on
+                dictionary.isDefinition = sourceViewController.definitionCheckBox.on
+                dictionary.isExtraInfo = sourceViewController.extraInfoCheckBox.on
+                dictionary.isSynonym = sourceViewController.synonymCheckBox.on
+                dictionary.isExample = sourceViewController.exampleCheckBox.on
+                print("examples: \(sourceViewController.exampleCheckBox.on)")
+                
                 dictionariesTableView.reloadData()
-            } catch let error as NSError {
-                print("Unresolved error during creating dictionary \(error), \(error.userInfo)")
             }
         }
         
@@ -192,7 +180,6 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
         
        //gettingListOfDictionaries()
         
-        dictionaries = realm.objects(RealmDictionary.self)
         
         self.dictionariesTableView.rowHeight = 60.0
         
@@ -203,7 +190,8 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        gettingListOfDictionaries()
+        dictionaries = realm.objects(RealmDictionary.self)
+        print(dictionaries)
     }
     
     override func didReceiveMemoryWarning() {
@@ -311,7 +299,7 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
             guard let cell = sender as? UITableViewCell, let indexPath = dictionariesTableView.indexPath(for: cell) else { return }
             
             dpvc.modalPresentationStyle = .overCurrentContext
-            //dpvc.dictionary = dictionaries[indexPath.row]
+            dpvc.dictionary = dictionaries?[indexPath.row]
             
         default:
             break

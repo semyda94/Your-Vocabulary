@@ -29,7 +29,7 @@ class DictionaryPropertiesViewController: UIViewController, UITextFieldDelegate 
     // MARK: - Propeties
 
     var newDictionary = true
-    var dictionary: Dictionary?
+    var dictionary: RealmDictionary?
     
     // MARK: - Functions
     

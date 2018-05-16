@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 import CoreData
 
 @UIApplicationMain
@@ -21,7 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: #colorLiteral(red: 1, green: 0.831372549, blue: 0.4588235294, alpha: 1)], for: .selected)
         */
+        
         return true
+        
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -39,6 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
+        
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 

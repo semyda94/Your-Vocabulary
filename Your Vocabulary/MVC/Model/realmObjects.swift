@@ -16,11 +16,11 @@ class RealmWord: Object {
     //Properties content
     @objc dynamic var word = NSLocalizedString("Unknown", comment: "Name of word during init")
     
-    let translations = List<String>()
-    let definitions = List<String>()
-    let extraInfos = List<String>()
-    let synonyms = List<String>()
-    let examples = List<String>()
+    let translations = List<String?>()
+    let definitions = List<String?>()
+    let extraInfos = List<String?>()
+    let synonyms = List<String?>()
+    let examples = List<String?>()
     
     //Dates
     @objc dynamic var dateOfCreation = Date()
@@ -30,6 +30,8 @@ class RealmWord: Object {
 
 class RealmDictionary: Object {
     @objc dynamic var name = NSLocalizedString("Unknown", comment: "Name of dictionary during init")
+    
+    let words = List<RealmWord>()
     @objc dynamic var numberOfLearnedWords = 0
     
     // Dates

@@ -7,44 +7,38 @@
 //
 
 import UIKit
+import RealmSwift
 import CoreData
 
 class WordTableViewCell: UITableViewCell {
 
     // MARK: - Properties
     
-    var currentWord: Word? {
+    var currentWord: RealmWord? {
         didSet {
-            guard let w = currentWord else { return }
+            guard let currentWord = currentWord else { return }
             
-            wordLabel.text = w.word
-            learnedCheckBox.on = w.isLearned
+            wordLabel.text = currentWord.word
+            learnedCheckBox.on = currentWord.isLearned
             
-            if let definition =  w.definitions?.allObjects as? [Definition] {
-                for d in definition {
-                    guard let text = d.text else { break }
-                    descriptionLabel.text = "\t \(text)"
-                    return
-                }
+            for translation in currentWord.translations {
+                guard let text = translation else { break }
+                descriptionLabel.text = "\t \(text)"
+                return
             }
             
-            if let translations = w.translations?.allObjects as? [Translation] {
-                print("Got array with translation")
-                for t in translations {
-                    guard let text = t.text else { print("translation doesn't have text"); break }
-                    descriptionLabel.text = text
-                    return
-                }
+            for definition in currentWord.definitions {
+                guard let text = definition else { break }
+                descriptionLabel.text = "\t \(text)"
+                return
             }
             
         }
     }
     
-    var managetContext: NSManagedObjectContext? {
-        guard  let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return nil }
-        
-        return appDelegate.persistentContainer.viewContext
-    }
+    var currentDictionary: RealmDictionary?
+    
+    let realm = try! Realm()
  
     
     // MARK: - Outlets
@@ -56,26 +50,17 @@ class WordTableViewCell: UITableViewCell {
     // MARK: - IBActions
     
     @IBAction func wasTappedLearnedMark(_ sender: BEMCheckBox) {
-        guard let context = managetContext else { return }
-        let word = context.object(with: currentWord!.objectID) as! Word
+       
+        guard let currentWord = currentWord else { return }
 
-        word.isLearned = sender.on
-        if word.isLearned {
-            word.dictionary?.numberofLearned += 1
-        } else {
-            word.dictionary?.numberofLearned -= 1
+        try! realm.write {
+            currentWord.isLearned = sender.on
+            if currentWord.isLearned {
+                currentDictionary?.numberOfLearnedWords += 1
+            } else {
+                currentDictionary?.numberOfLearnedWords -= 1
+            }
         }
-        print("learned mark for word \(word.word!) was changed to \(word.isLearned)")
-        /*childEntity.dictionary?.numberofLearned = sender.on ? childEntity.dictionary!.numberofLearned + 1 : childEntity.dictionary!.numberofLearned - 1
-         */
-        
-        do {
-            try context.save()
-        } catch let error as NSError {
-            print("Unresolved error during updating learned mark status \(error), \(error.userInfo)")
-        }
-        
-
     }
     
     

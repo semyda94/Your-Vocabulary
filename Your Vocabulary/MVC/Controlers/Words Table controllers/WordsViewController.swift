@@ -7,21 +7,20 @@
 //
 
 import UIKit
+import RealmSwift
 import CoreData
 
 class WordsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     // MARK: - Properties
     
-    private var managedContext: NSManagedObjectContext? {
-        guard  let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return nil}
-        
-        return appDelegate.persistentContainer.viewContext
-    }
+    let realm = try! Realm()
     
-    var currentDictionary: Dictionary? {
+    var currentDictionary: RealmDictionary? {
         didSet {
-            navigationItem.title = currentDictionary?.name
+            guard let dictionary = currentDictionary else { return }
+            
+            navigationItem.title = dictionary.name
         }
     }
     
@@ -39,24 +38,13 @@ class WordsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     @IBAction func saveButtonWasTapped(segue:
         UIStoryboardSegue){
+        
         guard let sourceView = segue.source as? WordViewController else { return }
-        
-        guard let context = managedContext else {
-            return
-        }
-        
-        if let word = sourceView.currentWord{
-            context.delete(word)
-            currentDictionary!.numberOfWords -= 1
-        }
-        
+    
         sourceView.saveContent()
-        do {
-            try context.save()
-            wordsTableView.reloadData()
-        } catch let error as NSError {
-            print("Unresolved error during saving new word \(error), \(error.userInfo)")
-        }
+        
+        wordsTableView.reloadData()
+        
     }
     
     // MARK: - Methods
@@ -78,10 +66,6 @@ class WordsViewController: UIViewController, UITableViewDataSource, UITableViewD
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         wordsTableView.reloadData()
@@ -96,7 +80,18 @@ class WordsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        guard let count = currentDictionary?.words?.count else { return 0}
+        
+        guard let dictionary = currentDictionary else {
+            nonWordsStack.isHidden = false;
+            UIView.animate(withDuration: 2) {
+                self.nonWordsStack.alpha = 1
+                tableView.alpha = 0
+            }
+            tableView.isHidden = true
+            return 0
+        }
+        
+        let count = dictionary.words.count
         
         if (count <= 0) {
             nonWordsStack.isHidden = false;
@@ -119,16 +114,15 @@ class WordsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath) as? WordTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath) as? WordTableViewCell, let dictionary = currentDictionary else {
              let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath)
             return cell
         }
         
         // Configure the cell...
         
-        guard let words = currentDictionary?.words?.array as? [Word] else { return cell }
-        
-        cell.currentWord = words[indexPath.row]
+        cell.currentDictionary = dictionary
+        cell.currentWord = dictionary.words[indexPath.row]
         return cell
     }
     
@@ -144,19 +138,15 @@ class WordsViewController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            guard let words = currentDictionary?.words?.array as? [Word] else { return }
+            guard let currentDictionary = currentDictionary else { return }
             
-            managedContext?.delete(words[indexPath.row])
-            
-            do {
-                currentDictionary?.numberOfWords -= 1
-                if words[indexPath.row].isLearned {
-                    currentDictionary?.numberofLearned -= 1
+            try! realm.write {
+                if currentDictionary.words[indexPath.row].isLearned {
+                    currentDictionary.numberOfLearnedWords -= 1
                 }
-                try managedContext?.save()
+                
+                currentDictionary.words.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
-            } catch let error as NSError {
-                print("Unsolved error during deleting word: \(error), \(error.userInfo)")
             }
             
         } else if editingStyle == .insert {
@@ -178,9 +168,8 @@ class WordsViewController: UIViewController, UITableViewDataSource, UITableViewD
             case "showWord" :
                 if let cell = sender as? WordTableViewCell, let indexPath = wordsTableView.indexPath(for: cell) {
                     
-                    guard let words = currentDictionary?.words?.array as? [Word] else { return }
                     wvc.currentDictionary = currentDictionary
-                    wvc.currentWord = words[indexPath.row]
+                    wvc.currentWord = currentDictionary?.words[indexPath.row]
                     print("showWord segue: was seted dictionary and word")
                 }
                 

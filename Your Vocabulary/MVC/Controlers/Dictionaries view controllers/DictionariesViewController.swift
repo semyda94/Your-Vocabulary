@@ -16,21 +16,9 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
     
     let realm = try! Realm()
     
-    var managedContext: NSManagedObjectContext? {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return nil }
-        
-        return appDelegate.persistentContainer.viewContext
-    }
     
     fileprivate var dictionaries : Results<RealmDictionary>?
-    
-    /*
-    fileprivate var dictionaries = [Dictionary]() {
-        didSet {
-            dictionaries.sort { $0.name! < $1.name! }
-        }
-    }
-    */
+
     
     fileprivate var blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
     fileprivate lazy var blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -189,7 +177,7 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
         super.viewWillAppear(animated)
         
         dictionaries = realm.objects(RealmDictionary.self)
-        print(dictionaries)
+        dictionariesTableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -276,16 +264,12 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
         
         switch segue.identifier {
         case "openDictionarySegue"?:
-            print("try make segue")
             guard let wvc = segue.destination as? WordsViewController else { return }
-            
-            print ("destination correct")
             
             guard let cell = sender as? DictionaryTableViewCell, let indexPath = dictionariesTableView.indexPath(for: cell), let dictionaries = dictionaries else { return }
             
-            //wvc.currentDictionary = dictionaries[indexPath.row]
-            
-            print("done segue")
+            wvc.currentDictionary = dictionaries[indexPath.row]
+
         case "newDictionaryProperties"? :
             guard let dpvc = segue.destination as? DictionaryPropertiesViewController else { return }
             

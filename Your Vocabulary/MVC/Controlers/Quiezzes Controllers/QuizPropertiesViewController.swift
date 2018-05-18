@@ -7,19 +7,18 @@
 //
 
 import UIKit
+import RealmSwift
 import CoreData
 
 class QuizPropertiesViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     //MARKL - Properties
     
-    fileprivate var managedContext: NSManagedObjectContext? {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return nil }
-        
-        return appDelegate.persistentContainer.viewContext
-    }
+    fileprivate let realm = try! Realm()
     
-    var parametrsForPicker =  (dictionaries: [Dictionary](), questionType: [DictionaryElements](), answersType: [DictionaryElements]())
+    var dictionaries : Results<RealmDictionary>?
+    
+    var parametrsForPicker =  (questionType: [DictionaryElements](), answersType: [DictionaryElements]())
     
     var typeOfQuiz = QuizzesTypes.none
     
@@ -32,19 +31,11 @@ class QuizPropertiesViewController: UIViewController, UIPickerViewDelegate, UIPi
     //MARK: Fucntions
     
     fileprivate func setPickersParametrs() {
-       guard let context = managedContext else { return }
+       
+        dictionaries = realm.objects(RealmDictionary.self)
+        setSubParametrs(dictionarAt: 0)
         
-        let request = NSFetchRequest<Dictionary>(entityName: "Dictionary")
         
-        do {
-            let result = try context.fetch(request)
-            if !result.isEmpty {
-                parametrsForPicker.dictionaries = result
-                setSubParametrs(dictionarAt: 0)
-            }
-        } catch let error as NSError {
-            print("Unresolver error during fetching dictionary: \(error), \(error.userInfo)")
-        }
         
     }
     
@@ -55,22 +46,24 @@ class QuizPropertiesViewController: UIViewController, UIPickerViewDelegate, UIPi
         parametrsForPicker.questionType.append(DictionaryElements.word)
         parametrsForPicker.answersType.append(DictionaryElements.word)
         
-        if parametrsForPicker.dictionaries[position].isTranslation {
+        guard let dictionaries = dictionaries else { return }
+        
+        if dictionaries[position].isTranslation {
             parametrsForPicker.questionType.append(DictionaryElements.translation)
             parametrsForPicker.answersType.append(DictionaryElements.translation)
         }
         
-        if parametrsForPicker.dictionaries[position].isDefinition {
+        if dictionaries[position].isDefinition {
             parametrsForPicker.questionType.append(DictionaryElements.definition)
             parametrsForPicker.answersType.append(DictionaryElements.definition)
         }
         
-        if parametrsForPicker.dictionaries[position].isSynonym {
+        if dictionaries[position].isSynonym {
             parametrsForPicker.questionType.append(DictionaryElements.synonym)
             parametrsForPicker.answersType.append(DictionaryElements.synonym)
         }
         
-        if parametrsForPicker.dictionaries[position].isExample {
+        if dictionaries[position].isExample {
             parametrsForPicker.questionType.append(DictionaryElements.example)
             parametrsForPicker.answersType.append(DictionaryElements.example)
         }
@@ -104,7 +97,8 @@ class QuizPropertiesViewController: UIViewController, UIPickerViewDelegate, UIPi
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch component {
         case 0:
-            return parametrsForPicker.dictionaries.count
+            guard let dictionaries = dictionaries else { return 0}
+            return dictionaries.count
         case 1:
             return parametrsForPicker.questionType.count
         case 2:
@@ -117,7 +111,8 @@ class QuizPropertiesViewController: UIViewController, UIPickerViewDelegate, UIPi
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch component {
         case 0:
-            return parametrsForPicker.dictionaries[row].name
+            guard let dictionaries = dictionaries else { return nil}
+            return dictionaries[row].name
         case 1:
             return parametrsForPicker.questionType[row].rawValue
         case 2:

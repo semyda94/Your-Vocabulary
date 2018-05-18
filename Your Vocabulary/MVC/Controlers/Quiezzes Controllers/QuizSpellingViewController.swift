@@ -34,7 +34,7 @@ class QuizSpellingViewController: UIViewController, QuizzesMethods, UITextFieldD
     // MARK: - Methods
     
     fileprivate func formQuestions() {
-        guard let parametrs = chosenParametrs, let words = parametrs.dictionary.words?.array as? [Word] else { return }
+/*        guard let parametrs = chosenParametrs, let words = parametrs.dictionary.words?.array as? [Word] else { return }
         
         for word in words {
             guard let question =
@@ -42,6 +42,7 @@ class QuizSpellingViewController: UIViewController, QuizzesMethods, UITextFieldD
             
             questionPairs.append((question, answer))
         }
+ */
     }
     
     fileprivate func setQuestion() {

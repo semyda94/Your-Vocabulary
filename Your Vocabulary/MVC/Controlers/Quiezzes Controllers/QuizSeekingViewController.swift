@@ -7,13 +7,16 @@
 //
 
 import UIKit
+import RealmSwift
 import CoreData
 
 class QuizSeekingViewController: UIViewController, QuizzesMethods {
 
     // MARK: - Properties
     
-    var chosenParametrs: (dictionary: Dictionary, questionType: DictionaryElements, answerType: DictionaryElements)?
+    
+    var dictionary : RealmDictionary?
+    var chosenParametrs: (questionType: DictionaryElements, answerType: DictionaryElements)?
     
     fileprivate var remainingQuestion = [(question: String, answer: String)]()
     fileprivate var currentQuestion: (question: String, answer: String) = ("None", "None")
@@ -88,9 +91,9 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
     }
     
     fileprivate func formQuestions() {
-        guard let parametrs = chosenParametrs, let words = parametrs.dictionary.words?.array as? [Word] else { return }
+        guard let parametrs = chosenParametrs, let dictionary = dictionary else { return }
         
-        for word in words {
+        for word in dictionary.words {
             if !word.isLearned {
                 guard let question = getElement(baseOn: parametrs.questionType, forWord: word), let answer = getElement(baseOn: parametrs.answerType, forWord: word) else { continue }
             

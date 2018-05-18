@@ -7,19 +7,14 @@
 //
 
 import UIKit
+import RealmSwift
 import CoreData
 
 class SettingsTableViewController: UITableViewController {
 
     // MARK : - Propertires
     
-    fileprivate var managedContext : NSManagedObjectContext? {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return nil
-        }
-        
-        return appDelegate.persistentContainer.viewContext
-    }
+    fileprivate let realm = try! Realm()
     
     fileprivate let settingsCells : [String : (section: Int, row: Int)] = ["Export" : (1 , 0),
                                                                            "Reset" : (1 , 2)]
@@ -103,6 +98,8 @@ class SettingsTableViewController: UITableViewController {
         case 1:
             switch indexPath.row {
             case settingsCells["Export"]!.row :
+                print("Export")
+                /*
                 guard let context = managedContext else { return }
                 
                 var dictionaries : [Dictionary]
@@ -117,21 +114,14 @@ class SettingsTableViewController: UITableViewController {
                 } catch let error as NSError {
                     print("Unresolved error during fetching dictionary for export: \(error), \(error.userInfo)")
                 }
-                
+                */
                 
             case settingsCells["Reset"]!.row:
                 let alert = UIAlertController(title: "Reseting database", message: "Are you sure you want to delete all data?", preferredStyle: .alert)
                 
                 alert.addAction(UIAlertAction(title: "Reset", style: .default, handler: { _ in
-                    for entity in entities {
-                        let  batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: entity.value)
-                        
-                        do {
-                            try self.managedContext!.execute(batchDeleteRequest)
-                            
-                        } catch {
-                            // Error Handling
-                        }
+                    try! self.realm.write {
+                        self.realm.deleteAll()
                     }
                 }))
                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))

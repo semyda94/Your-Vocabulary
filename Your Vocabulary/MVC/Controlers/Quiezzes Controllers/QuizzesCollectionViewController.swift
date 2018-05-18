@@ -30,7 +30,6 @@ class QuizzesCollectionViewController: UICollectionViewController {
     //MARK: - Unwind segue
     
     @IBAction func getEmptyListOfDictionaries(segue: UIStoryboardSegue) {
-        print("Lol")
         
     }
     
@@ -46,7 +45,6 @@ class QuizzesCollectionViewController: UICollectionViewController {
                 let chosenDictionary = sourceVC.dictionaries![sourceVC.pickerView.selectedRow(inComponent: 0)]
                 
                 if chosenDictionary.words.count - chosenDictionary.numberOfLearnedWords >= 4 {
-                    print("Dictionary has more than 4 words")
                     
                     switch sourceVC.typeOfQuiz {
                     case .seeking:
@@ -63,7 +61,6 @@ class QuizzesCollectionViewController: UICollectionViewController {
                         return
                     }
                 } else {
-                    print("Dictionary doesn't have 4 words")
                     let alertController = UIAlertController(title: NSLocalizedString("Not enough words", comment: "Title for alert controller when chosen dictionary doesn't have any words"), message: NSLocalizedString("Sorry, chosen dictionary doesn't have enough unlearned words. ", comment: "Message for alert controller when chosen dictionary doesnt' have any words"), preferredStyle: .alert)
                     
                     let cancelAlertAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Title for cancel alert action when chosen dictionary doesn't have any words"), style: .cancel, handler: nil)
@@ -113,25 +110,15 @@ class QuizzesCollectionViewController: UICollectionViewController {
             return
         }
         
-        guard let context = managedContext else { return }
-        
-        guard let entityQuiz = NSEntityDescription.entity(forEntityName: "TestInfo", in: context) else { return }
-        let newQuiz = TestInfo(entity: entityQuiz, insertInto: context)
-        
-        newQuiz.dateOfCreation = dateOfQuiz! as NSDate
-        newQuiz.numberOfAnswers = Int32(countOfAnswers)
-        newQuiz.numberOfCorrectAnswers = Int32(countOfCorrectAnswer)
-        /*
-        dictionary.insertIntoTests(newQuiz, at: 0)
-        
-        do {
-            try context.save()
-        } catch let error as NSError {
-            print("Unresolved error during insert new quiz \(error), \(error.userInfo)")
+        try! realm.write {
+            var newQuizInfo = RealmQuizInfo()
+            
+            newQuizInfo.numberOfAnswers = countOfAnswers
+            newQuizInfo.numberOfCorrectAnswers = countOfCorrectAnswer
+            
+            dictionary.quizesInfo.append(newQuizInfo)
         }
         
-        print(dictionary.tests?.array as! [TestInfo])
-   */
     }
     
     // MARK: - Life cycle
@@ -264,7 +251,6 @@ class QuizzesCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("try to set cell")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! QuizzesCollectionViewCell
     
         cell.quizzThumbNail.image = quizzes[indexPath.row].thumbnail

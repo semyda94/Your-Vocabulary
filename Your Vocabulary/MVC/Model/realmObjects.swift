@@ -32,6 +32,8 @@ class RealmDictionary: Object {
     @objc dynamic var name = NSLocalizedString("Unknown", comment: "Name of dictionary during init")
     
     let words = List<RealmWord>()
+    let quizesInfo = List<RealmQuizInfo>()
+    
     @objc dynamic var numberOfLearnedWords = 0
     
     // Dates
@@ -46,4 +48,10 @@ class RealmDictionary: Object {
     @objc dynamic var isSynonym = false
     @objc dynamic var isExample = false
     
+}
+
+class RealmQuizInfo: Object {
+    @objc dynamic var numberOfAnswers = 0
+    @objc dynamic var numberOfCorrectAnswers = 0
+    @objc dynamic var dateOfCreation = Date()
 }

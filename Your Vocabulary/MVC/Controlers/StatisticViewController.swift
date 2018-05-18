@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import RealmSwift
 import Charts
 
 class StatisticViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate {
@@ -15,13 +16,9 @@ class StatisticViewController: UIViewController, UITableViewDelegate, UITableVie
 
     // MARK: - Properties
     
-    var managedContext: NSManagedObjectContext? {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return nil }
-        
-        return appDelegate.persistentContainer.viewContext
-    }
+    fileprivate let realm = try! Realm()
     
-    fileprivate var dictionaries = [Dictionary]() {
+    fileprivate var dictionaries : Results<RealmDictionary>? {
         didSet {
             dictionaryPicker.reloadAllComponents()
         }
@@ -41,34 +38,40 @@ class StatisticViewController: UIViewController, UITableViewDelegate, UITableVie
     // MARK: - Methods
     
     
-    fileprivate func updateTableContent(forDictionary dictionary: Dictionary?) {
+    fileprivate func updateTableContent(forDictionary dictionary: RealmDictionary?) {
         
-        var tests = [TestInfo]()
         var numberOfWords = 0
         var numberOfAnswers = 0
         var numberOfCorrectAnswers = 0
+        var sortedQuizzes = [RealmQuizInfo]()
+        var quizzes = List<RealmQuizInfo>()
+        
+        guard let dictionaries = dictionaries else { return }
+        
         
         if let choosenDictionary = dictionary {
-            tests = choosenDictionary.tests?.array as! [TestInfo]
-            numberOfWords = Int(choosenDictionary.numberOfWords)
+            quizzes = choosenDictionary.quizesInfo
+            numberOfWords = Int(choosenDictionary.words.count)
             
         } else {
-            print("Show information for all dictionaries")
+            
             for dictionary in dictionaries {
-                tests.append(contentsOf: dictionary.tests?.array as! [TestInfo])
+                quizzes.append(objectsIn: dictionary.quizesInfo)
                 
-                numberOfWords += Int(dictionary.numberOfWords)
+                numberOfWords += dictionary.words.count
             }
         }
         
-        tests = tests.sorted(by: { $0.dateOfCreation?.compare($1.dateOfCreation! as Date) == .orderedAscending })
+        sortedQuizzes = quizzes.sorted { (lhsQuiz, rhsQuiz) -> Bool in
+            return lhsQuiz.dateOfCreation < rhsQuiz.dateOfCreation
+        }
+        //quizzes.sorted(byKeyPath: "dateOfCreation", ascending: true)
         
-        for test in tests {
-            numberOfAnswers += Int(test.numberOfAnswers)
-            numberOfCorrectAnswers += Int(test.numberOfCorrectAnswers)
+        for quiz in sortedQuizzes {
+            numberOfAnswers += Int(quiz.numberOfAnswers)
+            numberOfCorrectAnswers += Int(quiz.numberOfCorrectAnswers)
         }
         
-        print(tests)
         
         let e1: (title: String, number: Int)
         let e2: (title: String, number: Int)
@@ -87,12 +90,12 @@ class StatisticViewController: UIViewController, UITableViewDelegate, UITableVie
         rows.removeAll()
         rows.append(contentsOf: [e1, e2, e3])
         
-        updateBarData(withTests: tests)
+        updateBarData(withTests: sortedQuizzes)
         
         statisticTableView.reloadData()
     }
     
-    fileprivate func updateBarData(withTests tests: [TestInfo]) {
+    fileprivate func updateBarData(withTests tests: [RealmQuizInfo]) {
         combinedChart.reloadInputViews()
         var barChartDataEntries = [BarChartDataEntry]()
         var lineChartDataEntries = [ChartDataEntry]()
@@ -120,7 +123,7 @@ class StatisticViewController: UIViewController, UITableViewDelegate, UITableVie
         for (index, test) in tests.enumerated() {
             barChartDataEntries.append( BarChartDataEntry(x: Double(index), y: Double(test.numberOfAnswers)) )
             lineChartDataEntries.append(ChartDataEntry(x: Double(index), y: Double(test.numberOfCorrectAnswers)))
-            formato.labels.append(dateFormater.string(from: test.dateOfCreation! as Date))
+            formato.labels.append(dateFormater.string(from: test.dateOfCreation))
         }
         
         xaxis.valueFormatter = formato
@@ -170,31 +173,19 @@ class StatisticViewController: UIViewController, UITableViewDelegate, UITableVie
         
         
     }
-    
-    fileprivate func fetchListOfDictionaries() -> [Dictionary]? {
-        guard let context = managedContext else { return nil }
-        
-        let request = NSFetchRequest<Dictionary>(entityName: "Dictionary")
-        
-        do {
-            let result = try context.fetch(request)
-            
-            return result
-        } catch let error as NSError {
-            print("Unresolved error during fetching dictionaries for Statistic: \(error), \(error.userInfo)")
-            return nil
-        }
-    }
+
     
     // MARK: - View Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        dictionaries = fetchListOfDictionaries() ?? [Dictionary]()
+        
+        dictionaries = realm.objects(RealmDictionary.self)
+        
+        guard let dictionaries = dictionaries else { return }
         
         var amountOfTests = 0
         for dictionary in dictionaries {
-            if let count = dictionary.tests?.array.count { amountOfTests += count}
+            amountOfTests += dictionary.quizesInfo.count
         }
         
         if amountOfTests > 0 {
@@ -250,6 +241,7 @@ class StatisticViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        guard let dictionaries = dictionaries else { return 0}
         if (dictionaries.count > 1 ) {
             return dictionaries.count + 1
         } else {
@@ -258,6 +250,8 @@ class StatisticViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        guard let dictionaries = dictionaries else { return nil}
+        
         if dictionaries.count > 1 {
             switch row {
             case 0:
@@ -278,6 +272,7 @@ class StatisticViewController: UIViewController, UITableViewDelegate, UITableVie
             updateTableContent(forDictionary: nil)
             return
         default:
+            guard let dictionaries = dictionaries else { return }
             updateTableContent(forDictionary: dictionaries[row - 1])
             return
         }

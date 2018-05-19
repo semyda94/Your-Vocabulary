@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print("Realm schem version: \(Realm.Configuration.defaultConfiguration.schemaVersion)")
         
+     /*
         let config = Realm.Configuration(
             schemaVersion: 1,
             migrationBlock: { migration, oldSchemaVersion in
@@ -31,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         
         Realm.Configuration.defaultConfiguration = config
-        
+        */
         print("Realm schem version: \(Realm.Configuration.defaultConfiguration.schemaVersion)")
         
     }

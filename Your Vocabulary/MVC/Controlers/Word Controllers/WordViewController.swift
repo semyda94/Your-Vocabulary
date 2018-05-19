@@ -82,15 +82,11 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
             sectionContent.removeAll()
             sectionContent.append((sectionsName[0], typeOfCell.titleFollowingFields))
             
-            if word.translations.count > 1 {
-                
-                for translation in word.translations {
-                    sectionContent.append((translation , typeOfCell.field))
-                }
-            } else {
-                sectionContent.append((word.translations[0] , typeOfCell.field))
+            let translations = Array(word.translations)
+            for translation in translations {
+                sectionContent.append((translation , typeOfCell.field))
             }
-            
+
             sectionContent.append((nil, typeOfCell.addFieldButton))
             sections.append(sectionContent)
         }
@@ -99,16 +95,12 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
         if dictionary.isDefinition {
             sectionContent.removeAll()
             sectionContent.append((sectionsName[1], typeOfCell.titleFollowingFields))
-            
-            if word.definitions.count > 1 {
-                
-                for definition in word.definitions {
-                    sectionContent.append((definition , typeOfCell.field))
-                }
-            } else {
-                sectionContent.append((word.definitions[0] , typeOfCell.field))
+  
+            let definitions = Array(word.definitions)
+            for definition in definitions {
+                sectionContent.append((definition , typeOfCell.field))
             }
-            
+
             sectionContent.append((nil, typeOfCell.addFieldButton))
             sections.append(sectionContent)
         }
@@ -118,14 +110,11 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
             sectionContent.removeAll()
             sectionContent.append((sectionsName[2], typeOfCell.titleFollowingFields))
             
-            if word.extraInfos.count > 1 {
-                
-                for extraInfo in word.extraInfos {
-                    sectionContent.append((extraInfo , typeOfCell.field))
-                }
-            } else {
-                sectionContent.append((word.extraInfos[0] , typeOfCell.field))
+            let extraInfos = Array(word.extraInfos)
+            for extraInfo in extraInfos {
+                sectionContent.append((extraInfo , typeOfCell.field))
             }
+
             
             sectionContent.append((nil, typeOfCell.addFieldButton))
             sections.append(sectionContent)
@@ -136,13 +125,9 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
             sectionContent.removeAll()
             sectionContent.append((sectionsName[3], typeOfCell.titleFollowingFields))
             
-            if word.synonyms.count > 1 {
-                
-                for synonym in word.synonyms {
-                    sectionContent.append((synonym , typeOfCell.field))
-                }
-            } else {
-                sectionContent.append((word.synonyms[0] , typeOfCell.field))
+            let synonyms = Array(word.synonyms)
+            for synonym in synonyms {
+                sectionContent.append((synonym , typeOfCell.field))
             }
             
             sectionContent.append((nil, typeOfCell.addFieldButton))
@@ -154,15 +139,10 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
             sectionContent.removeAll()
             sectionContent.append((sectionsName[4], typeOfCell.titleFollowingFields))
             
-            if word.examples.count > 1 {
-        
-                for example in word.examples {
-                    sectionContent.append((example , typeOfCell.field))
-                }
-            } else {
-                sectionContent.append((word.examples[0] , typeOfCell.field))
+            let examples = Array(word.examples)
+            for example in examples {
+                sectionContent.append((example , typeOfCell.field))
             }
-
             
             sectionContent.append((nil, typeOfCell.addFieldButton))
             sections.append(sectionContent)
@@ -368,7 +348,6 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
             currentWord = RealmWord()
             try! realm.write {
                 currentDictionary.words.append(currentWord!)
-                currentDictionary.dateOfLastChanges = Date()
             }
         } else {
             try! realm.write {

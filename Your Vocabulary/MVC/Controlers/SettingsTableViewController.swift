@@ -11,7 +11,7 @@ import RealmSwift
 import SwiftyJSON
 
 class SettingsTableViewController: UITableViewController {
-
+    
     // MARK : - Propertires
     
     fileprivate let realm = try! Realm()
@@ -25,67 +25,67 @@ class SettingsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.tableView.backgroundView = UIImageView(image: #imageLiteral(resourceName: "bg"))
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
-
+    
     /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
+     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+     
+     // Configure the cell...
+     
+     return cell
+     }
+     */
+    
     /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
+     // Override to support conditional editing of the table view.
+     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+     // Return false if you do not want the specified item to be editable.
+     return true
+     }
+     */
+    
     /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
+     // Override to support editing the table view.
+     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+     if editingStyle == .delete {
+     // Delete the row from the data source
+     tableView.deleteRows(at: [indexPath], with: .fade)
+     } else if editingStyle == .insert {
+     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+     }
+     }
+     */
+    
     /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
+     // Override to support rearranging the table view.
+     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+     
+     }
+     */
+    
     /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
+     // Override to support conditional rearranging of the table view.
+     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+     // Return false if you do not want the item to be re-orderable.
+     return true
+     }
+     */
+    
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view:UIView, forSection: Int) {
         if let headerTitle = view as? UITableViewHeaderFooterView {
             headerTitle.textLabel?.textColor = #colorLiteral(red: 0.168627451, green: 0.2705882353, blue: 0.4392156863, alpha: 1)
@@ -269,7 +269,7 @@ class SettingsTableViewController: UITableViewController {
                         
                         
                         if index == dictionaries.count - 1 {
-                           jsonString += "\t\t}\n"
+                            jsonString += "\t\t}\n"
                         } else {
                             jsonString += "\t\t},\n"
                         }
@@ -300,21 +300,21 @@ class SettingsTableViewController: UITableViewController {
                 
                 
                 /*
-                guard let context = managedContext else { return }
-                
-                var dictionaries : [Dictionary]
-                
-                let request = NSFetchRequest<Dictionary>(entityName: "Dictionary")
-                
-                do {
-                    let result = try context.fetch(request)
-                    
-                    dictionaries = result
-                    
-                } catch let error as NSError {
-                    print("Unresolved error during fetching dictionary for export: \(error), \(error.userInfo)")
-                }
-                */
+                 guard let context = managedContext else { return }
+                 
+                 var dictionaries : [Dictionary]
+                 
+                 let request = NSFetchRequest<Dictionary>(entityName: "Dictionary")
+                 
+                 do {
+                 let result = try context.fetch(request)
+                 
+                 dictionaries = result
+                 
+                 } catch let error as NSError {
+                 print("Unresolved error during fetching dictionary for export: \(error), \(error.userInfo)")
+                 }
+                 */
             case settingsCells["Import"]!.row:
                 
                 if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
@@ -326,19 +326,86 @@ class SettingsTableViewController: UITableViewController {
                         let jsonString = try String(contentsOf: fileURL, encoding: .utf8)
                         
                         if let data = jsonString.data(using: .utf8) {
-                        
+                            
                             do {
                                 let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
                                 //print("Get json: \(json)")
                                 
-                                if let jsonDictionary = jsonObject as? [String : Any] {
-                                    if let dictionariesJSONDictionary = jsonDictionary["dictionaries"] as? [[String : Any]] {
-                                        for (inedex, dictionaryJSON) in dictionariesJSONDictionary.enumerated() {
-                                            print("Dictionary \(inedex) : \(dictionaryJSON)\n")
+                                var importedDictionaries = [RealmDictionary]()
+                                
+                                if let jsonDictionary = jsonObject as? [String : Any], let dictionariesJSONDictionary = jsonDictionary["dictionaries"] as? [[String : Any]] {
+                                    for (inedex, dictionaryJSON) in dictionariesJSONDictionary.enumerated() {
+                                        let newImportedDictionary = RealmDictionary()
+                                        
+                                        newImportedDictionary.name = dictionaryJSON["name"] as! String
+                                        
+                                        newImportedDictionary.numberOfLearnedWords = dictionaryJSON["numberOfLearnedWords"] as! Int
+                                        /*
+                                         let dateFormatter = DateFormatter()
+                                         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+                                         
+                                         if let dictionaryDataOfCreation = dateFormatter.date(from: dictionaryJSON["dateOfCreation"] as! String) {
+                                         newImportedDictionary.dateOfCreation = dictionaryDataOfCreation
+                                         }
+                                         
+                                         if let dictionaryDateIfLastChanges = dateFormatter.date(from: dictionaryJSON["dateOfLastChanges"] as! String) {
+                                         newImportedDictionary.dateOfLastChanges = dictionaryDateIfLastChanges
+                                         }
+                                         */
+                                        newImportedDictionary.isTranslation = dictionaryJSON["isTranslation"] as! Bool
+                                        newImportedDictionary.isDefinition = dictionaryJSON["isDefinition"] as! Bool
+                                        newImportedDictionary.isExtraInfo = dictionaryJSON["isExtraInfo"] as! Bool
+                                        newImportedDictionary.isSynonym = dictionaryJSON["isSynonym"] as! Bool
+                                        newImportedDictionary.isExample = dictionaryJSON["isExample"] as! Bool
+                                        
+                                        if let wordsJSONDictionariesArray = dictionaryJSON["words"] as? [[String : Any]] {
+                                            var importedWords = List<RealmWord>()
+                                            
+                                            for word in wordsJSONDictionariesArray {
+                                                let newImportedWord = RealmWord()
+                                                
+                                                newImportedWord.word = word["word"] as! String
+                                                newImportedWord.isLearned = word["isLearned"] as! Bool
+                                                
+                                                if let translations = word["translations"] as? [String?] {
+                                                    newImportedWord.translations.append(objectsIn: translations)
+                                                }
+                                                
+                                                if let translations = word["definitions"] as? [String?] {
+                                                    newImportedWord.definitions.append(objectsIn: translations)
+                                                }
+                                                
+                                                if let translations = word["extraInfos"] as? [String?] {
+                                                    newImportedWord.extraInfos.append(objectsIn: translations)
+                                                }
+                                                
+                                                if let translations = word["synonyms"] as? [String?] {
+                                                    newImportedWord.synonyms.append(objectsIn: translations)
+                                                }
+                                                
+                                                if let translations = word["examples"] as? [String?] {
+                                                    newImportedWord.examples.append(objectsIn: translations)
+                                                }
+                                                
+                                                importedWords.append(newImportedWord)
+                                            }
+                                            
+                                            newImportedDictionary.words = importedWords
+                                            print("got list of words")
                                         }
+                                        
+                                        importedDictionaries.append(newImportedDictionary)
+                                        
+                                        print("newImportedDictionary: \(newImportedDictionary)")
+                                        
+                                    }
+                                    
+                                    try! realm.write {
+                                        realm.deleteAll()
+                                        
+                                        realm.add(importedDictionaries)
                                     }
                                 }
-                                
                             } catch let error as NSError {
                                 print("error: \(error)")
                             }
@@ -370,17 +437,17 @@ class SettingsTableViewController: UITableViewController {
         default:
             return
         }
-
+        
     }
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

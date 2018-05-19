@@ -19,6 +19,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print("Realm schem version: \(Realm.Configuration.defaultConfiguration.schemaVersion)")
         
+        
+        /*
+         let realmURL = Realm.Configuration.defaultConfiguration.fileURL!
+         let realmURLs = [
+         realmURL,
+         realmURL.appendingPathExtension("lock"),
+         realmURL.appendingPathExtension("note"),
+         realmURL.appendingPathExtension("management")
+         ]
+         for URL in realmURLs {
+         do {
+         try FileManager.default.removeItem(at: URL)
+         } catch {
+         // handle error
+         }
+         }
+        */
      /*
         let config = Realm.Configuration(
             schemaVersion: 1,

@@ -17,7 +17,9 @@ class SettingsTableViewController: UITableViewController {
     fileprivate let realm = try! Realm()
     
     fileprivate let settingsCells : [String : (section: Int, row: Int)] = ["Export" : (1 , 0),
+                                                                           "Import" : (1, 1),
                                                                            "Reset" : (1 , 2)]
+    fileprivate let fileName = "DataBase.json"
     
     // MARK : - View life cycle
     
@@ -134,6 +136,7 @@ class SettingsTableViewController: UITableViewController {
                         jsonString += "\t\t\t\"isSynonym\" : \(dictionary.isSynonym),\n"
                         jsonString += "\t\t\t\"isExample\" : \(dictionary.isExample),\n"
                         
+                        jsonString += "\t\t\t\"words\" :\n"
                         jsonString += "\t\t\t[\n"
                         
                         for (wordIndex, word) in dictionary.words.enumerated() {
@@ -276,9 +279,7 @@ class SettingsTableViewController: UITableViewController {
                     
                     jsonString += "}"
                     
-                    let fileName = "DataBase.json"
-                    
-                    if let dir = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first {
+                    if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
                         let fileURL = dir.appendingPathComponent(fileName)
                         
                         print("directory: \(fileURL)")
@@ -289,12 +290,6 @@ class SettingsTableViewController: UITableViewController {
                             print("Error during exporting database : \(error)")
                         }
                         
-                        do {
-                            let text2 = try String(contentsOf: fileURL, encoding: .utf8)
-                            
-                            print("Exported in file: \n \(text2)")
-                        }
-                        catch {/* error handling here */}
                     }
                     
                     //print("JSON exported string:\n\(jsonString)")
@@ -320,6 +315,39 @@ class SettingsTableViewController: UITableViewController {
                     print("Unresolved error during fetching dictionary for export: \(error), \(error.userInfo)")
                 }
                 */
+            case settingsCells["Import"]!.row:
+                
+                if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                    let fileURL = dir.appendingPathComponent(fileName)
+                    
+                    print("directory: \(fileURL)")
+                    
+                    do {
+                        let jsonString = try String(contentsOf: fileURL, encoding: .utf8)
+                        
+                        if let data = jsonString.data(using: .utf8) {
+                        
+                            do {
+                                let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
+                                //print("Get json: \(json)")
+                                
+                                if let jsonDictionary = jsonObject as? [String : Any] {
+                                    if let dictionariesJSONDictionary = jsonDictionary["dictionaries"] as? [[String : Any]] {
+                                        for (inedex, dictionaryJSON) in dictionariesJSONDictionary.enumerated() {
+                                            print("Dictionary \(inedex) : \(dictionaryJSON)\n")
+                                        }
+                                    }
+                                }
+                                
+                            } catch let error as NSError {
+                                print("error: \(error)")
+                            }
+                            
+                        }
+                        
+                    }
+                    catch {/* error handling here */}
+                }
                 
             case settingsCells["Reset"]!.row:
                 let alert = UIAlertController(title: "Reseting database", message: "Are you sure you want to delete all data?", preferredStyle: .alert)

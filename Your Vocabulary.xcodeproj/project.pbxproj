@@ -45,6 +45,7 @@
 		E785D6D7200C5A0E0068B4CE /* BEMCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = E785D6D1200C5A0E0068B4CE /* BEMCheckBox.m */; };
 		E78E23D8205419CD00EE8790 /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78E23D7205419CD00EE8790 /* StatisticViewController.swift */; };
 		E78E23DC205633B700EE8790 /* StatisticTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78E23DB205633B700EE8790 /* StatisticTableViewCell.swift */; };
+		E79B547220AC3C52009A1E28 /* realmObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79B547120AC3C52009A1E28 /* realmObjects.swift */; };
 		E7A91669203E19EE006A5CDB /* QuizPropertiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A91668203E19EE006A5CDB /* QuizPropertiesViewController.swift */; };
 		E7C55641202524F500CD5C3C /* WordSaveCancelButtonsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C55640202524F500CD5C3C /* WordSaveCancelButtonsTableViewCell.swift */; };
 		E7C556432025252600CD5C3C /* WordTitleFollowingFieldsCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C556422025252600CD5C3C /* WordTitleFollowingFieldsCellTableViewCell.swift */; };
@@ -134,6 +135,7 @@
 		E788C2FF2096C8830032F30B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		E78E23D7205419CD00EE8790 /* StatisticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
 		E78E23DB205633B700EE8790 /* StatisticTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticTableViewCell.swift; sourceTree = "<group>"; };
+		E79B547120AC3C52009A1E28 /* realmObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = realmObjects.swift; sourceTree = "<group>"; };
 		E7A91668203E19EE006A5CDB /* QuizPropertiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizPropertiesViewController.swift; sourceTree = "<group>"; };
 		E7C55640202524F500CD5C3C /* WordSaveCancelButtonsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSaveCancelButtonsTableViewCell.swift; sourceTree = "<group>"; };
 		E7C556422025252600CD5C3C /* WordTitleFollowingFieldsCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordTitleFollowingFieldsCellTableViewCell.swift; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 				E7E91B7720033C540066EC13 /* Word+CoreDataProperties.swift */,
 				E7E91B7220032C020066EC13 /* Dictionary+CoreDataClass.swift */,
 				E7E91B7320032C020066EC13 /* Dictionary+CoreDataProperties.swift */,
+				E79B547120AC3C52009A1E28 /* realmObjects.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -432,12 +435,16 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Your Vocabulary/Pods-Your Vocabulary-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
-				"${BUILT_PRODUCTS_DIR}/Sync/Sync.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sync.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -509,6 +516,7 @@
 				E772806D1FFDDEF6004DC8A3 /* Your_Vocabulary.xcdatamodeld in Sources */,
 				E752843920A0766F00A397C3 /* enumerations.swift in Sources */,
 				E7E91B7920033C540066EC13 /* Word+CoreDataProperties.swift in Sources */,
+				E79B547220AC3C52009A1E28 /* realmObjects.swift in Sources */,
 				E7A91669203E19EE006A5CDB /* QuizPropertiesViewController.swift in Sources */,
 				E73171F21FFE56B500615B88 /* WordViewController.swift in Sources */,
 				E72E9DE3200C3300008D16A1 /* DictionariesViewController.swift in Sources */,

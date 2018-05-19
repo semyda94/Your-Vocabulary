@@ -9,28 +9,26 @@
 import UIKit
 
 class DictionaryTableViewCell: UITableViewCell {
-
+    
     // MARK: - Poperties
     
-    var dictionary: Dictionary? {
+    var dictionary: RealmDictionary? {
         didSet {
-            guard let currentDictionary = dictionary else { return }
+            guard let dictionary = dictionary else { return }
             
             let formatNumberOfWords = NSLocalizedString("Count of words: %d", comment: "Show count of words for dictionary")
             let formatNumberOfLearnedWords = NSLocalizedString("Learned words: %d", comment: "Show count of learned words for dictionary")
             
-            if let name = currentDictionary.name  {
-                thumbnailLabel.text = String(name.first!).uppercased()
-                titleLabel.text = name
-            }
+            thumbnailLabel.text = String(dictionary.name.first!).uppercased()
+            titleLabel.text = dictionary.name
             
-           
-            numberOfWordsLabel.text = String.localizedStringWithFormat(formatNumberOfWords, currentDictionary.numberOfWords) 
-            numberOfLearnedWordsLabel.text = String.localizedStringWithFormat(formatNumberOfLearnedWords, currentDictionary.numberofLearned)
+            
+           numberOfWordsLabel.text = String.localizedStringWithFormat(formatNumberOfWords, dictionary.words.count)
+            numberOfLearnedWordsLabel.text = String.localizedStringWithFormat(formatNumberOfLearnedWords, dictionary.numberOfLearnedWords)
             
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "d MMMM"
-            dataOfCreationLabel.text = "\(dateFormatter.string(from: currentDictionary.dateOfLastChanges! as Date))"
+            dataOfCreationLabel.text = "\(dateFormatter.string(from: dictionary.dateOfLastChanges))"
         }
     }
     
@@ -49,7 +47,7 @@ class DictionaryTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-    
+        
         titleLabel.text = NSLocalizedString("Unknown", comment: "Name for dictionary when user didn't set name")
         
         thumbnailLabel.textAlignment = .center
@@ -59,7 +57,7 @@ class DictionaryTableViewCell: UITableViewCell {
         
         thumbnailLabel.textColor = #colorLiteral(red: 0.168627451, green: 0.2705882353, blue: 0.4392156863, alpha: 1)
         thumbnailLabel.font = UIFont.systemFont(ofSize: 30)
-      //  thumbnailLabel.attributedText = NSAttributedString.
+        //  thumbnailLabel.attributedText = NSAttributedString.
         thumbnailLabel.layer.borderColor = #colorLiteral(red: 0.168627451, green: 0.2705882353, blue: 0.4392156863, alpha: 1)
         thumbnailLabel.center = thumbnailView.center
         
@@ -67,11 +65,12 @@ class DictionaryTableViewCell: UITableViewCell {
         thumbnailView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
-
+    
 }
+

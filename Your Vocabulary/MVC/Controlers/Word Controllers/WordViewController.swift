@@ -7,22 +7,17 @@
 //
 
 import UIKit
+import RealmSwift
 import CoreData
 
 class WordViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, AddNewFieldDelegate, SaveCancelWordTableContentDelegate {
     
     // MARK: - Properties
     
-    fileprivate var managedContext : NSManagedObjectContext? {
-        guard  let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return nil
-        }
-        
-        return appDelegate.persistentContainer.viewContext
-    }
+    fileprivate var realm = try! Realm()
     
-    var currentDictionary: Dictionary?
-    var currentWord: Word?
+    var currentDictionary: RealmDictionary?
+    var currentWord: RealmWord?
     
     fileprivate var sections = [[(value: String? , type: typeOfCell)]]()
     fileprivate var sectionsName = [NSLocalizedString("Translations", comment: "Title for translations properties in word view") ,NSLocalizedString("Definitions", comment: "Title for definitions properties in word view"), NSLocalizedString("Extra information", comment: "Title for extra information properties in word view"), NSLocalizedString("Synonyms", comment: "Title for synonyms properties in word view"), NSLocalizedString("Examples", comment: "Title for examples properties in word view")]
@@ -74,7 +69,7 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
         return 0
     }
     
-    func setData(forWord word: Word) -> Int{
+    func setData(forWord word: RealmWord) -> Int{
         
         guard let dictionary = currentDictionary else { return -1 }
         var sectionContent = [(value: String?, type: WordViewController.typeOfCell)]()
@@ -83,51 +78,56 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
         sections.append([(NSLocalizedString("Word", comment: "Title for word in word view"), typeOfCell.titleFollowingFields), (word.word, .field)])
         
         //Translation
-        if dictionary.isTranslation , let translations = word.translations?.allObjects as? [Translation] {
+        if dictionary.isTranslation {
             sectionContent.removeAll()
             sectionContent.append((sectionsName[0], typeOfCell.titleFollowingFields))
             
+            let translations = Array(word.translations)
             for translation in translations {
-                sectionContent.append((translation.text , typeOfCell.field))
+                sectionContent.append((translation , typeOfCell.field))
             }
-            
+
             sectionContent.append((nil, typeOfCell.addFieldButton))
             sections.append(sectionContent)
         }
         
         //Definition
-        if dictionary.isDefinition, let definitions = word.definitions?.allObjects as? [Definition] {
+        if dictionary.isDefinition {
             sectionContent.removeAll()
             sectionContent.append((sectionsName[1], typeOfCell.titleFollowingFields))
-            
+  
+            let definitions = Array(word.definitions)
             for definition in definitions {
-                sectionContent.append((definition.text, typeOfCell.field))
+                sectionContent.append((definition , typeOfCell.field))
             }
-            
+
             sectionContent.append((nil, typeOfCell.addFieldButton))
             sections.append(sectionContent)
         }
         
         //ExtraInfo
-        if dictionary.isExtraInfo, let extraInfos = word.extraInfos?.allObjects as? [ExtraInfo] {
+        if dictionary.isExtraInfo {
             sectionContent.removeAll()
             sectionContent.append((sectionsName[2], typeOfCell.titleFollowingFields))
             
+            let extraInfos = Array(word.extraInfos)
             for extraInfo in extraInfos {
-                sectionContent.append((extraInfo.text, typeOfCell.field))
+                sectionContent.append((extraInfo , typeOfCell.field))
             }
+
             
             sectionContent.append((nil, typeOfCell.addFieldButton))
             sections.append(sectionContent)
         }
         
         //Synonym
-        if dictionary.isSynonym, let synonyms = word.synonyms?.allObjects as? [Synonym] {
+        if dictionary.isSynonym {
             sectionContent.removeAll()
             sectionContent.append((sectionsName[3], typeOfCell.titleFollowingFields))
             
+            let synonyms = Array(word.synonyms)
             for synonym in synonyms {
-                sectionContent.append((synonym.text, typeOfCell.field))
+                sectionContent.append((synonym , typeOfCell.field))
             }
             
             sectionContent.append((nil, typeOfCell.addFieldButton))
@@ -135,12 +135,13 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
         //Example
-        if dictionary.isExample, let examples = word.examples?.allObjects as? [Example] {
+        if dictionary.isExample {
             sectionContent.removeAll()
             sectionContent.append((sectionsName[4], typeOfCell.titleFollowingFields))
             
+            let examples = Array(word.examples)
             for example in examples {
-                sectionContent.append((example.text, typeOfCell.field))
+                sectionContent.append((example , typeOfCell.field))
             }
             
             sectionContent.append((nil, typeOfCell.addFieldButton))
@@ -340,62 +341,60 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
     // MARK: - SaveCancelWordTableContentDelegate implementation
     
     func saveContent() {
-
-        guard let dictionary = currentDictionary else { return }
-
-        guard let context = managedContext else { return }
-
-        guard let entityWord = NSEntityDescription.entity(forEntityName: "Word", in: context) else { return }
-
-        let newWord = Word(entity: entityWord, insertInto: context)
-
-        newWord.word = sections[0][1].value
-        newWord.dateCreation = NSDate()
-        newWord.dateOfLastChanges = NSDate()
-        newWord.isLearned = false
         
-        for section in sections {
-            guard let sectionName = section[0].value else { break }
-            if sectionsName.contains(sectionName) {
-                for element in section[1..<section.count - 1] {
-                    switch sectionName {
-                    case sectionsName[0]:
-                        guard let entity = NSEntityDescription.entity(forEntityName: "Translation", in: context) else {print("translation entity wasn't created"); break }
-                        let newTranslation = Translation(entity: entity, insertInto: context)
-                        newTranslation.text = element.value
-                        newWord.addToTranslations(newTranslation)
-                        print("translation was added into word")
-                    case sectionsName[1]:
-                        guard let entity = NSEntityDescription.entity(forEntityName: "Definition", in: context) else { break }
-                        let newDefinition = Definition(entity: entity, insertInto: context)
-                        newDefinition.text = element.value
-                        newWord.addToDefinitions(newDefinition)
-                    case sectionsName[2]:
-                       guard let entity = NSEntityDescription.entity(forEntityName: "ExtraInfo", in: context) else { break }
-                        let newExtraInfo = ExtraInfo(entity: entity, insertInto: context)
-                        newExtraInfo.text = element.value
-                        newWord.addToExtraInfos(newExtraInfo)
-                    case sectionsName[3]:
-                         guard let entity = NSEntityDescription.entity(forEntityName: "Synonym", in: context) else { break }
-                        let newSynonym = Synonym(entity: entity, insertInto: context)
-                        newSynonym.text = element.value
-                        newWord.addToSynonyms(newSynonym)
-                    case sectionsName[4]:
-                        guard let entity = NSEntityDescription.entity(forEntityName: "Example", in: context) else { break }
-                        let newExample = Example(entity: entity, insertInto: context)
-                        newExample.text = element.value
-                        newWord.addToExamples(newExample)
-                    default:
-                        break;
+        guard let currentDictionary = currentDictionary else { return }
+        
+        if currentWord == nil {
+            currentWord = RealmWord()
+            try! realm.write {
+                currentDictionary.words.append(currentWord!)
+            }
+        } else {
+            try! realm.write {
+                currentWord!.translations.removeAll()
+                currentWord!.definitions.removeAll()
+                currentWord!.extraInfos.removeAll()
+                currentWord!.synonyms.removeAll()
+                currentWord!.examples.removeAll()
+            }
+        }
+        
+        guard let currentWord = currentWord else { return }
+        
+        var word = NSLocalizedString("Unknown", comment: "Unknown name for word with out seted word name")
+        try! realm.write {
+            if sections[0][1].value != nil {
+                word = sections[0][1].value!
+            }
+            
+            currentWord.word = word
+            currentWord.dateOfLastChanges = Date()
+            currentWord.isLearned = false
+            
+            for section in sections {
+                
+                guard let sectionName = section[0].value else { break }
+                if sectionsName.contains(sectionName) {
+                    for element in section[1..<section.count - 1] {
+                        switch sectionName {
+                        case sectionsName[0]:
+                            currentWord.translations.append(element.value)
+                        case sectionsName[1]:
+                            currentWord.definitions.append(element.value)
+                        case sectionsName[2]:
+                            currentWord.extraInfos.append(element.value)
+                        case sectionsName[3]:
+                            currentWord.synonyms.append(element.value)
+                        case sectionsName[4]:
+                            currentWord.examples.append(element.value)
+                        default:
+                            break;
+                        }
                     }
                 }
             }
         }
-
         
-        dictionary.addToWords(newWord)
-        dictionary.dateOfLastChanges = NSDate()
-        dictionary.numberOfWords += 1
     }
     
     func cancelChanges() {

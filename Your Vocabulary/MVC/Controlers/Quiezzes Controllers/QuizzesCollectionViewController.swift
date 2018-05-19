@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 import CoreData
 
 private let reuseIdentifier = "QuizCollectionCell"
@@ -14,7 +15,9 @@ private let reuseIdentifier = "QuizCollectionCell"
 class QuizzesCollectionViewController: UICollectionViewController {
 
     // MARK: - Properties
-    let quizzes: [(name: QuizzesTypes, thumbnail: UIImage)] = [(.seeking, #imageLiteral(resourceName: "seeking_icon") ), (.seekingByTime, #imageLiteral(resourceName: "seeking_by_time_icon")), (.matching, #imageLiteral(resourceName: "matching_icon")), (.matchingByTime, #imageLiteral(resourceName: "matching_by_time_icon")), /*(.spelling, #imageLiteral(resourceName: "spelling_icon")), (.spellingByTime, #imageLiteral(resourceName: "spelling_by_time_icon"))*/]
+    fileprivate let quizzes: [(name: QuizzesTypes, thumbnail: UIImage)] = [(.seeking, #imageLiteral(resourceName: "seeking_icon") ), (.seekingByTime, #imageLiteral(resourceName: "seeking_by_time_icon")), (.matching, #imageLiteral(resourceName: "matching_icon")), (.matchingByTime, #imageLiteral(resourceName: "matching_by_time_icon")), /*(.spelling, #imageLiteral(resourceName: "spelling_icon")), (.spellingByTime, #imageLiteral(resourceName: "spelling_by_time_icon"))*/]
+    
+    fileprivate let realm = try! Realm()
     
     var managedContext: NSManagedObjectContext? {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return nil }
@@ -27,7 +30,6 @@ class QuizzesCollectionViewController: UICollectionViewController {
     //MARK: - Unwind segue
     
     @IBAction func getEmptyListOfDictionaries(segue: UIStoryboardSegue) {
-        print("Lol")
         
     }
     
@@ -40,10 +42,9 @@ class QuizzesCollectionViewController: UICollectionViewController {
             
             segue.completion = {
                 guard let sourceVC = segue.source as? QuizPropertiesViewController else { return }
-                let chosenDictionary = sourceVC.parametrsForPicker.dictionaries[sourceVC.pickerView.selectedRow(inComponent: 0)]
+                let chosenDictionary = sourceVC.dictionaries![sourceVC.pickerView.selectedRow(inComponent: 0)]
                 
-                if chosenDictionary.numberOfWords - chosenDictionary.numberofLearned >= 4 {
-                    print("Dictionary has more than 4 words")
+                if chosenDictionary.words.count - chosenDictionary.numberOfLearnedWords >= 4 {
                     
                     switch sourceVC.typeOfQuiz {
                     case .seeking:
@@ -60,7 +61,6 @@ class QuizzesCollectionViewController: UICollectionViewController {
                         return
                     }
                 } else {
-                    print("Dictionary doesn't have 4 words")
                     let alertController = UIAlertController(title: NSLocalizedString("Not enough words", comment: "Title for alert controller when chosen dictionary doesn't have any words"), message: NSLocalizedString("Sorry, chosen dictionary doesn't have enough unlearned words. ", comment: "Message for alert controller when chosen dictionary doesnt' have any words"), preferredStyle: .alert)
                     
                     let cancelAlertAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Title for cancel alert action when chosen dictionary doesn't have any words"), style: .cancel, handler: nil)
@@ -79,7 +79,7 @@ class QuizzesCollectionViewController: UICollectionViewController {
         var countOfAnswers = 0
         var countOfCorrectAnswer = 0
         var dateOfQuiz: Date?
-        var dictionary: Dictionary
+        var dictionary: RealmDictionary
         
         switch segue.identifier! {
         case "unwindFinishSeekingQuiz":
@@ -87,15 +87,17 @@ class QuizzesCollectionViewController: UICollectionViewController {
             countOfAnswers = sourceVC.countOfAnswers + sourceVC.countOfTimerInvokerd
             countOfCorrectAnswer = sourceVC.countOfCorrectAnswers
             dateOfQuiz = sourceVC.dateOfQuiz
-            dictionary = sourceVC.chosenParametrs!.dictionary
+            dictionary = sourceVC.dictionary!
             print("unwindFinishSeekingQuiz done")
+
         case "unwindFinishMatchingQuiz":
             guard let sourceVC = segue.source as? QuizMatchingViewController else { return }
             countOfAnswers = sourceVC.countOfAnswers
             countOfCorrectAnswer = sourceVC.countOfCorrectAnswers
             dateOfQuiz = sourceVC.dateOfQuiz
-            dictionary = sourceVC.chosenParametrs!.dictionary
+            dictionary = sourceVC.dictionary!
             print("unwindFinishMatchingQuiz done")
+/*
         case "unwindFinishSpellingQuiz":
             guard let sourceVC = segue.source as? QuizSpellingViewController else { return }
             countOfAnswers = sourceVC.countOfAnswers
@@ -103,28 +105,19 @@ class QuizzesCollectionViewController: UICollectionViewController {
             dateOfQuiz = sourceVC.dateOfQuiz
             dictionary = sourceVC.chosenParametrs!.dictionary
             print("unwindFinishSpellingQuiz done")
+ */
         default:
             return
         }
         
-        guard let context = managedContext else { return }
-        
-        guard let entityQuiz = NSEntityDescription.entity(forEntityName: "TestInfo", in: context) else { return }
-        let newQuiz = TestInfo(entity: entityQuiz, insertInto: context)
-        
-        newQuiz.dateOfCreation = dateOfQuiz! as NSDate
-        newQuiz.numberOfAnswers = Int32(countOfAnswers)
-        newQuiz.numberOfCorrectAnswers = Int32(countOfCorrectAnswer)
-        
-        dictionary.insertIntoTests(newQuiz, at: 0)
-        
-        do {
-            try context.save()
-        } catch let error as NSError {
-            print("Unresolved error during insert new quiz \(error), \(error.userInfo)")
+        try! realm.write {
+            var newQuizInfo = RealmQuizInfo()
+            
+            newQuizInfo.numberOfAnswers = countOfAnswers
+            newQuizInfo.numberOfCorrectAnswers = countOfCorrectAnswer
+            
+            dictionary.quizesInfo.append(newQuizInfo)
         }
-        
-        print(dictionary.tests?.array as! [TestInfo])
         
     }
     
@@ -166,8 +159,8 @@ class QuizzesCollectionViewController: UICollectionViewController {
         case "showQuizProperties":
             
             guard let qpvc = segue.destination as? QuizPropertiesViewController else { return }
-            guard let qcvc = segue.source as? QuizzesCollectionViewController else { return }
-            /*guard let cell = sender as? QuizzesCollectionViewCell, let indexPath = collectionView?.indexPath(for: cell) else { return }*/
+            /*guard let qcvc = segue.source as? QuizzesCollectionViewController else { return }
+            guard let cell = sender as? QuizzesCollectionViewCell, let indexPath = collectionView?.indexPath(for: cell) else { return }*/
             qpvc.typeOfQuiz = quizzes[selectedQuizCellIndex.row].name
             qpvc.modalPresentationStyle = .overCurrentContext
         
@@ -175,53 +168,54 @@ class QuizzesCollectionViewController: UICollectionViewController {
             guard let qpvc = sender as? QuizPropertiesViewController else { return }
             guard let qsvc = segue.destination as? QuizSeekingViewController else { return }
             
-            let chosenParametrs: (dictionary: Dictionary, questionType: DictionaryElements, answerType: DictionaryElements)
+            let chosenParametrs: (questionType: DictionaryElements, answerType: DictionaryElements)
             
             qsvc.byTime = true
-            
-            chosenParametrs.dictionary = qpvc.parametrsForPicker.dictionaries[qpvc.pickerView.selectedRow(inComponent: 0)]
+        
             chosenParametrs.questionType = qpvc.parametrsForPicker.questionType[qpvc.pickerView.selectedRow(inComponent: 1)]
             chosenParametrs.answerType = qpvc.parametrsForPicker.answersType[qpvc.pickerView.selectedRow(inComponent: 2)]
             
             qsvc.chosenParametrs = chosenParametrs
+            qsvc.dictionary = qpvc.dictionaries![qpvc.pickerView.selectedRow(inComponent: 0)]
  
         case "startSeekingQuiz":
             guard let qpvc = sender as? QuizPropertiesViewController else { return }
             guard let qsvc = segue.destination as? QuizSeekingViewController else { return }
             
-            let chosenParametrs: (dictionary: Dictionary, questionType: DictionaryElements, answerType: DictionaryElements)
+            let chosenParametrs: (questionType: DictionaryElements, answerType: DictionaryElements)
             
-            chosenParametrs.dictionary = qpvc.parametrsForPicker.dictionaries[qpvc.pickerView.selectedRow(inComponent: 0)]
+            
             chosenParametrs.questionType = qpvc.parametrsForPicker.questionType[qpvc.pickerView.selectedRow(inComponent: 1)]
             chosenParametrs.answerType = qpvc.parametrsForPicker.answersType[qpvc.pickerView.selectedRow(inComponent: 2)]
             
             qsvc.chosenParametrs = chosenParametrs
+            qsvc.dictionary = qpvc.dictionaries![qpvc.pickerView.selectedRow(inComponent: 0)]
         
         case "startMatchingByTimeQuiz":
             guard let qpvc = sender as? QuizPropertiesViewController else { return }
             guard let qmvc = segue.destination as? QuizMatchingViewController else { return }
             
-            let chosenParametrs: (dictionary: Dictionary, questionType: DictionaryElements, answerType: DictionaryElements)
+            let chosenParametrs: (questionType: DictionaryElements, answerType: DictionaryElements)
             
             qmvc.byTime = true
             
-            chosenParametrs.dictionary = qpvc.parametrsForPicker.dictionaries[qpvc.pickerView.selectedRow(inComponent: 0)]
             chosenParametrs.questionType = qpvc.parametrsForPicker.questionType[qpvc.pickerView.selectedRow(inComponent: 1)]
             chosenParametrs.answerType = qpvc.parametrsForPicker.answersType[qpvc.pickerView.selectedRow(inComponent: 2)]
             
             qmvc.chosenParametrs = chosenParametrs
+            qmvc.dictionary = qpvc.dictionaries![qpvc.pickerView.selectedRow(inComponent: 0)]
             
         case "startMatchingQuiz":
             guard let qpvc = sender as? QuizPropertiesViewController else { return }
             guard let qmvc = segue.destination as? QuizMatchingViewController else { return }
             
-            let chosenParametrs: (dictionary: Dictionary, questionType: DictionaryElements, answerType: DictionaryElements)
+            let chosenParametrs: (questionType: DictionaryElements, answerType: DictionaryElements)
             
-            chosenParametrs.dictionary = qpvc.parametrsForPicker.dictionaries[qpvc.pickerView.selectedRow(inComponent: 0)]
             chosenParametrs.questionType = qpvc.parametrsForPicker.questionType[qpvc.pickerView.selectedRow(inComponent: 1)]
             chosenParametrs.answerType = qpvc.parametrsForPicker.answersType[qpvc.pickerView.selectedRow(inComponent: 2)]
             
             qmvc.chosenParametrs = chosenParametrs
+            qmvc.dictionary = qpvc.dictionaries![qpvc.pickerView.selectedRow(inComponent: 0)]
             
         case "startSpellingQuiz":
             guard let qpvc = sender as? QuizPropertiesViewController else { return }
@@ -229,11 +223,11 @@ class QuizzesCollectionViewController: UICollectionViewController {
             
             let chosenParametrs: (dictionary: Dictionary, questionType: DictionaryElements, answerType: DictionaryElements)
             
-            chosenParametrs.dictionary = qpvc.parametrsForPicker.dictionaries[qpvc.pickerView.selectedRow(inComponent: 0)]
+            //chosenParametrs.dictionary = qpvc.parametrsForPicker.dictionaries[qpvc.pickerView.selectedRow(inComponent: 0)]
             chosenParametrs.questionType = qpvc.parametrsForPicker.questionType[qpvc.pickerView.selectedRow(inComponent: 1)]
             chosenParametrs.answerType = qpvc.parametrsForPicker.answersType[qpvc.pickerView.selectedRow(inComponent: 2)]
             
-            qsvc.chosenParametrs = chosenParametrs
+            //qsvc.chosenParametrs = chosenParametrs
             
         default:
             break
@@ -257,7 +251,6 @@ class QuizzesCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("try to set cell")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! QuizzesCollectionViewCell
     
         cell.quizzThumbNail.image = quizzes[indexPath.row].thumbnail
@@ -272,26 +265,19 @@ class QuizzesCollectionViewController: UICollectionViewController {
 
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let context = managedContext else { return }
         
-        let request = NSFetchRequest<Dictionary>(entityName: "Dictionary")
-        
-        do {
-            let result = try context.fetch(request)
-            if !result.isEmpty {
-                selectedQuizCellIndex = indexPath
-                performSegue(withIdentifier: "showQuizProperties", sender: self)
-            } else {
-                let emptyListOfDictionariesAlertController = UIAlertController(title: NSLocalizedString("No dictionaries", comment: "Title for alert controler when list of dictionaries is empty"), message: NSLocalizedString("Sadly, at this moment your list of dictionaries doesn't have no one dictionary.", comment: "Message for alert controller when list of dictionaries is empty"), preferredStyle: .alert)
-                
-                let cancelAlertAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Title for cancel alert action when chosen dictionary doesn't have any words"), style: .cancel, handler: nil)
-                
-                emptyListOfDictionariesAlertController.addAction(cancelAlertAction)
-                
-                present(emptyListOfDictionariesAlertController, animated: true, completion: nil)
-            }
-        } catch let error as NSError {
-            print("Unresolver error during fetching dictionary: \(error), \(error.userInfo)")
+        let result = realm.objects(RealmDictionary.self)
+        if !result.isEmpty {
+            selectedQuizCellIndex = indexPath
+            performSegue(withIdentifier: "showQuizProperties", sender: self)
+        } else {
+            let emptyListOfDictionariesAlertController = UIAlertController(title: NSLocalizedString("No dictionaries", comment: "Title for alert controler when list of dictionaries is empty"), message: NSLocalizedString("Sadly, at this moment your list of dictionaries doesn't have no one dictionary.", comment: "Message for alert controller when list of dictionaries is empty"), preferredStyle: .alert)
+            
+            let cancelAlertAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Title for cancel alert action when chosen dictionary doesn't have any words"), style: .cancel, handler: nil)
+            
+            emptyListOfDictionariesAlertController.addAction(cancelAlertAction)
+            
+            present(emptyListOfDictionariesAlertController, animated: true, completion: nil)
         }
     }
     

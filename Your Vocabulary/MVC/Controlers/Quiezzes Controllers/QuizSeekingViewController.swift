@@ -7,13 +7,16 @@
 //
 
 import UIKit
+import RealmSwift
 import CoreData
 
 class QuizSeekingViewController: UIViewController, QuizzesMethods {
 
     // MARK: - Properties
     
-    var chosenParametrs: (dictionary: Dictionary, questionType: DictionaryElements, answerType: DictionaryElements)?
+    
+    var dictionary : RealmDictionary?
+    var chosenParametrs: (questionType: DictionaryElements, answerType: DictionaryElements)?
     
     fileprivate var remainingQuestion = [(question: String, answer: String)]()
     fileprivate var currentQuestion: (question: String, answer: String) = ("None", "None")
@@ -88,9 +91,9 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
     }
     
     fileprivate func formQuestions() {
-        guard let parametrs = chosenParametrs, let words = parametrs.dictionary.words?.array as? [Word] else { return }
+        guard let parametrs = chosenParametrs, let dictionary = dictionary else { return }
         
-        for word in words {
+        for word in dictionary.words {
             if !word.isLearned {
                 guard let question = getElement(baseOn: parametrs.questionType, forWord: word), let answer = getElement(baseOn: parametrs.answerType, forWord: word) else { continue }
             
@@ -133,8 +136,6 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
         let grade = 1.0 / (Float(countOfAnswers + countOfTimerInvokerd) / Float(countOfCorrectAnswers))
         var alertTitle : String!
         var alertMessage : String!
-        
-        print("Grade \(grade * 100.0)%");
         
         if grade >= 0.90 {
             alertTitle = NSLocalizedString("Excellent", comment: "Title for finish alert controller when user's grade above 90%")
@@ -189,7 +190,6 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
     
     fileprivate func updateProgressBar() {
         progressBar.setProgress(progressBar.progress + Float(stepForProgressBar), animated: true)
-        print("Progress: \(progressBar.progress)")
     }
     
     
@@ -205,7 +205,6 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
         setQuestionAndAnswers()
         
         if byTime {
-            print("Starting seeking by time quiz")
             timerLabel.isHidden = false
             seconds = timeForAnswer
             countOfTimerInvokerd += 1
@@ -218,8 +217,6 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
                     self.seconds = self.timeForAnswer
                 }
             })
-        } else {
-            print("Starting seeking quiz")
         }
         
         // Do any additional setup after loading the view.

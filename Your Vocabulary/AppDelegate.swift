@@ -7,13 +7,57 @@
 //
 
 import UIKit
+import RealmSwift
 import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    override init() {
+        super.init()
+        
+        print("Realm schem version: \(Realm.Configuration.defaultConfiguration.schemaVersion)")
+        
+        
+        /*
+         let realmURL = Realm.Configuration.defaultConfiguration.fileURL!
+         let realmURLs = [
+         realmURL,
+         realmURL.appendingPathExtension("lock"),
+         realmURL.appendingPathExtension("note"),
+         realmURL.appendingPathExtension("management")
+         ]
+         for URL in realmURLs {
+         do {
+         try FileManager.default.removeItem(at: URL)
+         } catch {
+         // handle error
+         }
+         }
+        */
+     /*
+        let config = Realm.Configuration(
+            schemaVersion: 1,
+            migrationBlock: { migration, oldSchemaVersion in
+                // Any migration logic older Realm files may need
+                if (oldSchemaVersion < 1) {
+                    // Nothing to do!
+                    // Realm will automatically detect new properties and removed properties
+                    // And will update the schema on disk automatically
+                }
+        })
+        
+        Realm.Configuration.defaultConfiguration = config
+        */
+        print("Realm schem version: \(Realm.Configuration.defaultConfiguration.schemaVersion)")
+        
+    }
+    
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+        
+        return true
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -22,7 +66,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: #colorLiteral(red: 1, green: 0.831372549, blue: 0.4588235294, alpha: 1)], for: .selected)
         */
+        
+        
+        
         return true
+        
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -40,6 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
+        
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 

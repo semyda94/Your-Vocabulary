@@ -16,10 +16,243 @@ class SettingsTableViewController: UITableViewController {
     
     fileprivate let realm = try! Realm()
     
-    fileprivate let settingsCells : [String : (section: Int, row: Int)] = ["Export" : (1 , 0),
+    fileprivate let settingsCells : [String : (section: Int, row: Int)] = ["Create Backup" : (1 , 0),
                                                                            "Import" : (1, 1),
                                                                            "Reset" : (1 , 2)]
-    fileprivate let fileName = "DataBase.json"
+    fileprivate let backupDirName = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Backups")
+    
+    // MARK : - Methods
+    
+    fileprivate func creatingBackUp(forDictionaries dictionaries : [RealmDictionary], withFileName fileName : String) {
+        
+        guard let backupDirName = backupDirName else { return }
+        
+        if !FileManager.default.fileExists(atPath: backupDirName.absoluteString) {
+            do {
+                try FileManager.default.createDirectory(at: backupDirName, withIntermediateDirectories: true, attributes: nil)
+            } catch let error as NSError {
+                print("Error during creating Backups directory:\n \(error)")
+            }
+        }
+        
+        let fileURL = backupDirName.appendingPathComponent(fileName)
+        
+        print("Backup file: \(fileURL)")
+        
+        let jsonString = generateJSONStringBaseOn(dictionaries: dictionaries)
+        
+        do {
+            try jsonString.write(to: fileURL, atomically: false, encoding: .utf8)
+        } catch let error as NSError {
+            print("Error during exporting database : \(error)")
+        }
+        
+    }
+    
+    fileprivate func showCreateBackupAlertController(forDictionaries dictionaries: [RealmDictionary]) {
+        
+        let alertTitle = NSLocalizedString("Create Backup", comment: "Title for alert that creating backup file")
+        let alertMessage = NSLocalizedString("Enter in field below name of backup file.", comment: "Message for alert that creating backup file")
+    
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        
+        alertController.addTextField { (textField) in
+            textField.placeholder = NSLocalizedString("Backup name", comment: "Placeholder string for text field that required a backup name")
+            textField.text = nil
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        let createAction = UIAlertAction(title: "Create", style: .default) { (alert) in
+            guard let backupFileName = alertController.textFields![0].text else { return }
+            
+            self.creatingBackUp(forDictionaries: dictionaries, withFileName: backupFileName)
+            
+        }
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(createAction)
+        
+        present(alertController, animated: true, completion: nil)
+    
+    }
+    
+    fileprivate func generateJSONStringBaseOn(dictionaries : [RealmDictionary]) -> String {
+        
+        var jsonString = "{\n"
+        
+        jsonString += "\t\"realm_version\" : \(realm.configuration.schemaVersion),\n"
+        
+        jsonString += "\t\"dictionaries\" :\n"
+        jsonString += "\t[\n"
+        
+        for (index, dictionary) in dictionaries.enumerated() {
+            jsonString += "\t\t{\n"
+            
+            jsonString += "\t\t\t\"name\" : \"\(dictionary.name)\",\n"
+            jsonString += "\t\t\t\"numberOfLearnedWords\" : \(dictionary.numberOfLearnedWords),\n"
+            
+            jsonString += "\t\t\t\"dateOfCreation\" : \"\(dictionary.dateOfCreation)\",\n"
+            jsonString += "\t\t\t\"dateOfLastChanges\" : \"\(dictionary.dateOfLastChanges)\",\n"
+            
+            jsonString += "\t\t\t\"isTranslation\" : \(dictionary.isTranslation),\n"
+            jsonString += "\t\t\t\"isDefinition\" : \(dictionary.isDefinition),\n"
+            jsonString += "\t\t\t\"isExtraInfo\" : \(dictionary.isExtraInfo),\n"
+            jsonString += "\t\t\t\"isSynonym\" : \(dictionary.isSynonym),\n"
+            jsonString += "\t\t\t\"isExample\" : \(dictionary.isExample),\n"
+            
+            jsonString += "\t\t\t\"words\" :\n"
+            jsonString += "\t\t\t[\n"
+            
+            for (wordIndex, word) in dictionary.words.enumerated() {
+                jsonString += "\t\t\t\t{\n"
+                
+                jsonString += "\t\t\t\t\t\"word\" : \"\(word.word)\",\n"
+                jsonString += "\t\t\t\t\t\"isLearned\" : \(word.isLearned),\n"
+                
+                jsonString += "\t\t\t\t\t\"dateOfCreation\" : \"\(word.dateOfCreation)\",\n"
+                jsonString += "\t\t\t\t\t\"dateOfLastChanges\" : \"\(word.dateOfLastChanges)\",\n"
+                
+                jsonString += "\t\t\t\t\t\"translations\" :\n"
+                jsonString += "\t\t\t\t\t[\n"
+                
+                let translations = Array(word.translations)
+                
+                for (translationIndex, translation) in translations.enumerated() {
+                    
+                    if let translation = translation {
+                        jsonString += "\t\t\t\t\t\t\"\(translation)\""
+                    } else {
+                        jsonString += "\t\t\t\t\t\tnull"
+                    }
+                    
+                    if translationIndex == word.translations.count - 1 {
+                        jsonString += "\n"
+                    } else {
+                        jsonString += ",\n"
+                    }
+                    
+                }
+                jsonString += "\t\t\t\t\t],\n"
+                
+                jsonString += "\t\t\t\t\t\"definitions\" :\n"
+                jsonString += "\t\t\t\t\t[\n"
+                
+                let definitions = Array(word.definitions)
+                
+                for (definitionIndex, definition) in definitions.enumerated() {
+                    
+                    if let definition = definition {
+                        jsonString += "\t\t\t\t\t\t\"\(definition)\""
+                    } else {
+                        jsonString += "\t\t\t\t\t\tnull"
+                    }
+                    
+                    if definitionIndex == definitions.count - 1 {
+                        jsonString += "\n"
+                    } else {
+                        jsonString += ",\n"
+                    }
+                    
+                }
+                jsonString += "\t\t\t\t\t],\n"
+                
+                jsonString += "\t\t\t\t\t\"extraInfos\" :\n"
+                jsonString += "\t\t\t\t\t[\n"
+                
+                let extraInfos = Array(word.extraInfos)
+                
+                for (extraInfoIndex, extraInfo) in extraInfos.enumerated() {
+                    
+                    if let extraInfo = extraInfo {
+                        jsonString += "\t\t\t\t\t\t\"\(extraInfo)\""
+                    } else {
+                        jsonString += "\t\t\t\t\t\tnull"
+                    }
+                    
+                    if extraInfoIndex == extraInfos.count - 1 {
+                        jsonString += "\n"
+                    } else {
+                        jsonString += ",\n"
+                    }
+                    
+                }
+                jsonString += "\t\t\t\t\t],\n"
+                
+                jsonString += "\t\t\t\t\t\"synonyms\" :\n"
+                jsonString += "\t\t\t\t\t[\n"
+                
+                let synonyms = Array(word.synonyms)
+                
+                for (synonymIndex, synonym) in synonyms.enumerated() {
+                    
+                    if let synonym = synonym {
+                        jsonString += "\t\t\t\t\t\t\"\(synonym)\""
+                    } else {
+                        jsonString += "\t\t\t\t\t\tnull"
+                    }
+                    
+                    if synonymIndex == synonyms.count - 1 {
+                        jsonString += "\n"
+                    } else {
+                        jsonString += ",\n"
+                    }
+                    
+                }
+                jsonString += "\t\t\t\t\t],\n"
+                
+                jsonString += "\t\t\t\t\t\"examples\" :\n"
+                jsonString += "\t\t\t\t\t[\n"
+                
+                let examples = Array(word.examples)
+                
+                for (exampleIndex, example) in examples.enumerated() {
+                    
+                    if let example = example {
+                        jsonString += "\t\t\t\t\t\t\"\(example)\""
+                    } else {
+                        jsonString += "\t\t\t\t\t\tnull"
+                    }
+                    
+                    if exampleIndex == examples.count - 1 {
+                        jsonString += "\n"
+                    } else {
+                        jsonString += ",\n"
+                    }
+                    
+                }
+                jsonString += "\t\t\t\t\t]\n"
+                
+                if wordIndex == dictionary.words.count - 1 {
+                    jsonString += "\t\t\t\t}\n"
+                } else {
+                    jsonString += "\t\t\t\t},\n"
+                }
+            }
+            
+            jsonString += "\t\t\t]\n"
+            
+            
+            if index == dictionaries.count - 1 {
+                jsonString += "\t\t}\n"
+            } else {
+                jsonString += "\t\t},\n"
+            }
+        }
+        
+        jsonString += "\t]\n"
+        
+        jsonString += "}"
+        
+        return jsonString
+    }
+    
+    // MARK : - Unwind Segues
+    
+    @IBAction func finishRestoringBackup(segue: UIStoryboardSegue) {
+        
+    }
+   
     
     // MARK : - View life cycle
     
@@ -99,7 +332,7 @@ class SettingsTableViewController: UITableViewController {
         switch indexPath.section {
         case 1:
             switch indexPath.row {
-            case settingsCells["Export"]!.row :
+            case settingsCells["Create Backup"]!.row :
                 print("Start exporting of realm database")
                 
                 let dictionaries = realm.objects(RealmDictionary.self)
@@ -114,307 +347,31 @@ class SettingsTableViewController: UITableViewController {
                     present(alertController, animated: true, completion: nil)
                     
                 } else {
-                    var jsonString = "{\n"
                     
-                    jsonString += "\t\"realm_version\" : \(realm.configuration.schemaVersion),\n"
-                    
-                    jsonString += "\t\"dictionaries\" :\n"
-                    jsonString += "\t[\n"
-                    
-                    for (index, dictionary) in dictionaries.enumerated() {
-                        jsonString += "\t\t{\n"
-                        
-                        jsonString += "\t\t\t\"name\" : \"\(dictionary.name)\",\n"
-                        jsonString += "\t\t\t\"numberOfLearnedWords\" : \(dictionary.numberOfLearnedWords),\n"
-                        
-                        jsonString += "\t\t\t\"dateOfCreation\" : \"\(dictionary.dateOfCreation)\",\n"
-                        jsonString += "\t\t\t\"dateOfLastChanges\" : \"\(dictionary.dateOfLastChanges)\",\n"
-                        
-                        jsonString += "\t\t\t\"isTranslation\" : \(dictionary.isTranslation),\n"
-                        jsonString += "\t\t\t\"isDefinition\" : \(dictionary.isDefinition),\n"
-                        jsonString += "\t\t\t\"isExtraInfo\" : \(dictionary.isExtraInfo),\n"
-                        jsonString += "\t\t\t\"isSynonym\" : \(dictionary.isSynonym),\n"
-                        jsonString += "\t\t\t\"isExample\" : \(dictionary.isExample),\n"
-                        
-                        jsonString += "\t\t\t\"words\" :\n"
-                        jsonString += "\t\t\t[\n"
-                        
-                        for (wordIndex, word) in dictionary.words.enumerated() {
-                            jsonString += "\t\t\t\t{\n"
-                            
-                            jsonString += "\t\t\t\t\t\"word\" : \"\(word.word)\",\n"
-                            jsonString += "\t\t\t\t\t\"isLearned\" : \(word.isLearned),\n"
-                            
-                            jsonString += "\t\t\t\t\t\"dateOfCreation\" : \"\(word.dateOfCreation)\",\n"
-                            jsonString += "\t\t\t\t\t\"dateOfLastChanges\" : \"\(word.dateOfLastChanges)\",\n"
-                            
-                            jsonString += "\t\t\t\t\t\"translations\" :\n"
-                            jsonString += "\t\t\t\t\t[\n"
-                            
-                            let translations = Array(word.translations)
-                            
-                            for (translationIndex, translation) in translations.enumerated() {
-                                
-                                if let translation = translation {
-                                    jsonString += "\t\t\t\t\t\t\"\(translation)\""
-                                } else {
-                                    jsonString += "\t\t\t\t\t\tnull"
-                                }
-                                
-                                if translationIndex == word.translations.count - 1 {
-                                    jsonString += "\n"
-                                } else {
-                                    jsonString += ",\n"
-                                }
-                                
-                            }
-                            jsonString += "\t\t\t\t\t],\n"
-                            
-                            jsonString += "\t\t\t\t\t\"definitions\" :\n"
-                            jsonString += "\t\t\t\t\t[\n"
-                            
-                            let definitions = Array(word.definitions)
-                            
-                            for (definitionIndex, definition) in definitions.enumerated() {
-                                
-                                if let definition = definition {
-                                    jsonString += "\t\t\t\t\t\t\"\(definition)\""
-                                } else {
-                                    jsonString += "\t\t\t\t\t\tnull"
-                                }
-                                
-                                if definitionIndex == definitions.count - 1 {
-                                    jsonString += "\n"
-                                } else {
-                                    jsonString += ",\n"
-                                }
-                                
-                            }
-                            jsonString += "\t\t\t\t\t],\n"
-                            
-                            jsonString += "\t\t\t\t\t\"extraInfos\" :\n"
-                            jsonString += "\t\t\t\t\t[\n"
-                            
-                            let extraInfos = Array(word.extraInfos)
-                            
-                            for (extraInfoIndex, extraInfo) in extraInfos.enumerated() {
-                                
-                                if let extraInfo = extraInfo {
-                                    jsonString += "\t\t\t\t\t\t\"\(extraInfo)\""
-                                } else {
-                                    jsonString += "\t\t\t\t\t\tnull"
-                                }
-                                
-                                if extraInfoIndex == extraInfos.count - 1 {
-                                    jsonString += "\n"
-                                } else {
-                                    jsonString += ",\n"
-                                }
-                                
-                            }
-                            jsonString += "\t\t\t\t\t],\n"
-                            
-                            jsonString += "\t\t\t\t\t\"synonyms\" :\n"
-                            jsonString += "\t\t\t\t\t[\n"
-                            
-                            let synonyms = Array(word.synonyms)
-                            
-                            for (synonymIndex, synonym) in synonyms.enumerated() {
-                                
-                                if let synonym = synonym {
-                                    jsonString += "\t\t\t\t\t\t\"\(synonym)\""
-                                } else {
-                                    jsonString += "\t\t\t\t\t\tnull"
-                                }
-                                
-                                if synonymIndex == synonyms.count - 1 {
-                                    jsonString += "\n"
-                                } else {
-                                    jsonString += ",\n"
-                                }
-                                
-                            }
-                            jsonString += "\t\t\t\t\t],\n"
-                            
-                            jsonString += "\t\t\t\t\t\"examples\" :\n"
-                            jsonString += "\t\t\t\t\t[\n"
-                            
-                            let examples = Array(word.examples)
-                            
-                            for (exampleIndex, example) in examples.enumerated() {
-                                
-                                if let example = example {
-                                    jsonString += "\t\t\t\t\t\t\"\(example)\""
-                                } else {
-                                    jsonString += "\t\t\t\t\t\tnull"
-                                }
-                                
-                                if exampleIndex == examples.count - 1 {
-                                    jsonString += "\n"
-                                } else {
-                                    jsonString += ",\n"
-                                }
-                                
-                            }
-                            jsonString += "\t\t\t\t\t]\n"
-                            
-                            if wordIndex == dictionary.words.count - 1 {
-                                jsonString += "\t\t\t\t}\n"
-                            } else {
-                                jsonString += "\t\t\t\t},\n"
-                            }
-                        }
-                        
-                        jsonString += "\t\t\t]\n"
-                        
-                        
-                        if index == dictionaries.count - 1 {
-                            jsonString += "\t\t}\n"
-                        } else {
-                            jsonString += "\t\t},\n"
-                        }
-                    }
-                    
-                    jsonString += "\t]\n"
-                    
-                    jsonString += "}"
-                    
-                    if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-                        let fileURL = dir.appendingPathComponent(fileName)
-                        
-                        print("directory: \(fileURL)")
-                        
-                        do {
-                            try jsonString.write(to: fileURL, atomically: false, encoding: .utf8)
-                        } catch let error as NSError {
-                            print("Error during exporting database : \(error)")
-                        }
-                        
-                    }
-                    
-                    //print("JSON exported string:\n\(jsonString)")
-                    
+                    showCreateBackupAlertController(forDictionaries: Array(dictionaries))
                 }
                 
                 print("End of Exporting of realm database")
                 
-                
-                /*
-                 guard let context = managedContext else { return }
-                 
-                 var dictionaries : [Dictionary]
-                 
-                 let request = NSFetchRequest<Dictionary>(entityName: "Dictionary")
-                 
-                 do {
-                 let result = try context.fetch(request)
-                 
-                 dictionaries = result
-                 
-                 } catch let error as NSError {
-                 print("Unresolved error during fetching dictionary for export: \(error), \(error.userInfo)")
-                 }
-                 */
             case settingsCells["Import"]!.row:
                 
+                guard let backupDirName = backupDirName else { return }
+
+                    
+                    if try! !FileManager.default.contentsOfDirectory(at: backupDirName, includingPropertiesForKeys: nil).isEmpty {
+                        performSegue(withIdentifier: "showBackups", sender: self)
+                    }
+                    // process files
+
+                /*
                 if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
                     let fileURL = dir.appendingPathComponent(fileName)
                     
                     print("directory: \(fileURL)")
                     
-                    do {
-                        let jsonString = try String(contentsOf: fileURL, encoding: .utf8)
-                        
-                        if let data = jsonString.data(using: .utf8) {
-                            
-                            do {
-                                let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
-                                //print("Get json: \(json)")
-                                
-                                var importedDictionaries = [RealmDictionary]()
-                                
-                                if let jsonDictionary = jsonObject as? [String : Any], let dictionariesJSONDictionary = jsonDictionary["dictionaries"] as? [[String : Any]] {
-                                    for (inedex, dictionaryJSON) in dictionariesJSONDictionary.enumerated() {
-                                        let newImportedDictionary = RealmDictionary()
-                                        
-                                        newImportedDictionary.name = dictionaryJSON["name"] as! String
-                                        
-                                        newImportedDictionary.numberOfLearnedWords = dictionaryJSON["numberOfLearnedWords"] as! Int
-                                        /*
-                                         let dateFormatter = DateFormatter()
-                                         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-                                         
-                                         if let dictionaryDataOfCreation = dateFormatter.date(from: dictionaryJSON["dateOfCreation"] as! String) {
-                                         newImportedDictionary.dateOfCreation = dictionaryDataOfCreation
-                                         }
-                                         
-                                         if let dictionaryDateIfLastChanges = dateFormatter.date(from: dictionaryJSON["dateOfLastChanges"] as! String) {
-                                         newImportedDictionary.dateOfLastChanges = dictionaryDateIfLastChanges
-                                         }
-                                         */
-                                        newImportedDictionary.isTranslation = dictionaryJSON["isTranslation"] as! Bool
-                                        newImportedDictionary.isDefinition = dictionaryJSON["isDefinition"] as! Bool
-                                        newImportedDictionary.isExtraInfo = dictionaryJSON["isExtraInfo"] as! Bool
-                                        newImportedDictionary.isSynonym = dictionaryJSON["isSynonym"] as! Bool
-                                        newImportedDictionary.isExample = dictionaryJSON["isExample"] as! Bool
-                                        
-                                        if let wordsJSONDictionariesArray = dictionaryJSON["words"] as? [[String : Any]] {
-                                            var importedWords = List<RealmWord>()
-                                            
-                                            for word in wordsJSONDictionariesArray {
-                                                let newImportedWord = RealmWord()
-                                                
-                                                newImportedWord.word = word["word"] as! String
-                                                newImportedWord.isLearned = word["isLearned"] as! Bool
-                                                
-                                                if let translations = word["translations"] as? [String?] {
-                                                    newImportedWord.translations.append(objectsIn: translations)
-                                                }
-                                                
-                                                if let translations = word["definitions"] as? [String?] {
-                                                    newImportedWord.definitions.append(objectsIn: translations)
-                                                }
-                                                
-                                                if let translations = word["extraInfos"] as? [String?] {
-                                                    newImportedWord.extraInfos.append(objectsIn: translations)
-                                                }
-                                                
-                                                if let translations = word["synonyms"] as? [String?] {
-                                                    newImportedWord.synonyms.append(objectsIn: translations)
-                                                }
-                                                
-                                                if let translations = word["examples"] as? [String?] {
-                                                    newImportedWord.examples.append(objectsIn: translations)
-                                                }
-                                                
-                                                importedWords.append(newImportedWord)
-                                            }
-                                            
-                                            newImportedDictionary.words = importedWords
-                                            print("got list of words")
-                                        }
-                                        
-                                        importedDictionaries.append(newImportedDictionary)
-                                        
-                                        print("newImportedDictionary: \(newImportedDictionary)")
-                                        
-                                    }
-                                    
-                                    try! realm.write {
-                                        realm.deleteAll()
-                                        
-                                        realm.add(importedDictionaries)
-                                    }
-                                }
-                            } catch let error as NSError {
-                                print("error: \(error)")
-                            }
-                            
-                        }
-                        
-                    }
-                    catch {/* error handling here */}
+                    
                 }
+ */
                 
             case settingsCells["Reset"]!.row:
                 let alert = UIAlertController(title: "Reseting database", message: "Are you sure you want to delete all data?", preferredStyle: .alert)
@@ -440,14 +397,22 @@ class SettingsTableViewController: UITableViewController {
         
     }
     
-    /*
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
+        switch segue.identifier {
+        case "showBackups":
+            guard let stvc = segue.source as? SettingsTableViewController, let btvc = segue.destination as? BackupsTableViewController, let backupDirName = stvc.backupDirName else { return }
+            
+            let backups = try! FileManager.default.contentsOfDirectory(at: backupDirName, includingPropertiesForKeys: nil, options: .skipsHiddenFiles)
+            
+            btvc.backups = backups
+            
+        default:
+            break
+        }
      }
-     */
+    
     
 }

@@ -3,7 +3,7 @@
 "2Tm-C5-4C8.headerTitle" = "Database";
 
 /* Class = "UILabel"; text = "Insert database"; ObjectID = "4x0-Z7-ZTk"; */
-"4x0-Z7-ZTk.text" = "Insert database";
+"4x0-Z7-ZTk.text" = "Restore from backup";
 
 /* Class = "UITableViewController"; title = "Language"; ObjectID = "58C-SK-XC8"; */
 "58C-SK-XC8.title" = "Language";
@@ -33,7 +33,7 @@
 "jva-tq-3U2.text" = "English";
 
 /* Class = "UILabel"; text = "Export database"; ObjectID = "oyl-wv-hfY"; */
-"oyl-wv-hfY.text" = "Export database";
+"oyl-wv-hfY.text" = "Create backup";
 
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "rcf-Kt-UAx"; */
 "rcf-Kt-UAx.headerTitle" = "Other";

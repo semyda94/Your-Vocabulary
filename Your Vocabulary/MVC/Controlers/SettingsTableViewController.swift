@@ -16,9 +16,10 @@ class SettingsTableViewController: UITableViewController {
     
     fileprivate let realm = try! Realm()
     
-    fileprivate let settingsCells : [String : (section: Int, row: Int)] = ["Create Backup" : (1 , 0),
-                                                                           "Import" : (1, 1),
-                                                                           "Reset" : (1 , 2)]
+    fileprivate let settingsCells : [String : IndexPath] = ["Create Backup" : IndexPath(row: 0, section: 1),
+                                                                           "Import" : IndexPath(row: 1, section: 1),
+                                                                           "Reset" : IndexPath(row: 2, section: 1),
+                                                                           "Guide" : IndexPath(row: 0, section: 2)]
     fileprivate let backupDirName = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Backups")
     
     // MARK : - Methods
@@ -331,8 +332,8 @@ class SettingsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 1:
-            switch indexPath.row {
-            case settingsCells["Create Backup"]!.row :
+            switch indexPath {
+            case settingsCells["Create Backup"] :
                 print("Start exporting of realm database")
                 
                 let dictionaries = realm.objects(RealmDictionary.self)
@@ -353,7 +354,7 @@ class SettingsTableViewController: UITableViewController {
                 
                 print("End of Exporting of realm database")
                 
-            case settingsCells["Import"]!.row:
+            case settingsCells["Import"]:
                 
                 guard let backupDirName = backupDirName else { return }
 
@@ -373,7 +374,7 @@ class SettingsTableViewController: UITableViewController {
                 }
  */
                 
-            case settingsCells["Reset"]!.row:
+            case settingsCells["Reset"]:
                 let alert = UIAlertController(title: "Reseting database", message: "Are you sure you want to delete all data?", preferredStyle: .alert)
                 
                 alert.addAction(UIAlertAction(title: "Reset", style: .default, handler: { _ in
@@ -388,6 +389,9 @@ class SettingsTableViewController: UITableViewController {
                 present(alert, animated: true, completion: {
                     tableView.deselectRow(at: indexPath, animated: true)
                 })
+            
+            case settingsCells["Guide"]:
+                print("")
             default:
                 return
             }

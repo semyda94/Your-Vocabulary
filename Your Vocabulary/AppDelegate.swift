@@ -17,6 +17,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     override init() {
         super.init()
         
+        window = UIWindow(frame: UIScreen.main.bounds)
+        
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let userDefaults = UserDefaults.standard
+        
+        if userDefaults.bool(forKey: "onboardingWasComplited") {
+            window?.rootViewController = sb.instantiateViewController(withIdentifier: "MainApp")
+        } else {
+            window?.rootViewController = sb.instantiateViewController(withIdentifier: "AppOnboarding")
+            window?.makeKeyAndVisible()
+        }
+        
         print("Realm schem version: \(Realm.Configuration.defaultConfiguration.schemaVersion)")
         
         

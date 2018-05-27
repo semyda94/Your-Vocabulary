@@ -7,22 +7,25 @@
 //
 
 import UIKit
+import UserNotifications
+import UserNotificationsUI
 import RealmSwift
 import SwiftyJSON
 
 class SettingsTableViewController: UITableViewController {
     
-    // MARK : - Propertires
+    // MARK: - Propertires
     
     fileprivate let realm = try! Realm()
     
-    fileprivate let settingsCells : [String : IndexPath] = ["Create Backup" : IndexPath(row: 0, section: 1),
-                                                                           "Import" : IndexPath(row: 1, section: 1),
-                                                                           "Reset" : IndexPath(row: 2, section: 1),
-                                                                           "Guide" : IndexPath(row: 0, section: 2)]
+    fileprivate let settingsCells : [String : IndexPath] = ["Notifications" : IndexPath(row: 1, section: 0),
+                                                            "Create Backup" : IndexPath(row: 0, section: 1),
+                                                            "Import" : IndexPath(row: 1, section: 1),
+                                                            "Reset" : IndexPath(row: 2, section: 1),
+                                                            "Guide" : IndexPath(row: 0, section: 2)]
     fileprivate let backupDirName = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Backups")
     
-    // MARK : - Methods
+    // MARK: - Methods
     
     fileprivate func creatingBackUp(forDictionaries dictionaries : [RealmDictionary], withFileName fileName : String) {
         
@@ -54,7 +57,7 @@ class SettingsTableViewController: UITableViewController {
         
         let alertTitle = NSLocalizedString("Create Backup", comment: "Title for alert that creating backup file")
         let alertMessage = NSLocalizedString("Enter in field below name of backup file.", comment: "Message for alert that creating backup file")
-    
+        
         let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
         
         alertController.addTextField { (textField) in
@@ -75,7 +78,7 @@ class SettingsTableViewController: UITableViewController {
         alertController.addAction(createAction)
         
         present(alertController, animated: true, completion: nil)
-    
+        
     }
     
     fileprivate func generateJSONStringBaseOn(dictionaries : [RealmDictionary]) -> String {
@@ -248,12 +251,12 @@ class SettingsTableViewController: UITableViewController {
         return jsonString
     }
     
-    // MARK : - Unwind Segues
+    // MARK: - Unwind Segues
     
     @IBAction func finishRestoringBackup(segue: UIStoryboardSegue) {
         
     }
-   
+    
     
     // MARK : - View life cycle
     
@@ -261,11 +264,17 @@ class SettingsTableViewController: UITableViewController {
         super.viewDidLoad()
         
         self.tableView.backgroundView = UIImageView(image: #imageLiteral(resourceName: "bg"))
+        
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = false
     }
     
     override func didReceiveMemoryWarning() {
@@ -330,81 +339,106 @@ class SettingsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.section {
-        case 1:
-            switch indexPath {
-            case settingsCells["Create Backup"] :
-                print("Start exporting of realm database")
-                
-                let dictionaries = realm.objects(RealmDictionary.self)
-                
-                if dictionaries.count < 1 {
-                    let alertController = UIAlertController(title: NSLocalizedString("Can not import", comment: "Title of error of exporting whole database"), message: NSLocalizedString("At this moment you don't have any dictionaries. For exporting database have to have at least one dictionary.", comment: "Message of allert action for error of exporting whole database"), preferredStyle: .alert)
-                    
-                    let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Title of alert action when user dosn't have any dictionaries during exporting"), style: .cancel, handler: nil)
-                    
-                    alertController.addAction(cancelAction)
-                    
-                    present(alertController, animated: true, completion: nil)
-                    
-                } else {
-                    
-                    showCreateBackupAlertController(forDictionaries: Array(dictionaries))
-                }
-                
-                print("End of Exporting of realm database")
-                
-            case settingsCells["Import"]:
-                
-                guard let backupDirName = backupDirName else { return }
-
-                    
-                    if try! !FileManager.default.contentsOfDirectory(at: backupDirName, includingPropertiesForKeys: nil).isEmpty {
-                        performSegue(withIdentifier: "showBackups", sender: self)
-                    }
-                    // process files
-
-                /*
-                if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-                    let fileURL = dir.appendingPathComponent(fileName)
-                    
-                    print("directory: \(fileURL)")
-                    
-                    
-                }
- */
-                
-            case settingsCells["Reset"]:
-                let alert = UIAlertController(title: "Reseting database", message: "Are you sure you want to delete all data?", preferredStyle: .alert)
-                
-                alert.addAction(UIAlertAction(title: "Reset", style: .default, handler: { _ in
-                    try! self.realm.write {
-                        self.realm.deleteAll()
-                    }
-                }))
-                
-                
-                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                
-                present(alert, animated: true, completion: {
-                    tableView.deselectRow(at: indexPath, animated: true)
-                })
+        switch indexPath {
             
-            case settingsCells["Guide"]:
-                print("")
-            default:
-                return
+        case settingsCells["Notifications"] :
+            
+            let UNCenter = UNUserNotificationCenter.current()
+            UNCenter.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+                if granted {
+                    
+                }
             }
+            
+            //performSegue(withIdentifier: "showNotifications", sender: nil)
+            /*
+            var dateComponents = DateComponents()
+            dateComponents.hour = 15
+            dateComponents.minute = 26
+            let triger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+            
+            triger.nextTriggerDate()
+            
+            let content = UNMutableNotificationContent()
+            content.title = "Title test"
+            content.body = "Test o the text in the body"
+            content.categoryIdentifier = "customIdentifier"
+            content.sound = UNNotificationSound.default()
+            
+            let request = UNNotificationRequest(identifier: "Test" , content: content, trigger: triger)
+            
+            UNCenter.add(request, withCompletionHandler: nil)*/
+            
+            
+        case settingsCells["Create Backup"] :
+            print("Start exporting of realm database")
+            
+            let dictionaries = realm.objects(RealmDictionary.self)
+            
+            if dictionaries.count < 1 {
+                let alertController = UIAlertController(title: NSLocalizedString("Can not import", comment: "Title of error of exporting whole database"), message: NSLocalizedString("At this moment you don't have any dictionaries. For exporting database have to have at least one dictionary.", comment: "Message of allert action for error of exporting whole database"), preferredStyle: .alert)
+                
+                let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Title of alert action when user dosn't have any dictionaries during exporting"), style: .cancel, handler: nil)
+                
+                alertController.addAction(cancelAction)
+                
+                present(alertController, animated: true, completion: nil)
+                
+            } else {
+                
+                showCreateBackupAlertController(forDictionaries: Array(dictionaries))
+            }
+            
+            print("End of Exporting of realm database")
+            
+        case settingsCells["Import"]:
+            
+            guard let backupDirName = backupDirName else { return }
+            
+            
+            if try! !FileManager.default.contentsOfDirectory(at: backupDirName, includingPropertiesForKeys: nil).isEmpty {
+                performSegue(withIdentifier: "showBackups", sender: self)
+            }
+            // process files
+            
+            /*
+             if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+             let fileURL = dir.appendingPathComponent(fileName)
+             
+             print("directory: \(fileURL)")
+             
+             
+             }
+             */
+            
+        case settingsCells["Reset"]:
+            let alert = UIAlertController(title: "Reseting database", message: "Are you sure you want to delete all data?", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Reset", style: .default, handler: { _ in
+                try! self.realm.write {
+                    self.realm.deleteAll()
+                }
+            }))
+            
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            
+            present(alert, animated: true, completion: {
+                tableView.deselectRow(at: indexPath, animated: true)
+            })
+            
+        case settingsCells["Guide"]:
+            print("")
         default:
             return
         }
         
     }
     
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "showBackups":
             guard let stvc = segue.source as? SettingsTableViewController, let btvc = segue.destination as? BackupsTableViewController, let backupDirName = stvc.backupDirName else { return }
@@ -416,7 +450,7 @@ class SettingsTableViewController: UITableViewController {
         default:
             break
         }
-     }
+    }
     
     
 }

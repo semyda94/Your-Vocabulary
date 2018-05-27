@@ -23,6 +23,8 @@
 		E73CE3982092DE67002FC803 /* Quizzes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E73CE39A2092DE67002FC803 /* Quizzes.storyboard */; };
 		E74B4A0920354285000BA062 /* WordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74B4A0820354285000BA062 /* WordsViewController.swift */; };
 		E74B4A0B20362951000BA062 /* WordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74B4A0A20362951000BA062 /* WordTableViewCell.swift */; };
+		E74EBF1420B66C530065ED93 /* TrainingReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74EBF1320B66C530065ED93 /* TrainingReminderViewController.swift */; };
+		E74EBF1620B797D60065ED93 /* DayOfWeekButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74EBF1520B797D60065ED93 /* DayOfWeekButton.swift */; };
 		E750B9A7202415770033AA2B /* ExtraInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E750B99D202415770033AA2B /* ExtraInfo+CoreDataClass.swift */; };
 		E750B9A8202415770033AA2B /* ExtraInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E750B99E202415770033AA2B /* ExtraInfo+CoreDataProperties.swift */; };
 		E750B9A9202415770033AA2B /* Translation+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E750B99F202415770033AA2B /* Translation+CoreDataClass.swift */; };
@@ -35,6 +37,7 @@
 		E750B9B0202415770033AA2B /* Example+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E750B9A6202415770033AA2B /* Example+CoreDataProperties.swift */; };
 		E752843920A0766F00A397C3 /* enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E752843820A0766F00A397C3 /* enumerations.swift */; };
 		E7591EC32023BE5F00007057 /* WordFieldsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7591EC22023BE5F00007057 /* WordFieldsTableViewCell.swift */; };
+		E75A612220B7A53C0035312A /* NotificationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75A612120B7A53C0035312A /* NotificationsTableViewController.swift */; };
 		E7717C4120B25A920080BB82 /* BackupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7717C4020B25A920080BB82 /* BackupsTableViewController.swift */; };
 		E77280651FFDDEF6004DC8A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77280641FFDDEF6004DC8A3 /* AppDelegate.swift */; };
 		E772806A1FFDDEF6004DC8A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E77280681FFDDEF6004DC8A3 /* Main.storyboard */; };
@@ -107,6 +110,8 @@
 		E73CE39E2092DE6B002FC803 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Quizzes.strings; sourceTree = "<group>"; };
 		E74B4A0820354285000BA062 /* WordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsViewController.swift; sourceTree = "<group>"; };
 		E74B4A0A20362951000BA062 /* WordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordTableViewCell.swift; sourceTree = "<group>"; };
+		E74EBF1320B66C530065ED93 /* TrainingReminderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingReminderViewController.swift; sourceTree = "<group>"; };
+		E74EBF1520B797D60065ED93 /* DayOfWeekButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekButton.swift; sourceTree = "<group>"; };
 		E750B99D202415770033AA2B /* ExtraInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ExtraInfo+CoreDataClass.swift"; path = "CoreDataObjects/ExtraInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E750B99E202415770033AA2B /* ExtraInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ExtraInfo+CoreDataProperties.swift"; path = "CoreDataObjects/ExtraInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E750B99F202415770033AA2B /* Translation+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Translation+CoreDataClass.swift"; path = "CoreDataObjects/Translation+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -119,6 +124,7 @@
 		E750B9A6202415770033AA2B /* Example+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Example+CoreDataProperties.swift"; path = "CoreDataObjects/Example+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E752843820A0766F00A397C3 /* enumerations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = enumerations.swift; path = ../../../../../../enumerations.swift; sourceTree = "<group>"; };
 		E7591EC22023BE5F00007057 /* WordFieldsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordFieldsTableViewCell.swift; sourceTree = "<group>"; };
+		E75A612120B7A53C0035312A /* NotificationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewController.swift; sourceTree = "<group>"; };
 		E760EA18209691B00080F1E5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		E7717C4020B25A920080BB82 /* BackupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupsTableViewController.swift; sourceTree = "<group>"; };
 		E77280611FFDDEF6004DC8A3 /* Your Vocabulary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Your Vocabulary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -290,6 +296,9 @@
 		E77280791FFDE0D6004DC8A3 /* Controlers */ = {
 			isa = PBXGroup;
 			children = (
+				E74EBF1320B66C530065ED93 /* TrainingReminderViewController.swift */,
+				E74EBF1520B797D60065ED93 /* DayOfWeekButton.swift */,
+				E75A612120B7A53C0035312A /* NotificationsTableViewController.swift */,
 				E7203D5520B3FB1F00281D9D /* AppOnboardingViewController.swift */,
 				E7717C4020B25A920080BB82 /* BackupsTableViewController.swift */,
 				E7E520C1207B2BE800546735 /* YourVocabularyTabBarController.swift */,
@@ -517,12 +526,14 @@
 				E7041E1E202BF069002A5B81 /* QuizzesViewController.swift in Sources */,
 				E7203D5420B3F8FA00281D9D /* AppOnboardingView.swift in Sources */,
 				E7591EC32023BE5F00007057 /* WordFieldsTableViewCell.swift in Sources */,
+				E74EBF1620B797D60065ED93 /* DayOfWeekButton.swift in Sources */,
 				E750B9AC202415770033AA2B /* Synonym+CoreDataProperties.swift in Sources */,
 				E7E312182032A81C00F03FC9 /* QuizSeekingViewController.swift in Sources */,
 				E7717C4120B25A920080BB82 /* BackupsTableViewController.swift in Sources */,
 				E78E23DC205633B700EE8790 /* StatisticTableViewCell.swift in Sources */,
 				E7E91B7420032C020066EC13 /* Dictionary+CoreDataClass.swift in Sources */,
 				E781A5AC204542E3002028D7 /* QuizzesMethods.swift in Sources */,
+				E75A612220B7A53C0035312A /* NotificationsTableViewController.swift in Sources */,
 				E750B9AF202415770033AA2B /* Example+CoreDataClass.swift in Sources */,
 				E714DB872033E65E0082024E /* DictionaryTableViewCell.swift in Sources */,
 				E7C556452025255600CD5C3C /* WordAddFieldButtonTableViewCell.swift in Sources */,
@@ -544,6 +555,7 @@
 				E7089B42202BE3F30028272C /* QuizzesCollectionViewCell.swift in Sources */,
 				E785D6D6200C5A0E0068B4CE /* BEMCheckBoxGroup.m in Sources */,
 				E750B9AD202415770033AA2B /* Definition+CoreDataClass.swift in Sources */,
+				E74EBF1420B66C530065ED93 /* TrainingReminderViewController.swift in Sources */,
 				E750B9AE202415770033AA2B /* Definition+CoreDataProperties.swift in Sources */,
 				E785D6D5200C5A0E0068B4CE /* BEMPathManager.m in Sources */,
 				E750B9A7202415770033AA2B /* ExtraInfo+CoreDataClass.swift in Sources */,

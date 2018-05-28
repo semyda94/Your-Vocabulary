@@ -44,7 +44,16 @@ class LanguageTableViewController: UITableViewController {
         }
         
         CustomeLanguageSwitcher.setAppleLAnguageTo(lang: languageCode)
+        CustomeLanguageSwitcher.DoTheMagic()
         print("was taped cell for language: \(language) with code \(languageCode)")
+        
+        let rootviewcontroller: UIWindow = ((UIApplication.shared.delegate?.window)!)!
+        rootviewcontroller.rootViewController =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainApp")
+        let mainwindow = (UIApplication.shared.delegate?.window!)!
+        mainwindow.backgroundColor = UIColor(hue: 0.6477, saturation: 0.6314, brightness: 0.6077, alpha: 0.8)
+        UIView.transition(with: mainwindow, duration: 0.55001, options: .transitionFlipFromLeft, animations: { () -> Void in
+        }) { (finished: Bool) -> Void in
+        }
         
         
     }

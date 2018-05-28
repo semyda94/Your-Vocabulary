@@ -16,6 +16,7 @@
 		E714DB872033E65E0082024E /* DictionaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E714DB862033E65E0082024E /* DictionaryTableViewCell.swift */; };
 		E7203D5420B3F8FA00281D9D /* AppOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7203D5320B3F8FA00281D9D /* AppOnboardingView.swift */; };
 		E7203D5620B3FB1F00281D9D /* AppOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7203D5520B3FB1F00281D9D /* AppOnboardingViewController.swift */; };
+		E7268D8020BC23C3009652E3 /* CustomeLanguageSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7268D7F20BC23C3009652E3 /* CustomeLanguageSwitcher.swift */; };
 		E72E9DE3200C3300008D16A1 /* DictionariesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72E9DE2200C3300008D16A1 /* DictionariesViewController.swift */; };
 		E73171F21FFE56B500615B88 /* WordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73171F11FFE56B500615B88 /* WordViewController.swift */; };
 		E73CE3892092DE56002FC803 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E73CE38B2092DE56002FC803 /* Settings.storyboard */; };
@@ -97,6 +98,7 @@
 		E714DB862033E65E0082024E /* DictionaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryTableViewCell.swift; sourceTree = "<group>"; };
 		E7203D5320B3F8FA00281D9D /* AppOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOnboardingView.swift; sourceTree = "<group>"; };
 		E7203D5520B3FB1F00281D9D /* AppOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOnboardingViewController.swift; sourceTree = "<group>"; };
+		E7268D7F20BC23C3009652E3 /* CustomeLanguageSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomeLanguageSwitcher.swift; sourceTree = "<group>"; };
 		E72E9DE2200C3300008D16A1 /* DictionariesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionariesViewController.swift; sourceTree = "<group>"; };
 		E73171F11FFE56B500615B88 /* WordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordViewController.swift; sourceTree = "<group>"; };
 		E73CE38A2092DE56002FC803 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 		E77280791FFDE0D6004DC8A3 /* Controlers */ = {
 			isa = PBXGroup;
 			children = (
+				E7268D7F20BC23C3009652E3 /* CustomeLanguageSwitcher.swift */,
 				E74EBF1320B66C530065ED93 /* TrainingReminderViewController.swift */,
 				E74EBF1520B797D60065ED93 /* DayOfWeekButton.swift */,
 				E75A612120B7A53C0035312A /* NotificationsTableViewController.swift */,
@@ -415,6 +418,7 @@
 				en,
 				Base,
 				ru,
+				ar,
 			);
 			mainGroup = E77280581FFDDEF6004DC8A3;
 			productRefGroup = E77280621FFDDEF6004DC8A3 /* Products */;
@@ -516,6 +520,7 @@
 				E7F04B6B2061252A000AF4BB /* publicDictionaries.swift in Sources */,
 				E785D6D4200C5A0E0068B4CE /* BEMAnimationManager.m in Sources */,
 				E7C556432025252600CD5C3C /* WordTitleFollowingFieldsCellTableViewCell.swift in Sources */,
+				E7268D8020BC23C3009652E3 /* CustomeLanguageSwitcher.swift in Sources */,
 				E7E25E3B203FC7E6009EFE87 /* UIStoryBoardSegueWithCompletion.swift in Sources */,
 				E7E520C2207B2BE800546735 /* YourVocabularyTabBarController.swift in Sources */,
 				E7E25E3D2042B9C3009EFE87 /* QuizMatchingViewController.swift in Sources */,

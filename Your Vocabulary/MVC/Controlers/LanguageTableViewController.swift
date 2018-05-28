@@ -28,6 +28,26 @@ class LanguageTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath), let language = cell.textLabel?.text else { return }
+        
+        var languageCode = ""
+        
+        switch language {
+        case "English":
+            languageCode = "en"
+        case "Русский":
+            languageCode = "ru"
+        default:
+            return
+        }
+        
+        CustomeLanguageSwitcher.setAppleLAnguageTo(lang: languageCode)
+        print("was taped cell for language: \(language) with code \(languageCode)")
+        
+        
+    }
 
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

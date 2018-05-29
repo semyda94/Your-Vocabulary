@@ -467,25 +467,25 @@
                                 <blurEffect style="dark"/>
                             </visualEffectView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VwZ-Hs-s7Y">
-                                <rect key="frame" x="43.666666666666657" y="306" width="288" height="210"/>
+                                <rect key="frame" x="15" y="306" width="345" height="210"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mdQ-PN-Wfe">
-                                        <rect key="frame" x="127.33333333333333" y="7.9999999999999982" width="33.333333333333329" height="20.333333333333329"/>
+                                        <rect key="frame" x="156" y="7.9999999999999982" width="33.333333333333343" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2co-rd-3L6">
-                                        <rect key="frame" x="16" y="36.333333333333314" width="256" height="30"/>
+                                        <rect key="frame" x="16" y="36.333333333333314" width="313" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="5Hq-Eh-KSH">
-                                        <rect key="frame" x="16" y="74" width="256" height="79"/>
+                                        <rect key="frame" x="15" y="74" width="315" height="79"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="1fZ-vM-qEP">
-                                                <rect key="frame" x="0.0" y="0.0" width="124" height="79"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="1fZ-vM-qEP">
+                                                <rect key="frame" x="0.0" y="0.0" width="153.66666666666666" height="79"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="L3c-4g-OjB">
                                                         <rect key="frame" x="0.0" y="0.0" width="84" height="79"/>
@@ -517,10 +517,10 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="BRy-eZ-pMz">
-                                                        <rect key="frame" x="92" y="0.0" width="32" height="79"/>
+                                                        <rect key="frame" x="132.66666666666666" y="0.0" width="21" height="79"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" verticalHuggingPriority="251" placeholderIntrinsicWidth="21" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="Uif-e3-o3f" customClass="BEMCheckBox">
-                                                                <rect key="frame" x="0.0" y="0.0" width="32" height="21"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="21" height="21"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="on" value="NO"/>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="onTintColor">
@@ -541,7 +541,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="21" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="qYf-2A-xit" customClass="BEMCheckBox">
-                                                                <rect key="frame" x="0.0" y="29" width="32" height="21"/>
+                                                                <rect key="frame" x="0.0" y="29" width="21" height="21"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="on" value="NO"/>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="onTintColor">
@@ -562,7 +562,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view contentMode="scaleToFill" verticalHuggingPriority="251" placeholderIntrinsicWidth="21" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="1wQ-VO-JL4" customClass="BEMCheckBox">
-                                                                <rect key="frame" x="0.0" y="58" width="32" height="21"/>
+                                                                <rect key="frame" x="0.0" y="58" width="21" height="21"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="on" value="NO"/>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="onTintColor">
@@ -586,8 +586,8 @@
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="2cQ-bK-frr">
-                                                <rect key="frame" x="132" y="0.0" width="124" height="50"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="2cQ-bK-frr">
+                                                <rect key="frame" x="161.66666666666663" y="0.0" width="153.33333333333337" height="50"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="77h-V7-ugA">
                                                         <rect key="frame" x="0.0" y="0.0" width="73" height="50"/>
@@ -610,10 +610,10 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="90r-s9-x7z">
-                                                        <rect key="frame" x="81.000000000000028" y="0.0" width="43" height="50"/>
+                                                        <rect key="frame" x="132.33333333333334" y="0.0" width="21" height="50"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" verticalHuggingPriority="251" placeholderIntrinsicWidth="21" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="KX8-R2-lOW" customClass="BEMCheckBox">
-                                                                <rect key="frame" x="0.0" y="0.0" width="43" height="21"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="21" height="21"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="on" value="NO"/>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="onTintColor">
@@ -634,7 +634,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="21" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="S8b-IL-K6m" customClass="BEMCheckBox">
-                                                                <rect key="frame" x="0.0" y="29" width="43" height="21"/>
+                                                                <rect key="frame" x="0.0" y="29" width="21" height="21"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="on" value="NO"/>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="onTintColor">
@@ -661,7 +661,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="hjb-jH-sqL">
-                                        <rect key="frame" x="99" y="172" width="90" height="30"/>
+                                        <rect key="frame" x="127.66666666666666" y="172" width="90" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fFw-7D-Jov">
                                                 <rect key="frame" x="0.0" y="0.0" width="48" height="30"/>
@@ -692,15 +692,16 @@
                                     <constraint firstAttribute="trailing" secondItem="2co-rd-3L6" secondAttribute="trailing" constant="16" id="aet-t2-0K0"/>
                                     <constraint firstItem="hjb-jH-sqL" firstAttribute="centerX" secondItem="VwZ-Hs-s7Y" secondAttribute="centerX" id="bvf-kR-gey"/>
                                     <constraint firstItem="mdQ-PN-Wfe" firstAttribute="centerX" secondItem="VwZ-Hs-s7Y" secondAttribute="centerX" id="ghW-iG-EGW"/>
-                                    <constraint firstItem="5Hq-Eh-KSH" firstAttribute="leading" secondItem="VwZ-Hs-s7Y" secondAttribute="leading" constant="16" id="hr6-ja-4sW"/>
-                                    <constraint firstAttribute="width" constant="288" id="mKe-aY-Fy3"/>
-                                    <constraint firstAttribute="trailing" secondItem="5Hq-Eh-KSH" secondAttribute="trailing" constant="16" id="vEL-NS-r3N"/>
+                                    <constraint firstItem="5Hq-Eh-KSH" firstAttribute="leading" secondItem="VwZ-Hs-s7Y" secondAttribute="leading" constant="15" id="hr6-ja-4sW"/>
+                                    <constraint firstAttribute="trailing" secondItem="5Hq-Eh-KSH" secondAttribute="trailing" constant="15" id="vEL-NS-r3N"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <constraints>
                             <constraint firstItem="VwZ-Hs-s7Y" firstAttribute="centerY" secondItem="aId-Sw-9zj" secondAttribute="centerY" id="DrN-HJ-egr"/>
                             <constraint firstItem="aId-Sw-9zj" firstAttribute="bottom" secondItem="Ssb-Le-P3r" secondAttribute="bottom" id="ElZ-LV-Vyz"/>
+                            <constraint firstItem="VwZ-Hs-s7Y" firstAttribute="leading" secondItem="aId-Sw-9zj" secondAttribute="leading" constant="15" id="MmP-QH-oxo"/>
+                            <constraint firstItem="aId-Sw-9zj" firstAttribute="trailing" secondItem="VwZ-Hs-s7Y" secondAttribute="trailing" constant="15" id="Ocv-If-cCc"/>
                             <constraint firstItem="VwZ-Hs-s7Y" firstAttribute="centerX" secondItem="aId-Sw-9zj" secondAttribute="centerX" id="PhC-W5-hXG"/>
                             <constraint firstItem="Ssb-Le-P3r" firstAttribute="top" secondItem="wHw-Uh-dma" secondAttribute="top" id="pXz-i3-ar8"/>
                             <constraint firstItem="aId-Sw-9zj" firstAttribute="trailing" secondItem="Ssb-Le-P3r" secondAttribute="trailing" id="rTm-9a-vnv"/>

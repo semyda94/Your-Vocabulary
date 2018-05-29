@@ -29,9 +29,11 @@ class TrainingReminderViewController: UIViewController {
     }
     
     fileprivate func showNonSelectedDaysAlert() {
-        let alertController = UIAlertController(title: "title", message: "Message", preferredStyle: .alert)
+        let alertControllerTitle = NSLocalizedString("Couldn't set", comment: "Title of alert when user didn't choose any of days.")
+        let alertControllerMessage = NSLocalizedString("You should select at least one day of the week to set a training reminder", comment: "Message of alert when user didn't choose any of days.")
+        let alertController = UIAlertController(title: alertControllerTitle, message: alertControllerMessage, preferredStyle: .alert)
         
-        let actionOk = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        let actionOk = UIAlertAction(title: NSLocalizedString("OK", comment: "Title of action when user didn't choose any of days."), style: .default, handler: nil)
         
         alertController.addAction(actionOk)
         

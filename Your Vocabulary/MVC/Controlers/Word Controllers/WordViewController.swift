@@ -378,15 +378,25 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
                     for element in section[1..<section.count - 1] {
                         switch sectionName {
                         case sectionsName[0]:
-                            currentWord.translations.append(element.value)
+                            if element.value != nil {
+                                currentWord.translations.append(element.value)
+                            }
                         case sectionsName[1]:
-                            currentWord.definitions.append(element.value)
+                            if element.value != nil {
+                                currentWord.definitions.append(element.value)
+                            }
                         case sectionsName[2]:
-                            currentWord.extraInfos.append(element.value)
+                            if element.value != nil {
+                                currentWord.extraInfos.append(element.value)
+                            }
                         case sectionsName[3]:
-                            currentWord.synonyms.append(element.value)
+                            if element.value != nil {
+                                currentWord.synonyms.append(element.value)
+                            }
                         case sectionsName[4]:
-                            currentWord.examples.append(element.value)
+                            if element.value != nil {
+                                currentWord.examples.append(element.value)
+                            }
                         default:
                             break;
                         }

@@ -40,7 +40,7 @@ class WordsViewController: UIViewController, UITableViewDataSource, UITableViewD
         UIStoryboardSegue){
         
         guard let sourceView = segue.source as? WordViewController else { return }
-    
+        
         sourceView.saveContent()
         
         wordsTableView.reloadData()

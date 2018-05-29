@@ -27,6 +27,18 @@ class SettingsTableViewController: UITableViewController {
     
     // MARK: - Methods
     
+    fileprivate func emptyOrDoesntExistBackupDir() {
+        let alertControllerTitle = NSLocalizedString("No backups", comment: "Title of alert when app doesn't have any backups")
+        let alertControllerMessage = NSLocalizedString("At this moment app doesn't have any backup files", comment: "Message of alert when app doesn;t have any backups")
+        let alertController = UIAlertController(title: alertControllerTitle, message: alertControllerMessage, preferredStyle: .alert)
+        
+        let alertDoneAction = UIAlertAction(title: NSLocalizedString("Ok", comment: "Title of action when app doesn't have any backup files"), style: .default, handler: nil)
+        
+        alertController.addAction(alertDoneAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
     fileprivate func creatingBackUp(forDictionaries dictionaries : [RealmDictionary], withFileName fileName : String) {
         
         guard let backupDirName = backupDirName else { return }
@@ -395,10 +407,17 @@ class SettingsTableViewController: UITableViewController {
             
             guard let backupDirName = backupDirName else { return }
             
-            
-            if try! !FileManager.default.contentsOfDirectory(at: backupDirName, includingPropertiesForKeys: nil).isEmpty {
-                performSegue(withIdentifier: "showBackups", sender: self)
-            }
+                do {
+                    if try !FileManager.default.contentsOfDirectory(at: backupDirName, includingPropertiesForKeys: nil).isEmpty {
+                        performSegue(withIdentifier: "showBackups", sender: self)
+                    } else {
+                        emptyOrDoesntExistBackupDir()
+                    }
+                } catch let error as NSError {
+                    emptyOrDoesntExistBackupDir()
+                    print("Error during checking backupfilse\(error)")
+                }
+
             // process files
             
             /*
@@ -427,8 +446,6 @@ class SettingsTableViewController: UITableViewController {
                 tableView.deselectRow(at: indexPath, animated: true)
             })
             
-        case settingsCells["Guide"]:
-            print("")
         default:
             return
         }

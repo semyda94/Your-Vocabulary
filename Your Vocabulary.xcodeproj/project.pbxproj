@@ -8,13 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		9B4FE77E5CC76ADB312CA568 /* Pods_Your_Vocabulary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA8B30719CDEEDAA212C72B /* Pods_Your_Vocabulary.framework */; };
+		C2C0483B20C01456008AC773 /* enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C0483A20C01456008AC773 /* enumerations.swift */; };
+		C2C17E1F20C63F4C0051F4EE /* AppOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C17E1E20C63F4C0051F4EE /* AppOnboardingView.swift */; };
 		E7041E1E202BF069002A5B81 /* QuizzesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7041E1D202BF069002A5B81 /* QuizzesViewController.swift */; };
 		E70793C9203B301800BF6712 /* TestInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70793C7203B301800BF6712 /* TestInfo+CoreDataClass.swift */; };
 		E70793CA203B301800BF6712 /* TestInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70793C8203B301800BF6712 /* TestInfo+CoreDataProperties.swift */; };
 		E7089B42202BE3F30028272C /* QuizzesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7089B41202BE3F30028272C /* QuizzesCollectionViewCell.swift */; };
 		E7089B44202BE42A0028272C /* QuizzesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7089B43202BE42A0028272C /* QuizzesCollectionViewController.swift */; };
 		E714DB872033E65E0082024E /* DictionaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E714DB862033E65E0082024E /* DictionaryTableViewCell.swift */; };
-		E7203D5420B3F8FA00281D9D /* AppOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7203D5320B3F8FA00281D9D /* AppOnboardingView.swift */; };
 		E7203D5620B3FB1F00281D9D /* AppOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7203D5520B3FB1F00281D9D /* AppOnboardingViewController.swift */; };
 		E7268D8020BC23C3009652E3 /* CustomeLanguageSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7268D7F20BC23C3009652E3 /* CustomeLanguageSwitcher.swift */; };
 		E72E9DE3200C3300008D16A1 /* DictionariesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72E9DE2200C3300008D16A1 /* DictionariesViewController.swift */; };
@@ -36,7 +37,6 @@
 		E750B9AE202415770033AA2B /* Definition+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E750B9A4202415770033AA2B /* Definition+CoreDataProperties.swift */; };
 		E750B9AF202415770033AA2B /* Example+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E750B9A5202415770033AA2B /* Example+CoreDataClass.swift */; };
 		E750B9B0202415770033AA2B /* Example+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E750B9A6202415770033AA2B /* Example+CoreDataProperties.swift */; };
-		E752843920A0766F00A397C3 /* enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E752843820A0766F00A397C3 /* enumerations.swift */; };
 		E7591EC32023BE5F00007057 /* WordFieldsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7591EC22023BE5F00007057 /* WordFieldsTableViewCell.swift */; };
 		E75A612220B7A53C0035312A /* NotificationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75A612120B7A53C0035312A /* NotificationsTableViewController.swift */; };
 		E7717C4120B25A920080BB82 /* BackupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7717C4020B25A920080BB82 /* BackupsTableViewController.swift */; };
@@ -89,6 +89,8 @@
 
 /* Begin PBXFileReference section */
 		30C67FC84EDE9663A2A1BBA6 /* Pods-Your Vocabulary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Your Vocabulary.release.xcconfig"; path = "Pods/Target Support Files/Pods-Your Vocabulary/Pods-Your Vocabulary.release.xcconfig"; sourceTree = "<group>"; };
+		C2C0483A20C01456008AC773 /* enumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = enumerations.swift; sourceTree = "<group>"; };
+		C2C17E1E20C63F4C0051F4EE /* AppOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOnboardingView.swift; sourceTree = "<group>"; };
 		CDA8B30719CDEEDAA212C72B /* Pods_Your_Vocabulary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Your_Vocabulary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7041E1D202BF069002A5B81 /* QuizzesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzesViewController.swift; sourceTree = "<group>"; };
 		E70793C7203B301800BF6712 /* TestInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "TestInfo+CoreDataClass.swift"; path = "CoreDataObjects/TestInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -96,7 +98,6 @@
 		E7089B41202BE3F30028272C /* QuizzesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzesCollectionViewCell.swift; sourceTree = "<group>"; };
 		E7089B43202BE42A0028272C /* QuizzesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzesCollectionViewController.swift; sourceTree = "<group>"; };
 		E714DB862033E65E0082024E /* DictionaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryTableViewCell.swift; sourceTree = "<group>"; };
-		E7203D5320B3F8FA00281D9D /* AppOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOnboardingView.swift; sourceTree = "<group>"; };
 		E7203D5520B3FB1F00281D9D /* AppOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOnboardingViewController.swift; sourceTree = "<group>"; };
 		E7268D7F20BC23C3009652E3 /* CustomeLanguageSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomeLanguageSwitcher.swift; sourceTree = "<group>"; };
 		E72E9DE2200C3300008D16A1 /* DictionariesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionariesViewController.swift; sourceTree = "<group>"; };
@@ -124,7 +125,6 @@
 		E750B9A4202415770033AA2B /* Definition+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Definition+CoreDataProperties.swift"; path = "CoreDataObjects/Definition+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E750B9A5202415770033AA2B /* Example+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Example+CoreDataClass.swift"; path = "CoreDataObjects/Example+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E750B9A6202415770033AA2B /* Example+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Example+CoreDataProperties.swift"; path = "CoreDataObjects/Example+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		E752843820A0766F00A397C3 /* enumerations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = enumerations.swift; path = ../../../../../../enumerations.swift; sourceTree = "<group>"; };
 		E7591EC22023BE5F00007057 /* WordFieldsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordFieldsTableViewCell.swift; sourceTree = "<group>"; };
 		E75A612120B7A53C0035312A /* NotificationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewController.swift; sourceTree = "<group>"; };
 		E760EA18209691B00080F1E5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -206,12 +206,12 @@
 		E70793C4203B2D1D00BF6712 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E7203D5320B3F8FA00281D9D /* AppOnboardingView.swift */,
 				E73CE38B2092DE56002FC803 /* Settings.storyboard */,
 				E73CE3932092DE5E002FC803 /* Statistic.storyboard */,
 				E73CE39A2092DE67002FC803 /* Quizzes.storyboard */,
 				E77280681FFDDEF6004DC8A3 /* Main.storyboard */,
 				E77280701FFDDEF6004DC8A3 /* LaunchScreen.storyboard */,
+				C2C17E1E20C63F4C0051F4EE /* AppOnboardingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -281,7 +281,7 @@
 		E77280631FFDDEF6004DC8A3 /* Your Vocabulary */ = {
 			isa = PBXGroup;
 			children = (
-				E752843820A0766F00A397C3 /* enumerations.swift */,
+				C2C0483A20C01456008AC773 /* enumerations.swift */,
 				E7F04B6A2061252A000AF4BB /* publicDictionaries.swift */,
 				E7D43453205D3D3F00287A5F /* Localizable.strings */,
 				E7D4344E205D3D3E00287A5F /* InfoPlist.strings */,
@@ -418,7 +418,6 @@
 				en,
 				Base,
 				ru,
-				ar,
 			);
 			mainGroup = E77280581FFDDEF6004DC8A3;
 			productRefGroup = E77280621FFDDEF6004DC8A3 /* Products */;
@@ -529,7 +528,6 @@
 				E78E23D8205419CD00EE8790 /* StatisticViewController.swift in Sources */,
 				E785D6D7200C5A0E0068B4CE /* BEMCheckBox.m in Sources */,
 				E7041E1E202BF069002A5B81 /* QuizzesViewController.swift in Sources */,
-				E7203D5420B3F8FA00281D9D /* AppOnboardingView.swift in Sources */,
 				E7591EC32023BE5F00007057 /* WordFieldsTableViewCell.swift in Sources */,
 				E74EBF1620B797D60065ED93 /* DayOfWeekButton.swift in Sources */,
 				E750B9AC202415770033AA2B /* Synonym+CoreDataProperties.swift in Sources */,
@@ -538,13 +536,13 @@
 				E78E23DC205633B700EE8790 /* StatisticTableViewCell.swift in Sources */,
 				E7E91B7420032C020066EC13 /* Dictionary+CoreDataClass.swift in Sources */,
 				E781A5AC204542E3002028D7 /* QuizzesMethods.swift in Sources */,
+				C2C0483B20C01456008AC773 /* enumerations.swift in Sources */,
 				E75A612220B7A53C0035312A /* NotificationsTableViewController.swift in Sources */,
 				E750B9AF202415770033AA2B /* Example+CoreDataClass.swift in Sources */,
 				E714DB872033E65E0082024E /* DictionaryTableViewCell.swift in Sources */,
 				E7C556452025255600CD5C3C /* WordAddFieldButtonTableViewCell.swift in Sources */,
 				E772806D1FFDDEF6004DC8A3 /* Your_Vocabulary.xcdatamodeld in Sources */,
 				E7203D5620B3FB1F00281D9D /* AppOnboardingViewController.swift in Sources */,
-				E752843920A0766F00A397C3 /* enumerations.swift in Sources */,
 				E7E91B7920033C540066EC13 /* Word+CoreDataProperties.swift in Sources */,
 				E79B547220AC3C52009A1E28 /* realmObjects.swift in Sources */,
 				E7A91669203E19EE006A5CDB /* QuizPropertiesViewController.swift in Sources */,
@@ -557,6 +555,7 @@
 				E750B9A8202415770033AA2B /* ExtraInfo+CoreDataProperties.swift in Sources */,
 				E7E25E3F2042C0B9009EFE87 /* QuizSpellingViewController.swift in Sources */,
 				E70793C9203B301800BF6712 /* TestInfo+CoreDataClass.swift in Sources */,
+				C2C17E1F20C63F4C0051F4EE /* AppOnboardingView.swift in Sources */,
 				E7089B42202BE3F30028272C /* QuizzesCollectionViewCell.swift in Sources */,
 				E785D6D6200C5A0E0068B4CE /* BEMCheckBoxGroup.m in Sources */,
 				E750B9AD202415770033AA2B /* Definition+CoreDataClass.swift in Sources */,

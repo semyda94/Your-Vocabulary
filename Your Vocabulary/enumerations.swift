@@ -7,19 +7,53 @@
 //
 
 import Foundation
+import UIKit
+
+struct LocalizedString: ExpressibleByStringLiteral, Equatable {
+    
+    let v: String
+    
+    init(key: String) {
+        self.v = NSLocalizedString(key, comment: "")
+    }
+    init(localized: String) {
+        self.v = localized
+    }
+    init(stringLiteral value:String) {
+        self.init(key: value)
+    }
+    init(extendedGraphemeClusterLiteral value: String) {
+        self.init(key: value)
+    }
+    init(unicodeScalarLiteral value: String) {
+        self.init(key: value)
+    }
+}
+
+func ==(lhs:LocalizedString, rhs:LocalizedString) -> Bool {
+    return lhs.v == rhs.v
+}
 
 // MARK: - Dictionary elements
-enum DictionaryElements:String {
+enum DictionaryElements: LocalizedString {
     case word = "Word"
     case translation = "Translation"
     case definition = "Definition"
     case extraInfo = "Extra information"
     case synonym = "Synonym"
     case example = "Example"
+    
+    var localizedString: String {
+        return self.rawValue.v
+    }
+    
+    init?(localizedString: String) {
+        self.init(rawValue: LocalizedString(localized: localizedString))
+    }
 }
 
 // MARK: - Types of quizzes
-enum QuizzesTypes:String {
+enum QuizzesTypes: LocalizedString {
     case seeking = "Seeking"
     case seekingByTime = "Seeking by time"
     case matching = "Matching"
@@ -27,4 +61,12 @@ enum QuizzesTypes:String {
     case spelling = "Spelling"
     case spellingByTime = "Spelling by time"
     case none = "none"
+    
+    var localizedString: String {
+        return self.rawValue.v
+    }
+    
+    init?(localizedString: String) {
+        self.init(rawValue: LocalizedString(localized: localizedString))
+    }
 }

@@ -254,7 +254,7 @@ class QuizzesCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! QuizzesCollectionViewCell
     
         cell.quizzThumbNail.image = quizzes[indexPath.row].thumbnail
-        cell.title.text = quizzes[indexPath.row].name.rawValue
+        cell.title.text = quizzes[indexPath.row].name.localizedString
         // Configure the cell
         
         return cell

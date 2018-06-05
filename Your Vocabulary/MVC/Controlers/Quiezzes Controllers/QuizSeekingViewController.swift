@@ -77,6 +77,7 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
     // MARK: - Methods
     
     fileprivate func prepareScreen() {
+        self.navigationController?.navigationBar.prefersLargeTitles = false
         self.view.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "bg"))
         
         for button in answersButtons {
@@ -154,14 +155,14 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
         let subview = (alertController.view.subviews.first?.subviews.first?.subviews.first!)! as UIView
         subview.backgroundColor = #colorLiteral(red: 0.5921568627, green: 0.737254902, blue: 0.7058823529, alpha: 1)
         
-        let restartGame = UIAlertAction(title: "New game", style: .default) { (_) in
+        let restartGame = UIAlertAction(title: NSLocalizedString("New game", comment: "New game title of action"), style: .default) { (_) in
             self.formQuestions()
             self.setQuestionAndAnswers()
         }
         
         alertController.addAction(restartGame)
         
-        let quitGame = UIAlertAction(title: "Quit", style: .default) { (_) in
+        let quitGame = UIAlertAction(title: NSLocalizedString("Quit", comment: "Quit title of action"), style: .default) { (_) in
             self.performSegue(withIdentifier: "unwindFinishSeekingQuiz", sender:self)
         }
         

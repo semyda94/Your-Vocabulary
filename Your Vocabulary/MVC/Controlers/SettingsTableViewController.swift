@@ -77,9 +77,9 @@ class SettingsTableViewController: UITableViewController {
             textField.text = nil
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel action for alert during cration backup"), style: .cancel, handler: nil)
         
-        let createAction = UIAlertAction(title: "Create", style: .default) { (alert) in
+        let createAction = UIAlertAction(title: NSLocalizedString("Create", comment: "Create action for alert during cration backup"), style: .default) { (alert) in
             guard let backupFileName = alertController.textFields![0].text else { return }
             
             self.creatingBackUp(forDictionaries: dictionaries, withFileName: backupFileName)
@@ -277,7 +277,6 @@ class SettingsTableViewController: UITableViewController {
         
         self.tableView.backgroundView = UIImageView(image: #imageLiteral(resourceName: "bg"))
         
-        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -351,6 +350,8 @@ class SettingsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         switch indexPath {
             
         case settingsCells["Notifications"] :

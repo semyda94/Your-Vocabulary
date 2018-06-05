@@ -78,13 +78,13 @@ class StatisticViewController: UIViewController, UITableViewDelegate, UITableVie
         let e3: (title: String, number: Int)
         
         
-        e1.title = "Number of words"
+        e1.title = NSLocalizedString("Number of words", comment: "Title of parametr that shows number of wors")
         e1.number = numberOfWords
         
-        e2.title = "Number of answers"
+        e2.title = NSLocalizedString("Number of answers", comment: "Title of parametr that shows number of answers")
         e2.number = numberOfAnswers
         
-        e3.title = "Number of correct answers"
+        e3.title = NSLocalizedString("Number of correct answers", comment: "Title of parametr that shows number of correct answers")
         e3.number = numberOfCorrectAnswers
         
         rows.removeAll()
@@ -129,12 +129,12 @@ class StatisticViewController: UIViewController, UITableViewDelegate, UITableVie
         xaxis.valueFormatter = formato
         
        
-        let barDataSet = BarChartDataSet(values: barChartDataEntries, label: "Number of answers")
+        let barDataSet = BarChartDataSet(values: barChartDataEntries, label: NSLocalizedString("Number of answers", comment: "Title of parametr that shows number of answers"))
         
         //barDataSet.setColor(#colorLiteral(red: 0.4117647059, green: 0.4117647059, blue: 0.7019607843, alpha: 1))
         barDataSet.setColor(#colorLiteral(red: 0.9568627451, green: 0.9137254902, blue: 0.8039215686, alpha: 1))
         
-        let lineDataSet = LineChartDataSet(values: lineChartDataEntries, label: "Number of correct answers")
+        let lineDataSet = LineChartDataSet(values: lineChartDataEntries, label: NSLocalizedString("Number of correct answers", comment: "Title of parametr that shows number of correct answers"))
         
         lineDataSet.circleColors.removeAll()
         lineDataSet.circleColors.append(#colorLiteral(red: 0.3960784314, green: 0.6078431373, blue: 0.368627451, alpha: 1))
@@ -178,6 +178,12 @@ class StatisticViewController: UIViewController, UITableViewDelegate, UITableVie
     // MARK: - View Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         dictionaries = realm.objects(RealmDictionary.self)
         

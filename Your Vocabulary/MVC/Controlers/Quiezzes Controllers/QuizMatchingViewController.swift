@@ -112,6 +112,8 @@ class QuizMatchingViewController: UIViewController, QuizzesMethods {
     
     // Screen
     fileprivate func prepareScreen() {
+        self.navigationController?.navigationBar.prefersLargeTitles = false
+        
         setButtonsSettings(forButtons: leftButtons)
         setButtonsSettings(forButtons: rightButtons)
     }
@@ -259,7 +261,7 @@ class QuizMatchingViewController: UIViewController, QuizzesMethods {
         let subview = (alertController.view.subviews.first?.subviews.first?.subviews.first!)! as UIView
         subview.backgroundColor = #colorLiteral(red: 0.5921568627, green: 0.737254902, blue: 0.7058823529, alpha: 1)
         
-        let restartGame = UIAlertAction(title: "New game", style: .default) { (_) in
+        let restartGame = UIAlertAction(title: NSLocalizedString("New game", comment: "new game action title"), style: .default) { (_) in
             self.formPairs()
             self.setButtonsLabels()
             self.updateProgressBarProgress()
@@ -267,7 +269,7 @@ class QuizMatchingViewController: UIViewController, QuizzesMethods {
         
         alertController.addAction(restartGame)
         
-        let quit = UIAlertAction(title: "Quit", style: .default) { (_) in
+        let quit = UIAlertAction(title: NSLocalizedString("Quit", comment: "quiz action title"), style: .default) { (_) in
             self.performSegue(withIdentifier: "unwindFinishMatchingQuiz", sender: self)
         }
         alertController.addAction(quit)

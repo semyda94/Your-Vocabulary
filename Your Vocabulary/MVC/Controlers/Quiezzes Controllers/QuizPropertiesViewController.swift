@@ -114,9 +114,9 @@ class QuizPropertiesViewController: UIViewController, UIPickerViewDelegate, UIPi
             guard let dictionaries = dictionaries else { return nil}
             return dictionaries[row].name
         case 1:
-            return parametrsForPicker.questionType[row].rawValue
+            return parametrsForPicker.questionType[row].localizedString
         case 2:
-            return parametrsForPicker.answersType[row].rawValue
+            return parametrsForPicker.answersType[row].localizedString
         default:
             return nil
         }

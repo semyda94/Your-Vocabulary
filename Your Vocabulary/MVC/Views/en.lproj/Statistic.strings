@@ -6,7 +6,7 @@
 "WhO-Jv-PuN.title" = "Statistic";
 
 /* Class = "UILabel"; text = "No quizzes"; ObjectID = "epn-zL-kkm"; */
-"epn-zL-kkm.text" = "No quizzes";
+"epn-zL-kkm.text" = "No statistics available.";
 
 /* Class = "UINavigationItem"; title = "Statistic"; ObjectID = "gaa-gZ-OvQ"; */
 "gaa-gZ-OvQ.title" = "Statistic";

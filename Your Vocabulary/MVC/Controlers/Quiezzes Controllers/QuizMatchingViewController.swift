@@ -80,6 +80,10 @@ class QuizMatchingViewController: UIViewController, QuizzesMethods {
             }
         }
         
+        if (answer.question != nil && answer.answer != nil) {
+            resetAnswerValue()
+        }
+        
         if countOfLeftAnswers == 0 {
             if questionPairs.count <= 1 {
                 finishQuiz()

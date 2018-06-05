@@ -200,10 +200,15 @@ class QuizMatchingViewController: UIViewController, QuizzesMethods {
         var copyCurrentPairs = currentPairs
         
         for i in 0..<currentPairs.count {
+            print(currentPairs)
             let randomQuestionPosition = copyCurrentPairs.count.getRandom()
-            leftButtons[i].setTitle(copyCurrentPairs[randomQuestionPosition].question, for: leftButtons[i].state)
+            
+            print("Was seted \(copyCurrentPairs[randomQuestionPosition].question)")
+            leftButtons[i].setTitle(copyCurrentPairs[randomQuestionPosition].question, for: .normal)
             
             copyCurrentPairs.remove(at: randomQuestionPosition)
+            
+            print("Next one \n _______________________________")
         }
         
         copyCurrentPairs = currentPairs

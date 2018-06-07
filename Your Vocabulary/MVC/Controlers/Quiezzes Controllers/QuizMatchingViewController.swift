@@ -26,6 +26,10 @@ class QuizMatchingViewController: UIViewController, QuizzesMethods {
     var byTime = false
     var roundTimer : Timer!
     var timeForAnswer = 15.0
+    
+    /**********************************************************************************************
+     ****** When "seconds" property was changed set label text by current value of property. ******
+     **********************************************************************************************/
     fileprivate var seconds = 0.0 {
         didSet {
             timerLabel.text = "\(Int(seconds))"
@@ -47,33 +51,41 @@ class QuizMatchingViewController: UIViewController, QuizzesMethods {
     
     // MARK: - Actions
     
+    /*******************************
+     ****** User gave answer. ******
+     *******************************/
     @IBAction func answerButtonWasTapped(_ sender: UIButton) {
+        //definition from which side was gave answer
         if leftButtons.contains(sender) {
             answer.question = sender.titleLabel?.text
+            //checking if user already choose his  option form other side
             if checkAnswer() {
                 
+                //If user chose option frome both sides chececk answers and question
                 sender.isEnabled = false
                 for button in rightButtons {
                     if button.titleLabel?.text == answer.answer {
                         button.isEnabled = false
                     }
                 }
-                
+                //Reseting chosen option
                 resetAnswerValue()
                 
                 countOfLeftAnswers -= 1
             }
         } else {
             answer.answer = sender.titleLabel?.text
+            //checking if user already choose his  option form other side
             if checkAnswer()  {
                 
+                //If user chose option frome both sides chececk answers and question
                 sender.isEnabled = false
                 for button in leftButtons {
                     if button.titleLabel?.text == answer.question {
                         button.isEnabled = false
                     }
                 }
-                
+                //Reseting chosen option
                 resetAnswerValue()
                 
                 countOfLeftAnswers -= 1
@@ -83,16 +95,18 @@ class QuizMatchingViewController: UIViewController, QuizzesMethods {
         if (answer.question != nil && answer.answer != nil) {
             resetAnswerValue()
         }
-        
+        // if user chose whole options
         if countOfLeftAnswers == 0 {
+            // if at dictionary left less than 2 words than showing quiz finish alert
             if questionPairs.count <= 1 {
                 finishQuiz()
                 return
             }
-            
+            // set new options
             setButtonsLabels()
             
             updateProgressBarProgress()
+            // if user chose a quiz by time than set timer
             if byTime {
                 roundTimer.invalidate()
                 
@@ -114,7 +128,9 @@ class QuizMatchingViewController: UIViewController, QuizzesMethods {
     
     // MARK: - Methods
     
-    // Screen
+    /***********************************************************************
+     ****** Setting Button view properties for left and right buttons ******
+     ***********************************************************************/
     fileprivate func prepareScreen() {
         self.navigationController?.navigationBar.prefersLargeTitles = false
         
@@ -122,6 +138,9 @@ class QuizMatchingViewController: UIViewController, QuizzesMethods {
         setButtonsSettings(forButtons: rightButtons)
     }
     
+    /***********************************************************
+     ****** Setting button properties for list of buttons ******
+     ***********************************************************/
     fileprivate func setButtonsSettings(forButtons buttons: [UIButton]) {
         for button in buttons {
             button.titleLabel?.numberOfLines = 3
@@ -134,8 +153,9 @@ class QuizMatchingViewController: UIViewController, QuizzesMethods {
         }
     }
     
-    //forming list of pairs
-    
+    /********************************************
+     ****** Forming list of pairs for quiz ******
+     ********************************************/
     fileprivate func formPairs() {
         guard let parametrs = chosenParametrs, let dictionary = dictionary else { return }
         
@@ -153,16 +173,19 @@ class QuizMatchingViewController: UIViewController, QuizzesMethods {
         progressBar.setProgress(1 / Float(questionPairs.count), animated: true)
     }
     
-    // game set up
-    
+    /*************************************************************
+     ****** Form new amount of pairs for next stage of quiz ******
+     *************************************************************/
     fileprivate func setQuestions() {
+        // if dictionary has less then 2 untested words.
         if questionPairs.count <= 1 {
             finishQuiz()
             return
         }
-        
+        // removing current pairs
         currentPairs.removeAll()
-    
+        
+        // calculate count of options
         var numberOfEnableButtons = 0
         if questionPairs.count <= leftButtons.count {
             numberOfEnableButtons = questionPairs.count
@@ -171,7 +194,7 @@ class QuizMatchingViewController: UIViewController, QuizzesMethods {
         }
         
         countOfLeftAnswers = numberOfEnableButtons
-        
+        //reset visible propeties for buttons
         for i in 0..<numberOfEnableButtons {
             let randomElementPosition = questionPairs.count.getRandom()
 
@@ -185,6 +208,7 @@ class QuizMatchingViewController: UIViewController, QuizzesMethods {
             
         }
         
+        //Hide buttons thet shouldn't have include in this round
         for i in numberOfEnableButtons..<leftButtons.count {
             leftButtons[i].isHidden = true
             rightButtons[i].isHidden = true
@@ -193,22 +217,23 @@ class QuizMatchingViewController: UIViewController, QuizzesMethods {
 
     }
     
+    /************************************
+     ****** Set labels for buttons ******
+     ************************************/
     fileprivate func setButtonsLabels() {
         
+        //forming pairs for this round
         setQuestions()
         
         var copyCurrentPairs = currentPairs
         
+        // setting of buttons labels
         for i in 0..<currentPairs.count {
-            print(currentPairs)
             let randomQuestionPosition = copyCurrentPairs.count.getRandom()
-            
-            print("Was seted \(copyCurrentPairs[randomQuestionPosition].question)")
             leftButtons[i].setTitle(copyCurrentPairs[randomQuestionPosition].question, for: .normal)
             
             copyCurrentPairs.remove(at: randomQuestionPosition)
             
-            print("Next one \n _______________________________")
         }
         
         copyCurrentPairs = currentPairs
@@ -222,6 +247,9 @@ class QuizMatchingViewController: UIViewController, QuizzesMethods {
         
     }
     
+    /**************************************************************
+     ****** Checking that user chose option frome both sides ******
+     **************************************************************/
     fileprivate func checkAnswer() -> Bool {
         guard let _ = answer.question, let _ = answer.answer  else { return false }
         
@@ -237,11 +265,17 @@ class QuizMatchingViewController: UIViewController, QuizzesMethods {
         return false
     }
     
+    /*******************************************
+     ****** Reseting users chosen options ******
+     *******************************************/
     fileprivate func resetAnswerValue() {
         answer.question = nil
         answer.answer = nil
     }
     
+    /*******************************************************************************************
+     ****** Present alert to user that provide opportunity to restart quiz or finish quiz ******
+     *******************************************************************************************/
     fileprivate func finishQuiz() {
         if byTime {
             roundTimer.invalidate()

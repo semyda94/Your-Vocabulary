@@ -8,7 +8,6 @@
 
 import UIKit
 import RealmSwift
-import CoreData
 
 class WordViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, AddNewFieldDelegate, SaveCancelWordTableContentDelegate {
     
@@ -26,6 +25,10 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var fieldsTableView: UITableView!
     
     // MARK: - Methods
+    
+    /*********************************************************************
+    ********This function set standart data properties for new word ******
+    *********************************************************************/
     
     func setDefaultData() -> Int {
         
@@ -69,6 +72,9 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
         return 0
     }
     
+    /*************************************************************************
+     ********This function set existing data properties for chosen word ******
+     *************************************************************************/
     func setData(forWord word: RealmWord) -> Int{
         
         guard let dictionary = currentDictionary else { return -1 }
@@ -154,6 +160,10 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
         return 0
     }
     
+    /*************************************************
+     ********This function deleteing field cell ******
+     ************************************************/
+    
     fileprivate func deletingFiledCellFromTable(at index: IndexPath) {
         sections[index.section].remove(at: index.row)
         fieldsTableView.deleteRows(at: [index], with: .fade)
@@ -161,6 +171,9 @@ class WordViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     // MARK: - IBActions
+    /************************************************************************************
+     ********This functions convert word frame when keyboard was hided or appeared ******
+     ************************************************************************************/
     
     @objc func adjustForKeyboard(notification: Notification) {
         let userInfo = notification.userInfo!

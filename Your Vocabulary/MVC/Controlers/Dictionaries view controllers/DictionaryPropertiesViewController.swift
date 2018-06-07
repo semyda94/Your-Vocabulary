@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData
 
 class DictionaryPropertiesViewController: UIViewController, UITextFieldDelegate {
     
@@ -33,6 +32,9 @@ class DictionaryPropertiesViewController: UIViewController, UITextFieldDelegate 
     
     // MARK: - Functions
     
+    /***********************************************************************************************
+     ****** Functions bellow change location of popup view after appearing or hiding keyboard ******
+     ***********************************************************************************************/
     @objc func keyboardWillShow(notification: Notification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
                     self.view.frame.origin.y -= keyboardSize.height / 2
@@ -60,8 +62,10 @@ class DictionaryPropertiesViewController: UIViewController, UITextFieldDelegate 
         NotificationCenter.default.addObserver(self, selector: #selector(DictionaryPropertiesViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
         
         if dictionary != nil {
+            // Set default name for dictionary
             titleOfView.text = NSLocalizedString("Editing properties", comment: "Title during editing properties of dictionary")
             
+            // Setting properties of dictionaries
             if let name = dictionary?.name { dictionaryNameTextField.text = name }
             
             translationCheckBox.on = (dictionary?.isTranslation)!

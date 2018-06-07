@@ -8,7 +8,6 @@
 
 import UIKit
 import RealmSwift
-import CoreData
 
 class DictionariesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -16,13 +15,17 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
     
     let realm = try! Realm()
     
-    
+    /*****************************************************
+     ****** List of dictionareis located at databse ******
+     *****************************************************/
     fileprivate var dictionaries : Results<RealmDictionary>?
 
-    
     fileprivate var blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
     fileprivate lazy var blurEffectView = UIVisualEffectView(effect: blurEffect)
     
+    /****************************************************************
+     ****** Dictionary that has keys for dictionary properties ******
+     ****************************************************************/
     fileprivate let dictionaryFlags:  [String : Int] = [ "Translation" : 0,
                                                         "Definition" : 1,
                                                          "ExtraInfo" : 2,
@@ -31,46 +34,9 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
     
     // MARK: - Methods
     
-    fileprivate func addDictionaryAtTable(withName name : String, isTranslation translation : Bool, isDefinition definition : Bool, isExtraInfo extraInfo : Bool, isSynonym synonym : Bool, isExample example : Bool) {
-        /*guard let context = managedContext, let entity = NSEntityDescription.entity(forEntityName: "Dictionary", in: context) else { return }
-        
-        let newDictionary = Dictionary(entity: entity, insertInto: context)
-        
-        newDictionary.setValue(name , forKey: "name")
-        newDictionary.setValue(translation, forKey: "isTranslation")
-        newDictionary.setValue(definition, forKey: "isDefinition")
-        newDictionary.setValue(extraInfo, forKey: "isExtraInfo")
-        newDictionary.setValue(synonym, forKey: "isSynonym")
-        newDictionary.setValue(example, forKey: "isExample")
-        
-        do {
-            try context.save()
-            dictionaries += [newDictionary]
-            dictionariesTableView.reloadData()
-        } catch let error as NSError {
-            print("Unresolved error during adding new dictionary \(error), \(error.userInfo)")
-        }
- */
-    }
-    
-    fileprivate func gettingListOfDictionaries(){
-    /*
-        
-        guard let context = managedContext else { return }
-        
-        let request = NSFetchRequest<Dictionary>(entityName: "Dictionary")
-        
-        do {
-            let result = try context.fetch(request)
-            
-            dictionaries = result
-            dictionariesTableView.reloadData()
-        } catch let error as NSError {
-            print("Unresolved error during fetching dictionary: \(error), \(error.userInfo)")
-        }
- */
-    }
-    
+    /**************************************************
+     ****** Deleting of dictionary from database ******
+     **************************************************/
     fileprivate func deletingDictionaryFromTable(at index:Int){
         
         guard let dictionaries = dictionaries else { return }
@@ -102,6 +68,9 @@ class DictionariesViewController: UIViewController, UITableViewDataSource, UITab
         
     }
     
+    /***********************************************************
+     ****** Addeding new dictionary to dictionaries table ******
+     ***********************************************************/
     @IBAction func saveButtonWasTapped(segue: UIStoryboardSegue){
        
         func getDictionryNameByField(_ field: UITextField ) -> String{

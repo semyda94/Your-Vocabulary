@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+// MARK: -  Implemetation localized string for enumerations.
+/*********************************************************************
+ ********Class that implement localized string for enumerations ******
+ *********************************************************************/
 struct LocalizedString: ExpressibleByStringLiteral, Equatable {
     
     let v: String
@@ -34,7 +38,10 @@ func ==(lhs:LocalizedString, rhs:LocalizedString) -> Bool {
     return lhs.v == rhs.v
 }
 
+
 // MARK: - Dictionary elements
+
+//Enumeration of words properties
 enum DictionaryElements: LocalizedString {
     case word = "Word"
     case translation = "Translation"
@@ -53,6 +60,8 @@ enum DictionaryElements: LocalizedString {
 }
 
 // MARK: - Types of quizzes
+
+//Enumeration of types of quizzes
 enum QuizzesTypes: LocalizedString {
     case seeking = "Seeking"
     case seekingByTime = "Seeking by time"

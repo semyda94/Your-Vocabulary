@@ -12,13 +12,14 @@ import UserNotifications
 class TrainingReminderViewController: UIViewController {
     
     // MARK: - Properties
-    
     @IBOutlet var daysOfWeekButtons: [DayOfWeekButton]!
-    
     @IBOutlet weak var timePicker: UIDatePicker!
     
     // MARK: - Methods
     
+    /****************************************************************************
+     ****** If any of days was chosen then confirming to set notifications ******
+     ****************************************************************************/
     fileprivate func checkSettigsBeforeCreateNotification() -> Bool {
         for day in daysOfWeekButtons {
             if day.isChosen {
@@ -28,6 +29,9 @@ class TrainingReminderViewController: UIViewController {
         return false
     }
     
+    /********************************************************************************
+     ****** Current function of present alert when user didn't select any days ******
+     ********************************************************************************/
     fileprivate func showNonSelectedDaysAlert() {
         let alertControllerTitle = NSLocalizedString("Couldn't set", comment: "Title of alert when user didn't choose any of days.")
         let alertControllerMessage = NSLocalizedString("You should select at least one day of the week to set a training reminder", comment: "Message of alert when user didn't choose any of days.")
@@ -41,25 +45,35 @@ class TrainingReminderViewController: UIViewController {
     }
     
     // MARK: - Actions
+    
+    /***********************************************************
+     ****** Setting notification into notification center ******
+     ***********************************************************/
     @IBAction func saveNotification(_ sender: Any) {
         
+        // Check that any days of week was chosen
         if !checkSettigsBeforeCreateNotification() {
             showNonSelectedDaysAlert()
+            return
         }
         
         let UNCenter = UNUserNotificationCenter.current()
-        
+       
+        // removing previos notifications.
         UNCenter.removeAllPendingNotificationRequests()
         
+        //Setting time of day properties
         var dateComponents = DateComponents()
         dateComponents.hour = timePicker.calendar.component(.hour, from: timePicker.date)
         dateComponents.minute = timePicker.calendar.component(.minute, from: timePicker.date)
         
+        //Setting the title and body of notification
         let content = UNMutableNotificationContent()
         content.title = "Traning Reminder"
         content.body = "Do not forget about the expansion of your vocabulary, regular practice increases the chance to memorize the material."
         content.sound = UNNotificationSound.default()
         
+        //Checking each day of week and request of notifications for chosen day
         for (index, day) in daysOfWeekButtons.enumerated() {
             if day.isChosen {
                 dateComponents.weekday = index + 1
@@ -71,7 +85,6 @@ class TrainingReminderViewController: UIViewController {
                 let request = UNNotificationRequest(identifier: "YourVocabNotification" + String(index), content: content, trigger: weeklyTriger)
                 
                 UNCenter.add(request, withCompletionHandler: nil)
-                
                 
             }
         }

@@ -12,6 +12,9 @@ class DictionaryTableViewCell: UITableViewCell {
     
     // MARK: - Poperties
     
+    /**************************************************************************
+     ****** After setting of dictionary properties set cell information  ******
+     **************************************************************************/
     var dictionary: RealmDictionary? {
         didSet {
             guard let dictionary = dictionary else { return }

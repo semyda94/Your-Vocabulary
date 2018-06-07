@@ -8,9 +8,11 @@
 
 import UIKit
 
+/*****************************************************************************************************
+ ***Class inherited from UI button and added isChosen property that shows was button tapped or not ***
+ *****************************************************************************************************/
 class DayOfWeekButton: UIButton {
 
-    
     var isChosen = false {
         didSet {
             if isChosen {

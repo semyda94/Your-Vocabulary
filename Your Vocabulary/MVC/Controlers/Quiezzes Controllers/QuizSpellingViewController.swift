@@ -6,6 +6,10 @@
 //  Copyright © 2018 Dmitrii Semykin. All rights reserved.
 //
 
+/***********************************************************
+ ********This controller is't using at current version******
+ **********************************************************/
+
 import UIKit
 
 class QuizSpellingViewController: UIViewController, QuizzesMethods, UITextFieldDelegate {
@@ -26,7 +30,7 @@ class QuizSpellingViewController: UIViewController, QuizzesMethods, UITextFieldD
     
     // MARK: - Properties
     
-    var chosenParametrs: (dictionary: Dictionary, questionType: DictionaryElements, answerType: DictionaryElements)?
+    var chosenParametrs: (dictionary: RealmDictionary, questionType: DictionaryElements, answerType: DictionaryElements)?
     
     fileprivate var questionPairs = [(question: String, answer: String)]()
     fileprivate var currentPair: (question: String?, answer: String?)

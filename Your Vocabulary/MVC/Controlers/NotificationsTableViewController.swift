@@ -6,6 +6,9 @@
 //  Copyright © 2018 Dmitrii Semykin. All rights reserved.
 //
 
+/***********************************************************
+ ********This controller is't using at current version******
+ **********************************************************/
 import UIKit
 
 class NotificationsTableViewController: UITableViewController {

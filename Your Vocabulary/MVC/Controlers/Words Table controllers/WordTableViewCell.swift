@@ -8,12 +8,14 @@
 
 import UIKit
 import RealmSwift
-import CoreData
 
 class WordTableViewCell: UITableViewCell {
 
     // MARK: - Properties
     
+    /***************************
+     ****** Word for cell ******
+     ***************************/
     var currentWord: RealmWord? {
         didSet {
             guard let currentWord = currentWord else { return }
@@ -49,6 +51,9 @@ class WordTableViewCell: UITableViewCell {
     
     // MARK: - IBActions
     
+    /*************************************************
+     ****** Changing of isLearned flag for word ******
+     *************************************************/
     @IBAction func wasTappedLearnedMark(_ sender: BEMCheckBox) {
        
         guard let currentWord = currentWord else { return }

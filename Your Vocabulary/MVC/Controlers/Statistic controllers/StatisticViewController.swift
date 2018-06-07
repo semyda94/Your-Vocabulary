@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData
 import RealmSwift
 import Charts
 
@@ -18,6 +17,9 @@ class StatisticViewController: UIViewController, UITableViewDelegate, UITableVie
     
     fileprivate let realm = try! Realm()
     
+    /**************************************************************
+     ****** After getting list of dictionaries reload oicker ******
+     **************************************************************/
     fileprivate var dictionaries : Results<RealmDictionary>? {
         didSet {
             dictionaryPicker.reloadAllComponents()
@@ -37,7 +39,9 @@ class StatisticViewController: UIViewController, UITableViewDelegate, UITableVie
     
     // MARK: - Methods
     
-    
+    /********************************************************************************************
+     ****** Change table information for chosen dictionary base on dictionary quizzes info ******
+     *********************************************************w**********************************/
     fileprivate func updateTableContent(forDictionary dictionary: RealmDictionary?) {
         
         var numberOfWords = 0
@@ -95,6 +99,9 @@ class StatisticViewController: UIViewController, UITableViewDelegate, UITableVie
         statisticTableView.reloadData()
     }
     
+    /*******************************************************************
+     ****** Update graph for list of quizzes infos for dictionary ******
+     *******************************************************************/
     fileprivate func updateBarData(withTests tests: [RealmQuizInfo]) {
         combinedChart.reloadInputViews()
         var barChartDataEntries = [BarChartDataEntry]()
@@ -182,6 +189,9 @@ class StatisticViewController: UIViewController, UITableViewDelegate, UITableVie
         
     }
     
+    /*****************************************************
+     ****** Affter appearing view reload whole data ******
+     *****************************************************/
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -286,6 +296,9 @@ class StatisticViewController: UIViewController, UITableViewDelegate, UITableVie
     
 }
 
+/***************************************************************
+ ****** Clas that provide set text label for graph values ******
+ ***************************************************************/
 @objc(CombinedChartFormatter)
 public class CombinedChartFormatter: NSObject, IAxisValueFormatter{
     

@@ -8,30 +8,35 @@
 
 import UIKit
 import RealmSwift
-import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
     override init() {
         super.init()
-        
+        // Getting standart window
         window = UIWindow(frame: UIScreen.main.bounds)
         
+        //getting Main storyboard
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        let userDefaults = UserDefaults.standard
         
-        if userDefaults.bool(forKey: "onboardingWasComplited") {
+        /****************************************************************************
+         ****** Checking of was omboarding complited or not from user defaults ******
+         ****************************************************************************/
+        if UserDefaults.standard.bool(forKey: "onboardingWasComplited") {
+            // If onboarding was finished to present a Dictionaries view Controller
             window?.rootViewController = sb.instantiateViewController(withIdentifier: "MainApp")
         } else {
+            // If application started first time then present onboarding view.
             window?.rootViewController = sb.instantiateViewController(withIdentifier: "AppOnboarding")
             window?.makeKeyAndVisible()
         }
         
-        print("Realm schem version: \(Realm.Configuration.defaultConfiguration.schemaVersion)")
-        
-        
+        /***************************************************************
+         ****** Removing of realm database from application files ******
+         ***************************************************************/
         /*
          let realmURL = Realm.Configuration.defaultConfiguration.fileURL!
          let realmURLs = [
@@ -48,9 +53,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          }
          }
         */
-     /*
+        
+        
+        /********************************************
+         ****** Setting of realm configuration ******
+         ********************************************/
+        
         let config = Realm.Configuration(
-            schemaVersion: 1,
+            schemaVersion: 0,
             migrationBlock: { migration, oldSchemaVersion in
                 // Any migration logic older Realm files may need
                 if (oldSchemaVersion < 1) {
@@ -61,9 +71,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         
         Realm.Configuration.defaultConfiguration = config
-        */
-        print("Realm schem version: \(Realm.Configuration.defaultConfiguration.schemaVersion)")
         
+        //Shows current version of realm
+        print("Realm schem version: \(Realm.Configuration.defaultConfiguration.schemaVersion)")
+    
     }
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
@@ -107,52 +118,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
-        self.saveContext()
-    }
-
-    // MARK: - Core Data stack
-
-    lazy var persistentContainer: NSPersistentContainer = {
-        /*
-         The persistent container for the application. This implementation
-         creates and returns a container, having loaded the store for the
-         application to it. This property is optional since there are legitimate
-         error conditions that could cause the creation of the store to fail.
-        */
-        let container = NSPersistentContainer(name: "Your_Vocabulary")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                 
-                /*
-                 Typical reasons for an error here include:
-                 * The parent directory does not exist, cannot be created, or disallows writing.
-                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-                 * The device is out of space.
-                 * The store could not be migrated to the current model version.
-                 Check the error message to determine what the actual problem was.
-                 */
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
-        return container
-    }()
-
-    // MARK: - Core Data Saving support
-
-    func saveContext () {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
-        }
     }
 
 }

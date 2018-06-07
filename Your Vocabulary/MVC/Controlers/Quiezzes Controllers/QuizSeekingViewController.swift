@@ -8,7 +8,6 @@
 
 import UIKit
 import RealmSwift
-import CoreData
 
 class QuizSeekingViewController: UIViewController, QuizzesMethods {
 
@@ -25,6 +24,10 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
     fileprivate var roundTimer : Timer!
     
     fileprivate var stepForProgressBar = 0.0
+    
+    /*******************************************************************************************************
+     ****** If value of property "seconds" was changed then update label of showen left time for quiz ******
+     *******************************************************************************************************/
     fileprivate var seconds = 0.0 {
         didSet {
             timerLabel.text = "\(Int(seconds))"
@@ -48,14 +51,21 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
     
     @IBOutlet var answersButtons: [UIButton]!
     
+    /***********************************
+     ****** When user gave answer ******
+     ***********************************/
     @IBAction func wasDoneAnswer(_ sender: UIButton) {
+        //increase count of answers
         countOfAnswers += 1
+        // checking given answer with answer that should be done for current question
         if sender.currentTitle == currentQuestion.answer {
             
             countOfCorrectAnswers += 1
             
+            //set new question
             setQuestionAndAnswers()
             
+            // if user chose the quize by time than set timer
             if byTime {
                 roundTimer.invalidate()
                 
@@ -76,6 +86,9 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
     
     // MARK: - Methods
     
+    /***************************************************
+     ****** Setting visual properties UI elements ******
+     ***************************************************/
     fileprivate func prepareScreen() {
         self.navigationController?.navigationBar.prefersLargeTitles = false
         self.view.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "bg"))
@@ -91,9 +104,13 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
         }
     }
     
+    /****************************************
+     ****** Forming questions for quiz ******
+     ****************************************/
     fileprivate func formQuestions() {
         guard let parametrs = chosenParametrs, let dictionary = dictionary else { return }
         
+        // append all unlearned words.
         for word in dictionary.words {
             if !word.isLearned {
                 guard let question = getElement(baseOn: parametrs.questionType, forWord: word), let answer = getElement(baseOn: parametrs.answerType, forWord: word) else { continue }
@@ -108,6 +125,9 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
         
     }
     
+    /***************************************************
+     ****** Setting options of answer to buttons. ******
+     ***************************************************/
     fileprivate func setAnswers(forQuestion question : (question: String, answer: String)) {
         currentAnswers.removeAll()
         
@@ -129,11 +149,17 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
         
     }
     
+    /****************************************************************************************************
+     ****** Finishig quiz that provide alert controller which provide opportunity to restart quiz. ******
+     ********************************** or finish quiz **************************************************
+     ****************************************************************************************************/
     fileprivate func finishQuiz() {
         if byTime {
             roundTimer.invalidate()
         }
         
+        
+        // Calculate the grade of user and depend on the frade show the title and message.
         let grade = 1.0 / (Float(countOfAnswers + countOfTimerInvokerd) / Float(countOfCorrectAnswers))
         var alertTitle : String!
         var alertMessage : String!
@@ -172,6 +198,9 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
         present(alertController, animated: true, completion: nil)
     }
     
+    /*****************************************************************
+     ****** Set question and answers for button for next round. ******
+     *****************************************************************/
     fileprivate func setQuestionAndAnswers() {
         if remainingQuestion.count == 0 {
             finishQuiz()
@@ -205,6 +234,7 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
         
         setQuestionAndAnswers()
         
+        // setting a timer if user chose a quiz by time.
         if byTime {
             timerLabel.isHidden = false
             seconds = timeForAnswer
@@ -240,6 +270,10 @@ class QuizSeekingViewController: UIViewController, QuizzesMethods {
     */
 
 }
+
+ /**********************************************************************
+  ****** Extendig of Int class by function that get random value. ******
+  **********************************************************************/
 
  extension Int {
     func getRandom() -> Int {

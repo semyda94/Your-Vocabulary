@@ -8,7 +8,6 @@
 
 import UIKit
 import RealmSwift
-import CoreData
 
 class QuizPropertiesViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
@@ -30,15 +29,18 @@ class QuizPropertiesViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     //MARK: Fucntions
     
+    /*******************************************************************
+    ****** Set picekrs parametrs for first dictionary at database ******
+    ********************************************************************/
     fileprivate func setPickersParametrs() {
-       
         dictionaries = realm.objects(RealmDictionary.self)
         setSubParametrs(dictionarAt: 0)
         
-        
-        
     }
     
+    /************************************************************
+     ****** Set options of parametrs for chosen dictionary ******
+     ************************************************************/
     fileprivate func setSubParametrs(dictionarAt position: Int) {
         parametrsForPicker.answersType.removeAll()
         parametrsForPicker.questionType.removeAll()

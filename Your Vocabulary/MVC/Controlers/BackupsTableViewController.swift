@@ -23,10 +23,12 @@ class BackupsTableViewController: UITableViewController {
      ************************************************************************************/
     fileprivate func restoreBackup(FromFile backupFileURL: URL) {
         do {
+            //Getting json string from url file
             let jsonString = try String(contentsOf: backupFileURL, encoding: .utf8)
             
             if let data = jsonString.data(using: .utf8) {
                 
+                // serialization of json data into realm objects
                 do {
                     let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
                     //print("Get json: \(json)")
@@ -34,7 +36,7 @@ class BackupsTableViewController: UITableViewController {
                     var importedDictionaries = [RealmDictionary]()
                     
                     if let jsonDictionary = jsonObject as? [String : Any], let dictionariesJSONDictionary = jsonDictionary["dictionaries"] as? [[String : Any]] {
-                        for (inedex, dictionaryJSON) in dictionariesJSONDictionary.enumerated() {
+                        for (_, dictionaryJSON) in dictionariesJSONDictionary.enumerated() {
                             let newImportedDictionary = RealmDictionary()
                             
                             newImportedDictionary.name = dictionaryJSON["name"] as! String
@@ -59,7 +61,7 @@ class BackupsTableViewController: UITableViewController {
                             newImportedDictionary.isExample = dictionaryJSON["isExample"] as! Bool
                             
                             if let wordsJSONDictionariesArray = dictionaryJSON["words"] as? [[String : Any]] {
-                                var importedWords = List<RealmWord>()
+                                let importedWords = List<RealmWord>()
                                 
                                 for word in wordsJSONDictionariesArray {
                                     let newImportedWord = RealmWord()

@@ -13,6 +13,9 @@ protocol QuizzesMethods {
 
 extension QuizzesMethods {
     
+    /*****************************************************************
+     ****** Return first element from word for type of property ******
+     *****************************************************************/
     func getElement(baseOn typeElement: DictionaryElements, forWord word: RealmWord) -> String?{
         switch typeElement {
         case .word:

@@ -15,6 +15,7 @@ class WordFieldsTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        // when cell was appeared then set visual properties for view.
         textView.layer.borderColor = #colorLiteral(red: 0.168627451, green: 0.2705882353, blue: 0.4392156863, alpha: 0.5)
         textView.layer.borderWidth = 1
         textView.layer.cornerRadius = 10

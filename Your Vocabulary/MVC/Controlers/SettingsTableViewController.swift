@@ -18,6 +18,9 @@ class SettingsTableViewController: UITableViewController {
     
     fileprivate let realm = try! Realm()
     
+    /*************************************************************
+     ****** Dictionary with indexes of settings table cells ******
+     *************************************************************/
     fileprivate let settingsCells : [String : IndexPath] = ["Notifications" : IndexPath(row: 1, section: 0),
                                                             "Create Backup" : IndexPath(row: 0, section: 1),
                                                             "Import" : IndexPath(row: 1, section: 1),
@@ -27,6 +30,9 @@ class SettingsTableViewController: UITableViewController {
     
     // MARK: - Methods
     
+    /***************************************************************
+     ****** Showing alert when user didn't create any backups ******
+     ***************************************************************/
     fileprivate func emptyOrDoesntExistBackupDir() {
         let alertControllerTitle = NSLocalizedString("No backups", comment: "Title of alert when app doesn't have any backups")
         let alertControllerMessage = NSLocalizedString("At this moment app doesn't have any backup files", comment: "Message of alert when app doesn;t have any backups")
@@ -39,10 +45,15 @@ class SettingsTableViewController: UITableViewController {
         present(alertController, animated: true, completion: nil)
     }
     
+    /******************************************
+     ****** Creating of backup with name ******
+     ******************************************/
+    //Creating of backup with name
     fileprivate func creatingBackUp(forDictionaries dictionaries : [RealmDictionary], withFileName fileName : String) {
-        
+        // Checking name
         guard let backupDirName = backupDirName else { return }
         
+        // checking existing of directory for backups
         if !FileManager.default.fileExists(atPath: backupDirName.absoluteString) {
             do {
                 try FileManager.default.createDirectory(at: backupDirName, withIntermediateDirectories: true, attributes: nil)
@@ -55,8 +66,10 @@ class SettingsTableViewController: UITableViewController {
         
         print("Backup file: \(fileURL)")
         
+        //generate string at json format
         let jsonString = generateJSONStringBaseOn(dictionaries: dictionaries)
         
+        //write a json into file.
         do {
             try jsonString.write(to: fileURL, atomically: false, encoding: .utf8)
         } catch let error as NSError {
@@ -65,6 +78,10 @@ class SettingsTableViewController: UITableViewController {
         
     }
     
+    /************************************************************************
+     ****** Showing alert for creating backup this alert has textfield ******
+     ************************************************************************/
+
     fileprivate func showCreateBackupAlertController(forDictionaries dictionaries: [RealmDictionary]) {
         
         let alertTitle = NSLocalizedString("Create Backup", comment: "Title for alert that creating backup file")
@@ -93,6 +110,9 @@ class SettingsTableViewController: UITableViewController {
         
     }
     
+    /*********************************************************************
+     ****** Function that generates a json string for dictionaries. ******
+     *********************************************************************/
     fileprivate func generateJSONStringBaseOn(dictionaries : [RealmDictionary]) -> String {
         
         var jsonString = "{\n"
@@ -340,6 +360,10 @@ class SettingsTableViewController: UITableViewController {
      }
      */
     
+    /**********************************
+     ****** Setting header view. ******
+     **********************************/
+    
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view:UIView, forSection: Int) {
         if let headerTitle = view as? UITableViewHeaderFooterView {
             headerTitle.textLabel?.textColor = #colorLiteral(red: 0.168627451, green: 0.2705882353, blue: 0.4392156863, alpha: 1)
@@ -349,46 +373,31 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     
+    /*********************
+     ****** Chosing ******
+     *********************/
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         cell?.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         switch indexPath {
-            
+        //Notification cell was selected
         case settingsCells["Notifications"] :
-            
+            //Checking user permision for notification
             let UNCenter = UNUserNotificationCenter.current()
             UNCenter.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
                 if granted {
                     
                 }
             }
-            
-            //performSegue(withIdentifier: "showNotifications", sender: nil)
-            /*
-            var dateComponents = DateComponents()
-            dateComponents.hour = 15
-            dateComponents.minute = 26
-            let triger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-            
-            triger.nextTriggerDate()
-            
-            let content = UNMutableNotificationContent()
-            content.title = "Title test"
-            content.body = "Test o the text in the body"
-            content.categoryIdentifier = "customIdentifier"
-            content.sound = UNNotificationSound.default()
-            
-            let request = UNNotificationRequest(identifier: "Test" , content: content, trigger: triger)
-            
-            UNCenter.add(request, withCompletionHandler: nil)*/
-            
-            
+        
+            //Create backup cell was selected
         case settingsCells["Create Backup"] :
             print("Start exporting of realm database")
-            
+            // getting list of dictionaries from database
             let dictionaries = realm.objects(RealmDictionary.self)
             
             if dictionaries.count < 1 {
+                //If app doesn't have any dictionaries showing alert.
                 let alertController = UIAlertController(title: NSLocalizedString("Can not import", comment: "Title of error of exporting whole database"), message: NSLocalizedString("At this moment you don't have any dictionaries. For exporting database have to have at least one dictionary.", comment: "Message of allert action for error of exporting whole database"), preferredStyle: .alert)
                 
                 let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Title of alert action when user dosn't have any dictionaries during exporting"), style: .cancel, handler: nil)
@@ -398,23 +407,26 @@ class SettingsTableViewController: UITableViewController {
                 present(alertController, animated: true, completion: nil)
                 
             } else {
-                
+                //Else showing alert that invoke creation of backup
                 showCreateBackupAlertController(forDictionaries: Array(dictionaries))
             }
             
             print("End of Exporting of realm database")
-            
+        
+        //Restore frome backup cell was selected
         case settingsCells["Import"]:
             
             guard let backupDirName = backupDirName else { return }
-            
                 do {
+                    //checking existing of backups and if exist present view that shows list of backups
                     if try !FileManager.default.contentsOfDirectory(at: backupDirName, includingPropertiesForKeys: nil).isEmpty {
                         performSegue(withIdentifier: "showBackups", sender: self)
                     } else {
+                        //showing alert that app doesn't have any backups
                         emptyOrDoesntExistBackupDir()
                     }
                 } catch let error as NSError {
+                    //showing alert that app doesn't have any backups
                     emptyOrDoesntExistBackupDir()
                     print("Error during checking backupfilse\(error)")
                 }
@@ -430,12 +442,16 @@ class SettingsTableViewController: UITableViewController {
              
              }
              */
-            
+        
+        //Reseting fatabase cell was selected
         case settingsCells["Reset"]:
+            //present of alert that notify user before reset
             let alert = UIAlertController(title: "Reseting database", message: "Are you sure you want to delete all data?", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "Reset", style: .default, handler: { _ in
+                //If user chosen a reset whole dictionaries
                 try! self.realm.write {
+                    //remove all dictionaries
                     self.realm.deleteAll()
                 }
             }))
@@ -455,7 +471,9 @@ class SettingsTableViewController: UITableViewController {
     
     // MARK: - Navigation
     
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    /*****************************************************************************************************************
+     ****** In a storyboard-based application, you will often want to do a little preparation before navigation ******
+     *****************************************************************************************************************/
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "showBackups":

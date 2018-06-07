@@ -8,7 +8,6 @@
 
 import UIKit
 import RealmSwift
-import CoreData
 
 class WordsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -16,6 +15,9 @@ class WordsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     let realm = try! Realm()
     
+    /********************************
+     ****** Chosen dictionary  ******
+     ********************************/
     var currentDictionary: RealmDictionary? {
         didSet {
             guard let dictionary = currentDictionary else { return }
@@ -49,7 +51,9 @@ class WordsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     // MARK: - Methods
     
-    // action when we add new Word
+    /*****************************************
+     ****** Action when we add new Word ******
+     *****************************************/
     
     @objc func addTapped() {
         performSegue(withIdentifier: "newWord", sender: nil)

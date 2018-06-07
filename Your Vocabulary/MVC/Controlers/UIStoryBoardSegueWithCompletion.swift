@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**********************************************************************************************************************
+ ****** Class inhireted from UIStoryboardSegue that provide opportunity to have completion function after segue. ******
+ **********************************************************************************************************************/
 class UIStoryboardSegueWithCompletion: UIStoryboardSegue {
     var completion: (() -> Void)?
     

@@ -10,9 +10,13 @@ import Foundation
 
 let APPLE_LANGUAGE_KEY = "AppleLanguages"
 
+/**************************************************
+ ******** Class that inherited from NSObject ******
+ **************************************************/
+
 class CustomeLanguageSwitcher:NSObject {
     
-    // get current Apple language
+    // function get current Apple language
     class func currentAppleLanguage() -> String{
         let userdef = UserDefaults.standard
         let langArray = userdef.object(forKey: APPLE_LANGUAGE_KEY) as! NSArray
@@ -20,6 +24,7 @@ class CustomeLanguageSwitcher:NSObject {
         return current
     }
     
+    // function get current language
     class func currentAppleLanguageFull() -> String{
         let userdef = UserDefaults.standard
         let langArray = userdef.object(forKey: APPLE_LANGUAGE_KEY) as! NSArray
@@ -34,14 +39,11 @@ class CustomeLanguageSwitcher:NSObject {
         userdef.synchronize()
     }
     
+    
     class func DoTheMagic() {
         
         MethodSwizzleGivenClassName(cls: Bundle.self, originalSelector: #selector(Bundle.localizedString(forKey:value:table:)), overrideSelector: #selector(Bundle.specialLocalizedStringForKey(_:value:table:)))
         MethodSwizzleGivenClassName(cls: UIApplication.self, originalSelector: #selector(getter: UIApplication.userInterfaceLayoutDirection), overrideSelector: #selector(getter: UIApplication.cstm_userInterfaceLayoutDirection))
-        /*MethodSwizzleGivenClassName(cls: UITextField.self, originalSelector: #selector(UITextField.layoutSubviews), overrideSelector: #selector(UITextField.cstmlayoutSubviews))
-        MethodSwizzleGivenClassName(cls: UILabel.self, originalSelector: #selector(UILabel.layoutSubviews), overrideSelector: #selector(UILabel.cstmlayoutSubviews))
-         */
-        
     }
     
 }
@@ -58,6 +60,11 @@ extension UIApplication {
         }
     }
 }
+
+/**********************************************************
+ ******** Extending of bundel for changing language. ******
+ **********************************************************/
+
 extension Bundle {
     @objc func specialLocalizedStringForKey(_ key: String, value: String?, table tableName: String?) -> String {
         if self == Bundle.main {
@@ -82,8 +89,9 @@ func disableMethodSwizzling() {
     
 }
 
-
-/// Exchange the implementation of two methods of the same Class
+/****************************************************************************
+ ******** Exchange the implementation of two methods of the same Class ******
+ ****************************************************************************/
 func MethodSwizzleGivenClassName(cls: AnyClass, originalSelector: Selector, overrideSelector: Selector) {
     let origMethod: Method = class_getInstanceMethod(cls, originalSelector)!;
     let overrideMethod: Method = class_getInstanceMethod(cls, overrideSelector)!;

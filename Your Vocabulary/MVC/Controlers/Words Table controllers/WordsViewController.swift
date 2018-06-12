@@ -9,11 +9,15 @@
 import UIKit
 import RealmSwift
 
-class WordsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class WordsViewController: UIViewController {
 
     // MARK: - Properties
     
-    let realm = try! Realm()
+    fileprivate let realm = try! Realm()
+    
+    fileprivate let searchController = UISearchController(searchResultsController: nil)
+    
+    fileprivate var filteredWords = [RealmWord]()
     
     /********************************
      ****** Chosen dictionary  ******
@@ -59,6 +63,27 @@ class WordsViewController: UIViewController, UITableViewDataSource, UITableViewD
         performSegue(withIdentifier: "newWord", sender: nil)
     }
     
+    func searchBarIsEmpty() -> Bool {
+        // Returns true if the text is empty or nil
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+        guard let dictionary = currentDictionary else { return }
+        
+        filteredWords = dictionary.words.filter({( word : RealmWord) -> Bool in
+            return word.word.lowercased().contains(searchText.lowercased())
+        })
+        
+        wordsTableView.reloadData()
+    }
+    
+    func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
+    }
+    
+    // MARK: - View life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -68,15 +93,78 @@ class WordsViewController: UIViewController, UITableViewDataSource, UITableViewD
         wordsTableView.rowHeight = UITableViewAutomaticDimension
         
         // Do any additional setup after loading the view.
+        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.placeholder = NSLocalizedString("Search words", comment: "Place holder for search bar at words tablew view")
+        navigationItem.searchController = searchController
+        definesPresentationContext = false
+        
+        let textFieldInsideSearchBar = searchController.searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.textColor = #colorLiteral(red: 0.1688913405, green: 0.2733592689, blue: 0.4399766326, alpha: 1)
+        
+        let textFieldInsideSearchBarLabel = textFieldInsideSearchBar!.value(forKey: "placeholderLabel") as? UILabel
+        textFieldInsideSearchBarLabel?.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     }
 
     
     override func viewWillAppear(_ animated: Bool) {
         wordsTableView.reloadData()
+        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = NSLocalizedString("Search words", comment: "Place holder for search bar at words tablew view")
+        navigationItem.searchController = searchController
+        definesPresentationContext = false
+        
+        let textFieldInsideSearchBar = searchController.searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.textColor = #colorLiteral(red: 0.1688913405, green: 0.2733592689, blue: 0.4399766326, alpha: 1)
+        
+        let textFieldInsideSearchBarLabel = textFieldInsideSearchBar!.value(forKey: "placeholderLabel") as? UILabel
+        textFieldInsideSearchBarLabel?.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     }
-
-    // MARK: - Table view data source
     
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        
+        if let wvc = segue.destination as? WordViewController {
+            
+            switch segue.identifier! {
+            case "showWord" :
+                if let cell = sender as? WordTableViewCell, let indexPath = wordsTableView.indexPath(for: cell) {
+                    
+                    if !isFiltering() {
+                        wvc.currentDictionary = currentDictionary
+                        wvc.currentWord = currentDictionary?.words[indexPath.row]
+                    } else {
+                        wvc.currentDictionary = currentDictionary
+                        wvc.currentWord = filteredWords[indexPath.row]
+                    }
+                    
+                    print("showWord segue: was seted dictionary and word")
+                }
+                
+            case "newWord" :
+                wvc.currentDictionary = currentDictionary
+                print("newWord segue: was setted Dictionary")
+                
+            default:
+                print("segue identifier wasn't found")
+                break
+            }
+            
+            
+        }
+    }
+}
+
+// MARK: - Table View Data Source
+extension WordsViewController : UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -84,6 +172,10 @@ class WordsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        
+        if isFiltering() {
+            return filteredWords.count
+        }
         
         guard let dictionary = currentDictionary else {
             nonWordsStack.isHidden = false;
@@ -117,26 +209,34 @@ class WordsViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath) as? WordTableViewCell, let dictionary = currentDictionary else {
-             let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath)
             return cell
         }
         
         // Configure the cell...
         
-        cell.currentDictionary = dictionary
-        cell.currentWord = dictionary.words[indexPath.row]
+        if !isFiltering() {
+            cell.currentDictionary = dictionary
+            cell.currentWord = dictionary.words[indexPath.row]
+        } else {
+            cell.currentDictionary = dictionary
+            cell.currentWord = filteredWords[indexPath.row]
+        }
         return cell
     }
-    
+}
+
+// MARK: - Table View Delegate
+extension WordsViewController : UITableViewDelegate {
     /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
+    // Override to support conditional editing of the table view.
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the specified item to be editable.
+        return true
+    }
+    */
     
     // Override to support editing the table view.
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -157,38 +257,12 @@ class WordsViewController: UIViewController, UITableViewDataSource, UITableViewD
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
+}
 
-    
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        
-        if let wvc = segue.destination as? WordViewController {
-            
-            switch segue.identifier! {
-            case "showWord" :
-                if let cell = sender as? WordTableViewCell, let indexPath = wordsTableView.indexPath(for: cell) {
-                    
-                    wvc.currentDictionary = currentDictionary
-                    wvc.currentWord = currentDictionary?.words[indexPath.row]
-                    print("showWord segue: was seted dictionary and word")
-                }
-                
-            case "newWord" :
-                wvc.currentDictionary = currentDictionary
-                print("newWord segue: was setted Dictionary")
-                
-            default:
-                print("segue identifier wasn't found")
-                break
-            }
-            
-            
-        }
+// MARK: - UISearchResultsUpdating Delegate
+extension WordsViewController : UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
     }
-    
-
 }

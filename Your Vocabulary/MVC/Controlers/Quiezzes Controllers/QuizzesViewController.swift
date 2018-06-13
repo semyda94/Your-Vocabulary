@@ -1,34 +1,31 @@
 //
-//  QuizzesCollectionViewController.swift
+//  QuizzesViewController.swift
 //  Your Vocabulary
 //
-//  Created by Dmitrii Semykin on 8/02/18.
+//  Created by Dmitrii Semykin on 13/06/18.
 //  Copyright © 2018 Dmitrii Semykin. All rights reserved.
 //
 
 import UIKit
 import RealmSwift
 
-private let reuseIdentifier = "QuizCollectionCell"
-
-class QuizzesCollectionViewController: UICollectionViewController {
-
-    // MARK: - Properties
+class QuizzesViewController: UIViewController {
     
-    /*********************************************************************
-     ****** Dictionary present title of quiz and thumbnail for quiz ******
-     *********************************************************************/
-    fileprivate let quizzes: [(name: QuizzesTypes, thumbnail: UIImage)] = [(.seeking, #imageLiteral(resourceName: "seeking_icon") ), (.seekingByTime, #imageLiteral(resourceName: "seeking_by_time_icon")), (.matching, #imageLiteral(resourceName: "matching_icon")), (.matchingByTime, #imageLiteral(resourceName: "matching_by_time_icon")), /*(.spelling, #imageLiteral(resourceName: "spelling_icon")), (.spellingByTime, #imageLiteral(resourceName: "spelling_by_time_icon"))*/]
+    // MARK: - Properties
     
     fileprivate let realm = try! Realm()
     
-    fileprivate var selectedQuizCellIndex = IndexPath(row: 0, section: 0)
+    fileprivate var selectedTypeOfQuiz : QuizzesTypes?
     
-    //MARK: - Unwind segue
+    // MARK: - Outlets
     
-    @IBAction func getEmptyListOfDictionaries(segue: UIStoryboardSegue) {
-        
-    }
+    @IBOutlet weak var quizzesTable: UITableView!
+    
+    // MARK: - Methods
+    
+    fileprivate var quizzes = [(nameOfSection: String, sectionQuizzes: [(name: QuizzesTypes, thumbnail: UIImage)])]()
+    
+    // MARK: - Unwind segues
     
     @IBAction func closePropertiesView(segue: UIStoryboardSegue){
         
@@ -42,13 +39,14 @@ class QuizzesCollectionViewController: UICollectionViewController {
             
             // set segue completion
             segue.completion = {
-                
+            
                 guard let sourceVC = segue.source as? QuizPropertiesViewController else { return }
                 let chosenDictionary = sourceVC.dictionaries![sourceVC.pickerView.selectedRow(inComponent: 0)]
                 
                 //checking amount of unlearned words at chosen dictionary
                 
                 if chosenDictionary.words.count - chosenDictionary.numberOfLearnedWords >= 4 {
+                    print("lasdasd")
                     // if chosen dictionary has more than 4 unlearned words then start quiz with chosen type
                     switch sourceVC.typeOfQuiz {
                     case .seeking:
@@ -80,7 +78,6 @@ class QuizzesCollectionViewController: UICollectionViewController {
         }
     }
     
-    
     /**************************************************************
      ****** Function that finish quiz and save quiz results. ******
      **************************************************************/
@@ -98,7 +95,7 @@ class QuizzesCollectionViewController: UICollectionViewController {
             dateOfQuiz = sourceVC.dateOfQuiz
             dictionary = sourceVC.dictionary!
             print("unwindFinishSeekingQuiz done")
-
+            
         case "unwindFinishMatchingQuiz":
             guard let sourceVC = segue.source as? QuizMatchingViewController else { return }
             countOfAnswers = sourceVC.countOfAnswers
@@ -106,15 +103,15 @@ class QuizzesCollectionViewController: UICollectionViewController {
             dateOfQuiz = sourceVC.dateOfQuiz
             dictionary = sourceVC.dictionary!
             print("unwindFinishMatchingQuiz done")
-/*
-        case "unwindFinishSpellingQuiz":
-            guard let sourceVC = segue.source as? QuizSpellingViewController else { return }
-            countOfAnswers = sourceVC.countOfAnswers
-            countOfCorrectAnswer = sourceVC.countOfCorrectAnswers
-            dateOfQuiz = sourceVC.dateOfQuiz
-            dictionary = sourceVC.chosenParametrs!.dictionary
-            print("unwindFinishSpellingQuiz done")
- */
+            /*
+             case "unwindFinishSpellingQuiz":
+             guard let sourceVC = segue.source as? QuizSpellingViewController else { return }
+             countOfAnswers = sourceVC.countOfAnswers
+             countOfCorrectAnswer = sourceVC.countOfCorrectAnswers
+             dateOfQuiz = sourceVC.dateOfQuiz
+             dictionary = sourceVC.chosenParametrs!.dictionary
+             print("unwindFinishSpellingQuiz done")
+             */
         default:
             return
         }
@@ -133,52 +130,42 @@ class QuizzesCollectionViewController: UICollectionViewController {
         
     }
     
-    // MARK: - Life cycle
     
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-//        // Register cell classes
-//        self.collectionView!.register(QuizzesCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
         // Do any additional setup after loading the view.
+        
+        let memoName = "Memorization"
+        let memoQuizzes: [(name: QuizzesTypes, thumbnail: UIImage)] =  [(.seeking, #imageLiteral(resourceName: "seeking_icon") ), (.seekingByTime, #imageLiteral(resourceName: "seeking_by_time_icon")), (.matching, #imageLiteral(resourceName: "matching_icon")), (.matchingByTime, #imageLiteral(resourceName: "matching_by_time_icon"))]
+        
+        quizzes.append((nameOfSection: memoName, sectionQuizzes: memoQuizzes))
+        
+        let spelName = "Spelling"
+        let spelQuizzes: [(name: QuizzesTypes, thumbnail: UIImage)] = [(.spelling, #imageLiteral(resourceName: "spelling_icon")), (.spellingByTime, #imageLiteral(resourceName: "spelling_by_time_icon"))]
+        
+        quizzes.append((nameOfSection: spelName, sectionQuizzes: spelQuizzes))
+        
+        quizzesTable.reloadData()
     }
 
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        //set width of quiz cell
-        if let layout = collectionView!.collectionViewLayout as? UICollectionViewFlowLayout {
-            let itemWidth = view.bounds.width / 2.0 - 5
-            let itemHeight = itemWidth
-            layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
-        }
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
     
-    // MARK: - Navigation
 
-    /*****************************************************************************************************************
-     ****** In a storyboard-based application, you will often want to do a little preparation before navigation ******
-     *****************************************************************************************************************/
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier! {
         case "showQuizProperties":
             
             guard let qpvc = segue.destination as? QuizPropertiesViewController else { return }
             /*guard let qcvc = segue.source as? QuizzesCollectionViewController else { return }
-            guard let cell = sender as? QuizzesCollectionViewCell, let indexPath = collectionView?.indexPath(for: cell) else { return }*/
-            qpvc.typeOfQuiz = quizzes[selectedQuizCellIndex.row].name
+             guard let cell = sender as? QuizzesCollectionViewCell, let indexPath = collectionView?.indexPath(for: cell) else { return }*/
+            qpvc.typeOfQuiz = selectedTypeOfQuiz!
             qpvc.modalPresentationStyle = .overCurrentContext
-        
+            
         case "startSeekingByTimeQuiz":
             guard let qpvc = sender as? QuizPropertiesViewController else { return }
             guard let qsvc = segue.destination as? QuizSeekingViewController else { return }
@@ -186,13 +173,13 @@ class QuizzesCollectionViewController: UICollectionViewController {
             let chosenParametrs: (questionType: DictionaryElements, answerType: DictionaryElements)
             
             qsvc.byTime = true
-        
+            
             chosenParametrs.questionType = qpvc.parametrsForPicker.questionType[qpvc.pickerView.selectedRow(inComponent: 1)]
             chosenParametrs.answerType = qpvc.parametrsForPicker.answersType[qpvc.pickerView.selectedRow(inComponent: 2)]
             
             qsvc.chosenParametrs = chosenParametrs
             qsvc.dictionary = qpvc.dictionaries![qpvc.pickerView.selectedRow(inComponent: 0)]
- 
+            
         case "startSeekingQuiz":
             guard let qpvc = sender as? QuizPropertiesViewController else { return }
             guard let qsvc = segue.destination as? QuizSeekingViewController else { return }
@@ -205,7 +192,7 @@ class QuizzesCollectionViewController: UICollectionViewController {
             
             qsvc.chosenParametrs = chosenParametrs
             qsvc.dictionary = qpvc.dictionaries![qpvc.pickerView.selectedRow(inComponent: 0)]
-        
+            
         case "startMatchingByTimeQuiz":
             guard let qpvc = sender as? QuizPropertiesViewController else { return }
             guard let qmvc = segue.destination as? QuizMatchingViewController else { return }
@@ -231,20 +218,20 @@ class QuizzesCollectionViewController: UICollectionViewController {
             
             qmvc.chosenParametrs = chosenParametrs
             qmvc.dictionary = qpvc.dictionaries![qpvc.pickerView.selectedRow(inComponent: 0)]
-        
-        /*
-        case "startSpellingQuiz":
-            guard let qpvc = sender as? QuizPropertiesViewController else { return }
-            guard let qsvc = segue.destination as? QuizSpellingViewController else { return }
             
-            let chosenParametrs: (dictionary: RealmDictionary, questionType: DictionaryElements, answerType: DictionaryElements)
-            
-            //chosenParametrs.dictionary = qpvc.parametrsForPicker.dictionaries[qpvc.pickerView.selectedRow(inComponent: 0)]
-            chosenParametrs.questionType = qpvc.parametrsForPicker.questionType[qpvc.pickerView.selectedRow(inComponent: 1)]
-            chosenParametrs.answerType = qpvc.parametrsForPicker.answersType[qpvc.pickerView.selectedRow(inComponent: 2)]
-            
-            //qsvc.chosenParametrs = chosenParametrs
- */
+            /*
+             case "startSpellingQuiz":
+             guard let qpvc = sender as? QuizPropertiesViewController else { return }
+             guard let qsvc = segue.destination as? QuizSpellingViewController else { return }
+             
+             let chosenParametrs: (dictionary: RealmDictionary, questionType: DictionaryElements, answerType: DictionaryElements)
+             
+             //chosenParametrs.dictionary = qpvc.parametrsForPicker.dictionaries[qpvc.pickerView.selectedRow(inComponent: 0)]
+             chosenParametrs.questionType = qpvc.parametrsForPicker.questionType[qpvc.pickerView.selectedRow(inComponent: 1)]
+             chosenParametrs.answerType = qpvc.parametrsForPicker.answersType[qpvc.pickerView.selectedRow(inComponent: 2)]
+             
+             //qsvc.chosenParametrs = chosenParametrs
+             */
             
         default:
             break
@@ -252,41 +239,53 @@ class QuizzesCollectionViewController: UICollectionViewController {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
     }
+
+}
+
+// MARK: - UITableViewDataSource
+extension QuizzesViewController: UITableViewDataSource {
     
-
-    // MARK: UICollectionViewDataSource
-
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return quizzes[section].nameOfSection
     }
-
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         return quizzes.count
     }
-
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! QuizzesCollectionViewCell
-    /*
-        cell.quizzThumbNail.image = quizzes[indexPath.row].thumbnail
-        cell.title.text = quizzes[indexPath.row].name.localizedString
-        // Configure the cell*/
-        
-        return cell
-        
-    }
-
-    // MARK: UICollectionViewDelegate
-
     
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = quizzesTable.dequeueReusableCell(withIdentifier: "QuizzesColection", for: indexPath) as! QuizzesTableViewCell
         
+        cell.quizzes = quizzes[indexPath.section].sectionQuizzes
+        cell.delegateQuizWasSelected = self
+        return cell
+    }
+    
+    
+}
+
+//
+
+// MARK: - UITableViewDelegate
+extension QuizzesViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UIScreen.main.bounds.size.height / 2.3
+    }
+}
+
+// MARK: - delegateQuizWasSelected
+
+extension QuizzesViewController: QuizWasSelected {
+    func quizWasSelected(withForQuizType quizType: QuizzesTypes) {
+        print("Was chose \(quizType)")
         //checking amount of dictionaries before present Quiz properties view.
         let result = realm.objects(RealmDictionary.self)
         if !result.isEmpty {
-            selectedQuizCellIndex = indexPath
+            selectedTypeOfQuiz = quizType
             performSegue(withIdentifier: "showQuizProperties", sender: self)
         } else {
             let emptyListOfDictionariesAlertController = UIAlertController(title: NSLocalizedString("No dictionaries", comment: "Title for alert controler when list of dictionaries is empty"), message: NSLocalizedString("Sadly, at this moment your list of dictionaries doesn't have no one dictionary.", comment: "Message for alert controller when list of dictionaries is empty"), preferredStyle: .alert)
@@ -299,34 +298,5 @@ class QuizzesCollectionViewController: UICollectionViewController {
         }
     }
     
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
     
-    }
-    */
-    
-
 }

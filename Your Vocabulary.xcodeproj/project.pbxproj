@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		9B4FE77E5CC76ADB312CA568 /* Pods_Your_Vocabulary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA8B30719CDEEDAA212C72B /* Pods_Your_Vocabulary.framework */; };
+		C2AF469E20D121D30002D3D3 /* QuizzesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2AF469D20D121D30002D3D3 /* QuizzesViewController.swift */; };
+		C2AF46A020D126B40002D3D3 /* QuizzesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2AF469F20D126B40002D3D3 /* QuizzesTableViewCell.swift */; };
 		C2C0483B20C01456008AC773 /* enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C0483A20C01456008AC773 /* enumerations.swift */; };
 		C2C17E1F20C63F4C0051F4EE /* AppOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C17E1E20C63F4C0051F4EE /* AppOnboardingView.swift */; };
 		E7089B42202BE3F30028272C /* QuizzesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7089B41202BE3F30028272C /* QuizzesCollectionViewCell.swift */; };
@@ -71,6 +73,8 @@
 
 /* Begin PBXFileReference section */
 		30C67FC84EDE9663A2A1BBA6 /* Pods-Your Vocabulary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Your Vocabulary.release.xcconfig"; path = "Pods/Target Support Files/Pods-Your Vocabulary/Pods-Your Vocabulary.release.xcconfig"; sourceTree = "<group>"; };
+		C2AF469D20D121D30002D3D3 /* QuizzesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzesViewController.swift; sourceTree = "<group>"; };
+		C2AF469F20D126B40002D3D3 /* QuizzesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzesTableViewCell.swift; sourceTree = "<group>"; };
 		C2C0483A20C01456008AC773 /* enumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = enumerations.swift; sourceTree = "<group>"; };
 		C2C17E1E20C63F4C0051F4EE /* AppOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOnboardingView.swift; sourceTree = "<group>"; };
 		CDA8B30719CDEEDAA212C72B /* Pods_Your_Vocabulary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Your_Vocabulary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,6 +196,8 @@
 		E74B4A0D20362CF8000BA062 /* Quiezzes Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C2AF469D20D121D30002D3D3 /* QuizzesViewController.swift */,
+				C2AF469F20D126B40002D3D3 /* QuizzesTableViewCell.swift */,
 				E7E25E3E2042C0B9009EFE87 /* QuizSpellingViewController.swift */,
 				E7E25E3C2042B9C3009EFE87 /* QuizMatchingViewController.swift */,
 				E7A91668203E19EE006A5CDB /* QuizPropertiesViewController.swift */,
@@ -479,6 +485,7 @@
 				E74B4A0920354285000BA062 /* WordsViewController.swift in Sources */,
 				E78E23D8205419CD00EE8790 /* StatisticViewController.swift in Sources */,
 				E785D6D7200C5A0E0068B4CE /* BEMCheckBox.m in Sources */,
+				C2AF46A020D126B40002D3D3 /* QuizzesTableViewCell.swift in Sources */,
 				E7591EC32023BE5F00007057 /* WordFieldsTableViewCell.swift in Sources */,
 				E74EBF1620B797D60065ED93 /* DayOfWeekButton.swift in Sources */,
 				E7E312182032A81C00F03FC9 /* QuizSeekingViewController.swift in Sources */,
@@ -498,6 +505,7 @@
 				E7DC927E20104EC6009D77FE /* DictionaryPropertiesViewController.swift in Sources */,
 				E7C901BE20591A9B0076823C /* SettingsTableViewController.swift in Sources */,
 				E7E25E3F2042C0B9009EFE87 /* QuizSpellingViewController.swift in Sources */,
+				C2AF469E20D121D30002D3D3 /* QuizzesViewController.swift in Sources */,
 				C2C17E1F20C63F4C0051F4EE /* AppOnboardingView.swift in Sources */,
 				E7089B42202BE3F30028272C /* QuizzesCollectionViewCell.swift in Sources */,
 				E785D6D6200C5A0E0068B4CE /* BEMCheckBoxGroup.m in Sources */,

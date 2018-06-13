@@ -8,12 +8,19 @@
 
 import UIKit
 
+
+
 class QuizzesCollectionViewCell: UICollectionViewCell {
     
+    var quiz : (name: QuizzesTypes, thumbnail: UIImage)! {
+        didSet {
+            if quiz != nil {
+                testLabel.text = quiz.name.localizedString
+            }
+        }
+    }
     
-    @IBOutlet weak var quizzThumbNail: UIImageView!
-    
-    @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var testLabel: UILabel!
     
     override func awakeFromNib() {
     }

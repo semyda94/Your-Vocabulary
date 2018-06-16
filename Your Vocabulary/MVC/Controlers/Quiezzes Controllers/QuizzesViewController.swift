@@ -273,7 +273,7 @@ extension QuizzesViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension QuizzesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UIScreen.main.bounds.size.height / 2.3
+        return UIScreen.main.bounds.size.height / 2.7
     }
 }
 

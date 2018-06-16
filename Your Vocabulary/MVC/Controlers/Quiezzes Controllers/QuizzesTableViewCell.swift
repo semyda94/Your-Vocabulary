@@ -28,7 +28,6 @@ class QuizzesTableViewCell: UITableViewCell {
     fileprivate let realm = try! Realm()
     // MARK: - Outlets
     
-    @IBOutlet weak var TestLabel: UILabel!
     @IBOutlet weak var quizzesCollection: UICollectionView!
     
     
@@ -67,7 +66,7 @@ extension QuizzesTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "QuizCell", for: indexPath) as! QuizzesCollectionViewCell
-        
+        cell.contentView.layer.cornerRadius = 10.0
         cell.quiz = quizzes[indexPath.row]
         return cell
     }

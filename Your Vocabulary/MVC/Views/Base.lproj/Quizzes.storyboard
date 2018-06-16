@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
@@ -400,39 +401,83 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="216.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="U8q-qF-IYD">
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="U8q-qF-IYD">
                                                     <rect key="frame" x="5" y="5" width="365" height="206.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7mv-m0-4dt">
-                                                        <size key="itemSize" width="50" height="50"/>
+                                                        <size key="itemSize" width="166" height="166"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="QuizCell" id="R6Y-NE-Soo" customClass="QuizzesCollectionViewCell" customModule="Your_Vocabulary" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                            <rect key="frame" x="0.0" y="20.5" width="166" height="166"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="166" height="166"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mhh-ZX-zHL">
-                                                                        <rect key="frame" x="21" y="14.5" width="8" height="21"/>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                        <nil key="textColor"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yy8-ts-Vyb">
+                                                                        <rect key="frame" x="5" y="5" width="156" height="156"/>
+                                                                        <subviews>
+                                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1mP-I5-Cow">
+                                                                                <rect key="frame" x="29" y="10" width="98.5" height="99"/>
+                                                                                <subviews>
+                                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4hE-p9-dET">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="98.5" height="99"/>
+                                                                                        <constraints>
+                                                                                            <constraint firstAttribute="width" secondItem="4hE-p9-dET" secondAttribute="height" multiplier="1:1" id="LW0-5f-4P6"/>
+                                                                                        </constraints>
+                                                                                    </imageView>
+                                                                                </subviews>
+                                                                            </stackView>
+                                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Uu2-CV-A0O">
+                                                                                <rect key="frame" x="10" y="119" width="136" height="27"/>
+                                                                                <subviews>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Quiz Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mhh-ZX-zHL">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="136" height="15.5"/>
+                                                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                                                        <color key="textColor" red="0.19215686269999999" green="0.27058823529999998" blue="0.42745098040000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                    </label>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quiz description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfm-gE-ko9">
+                                                                                        <rect key="frame" x="0.0" y="15.5" width="136" height="11.5"/>
+                                                                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                                                                        <color key="textColor" red="0.19215686269999999" green="0.27058823529999998" blue="0.42745098040000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                    </label>
+                                                                                </subviews>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="width" secondItem="Uu2-CV-A0O" secondAttribute="height" multiplier="5:1" id="3hL-Z7-dgF"/>
+                                                                                </constraints>
+                                                                            </stackView>
+                                                                        </subviews>
+                                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <constraints>
+                                                                            <constraint firstItem="1mP-I5-Cow" firstAttribute="top" secondItem="yy8-ts-Vyb" secondAttribute="top" constant="10" id="DvW-MK-Oba"/>
+                                                                            <constraint firstItem="1mP-I5-Cow" firstAttribute="centerX" secondItem="yy8-ts-Vyb" secondAttribute="centerX" id="okf-Gi-ZrC"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="Uu2-CV-A0O" secondAttribute="bottom" constant="10" id="r3h-fr-UmW"/>
+                                                                            <constraint firstItem="Uu2-CV-A0O" firstAttribute="leading" secondItem="yy8-ts-Vyb" secondAttribute="leading" constant="10" id="uAo-Ji-lK0"/>
+                                                                            <constraint firstItem="Uu2-CV-A0O" firstAttribute="top" secondItem="1mP-I5-Cow" secondAttribute="bottom" constant="10" id="uYz-Af-zcv"/>
+                                                                            <constraint firstItem="1mP-I5-Cow" firstAttribute="top" secondItem="yy8-ts-Vyb" secondAttribute="top" constant="10" id="w9f-hs-jXR"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="Uu2-CV-A0O" secondAttribute="trailing" constant="10" id="wmn-dp-xCz"/>
+                                                                        </constraints>
+                                                                    </view>
                                                                 </subviews>
                                                             </view>
                                                             <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="trailingMargin" secondItem="Mhh-ZX-zHL" secondAttribute="trailing" constant="5" id="1Mo-h1-pne"/>
-                                                                <constraint firstItem="Mhh-ZX-zHL" firstAttribute="leading" secondItem="R6Y-NE-Soo" secondAttribute="leadingMargin" constant="5" id="M5y-69-Gj6"/>
-                                                                <constraint firstItem="Mhh-ZX-zHL" firstAttribute="centerY" secondItem="R6Y-NE-Soo" secondAttribute="centerY" id="ftv-7N-DSy"/>
+                                                                <constraint firstAttribute="bottom" secondItem="yy8-ts-Vyb" secondAttribute="bottom" constant="5" id="8Cn-Gq-N7r"/>
+                                                                <constraint firstAttribute="trailing" secondItem="yy8-ts-Vyb" secondAttribute="trailing" constant="5" id="Gn2-Oh-nnf"/>
+                                                                <constraint firstItem="yy8-ts-Vyb" firstAttribute="top" secondItem="R6Y-NE-Soo" secondAttribute="top" constant="5" id="HRI-tH-xAC"/>
+                                                                <constraint firstItem="yy8-ts-Vyb" firstAttribute="leading" secondItem="R6Y-NE-Soo" secondAttribute="leading" constant="5" id="Ldb-nx-CzV"/>
                                                             </constraints>
                                                             <connections>
-                                                                <outlet property="testLabel" destination="Mhh-ZX-zHL" id="YrN-dL-ibY"/>
+                                                                <outlet property="quizDescription" destination="gfm-gE-ko9" id="PHN-pI-Gjk"/>
+                                                                <outlet property="quizImage" destination="4hE-p9-dET" id="HUK-AT-Lng"/>
+                                                                <outlet property="quizTitleLabel" destination="Mhh-ZX-zHL" id="ilu-Uc-VAv"/>
+                                                                <outlet property="quizzBGView" destination="yy8-ts-Vyb" id="OkR-1Q-mZF"/>
                                                             </connections>
                                                         </collectionViewCell>
                                                     </cells>
@@ -483,7 +528,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ebc-QD-bpi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1149.5999999999999" y="541.97901049475263"/>
+            <point key="canvasLocation" x="1149.5" y="541.5"/>
         </scene>
         <!--Quiz Properties View Controller-->
         <scene sceneID="gNb-tx-9oN">

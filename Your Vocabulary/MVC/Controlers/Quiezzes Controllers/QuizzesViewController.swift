@@ -46,7 +46,6 @@ class QuizzesViewController: UIViewController {
                 //checking amount of unlearned words at chosen dictionary
                 
                 if chosenDictionary.words.count - chosenDictionary.numberOfLearnedWords >= 4 {
-                    print("lasdasd")
                     // if chosen dictionary has more than 4 unlearned words then start quiz with chosen type
                     switch sourceVC.typeOfQuiz {
                     case .seeking:
@@ -59,6 +58,8 @@ class QuizzesViewController: UIViewController {
                         self.performSegue(withIdentifier: "startMatchingByTimeQuiz", sender: sourceVC)
                     case .spelling:
                         self.performSegue(withIdentifier: "startSpellingQuiz", sender: sourceVC)
+                    case .spellingByTime:
+                        self.performSegue(withIdentifier: "startSpellingQuizByTime", sender: sourceVC)
                     default:
                         return
                     }
@@ -103,15 +104,15 @@ class QuizzesViewController: UIViewController {
             dateOfQuiz = sourceVC.dateOfQuiz
             dictionary = sourceVC.dictionary!
             print("unwindFinishMatchingQuiz done")
-            /*
-             case "unwindFinishSpellingQuiz":
-             guard let sourceVC = segue.source as? QuizSpellingViewController else { return }
-             countOfAnswers = sourceVC.countOfAnswers
-             countOfCorrectAnswer = sourceVC.countOfCorrectAnswers
-             dateOfQuiz = sourceVC.dateOfQuiz
-             dictionary = sourceVC.chosenParametrs!.dictionary
-             print("unwindFinishSpellingQuiz done")
-             */
+        
+        case "unwindFinishSpellingQuiz":
+            guard let sourceVC = segue.source as? QuizSpellingViewController else { return }
+            countOfAnswers = sourceVC.countOfAnswers
+            countOfCorrectAnswer = sourceVC.countOfCorrectAnswers
+            dateOfQuiz = sourceVC.dateOfQuiz
+            dictionary = sourceVC.dictionary!
+            print("unwindFinishSpellingQuiz done")
+            
         default:
             return
         }
@@ -218,6 +219,20 @@ class QuizzesViewController: UIViewController {
             
             qmvc.chosenParametrs = chosenParametrs
             qmvc.dictionary = qpvc.dictionaries![qpvc.pickerView.selectedRow(inComponent: 0)]
+            
+        case "startSpellingQuizByTime":
+            guard let qpvc = sender as? QuizPropertiesViewController else { return }
+            guard let qsvc = segue.destination as? QuizSpellingViewController else { return }
+            
+            let chosenParametrs: (questionType: DictionaryElements, answerType: DictionaryElements)
+            
+            qsvc.byTime = true
+            
+            chosenParametrs.questionType = qpvc.parametrsForPicker.questionType[qpvc.pickerView.selectedRow(inComponent: 1)]
+            chosenParametrs.answerType = qpvc.parametrsForPicker.answersType[qpvc.pickerView.selectedRow(inComponent: 2)]
+            
+            qsvc.chosenParametrs = chosenParametrs
+            qsvc.dictionary = qpvc.dictionaries![qpvc.pickerView.selectedRow(inComponent: 0)]
             
         case "startSpellingQuiz":
              guard let qpvc = sender as? QuizPropertiesViewController else { return }

@@ -308,6 +308,19 @@ class QuizMatchingViewController: UIViewController, QuizzesMethods {
             self.formPairs()
             self.setButtonsLabels()
             self.updateProgressBarProgress()
+            
+            if self.byTime {
+                self.seconds = self.timeForAnswer
+                self.roundTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (_) in
+                    self.seconds -= 1
+                    if self.seconds < 0 {
+                        self.setButtonsLabels()
+                        
+                        self.seconds = self.timeForAnswer
+                    }
+                })
+                
+            }
         }
         
         alertController.addAction(restartGame)
@@ -343,7 +356,6 @@ class QuizMatchingViewController: UIViewController, QuizzesMethods {
                     self.seconds = self.timeForAnswer
                 }
             })
-            
         }
         // Do any additional setup after loading the view.
     }

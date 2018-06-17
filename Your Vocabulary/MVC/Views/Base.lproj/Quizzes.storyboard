@@ -6,7 +6,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -300,10 +299,21 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="gCo-KB-kiZ">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="uSD-OD-1i4">
-                                <rect key="frame" x="31" y="79" width="313" height="2"/>
-                                <color key="progressTintColor" red="0.16862745100000001" green="0.27058823529999998" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </progressView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="NCS-1f-DmX">
+                                <rect key="frame" x="15" y="79" width="345" height="2"/>
+                                <subviews>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Timer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieM-TY-oIM">
+                                        <rect key="frame" x="0.0" y="-79" width="345" height="0.0"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <color key="textColor" red="0.19215686269999999" green="0.27058823529999998" blue="0.42745098040000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="uSD-OD-1i4">
+                                        <rect key="frame" x="0.0" y="0.0" width="345" height="2"/>
+                                        <color key="progressTintColor" red="0.16862745100000001" green="0.27058823529999998" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </progressView>
+                                </subviews>
+                            </stackView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0cl-n5-ajp">
                                 <rect key="frame" x="15" y="350.5" width="345" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -312,7 +322,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="50X-8j-ppb">
-                                <rect key="frame" x="15" y="86" width="345" height="20.5"/>
+                                <rect key="frame" x="15" y="96" width="345" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.16862745100000001" green="0.27058823529999998" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -321,14 +331,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="gCo-KB-kiZ" firstAttribute="top" secondItem="OmP-3W-7Xh" secondAttribute="top" id="0KP-wL-cmv"/>
+                            <constraint firstItem="NCS-1f-DmX" firstAttribute="top" secondItem="bvh-Hm-cYI" secondAttribute="top" constant="15" id="2AL-kI-hDD"/>
+                            <constraint firstItem="bvh-Hm-cYI" firstAttribute="trailing" secondItem="NCS-1f-DmX" secondAttribute="trailing" constant="15" id="2t7-HY-ddJ"/>
                             <constraint firstItem="bvh-Hm-cYI" firstAttribute="bottom" secondItem="gCo-KB-kiZ" secondAttribute="bottom" id="BKR-Hf-D5R"/>
                             <constraint firstAttribute="trailing" secondItem="gCo-KB-kiZ" secondAttribute="trailing" id="CIb-Ac-Kwd"/>
-                            <constraint firstItem="50X-8j-ppb" firstAttribute="top" secondItem="uSD-OD-1i4" secondAttribute="bottom" constant="5" id="M5t-wz-OLM"/>
-                            <constraint firstItem="uSD-OD-1i4" firstAttribute="leading" secondItem="OmP-3W-7Xh" secondAttribute="leadingMargin" constant="15" id="Mh7-S0-cTs"/>
                             <constraint firstItem="bvh-Hm-cYI" firstAttribute="trailing" secondItem="50X-8j-ppb" secondAttribute="trailing" constant="15" id="NJW-ea-fog"/>
-                            <constraint firstItem="uSD-OD-1i4" firstAttribute="top" secondItem="bvh-Hm-cYI" secondAttribute="top" constant="15" id="OnR-9r-bwV"/>
                             <constraint firstItem="bvh-Hm-cYI" firstAttribute="trailing" secondItem="0cl-n5-ajp" secondAttribute="trailing" constant="15" id="PoN-38-zDG"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="uSD-OD-1i4" secondAttribute="trailing" constant="15" id="Xh8-xe-IFj"/>
+                            <constraint firstItem="50X-8j-ppb" firstAttribute="top" secondItem="NCS-1f-DmX" secondAttribute="bottom" constant="15" id="VXx-St-U4p"/>
+                            <constraint firstItem="NCS-1f-DmX" firstAttribute="leading" secondItem="bvh-Hm-cYI" secondAttribute="leading" constant="15" id="Vu4-EI-hBw"/>
                             <constraint firstItem="gCo-KB-kiZ" firstAttribute="leading" secondItem="bvh-Hm-cYI" secondAttribute="leading" id="cSX-UH-AAV"/>
                             <constraint firstItem="0cl-n5-ajp" firstAttribute="centerY" secondItem="bvh-Hm-cYI" secondAttribute="centerY" id="qO8-Vc-Qub"/>
                             <constraint firstItem="50X-8j-ppb" firstAttribute="leading" secondItem="bvh-Hm-cYI" secondAttribute="leading" constant="15" id="tej-kp-wYk"/>
@@ -340,13 +350,14 @@
                         <outlet property="answerField" destination="0cl-n5-ajp" id="h02-5s-zmL"/>
                         <outlet property="progressBar" destination="uSD-OD-1i4" id="emO-tl-Rru"/>
                         <outlet property="questionLabel" destination="50X-8j-ppb" id="mcm-pM-RpF"/>
+                        <outlet property="timerLabel" destination="ieM-TY-oIM" id="G26-i9-Ijd"/>
                         <segue destination="WzQ-c0-5fl" kind="unwind" identifier="unwindFinishSpellingQuiz" unwindAction="finishQuizWithSegue:" id="Phq-QA-z7S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8xg-hf-W8b" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="WzQ-c0-5fl" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1742" y="1439"/>
+            <point key="canvasLocation" x="1822" y="1439"/>
         </scene>
         <!--Quizzes-->
         <scene sceneID="xFc-7V-neC">
@@ -524,6 +535,7 @@
                         <segue destination="QWs-Ge-WNh" kind="show" identifier="startMatchingQuiz" id="UIn-aX-MQR"/>
                         <segue destination="QWs-Ge-WNh" kind="show" identifier="startMatchingByTimeQuiz" id="lZ2-4k-YBQ"/>
                         <segue destination="lQn-hh-uMz" kind="show" identifier="startSpellingQuiz" id="3Sw-U5-98f"/>
+                        <segue destination="lQn-hh-uMz" kind="show" identifier="startSpellingQuizByTime" id="V80-vK-KtC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ebc-QD-bpi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -636,6 +648,7 @@
         <image name="quiz_tb_selected" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="V80-vK-KtC"/>
         <segue reference="lZ2-4k-YBQ"/>
         <segue reference="tjC-0n-mbU"/>
     </inferredMetricsTieBreakers>

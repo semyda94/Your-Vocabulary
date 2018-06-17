@@ -16,6 +16,7 @@ class QuizSpellingViewController: UIViewController, QuizzesMethods {
 
     // MARK: - Outlets
     
+    @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var answerField: UITextField!
@@ -34,8 +35,17 @@ class QuizSpellingViewController: UIViewController, QuizzesMethods {
     
     var dictionary : RealmDictionary?
     
+    var byTime = false
+    
     fileprivate var questionPairs = [(question: String, answer: String)]()
     fileprivate var currentPair: (question: String?, answer: String?)
+    
+    fileprivate var seconds = 15.0 {
+        didSet {
+            timerLabel.text = "\(Int(seconds))"
+        }
+    }
+    fileprivate var roundTimer: Timer!
     
     // MARK: - Methods
     
@@ -90,6 +100,13 @@ class QuizSpellingViewController: UIViewController, QuizzesMethods {
     }
     
     fileprivate func setQuestion() {
+        if questionPairs.count <= 0 {
+            roundTimer.invalidate()
+            finishQuiz()
+            return
+        }
+        
+        updateProgressBarProgress()
         let randomQuestionPosition = questionPairs.count.getRandom()
         
         currentPair.question = questionPairs[randomQuestionPosition].question
@@ -98,25 +115,55 @@ class QuizSpellingViewController: UIViewController, QuizzesMethods {
         questionPairs.remove(at: randomQuestionPosition)
         
         questionLabel.text = currentPair.question
-        updateProgressBarProgress()
     }
     
     fileprivate func finishQuiz() {
-        let alertController = UIAlertController(title: "Done", message: "Finish quiz?", preferredStyle: .alert)
+        if byTime {
+            roundTimer.invalidate()
+        }
+        
+        let grade = 1.0 / (Float(countOfAnswers) / Float(countOfCorrectAnswers))
+        var alertTitle : String!
+        var alertMessage : String!
+        
+        print("Grade \(grade * 100.0)%");
+        
+        if grade >= 0.90 {
+            alertTitle = NSLocalizedString("Excellent", comment: "Title for finish alert controller when user's grade above 90%")
+            alertMessage = NSLocalizedString("Excellent, your knowledge is great, keep adding new words and expand your vocabulary", comment: "Message for finish alert controller when user's grade above 90%")
+        } else if grade >= 0.75 {
+            alertTitle = NSLocalizedString("Good", comment: "Title for finish alert controller when user's grade above 75%")
+            alertMessage = NSLocalizedString("Your results are good enough, a little more practice and your knowledge will be excellent", comment: "Message for finish alert controller when user's grade above 75%")
+        } else {
+            alertTitle = NSLocalizedString("Keep going", comment: "Title for finish alert controller when user's grade under 75%")
+            alertMessage = NSLocalizedString("Continue to work in the same direction and your results will be improving with every attempt!", comment: "Message for finish alert controller when user's grade under 75%")
+        }
+        
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
         
         alertController.view.tintColor = #colorLiteral(red: 0.168627451, green: 0.2705882353, blue: 0.4392156863, alpha: 1)
         let subview = (alertController.view.subviews.first?.subviews.first?.subviews.first!)! as UIView
         subview.backgroundColor = #colorLiteral(red: 0.5921568627, green: 0.737254902, blue: 0.7058823529, alpha: 1)
         
-        let restartGame = UIAlertAction(title: "New game", style: .default) { (_) in
+        let restartGame = UIAlertAction(title: NSLocalizedString("New game", comment: "new game action title"), style: .default) { (_) in
             self.formQuestions()
             self.setQuestion()
-            self.updateProgressBarProgress()
+            
+            if self.byTime {
+                self.seconds = 15.0
+                self.roundTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (_) in
+                    self.seconds -= 1
+                    if self.seconds < 0 {
+                        self.setQuestion()
+                        self.seconds = 15.0
+                    }
+                })
+            }
         }
         
         alertController.addAction(restartGame)
         
-        let quit = UIAlertAction(title: "Quit", style: .default) { (_) in
+        let quit = UIAlertAction(title: NSLocalizedString("Quit", comment: "quiz action title"), style: .default) { (_) in
             self.performSegue(withIdentifier: "unwindFinishSpellingQuiz", sender: self)
         }
         alertController.addAction(quit)
@@ -141,8 +188,18 @@ class QuizSpellingViewController: UIViewController, QuizzesMethods {
         
         setQuestion()
         
+        if byTime {
+            timerLabel.isHidden = false
+            seconds = 15.0
+            roundTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (_) in
+                self.seconds -= 1
+                if self.seconds < 0 {
+                    self.setQuestion()
+                    self.seconds = 15.0
+                }
+            })
+        }
         
-
         // Do any additional setup after loading the view.
     }
 
@@ -173,6 +230,20 @@ extension QuizSpellingViewController : UITextFieldDelegate {
             countOfCorrectAnswers += 1
             if questionPairs.count > 0 {
                 setQuestion()
+                
+                if byTime {
+                    roundTimer.invalidate()
+                    
+                    seconds = 15.0
+                    
+                    roundTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (_) in
+                        self.seconds -= 1
+                        if self.seconds < 0 {
+                            self.setQuestion()
+                            self.seconds = 15.0
+                        }
+                    })
+                }
             } else {
                 finishQuiz()
             }

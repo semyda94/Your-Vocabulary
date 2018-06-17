@@ -219,19 +219,17 @@ class QuizzesViewController: UIViewController {
             qmvc.chosenParametrs = chosenParametrs
             qmvc.dictionary = qpvc.dictionaries![qpvc.pickerView.selectedRow(inComponent: 0)]
             
-            /*
-             case "startSpellingQuiz":
+        case "startSpellingQuiz":
              guard let qpvc = sender as? QuizPropertiesViewController else { return }
              guard let qsvc = segue.destination as? QuizSpellingViewController else { return }
              
-             let chosenParametrs: (dictionary: RealmDictionary, questionType: DictionaryElements, answerType: DictionaryElements)
+             let chosenParametrs: (questionType: DictionaryElements, answerType: DictionaryElements)
              
-             //chosenParametrs.dictionary = qpvc.parametrsForPicker.dictionaries[qpvc.pickerView.selectedRow(inComponent: 0)]
              chosenParametrs.questionType = qpvc.parametrsForPicker.questionType[qpvc.pickerView.selectedRow(inComponent: 1)]
              chosenParametrs.answerType = qpvc.parametrsForPicker.answersType[qpvc.pickerView.selectedRow(inComponent: 2)]
              
-             //qsvc.chosenParametrs = chosenParametrs
-             */
+             qsvc.chosenParametrs = chosenParametrs
+             qsvc.dictionary = qpvc.dictionaries![qpvc.pickerView.selectedRow(inComponent: 0)]
             
         default:
             break

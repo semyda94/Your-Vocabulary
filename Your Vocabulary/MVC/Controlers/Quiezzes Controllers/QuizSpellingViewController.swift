@@ -12,7 +12,7 @@
 
 import UIKit
 
-class QuizSpellingViewController: UIViewController, QuizzesMethods, UITextFieldDelegate {
+class QuizSpellingViewController: UIViewController, QuizzesMethods {
 
     // MARK: - Outlets
     
@@ -30,23 +30,63 @@ class QuizSpellingViewController: UIViewController, QuizzesMethods, UITextFieldD
     
     // MARK: - Properties
     
-    var chosenParametrs: (dictionary: RealmDictionary, questionType: DictionaryElements, answerType: DictionaryElements)?
+    var chosenParametrs: (questionType: DictionaryElements, answerType: DictionaryElements)?
+    
+    var dictionary : RealmDictionary?
     
     fileprivate var questionPairs = [(question: String, answer: String)]()
     fileprivate var currentPair: (question: String?, answer: String?)
     
     // MARK: - Methods
     
-    fileprivate func formQuestions() {
-/*        guard let parametrs = chosenParametrs, let words = parametrs.dictionary.words?.array as? [Word] else { return }
+    @objc fileprivate func tipWasTapped() {
+        print("Test of tip tapped")
         
-        for word in words {
+        guard let question = questionLabel.text?.lowercased(), let answer = answerField.text?.lowercased() else { return }
+        
+        var indexOfNextCharacterAfterTip = question.startIndex
+        var newAnswer = ""
+        
+        for (index, character) in answer.enumerated() {
+            if character == question[question.index(question.startIndex, offsetBy: index)] {
+                
+                print("character '\(character)' at position \(index) was matched")
+                indexOfNextCharacterAfterTip = question.index(question.startIndex, offsetBy: index)
+                newAnswer.append(question[question.index(question.startIndex, offsetBy: index)])
+            } else {
+                print("character '\(character)' at position \(index) wasn't matched")
+                break
+            }
+        }
+        
+        if newAnswer.count == 0 {
+            let tipCharacter = question[question.startIndex]
+            print("Tip character:\(tipCharacter)")
+            newAnswer.append(tipCharacter)
+        } else if indexOfNextCharacterAfterTip != question.index(before: question.endIndex) {
+            let tipCharacter = question[question.index(indexOfNextCharacterAfterTip, offsetBy: 1)]
+            
+            print("Tips character:\(tipCharacter)")
+            newAnswer.append(tipCharacter)
+        }
+        
+        answerField.text = newAnswer
+    }
+    
+    fileprivate func prepareView() {
+        let tip = UIBarButtonItem(image: #imageLiteral(resourceName: "bulb"), style: .plain, target: self, action: #selector(tipWasTapped))
+        navigationItem.setRightBarButton(tip, animated: true)
+    }
+    
+    fileprivate func formQuestions() {
+        guard let parametrs = chosenParametrs, let dictionary = dictionary else { return }
+        
+        for word in dictionary.words {
             guard let question =
                 getElement(baseOn: parametrs.questionType, forWord: word), let answer = getElement(baseOn: parametrs.answerType, forWord: word) else { continue }
             
             questionPairs.append((question, answer))
         }
- */
     }
     
     fileprivate func setQuestion() {
@@ -71,7 +111,7 @@ class QuizSpellingViewController: UIViewController, QuizzesMethods, UITextFieldD
         let restartGame = UIAlertAction(title: "New game", style: .default) { (_) in
             self.formQuestions()
             self.setQuestion()
-            //self.updateProgressBarProgress()
+            self.updateProgressBarProgress()
         }
         
         alertController.addAction(restartGame)
@@ -95,6 +135,8 @@ class QuizSpellingViewController: UIViewController, QuizzesMethods, UITextFieldD
         
         answerField.delegate = self
         
+        prepareView()
+        
         formQuestions()
         
         setQuestion()
@@ -108,25 +150,6 @@ class QuizSpellingViewController: UIViewController, QuizzesMethods, UITextFieldD
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    // MARK: - UITextFieldDelegate
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        countOfAnswers += 1
-        if textField.text == currentPair.answer {
-            countOfCorrectAnswers += 1
-            if questionPairs.count > 0 {
-                setQuestion()
-            } else {
-                finishQuiz()
-            }
-            textField.text = nil
-            return true
-        }
-        return false
-    }
-    
 
     /*
     // MARK: - Navigation
@@ -138,4 +161,26 @@ class QuizSpellingViewController: UIViewController, QuizzesMethods, UITextFieldD
     }
     */
 
+}
+
+// MARK: - UITextFieldDelegate
+extension QuizSpellingViewController : UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        countOfAnswers += 1
+        if textField.text?.lowercased() == currentPair.answer?.lowercased() {
+            countOfCorrectAnswers += 1
+            if questionPairs.count > 0 {
+                setQuestion()
+            } else {
+                finishQuiz()
+            }
+            textField.text = nil
+            return true
+        }
+        return false
+        
+    }
+    
 }

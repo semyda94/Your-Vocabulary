@@ -20,11 +20,35 @@ class QuizzesCollectionViewCell: UICollectionViewCell {
                 
                 switch quiz.name {
                 case .seeking:
-                    quizzBGView.backgroundColor = #colorLiteral(red: 0.6941176471, green: 0.8039215686, blue: 0.9411764706, alpha: 1)
-                    quizImage.image = #imageLiteral(resourceName: "cat")
+                    quizzBGView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+                    quizImage.image = #imageLiteral(resourceName: "seeking_icon")
                     
-                    quizDescription.text = NSLocalizedString("Quiz where it providing a question and you must choose one of four suggested answers", comment: "Description of seeking quiz")
-                
+                    quizDescription.text = NSLocalizedString("Quiz that providing a question and you must choose one of four suggested answers", comment: "Description of seeking quiz")
+                case .seekingByTime:
+                    quizzBGView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+                    quizImage.image = #imageLiteral(resourceName: "seeking_by_time_icon")
+                    
+                    quizDescription.text = NSLocalizedString("Quiz that providing a question and you must choose one of four suggested answers, however time is limited", comment: "Description of seeking quiz by time")
+                case .matching:
+                    quizzBGView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+                    quizImage.image = #imageLiteral(resourceName: "matching_icon")
+                    
+                    quizDescription.text = NSLocalizedString("Quiz where you should relate the presented pairs", comment: "Description of matching quiz")
+                case .matchingByTime:
+                    quizzBGView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+                    quizImage.image = #imageLiteral(resourceName: "matching_by_time_icon")
+                    
+                    quizDescription.text = NSLocalizedString("Quiz where you should relate the presented pairs, however time is limited", comment: "Description of matching quiz by time")
+                case .spelling:
+                    quizzBGView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+                    quizImage.image = #imageLiteral(resourceName: "spelling_icon")
+                    
+                    quizDescription.text = NSLocalizedString("Quiz, where you should write a right spelled answer for presented option", comment: "Description of spelling quiz")
+                case .spellingByTime:
+                    quizzBGView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+                    quizImage.image = #imageLiteral(resourceName: "spelling_by_time_icon")
+                    
+                    quizDescription.text = NSLocalizedString("Quiz, where you should write a right spelled answer for presented option, however time is limited", comment: "Description of spelling quiz by time")
                 default:
                     
                     break;

@@ -163,6 +163,19 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		C212C72C21006ADE006A450C /* Settings Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E7268D7F20BC23C3009652E3 /* CustomeLanguageSwitcher.swift */,
+				E74EBF1320B66C530065ED93 /* TrainingReminderViewController.swift */,
+				E75A612120B7A53C0035312A /* NotificationsTableViewController.swift */,
+				E7717C4020B25A920080BB82 /* BackupsTableViewController.swift */,
+				E7C901C02059279E0076823C /* LanguageTableViewController.swift */,
+				E7C901BD20591A9B0076823C /* SettingsTableViewController.swift */,
+			);
+			path = "Settings Controllers";
+			sourceTree = "<group>";
+		};
 		C284197F20C93D3C00411E5B /* Statistic controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -274,17 +287,12 @@
 		E77280791FFDE0D6004DC8A3 /* Controlers */ = {
 			isa = PBXGroup;
 			children = (
-				E7268D7F20BC23C3009652E3 /* CustomeLanguageSwitcher.swift */,
-				E74EBF1320B66C530065ED93 /* TrainingReminderViewController.swift */,
 				E74EBF1520B797D60065ED93 /* DayOfWeekButton.swift */,
-				E75A612120B7A53C0035312A /* NotificationsTableViewController.swift */,
 				E7203D5520B3FB1F00281D9D /* AppOnboardingViewController.swift */,
-				E7717C4020B25A920080BB82 /* BackupsTableViewController.swift */,
 				E7E520C1207B2BE800546735 /* YourVocabularyTabBarController.swift */,
-				E7C901C02059279E0076823C /* LanguageTableViewController.swift */,
-				E7C901BD20591A9B0076823C /* SettingsTableViewController.swift */,
 				E781A5AB204542E3002028D7 /* QuizzesMethods.swift */,
 				E7E25E3A203FC7E6009EFE87 /* UIStoryBoardSegueWithCompletion.swift */,
+				C212C72C21006ADE006A450C /* Settings Controllers */,
 				E74B4A0D20362CF8000BA062 /* Quiezzes Controllers */,
 				E7C5563D2025247D00CD5C3C /* Word Controllers */,
 				E74B4A0F20362EB4000BA062 /* Dictionaries view controllers */,

@@ -52,17 +52,17 @@ class QuizSpellingViewController: UIViewController, QuizzesMethods {
     @objc fileprivate func tipWasTapped() {
         print("Test of tip tapped")
         
-        guard let question = questionLabel.text?.lowercased(), let answer = answerField.text?.lowercased() else { return }
+        guard let answerAtSistem = currentPair.answer?.lowercased(), let usersAnswer = answerField.text?.lowercased() else { return }
         
-        var indexOfNextCharacterAfterTip = question.startIndex
+        var indexOfNextCharacterAfterTip = answerAtSistem.startIndex
         var newAnswer = ""
         
-        for (index, character) in answer.enumerated() {
-            if character == question[question.index(question.startIndex, offsetBy: index)] {
+        for (index, character) in usersAnswer.enumerated() {
+            if character == answerAtSistem[answerAtSistem.index(answerAtSistem.startIndex, offsetBy: index)] {
                 
                 print("character '\(character)' at position \(index) was matched")
-                indexOfNextCharacterAfterTip = question.index(question.startIndex, offsetBy: index)
-                newAnswer.append(question[question.index(question.startIndex, offsetBy: index)])
+                indexOfNextCharacterAfterTip = answerAtSistem.index(answerAtSistem.startIndex, offsetBy: index)
+                newAnswer.append(answerAtSistem[answerAtSistem.index(answerAtSistem.startIndex, offsetBy: index)])
             } else {
                 print("character '\(character)' at position \(index) wasn't matched")
                 break
@@ -70,11 +70,11 @@ class QuizSpellingViewController: UIViewController, QuizzesMethods {
         }
         
         if newAnswer.count == 0 {
-            let tipCharacter = question[question.startIndex]
+            let tipCharacter = answerAtSistem[answerAtSistem.startIndex]
             print("Tip character:\(tipCharacter)")
             newAnswer.append(tipCharacter)
-        } else if indexOfNextCharacterAfterTip != question.index(before: question.endIndex) {
-            let tipCharacter = question[question.index(indexOfNextCharacterAfterTip, offsetBy: 1)]
+        } else if indexOfNextCharacterAfterTip != answerAtSistem.index(before: answerAtSistem.endIndex) {
+            let tipCharacter = answerAtSistem[answerAtSistem.index(indexOfNextCharacterAfterTip, offsetBy: 1)]
             
             print("Tips character:\(tipCharacter)")
             newAnswer.append(tipCharacter)

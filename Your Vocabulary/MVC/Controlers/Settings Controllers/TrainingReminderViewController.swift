@@ -88,6 +88,8 @@ class TrainingReminderViewController: UIViewController {
                 
             }
         }
+        
+        performSegue(withIdentifier: "finishSettingReminder", sender: self)
     }
     
     @IBAction func changeButtonProperties(_ sender: DayOfWeekButton) {

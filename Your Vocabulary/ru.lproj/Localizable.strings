@@ -36,9 +36,6 @@
 /* Title for definitions properties in word view */
 "Definitions" = "Определения";
 
-/* Title for definitions properties in word view */
-"Definition" = "Определениe";
-
 /* Delete dictionary table view edit action
    Delete title properties in word view */
 "Delete" = "Удалить";
@@ -57,9 +54,6 @@
 
 /* Title for examples properties in word view */
 "Examples" = "Примеры";
-
-/* Title for examples properties in word view */
-"Example" = "Пример";
 
 /* Title for finish alert controller when user's grade above 90% */
 "Excellent" = "Великолепно.";
@@ -84,6 +78,9 @@
 
 /* Show count of learned words for dictionary */
 "Learned words: %d" = "Выученных слов: %d";
+
+/* Name of memorization section at quizzes view */
+"Memorization" = "Запоминание";
 
 /* Title during creating new dictionary */
 "New dictionary" = "Новый словарь";
@@ -126,26 +123,44 @@
    quiz action title */
 "Quit" = "Завершить";
 
+/* Description of seeking quiz */
+"Quiz that providing a question and you must choose one of four suggested answers" = "Тест в котором предоставляется вопрос и вы должны выбрать один из 4-х ответов";
+
+/* Description of seeking quiz by time */
+"Quiz that providing a question and you must choose one of four suggested answers, however time is limited" = "Тест в котором предоставляется вопрос и вы должны выбрать один из 4-х ответов, однако время ограничено";
+
+/* Description of matching quiz */
+"Quiz where you should relate the presented pairs" = "Тест в котором вы должны сопоставить представленные пары";
+
+/* Description of matching quiz by time */
+"Quiz where you should relate the presented pairs, however time is limited" = "Тест в котором вы должны сопоставить представленные пары, однако время ограничено";
+
+/* Description of spelling quiz */
+"Quiz, where you should write a right spelled answer for presented option" = "Тест в котором вы должны написать корректно написанный ответ на предоставленный вопрос";
+
+/* Description of spelling quiz by time */
+"Quiz, where you should write a right spelled answer for presented option, however time is limited" = "Тест в котором вы должны написать корректно написанный ответ на предоставленный вопрос, однако время ограничено";
+
 /* Quizzes onboarding title */
 "Quizzes" = "Тесты";
 
 /* Message for alert controller when list of dictionaries is empty */
 "Sadly, at this moment your list of dictionaries doesn't have no one dictionary." = "К сожалению, на данный момент приложение не содержит ни одного словаря";
 
+/* Place holder for search bar at words tablew view */
+"Search words" = "Поиск слов";
+
 /* Message for alert controller when chosen dictionary doesnt' have any words */
 "Sorry, chosen dictionary doesn't have enough unlearned words. " = "К сожалению, словарь содержит недостаточно невыученных слов.";
+
+/* Name of spelling section at quizzes view */
+"Spelling" = "Правописание";
 
 /* Title for synonyms properties in word view */
 "Synonyms" = "Cинонимы";
 
-/* Title for synonyms properties in word view */
-"Synonym" = "Cиноним";
-
 /* Title for translations properties in word view */
 "Translations" = "Переводы";
-
-/* Title for translations properties in word view */
-"Translation" = "Перевод";
 
 /* Dictionary without name
    Name for dictionary when user didn't set name
@@ -181,3 +196,6 @@
 /* Message for finish alert controller when user's grade above 75% */
 "Matching by time" = "Соотношение на время";
 
+"Spelling" = "Правописание";
+
+"Spelling by time" = "Правописание на время";

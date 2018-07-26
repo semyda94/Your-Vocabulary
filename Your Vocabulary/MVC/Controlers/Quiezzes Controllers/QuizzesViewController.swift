@@ -138,12 +138,12 @@ class QuizzesViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        let memoName = "Memorization"
+        let memoName = NSLocalizedString("Memorization", comment: "Name of memorization section at quizzes view")
         let memoQuizzes: [(name: QuizzesTypes, thumbnail: UIImage)] =  [(.seeking, #imageLiteral(resourceName: "seeking_icon") ), (.seekingByTime, #imageLiteral(resourceName: "seeking_by_time_icon")), (.matching, #imageLiteral(resourceName: "matching_icon")), (.matchingByTime, #imageLiteral(resourceName: "matching_by_time_icon"))]
         
         quizzes.append((nameOfSection: memoName, sectionQuizzes: memoQuizzes))
         
-        let spelName = "Spelling"
+        let spelName = NSLocalizedString("Spelling", comment: "Name of spelling section at quizzes view")
         let spelQuizzes: [(name: QuizzesTypes, thumbnail: UIImage)] = [(.spelling, #imageLiteral(resourceName: "spelling_icon")), (.spellingByTime, #imageLiteral(resourceName: "spelling_by_time_icon"))]
         
         quizzes.append((nameOfSection: spelName, sectionQuizzes: spelQuizzes))

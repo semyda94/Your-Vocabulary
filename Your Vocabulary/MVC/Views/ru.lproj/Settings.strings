@@ -25,6 +25,9 @@
 /* Class = "UINavigationItem"; title = "Settings"; ObjectID = "Jcz-Ax-iC1"; */
 "Jcz-Ax-iC1.title" = "Настройки";
 
+/* Class = "UILabel"; text = "All rights reserved."; ObjectID = "jsT-0G-aPY"; */
+"jsT-0G-aPY.text" = "Все права защищены";
+
 /* Class = "UITabBarItem"; title = "Settings"; ObjectID = "KLd-dK-Q8X"; */
 "KLd-dK-Q8X.title" = "Настройки";
 

@@ -13,9 +13,6 @@
 /* Class = "UIButton"; normalTitle = "R3"; ObjectID = "jcO-kA-cQM"; */
 "jcO-kA-cQM.normalTitle" = "R3";
 
-/* Class = "UINavigationItem"; title = "Quizzes"; ObjectID = "JTy-Xe-XLr"; */
-"JTy-Xe-XLr.title" = "Тесты";
-
 /* Class = "UILabel"; text = "Question"; ObjectID = "meo-kJ-P1o"; */
 "meo-kJ-P1o.text" = "Question";
 
@@ -33,9 +30,6 @@
 
 /* Class = "UIButton"; normalTitle = "L5"; ObjectID = "WXm-fe-BBh"; */
 "WXm-fe-BBh.normalTitle" = "L5";
-
-/* Class = "UILabel"; text = "Label"; ObjectID = "Xdq-av-kid"; */
-"Xdq-av-kid.text" = "Label";
 
 /* Class = "UIButton"; normalTitle = "Start"; ObjectID = "zlv-Yv-De1"; */
 "zlv-Yv-De1.normalTitle" = "Начать";
